@@ -4,64 +4,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vicent Cardona | Technology & CS Educator</title>
+    <title>Prof. Vicent Cardona | Tech & CS</title>
     <meta name="description"
         content="Personal website and student resources for Technology and Computer Science by Vicent Cardona.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Importing Inter for Body, Lora for optional serif headings -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <header class="hero">
-        <nav class="navbar">
-            <div class="logo">Prof. Vicent</div>
+    <!-- Floating Bottom/Top Nav Pill -->
+    <nav class="nav-pill">
+        <div class="nav-content">
+            <span class="logo">Prof. Vicent</span>
             <ul class="nav-links">
-                <li><a href="#courses">Courses</a></li>
-                <li><a href="#resources">Resources</a></li>
-                <li><a href="#simulations">Simulations</a></li>
-                <li><a href="#concept">Python & Code</a></li>
+                <li><a href="#students" class="active">Students</a></li>
+                <li><a href="#parents">Parents</a></li>
+                <li><a href="#about">About Me</a></li>
             </ul>
-        </nav>
-        <div class="hero-content">
-            <h1>Technology & Computer Science</h1>
-            <p>Empowering the next generation of engineers and developers.</p>
-            <a href="#courses" class="btn-primary">Explore Courses</a>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section id="courses" class="section">
-            <div class="container">
-                <h2>Ongoing Courses</h2>
-                <div class="grid">
-                    <!-- Course Card 1 -->
-                    <div class="card">
-                        <h3>Python Crash Course</h3>
-                        <p>Learn the basics of Python programming, from syntax to simple applications.</p>
-                        <a href="#" class="btn-text">View Materials &rarr;</a>
+    <main class="container">
+        <!-- Header Section -->
+        <header class="page-header">
+            <div class="header-icon">👋</div>
+            <h1 class="title-serif">Welcome to Tech & CS</h1>
+            <p class="subtitle">Hi, I'm Vicent Cardona. Here you will find all the resources, syllabus information, and
+                interactive tools for our engineering and computer science classes.</p>
+        </header>
+
+        <hr class="divider">
+
+        <!-- Classes Bento Grid -->
+        <section id="students" class="section">
+            <div class="section-header">
+                <h2>Current Courses</h2>
+                <span class="badge badge-green">Fall 2026 Active</span>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Large Card: Python -->
+                <a href="#" class="bento-card card-large">
+                    <div class="card-emoji">🐍</div>
+                    <h3>Python Crash Course</h3>
+                    <p>Learn the basics of Python programming, from syntax to simple applications. Includes interactive
+                        code snippets.</p>
+                    <div class="card-footer">
+                        <span class="badge badge-blue">Programming</span>
+                        <span class="arrow">→</span>
                     </div>
-                    <!-- Course Card 2 -->
-                    <div class="card">
-                        <h3>Web Development</h3>
-                        <p>Master the fundamentals of the web: HTML, CSS, and interactive JavaScript.</p>
-                        <a href="#" class="btn-text">View Materials &rarr;</a>
+                </a>
+
+                <!-- Normal Card: Web Dev -->
+                <a href="#" class="bento-card">
+                    <div class="card-emoji">🌐</div>
+                    <h3>Web Development</h3>
+                    <p>Master HTML, CSS, and basic JavaScript.</p>
+                    <div class="card-footer">
+                        <span class="badge badge-yellow">Frontend</span>
+                        <span class="arrow">→</span>
                     </div>
-                    <!-- Course Card 3 -->
-                    <div class="card">
-                        <h3>Basic Engineering</h3>
-                        <p>Discover C, Arduino, Micropython, and SQL fundamentals to build real systems.</p>
-                        <a href="#" class="btn-text">View Materials &rarr;</a>
+                </a>
+
+                <!-- Normal Card: Engineering -->
+                <a href="#" class="bento-card">
+                    <div class="card-emoji">⚙️</div>
+                    <h3>Basic Engineering</h3>
+                    <p>C, Arduino, Micropython, and SQL fundamentals.</p>
+                    <div class="card-footer">
+                        <span class="badge badge-red">Hardware/Data</span>
+                        <span class="arrow">→</span>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 Vicent Cardona. Built for students.</p>
-    </footer>
+        <!-- Quick Links Bento Grid -->
+        <section class="section">
+            <div class="bento-grid grid-small">
+                <a href="#" class="bento-card card-small">
+                    <div class="card-emoji">📚</div>
+                    <h3>Syllabus</h3>
+                    <p>Course rules and grading.</p>
+                </a>
+
+                <a href="#" class="bento-card card-small">
+                    <div class="card-emoji">📅</div>
+                    <h3>Schedule</h3>
+                    <p>Class times & exams.</p>
+                </a>
+
+                <a href="#" class="bento-card card-small">
+                    <div class="card-emoji">🔬</div>
+                    <h3>Simulations</h3>
+                    <p>PhET & Tinkercad.</p>
+                </a>
+
+                <a href="#" class="bento-card card-small">
+                    <div class="card-emoji">📥</div>
+                    <h3>Resources</h3>
+                    <p>Downloadable files.</p>
+                </a>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- FAQ Accordion section -->
+        <section id="parents" class="section faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <details class="accordion">
+                <summary>▸ What software does my student need?</summary>
+                <div class="accordion-content">
+                    All software used in this class is free. We primarily use Python, Visual Studio Code, and web-based
+                    tools like Tinkercad.
+                </div>
+            </details>
+
+            <details class="accordion">
+                <summary>▸ How are grades calculated?</summary>
+                <div class="accordion-content">
+                    Grades are based 40% on projects, 40% on exams, and 20% on weekly participation and homework
+                    assignments.
+                </div>
+            </details>
+
+            <details class="accordion">
+                <summary>▸ How can I contact the teacher?</summary>
+                <div class="accordion-content">
+                    The best way to reach me is via the school email system. I typically respond within 24 business
+                    hours.
+                </div>
+            </details>
+        </section>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Vicent Cardona. Built for students.</p>
+        </footer>
+    </main>
 
     <script src="js/main.js"></script>
 </body>

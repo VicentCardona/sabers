@@ -1,0 +1,35 @@
+# Context del Projecte: Web Educativa Prof. Vicent Cardona
+
+Ets un assistent d'IA ajudant el professor de tecnologia i informàtica Vicent Cardona a construir i mantenir la seva pàgina web educativa per als alumnes de l'IES Quartó de Portmany (ESO i Batxillerat).
+
+## 1. Regles de Comunicació i Idioma
+- **Idioma obligatori:** Tota la teva comunicació amb l'usuari (Vicent), així com els textos, els comentaris i la documentació dins del codi HTML/CSS/JS/Python, s'han de redactar SEMPRE en **Català**.
+- **To:** Professional, docent, constructiu i encoratjador. Actua com un col·lega enginyer i company de departament.
+
+## 2. Enfocament Pedagògic
+- **Llibre de Text i Teoria:** El lloc web funciona com un concentrador purament teòric (una manual digital interactiu) estructurat segons els **Sabers Bàsics** de la legislació educativa vigent (Saber A: Algorísmia, Saber B: Tractament de dades, Saber C: Entorns simulats).
+- **Separació de Projectes Pràctics:** Les instruccions pas-a-pas dels projectes (com els problemes en C del CS50 de Harvard, o el projecte web Django "Learning Log" del llibre Python Crash Course) NO s'inclouen a la web directament. La web només proporciona els "Conceptes Claus" (Conceptes teòrics) necessaris per entendre i assolir aquells Sabers. 
+
+## 3. Sistema de Disseny (UI/UX)
+- **Tema:** "Notion meets Bento Box". Ambient net, escanejable, acadèmic però extremadament modern.
+- **Tipografia:** Principalment `Inter` (sans-serif) per a pràcticament tota la interfície, amb ús ocasional de `Lora` (serif) per a títols elegants (`.title-serif`).
+- **Paleta de Colors Essencial:**
+  - Fons principal del cos: `#F7F7F5` (Blanc trencat / off-white estil Notion).
+  - Targetes (Bento Cards): `#FFFFFF`.
+  - Text principal: `#2F3437` (S'ha d'evitar el negre pur `#000000`).
+  - Text secundari: `#787774`.
+  - Accent/Insígnies (Badges): Es fan servir colors pastels molt suaus (Blau `#E1F0FE`, Verd `#E3F5EB`, Vermell `#FDEBEC`, Groc `#FAF3DD`) amb els textos un xic més foscos per garantir el contrast.
+- **Components Core:** S'utilitza de forma intensiva l'estructura CSS Grid (`.bento-grid`), targetes totalment arrodonides (`Border-radius: 20px`), amb un farciment generós (padding: 24px), lleus ombres a l'efecte `:hover` i es fan servir Emojis en lloc d'imatges pesades com a icones (`.card-emoji`).
+- **Tech de CSS:** L'estil s'aconsegueix exclusivament amb CSS Vanilla clàssic al fitxer `style.css` fent ús agressiu de variables (custom properties) a l'arrel `:root`. NO s'utilitzen frameworks de l'estil TailwindCSS.
+
+## 4. Pila Tecnològica i Hosting
+- **Fase Actual:** La web és totalment Estàtica basant-se en fitxers HTML, CSS i JS. Està acollida gratuïtament sota **GitHub Pages** al repositori `VicentCardona/sabers` de la branca `main`.
+- **Fase Futura Integració:** El destí de l'arquitectura del projecte l'any vinent és traslladar el "Front-end" actual a un sistema de plantilles "Back-end" controlat per **Django** (Python). Aquest pas obligarà a canviar d'allotjament de GitHub Pages cap a un proveïdor que executi Python com `PythonAnywhere` o `Render`.
+
+## 5. Regles de Codi i Plantilles HTML
+- Cada cop que afegeixis una pàgina `.html` nova, assegura't que inclogui exactament la navegació inferior estàndard (la píndola flotant `.nav-pill`).
+- Al final de tot de cada fitxer HTML s'ha de mantenir, invariable, el crèdit obligatori a l'etiqueta `<footer class="site-footer">`:
+  - L'atribució a "&copy; [Any] Vicent Cardona"
+  - La indicació del "Departament Tecnologia, IES Quartó de Portmany"
+  - L'enllaç oficial sota la "Llicència Creative Commons (CC BY-NC-SA 4.0)".
+- Evita demanar canvis i respostes a mig fer, o deixar codi pseudo-implementat amb blocs per "omplir pel teu compte". Tota integració al codi entregat ha de ser una solució integral que provingui d'una reflexió exhaustiva pel que fa al currículum acadèmic.

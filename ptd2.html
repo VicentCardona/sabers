@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTD2 | Prof. Vicent Cardona</title>
+    <meta name="description" content="Curs de Programació i Tractament de Dades II.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="course-page">
+
+    <!-- Floating Bottom/Top Nav Pill -->
+    <nav class="nav-pill">
+        <div class="nav-content">
+            <span class="logo">Prof. Vicent</span>
+            <ul class="nav-links">
+                <li><a href="index.html">← Tornar a l'Inici</a></li>
+                <li><a href="#intro" class="active">Introducció</a></li>
+                <li><a href="#sabers">Sabers Bàsics</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Course Header -->
+        <header id="intro" class="page-header course-header">
+            <div class="breadcrumb">
+                <a href="index.html">Cursos</a> / <span>PTD2</span>
+            </div>
+            <div class="header-icon">📊</div>
+            <h1 class="title-serif">Programació i Tractament de Dades II</h1>
+            <p class="subtitle">Aquest espai web serveix com a suport teòric i interactiu per assolir els Sabers Bàsics
+                establerts a la llei educativa, vinculant-los directament amb casos pràctics i projectes reals.</p>
+            <div class="course-meta">
+                <span class="badge badge-green">2n Batxillerat</span>
+                <span class="badge badge-blue">Normativa 2025/26</span>
+            </div>
+        </header>
+
+        <hr class="divider">
+
+        <!-- Core Knowledge Section (Sabers Basics) -->
+        <section id="sabers" class="section">
+            <div class="section-header">
+                <h2>📚 Els Sabers Bàsics (Què hem d'aprendre?)</h2>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Segons la normativa vigent, el curs
+                s'estructura en tres grans blocs de coneixement. Aquí trobaràs la teoria, les simulacions i quin
+                projecte pràctic farem per assolir cadascun d'ells.</p>
+
+            <!-- Saber Basic A -->
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-badge">Saber Bàsic A</div>
+                    <h3>Algorísmia i Programació</h3>
+                </div>
+                <div class="module-body">
+                    <p>Aquest bloc se centra en la resolució de problemes (divideix i guanyaràs), l'ús de bucles
+                        imbricats, les funcions, la reutilització de codi i el paradigma de la Programació Orientada a
+                        Objectes (POO).</p>
+
+                    <div class="resource-list">
+                        <h4>Suport Teòric</h4>
+                        <ul>
+                            <li><a href="#" class="resource-link"><span class="icon">📗</span> Teoria: Estructures de
+                                    Resolució de Problemes</a></li>
+                            <li><a href="#" class="resource-link"><span class="icon">📗</span> Conceptes de POO:
+                                    Classes, Herència i Polimorfisme</a></li>
+                            <li><a href="#" class="resource-link"><span class="icon">▶️</span> Simulació: Diagrames de
+                                    classes interactius</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="project-box">
+                        <h4>🎯 Com ho posem en pràctica?</h4>
+                        <p><strong>1. El Repte Mario (CS50):</strong> Utilitzarem C per comprendre l'algorísmia pura
+                            basant-nos en el curs de Harvard.<br>
+                            <strong>2. Llibre Python Crash Course:</strong> Crearem els nostres propis objectes i mòduls
+                            en Python per consolidar la POO.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saber Basic B -->
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-badge badge-red">Saber Bàsic B</div>
+                    <h3>Tractament de Dades</h3>
+                </div>
+                <div class="module-body">
+                    <p>Comprèn l'estudi del Model Entitat-Relació, les regles d'integritat per a Bases de Dades SQL
+                        (Formes Normals), els fitxers externs (JSON, CSV) i l'accés a dades mitjançant APIs i connexions
+                        web.</p>
+
+                    <div class="resource-list">
+                        <h4>Suport Teòric</h4>
+                        <ul>
+                            <li><a href="#" class="resource-link"><span class="icon">📗</span> Teoria: El model
+                                    Relacional i les Comandes SQL (DDL/DML)</a></li>
+                            <li><a href="#" class="resource-link"><span class="icon">📗</span> Entenent els fitxers
+                                    d'emmagatzematge: CSV i JSON</a></li>
+                            <li><a href="#" class="resource-link"><span class="icon">▶️</span> Interactiu: Executa
+                                    consultes SELECT sobre la nostra BBDD web</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="project-box">
+                        <h4>🎯 Com ho posem en pràctica?</h4>
+                        <p><strong>3. Tractament Massiu:</strong> Connectarem aplicacions Python a les APIs i
+                            descarregarem datasets governamentals.<br>
+                            <strong>4. Back-End Actiu:</strong> Farem servir Django per crear bases de dades reals
+                            integrades a una pàgina web on els usuaris injectaran informació.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saber Basic C -->
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-badge badge-green">Saber Bàsic C</div>
+                    <h3>Aplicació en Entorns Simulats (i Publicació)</h3>
+                </div>
+                <div class="module-body">
+                    <p>Aplicació pràctica dels coneixements a branques com videojocs, IA, domòtica o tractament massiu.
+                        Inclou la necessitat fonamental de documentar de forma clara per a l'usuari final (Saber Bàsic D
+                        de Primer, actiu a Segon).</p>
+
+                    <div class="resource-list">
+                        <h4>Suport Teòric i Exploració</h4>
+                        <ul>
+                            <li><a href="#" class="resource-link"><span class="icon">📗</span> Guia per comentar i
+                                    modular el codi de forma neta</a></li>
+                            <li><a href="#" class="resource-link"><span class="icon">🌐</span> Branques tecnològiques:
+                                    El Futur de l'IoT (Internet of Things)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="project-box">
+                        <h4>🎯 Com ho posem en pràctica?</h4>
+                        <p><strong>5. El Projecte Final Lliure:</strong> L'alumne escollirà un entorn simulat (videojoc,
+                            anàlisi de dades massiva o domòtica) per implementar una solució global que reuneixi tots
+                            els Sabers, i serà responsable de redactar i publicar el manual d'usuari (UX).</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <hr class="divider">
+
+        <!-- Toolbox Section -->
+        <section id="recursos" class="section">
+            <div class="section-header">
+                <h2>🛠️ Les Eines del Curs</h2>
+            </div>
+            <div class="bento-grid grid-small">
+                <a href="https://code.visualstudio.com/" target="_blank" class="bento-card card-small">
+                    <div class="card-emoji">📝</div>
+                    <h3>VS Code</h3>
+                    <p>L'editor de codi.</p>
+                </a>
+                <a href="https://www.python.org/" target="_blank" class="bento-card card-small">
+                    <div class="card-emoji">🐍</div>
+                    <h3>Python 3</h3>
+                    <p>Documentació oficial.</p>
+                </a>
+                <a href="https://docs.djangoproject.com/" target="_blank" class="bento-card card-small">
+                    <div class="card-emoji">🌐</div>
+                    <h3>Django</h3>
+                    <p>El framework web.</p>
+                </a>
+                <a href="https://cs50.harvard.edu/x/2024/" target="_blank" class="bento-card card-small">
+                    <div class="card-emoji">🎓</div>
+                    <h3>CS50</h3>
+                    <p>Lliçons Harvard.</p>
+                </a>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Vicent Cardona. Construït per als alumnes de PTD2.</p>
+        </footer>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -21,9 +21,10 @@
             <span class="logo">Prof. Vicent</span>
             <ul class="nav-links">
                 <li><a href="ptd2.html">← Tornar a Sabers Bàsics</a></li>
-                <li><a href="#intro" class="active">Introducció back-end</a></li>
-                <li><a href="#arquitectura">Arquitectura MTV</a></li>
-                <li><a href="#orm">Tractament de dades (ORM)</a></li>
+                <li><a href="#intro" class="active">Introducció</a></li>
+                <li><a href="#django">Per què Django?</a></li>
+                <li><a href="#arquitectura">MTV vs MVC</a></li>
+                <li><a href="#conceptes">Conceptes Avançats</a></li>
             </ul>
         </div>
     </nav>
@@ -74,34 +75,68 @@
             </div>
         </section>
 
-        <section id="arquitectura" class="section">
+        <section id="django" class="section">
             <div class="section-header">
-                <h2>📐 2. L'Arquitectura de Django (El patró MTV)</h2>
+                <h2>🐍 2. Per què Django? (Batteries Included)</h2>
             </div>
 
             <div class="module-card">
                 <div class="module-body">
-                    <p>Quan estem construint plataformes gigantesques, no escrivim tot el codi al mateix fitxer. Els
-                        <strong>Frameworks</strong> (com Django per Python o Laravel per PHP) organitzen el projecte
-                        dividint-lo en tres parts clarament diferenciades. Aquest patró teòric s'anomena usualment MVC
-                        (Model, Vista, Controlador), però Django el simplifica a <strong>MTV:</strong></p>
+                    <p>Al mercat existeixen dotzenes de Frameworks Web (Express per JavaScript, Laravel per PHP...). Per
+                        al nostre curs utilitzarem <strong>Django</strong> (basat en Python) per diversos motius
+                        fonamentals lligats a la filosofia "Batteries Included" (Piles Incloses):</p>
+
+                    <div class="bento-grid" style="margin-top: 2rem;">
+                        <div class="bento-card card-small">
+                            <div class="card-emoji">🔋</div>
+                            <h3>Piles Incloses</h3>
+                            <p>Forneix eines d'autenticació clau en mà, panells d'administració automàtics, formularis i
+                                gestió de contrasenyes de sèrie. No cal inventar la roda ni buscar desenes de llibreries
+                                de tercers per funcionalitats estàndards.</p>
+                        </div>
+                        <div class="bento-card card-small">
+                            <div class="card-emoji">🛡️</div>
+                            <h3>Seguretat per defecte</h3>
+                            <p>Protegeix nativament contra les vulnerabilitats web més perilloses (com Injeccions SQL o
+                                Cross-Site Scripting), deixant que l'alumne es centri a entendre la lògica i les dades
+                                en lloc de patir forats de seguretat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="arquitectura" class="section">
+            <div class="section-header">
+                <h2>📐 3. Arquitectura del Codi: MVC contra MTV</h2>
+            </div>
+
+            <div class="module-card">
+                <div class="module-body">
+                    <p>Construir plataformes massives requereix ordre; no escrivim tot el codi en un document de 10.000
+                        línies. Els <strong>Frameworks</strong> organitzen els projectes dividint-los per
+                        responsabilitats teòriques. Històricament, el patró daurat de la indústria és el <strong>MVC
+                            (Model-Vista-Controlador)</strong>, on cada capa fa el seu treball. Django, per fer-ho més
+                        assequible a desenvolupadors ràpids, utilitza la seva pròpia aproximació: <strong>l'Arquitectura
+                            MTV (Model-Template-View)</strong>.</p>
 
                     <ul style="margin-left: 2rem; margin-top: 1rem; color: var(--text-secondary); line-height: 1.8;">
-                        <li><strong>[M] Model:</strong> La lògica de dades. És l'esquema de com seran les taules a la
-                            Base de Dades i les regles per emmagatzemar la informació.</li>
-                        <li><strong>[T] Template (Plantilla):</strong> La cara visible. L'esquelet HTML que rebrà les
-                            dades enviades pel codi i les posarà maques per a l'usuari final.</li>
-                        <li><strong>[V] View (Vista):</strong> El director d'orquestra. Un codi en Python que decideix
-                            quina dada treure del Model (SQL) i a quina Plantilla (HTML) enviar-la segons la ruta
-                            sol·licitada (ex. l'usuari obre 'domini.com/inici').</li>
+                        <li><strong>[M] Model:</strong> La lògica de les dades estructurades. (Equivalent al "Model" de
+                            MVC). Són definicions en Python de com seran les taules a la Base de Dades SQl.</li>
+                        <li><strong>[T] Template (Plantilla):</strong> La cara visible per a l'usuari. (Això seria la
+                            "Vista" clàssica de MVC). És l'esquelet HTML que s'omplirà dinàmicament amb dades.</li>
+                        <li><strong>[V] View (Vista de Django):</strong> El controlador intel·ligent. (És
+                            l'"encarregat", el "Controlador" del MVC clàssic). És la funció pura i dura en Python que
+                            pren la decisió: demana dades al Model, processa lògica de negoci, i ho envia al Template
+                            que correspongui segons la URL.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="orm" class="section">
+        <section class="section">
             <div class="section-header">
-                <h2>🗄️ 3. Què és un ORM? (Tractament d'Dades)</h2>
+                <h2>🗄️ 4. Què és un ORM? (Tractament d'Dades)</h2>
             </div>
 
             <div class="module-card">
@@ -110,7 +145,8 @@
                             (Object-Relational Mapping)</strong>.</p>
                     <p>Tècnicament, les Bases de Dades només "parlen" el llenguatge SQL (ex.
                         <code>SELECT * FROM usuaris;</code>). No obstant, nosaltres som programadors que treballem amb
-                        Classes i Objectes (POO). L'ORM fa de traductor simultani entre els dos mons.</p>
+                        Classes i Objectes (POO). L'ORM fa de traductor simultani entre els dos mons.
+                    </p>
 
                     <div class="project-box" style="margin-top: 2rem;">
                         <h4>🎯 L'Avantatge de l'ORM per a la Consistència de Dades</h4>
@@ -121,6 +157,45 @@
                             construir totes les columnes amb els tipus de dades adients, assegurant la integritat del
                             model.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conceptes" class="section">
+            <div class="section-header">
+                <h2>🚀 5. Més enllà de les dades: Altres Fonaments Moderns</h2>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Venv -->
+                <div class="bento-card card-large">
+                    <h3>📦 L'Aïllament: Entorns Virtuals (VENV)</h3>
+                    <p>En el desenvolupament de servidors rarament programem de zero absolut; depenem de llibreries
+                        grans i complexes (com el propi Django). Un <strong>Entorn Virtual</strong> és com una "caixa de
+                        sorra" (sandbox).</p>
+                    <p>Si instal·lem eines globalment a un ordinador local, els canvis de versificació poden fracturar
+                        aplicacions antigues. Els entorns virtuals garanteixen que un Projecte del 2026 i el teu futur
+                        Projecte del 2027 tinguin espais inalterables; les llibreries que s'actualitzin a un no
+                        trencaran mai l'altre.</p>
+                </div>
+
+                <!-- Enrutament -->
+                <div class="bento-card">
+                    <h3>🔀 L'Enrutament (URL Mapping)</h3>
+                    <p>El concepte fonamental que permet a un servidor traduir un text humà com
+                        <code>youtube.com/watch</code> en codi. Les Rutes actuen com un mapa de carreteres invisible:
+                        connecten cadenes de text (l'URL peticionada al navegador) exclusivament amb la funció
+                        específica encarregada de resoldre i proporcionar aquella pàgina (la Vista MTV).</p>
+                </div>
+
+                <!-- Autenticacio -->
+                <div class="bento-card">
+                    <h3>🔐 Autenticació i Sessions</h3>
+                    <p>Internet es basa en protocols sense estat (<em>stateless</em>): el servidor s'oblida absolutament
+                        de tu un cop t'ha lliurat el codi HTML demanat. Aleshores, com el servidor reconeix que estàs
+                        dins del teu compte iniciat de YouTube o Google? Mitjançant identificadors persistents de Sessió
+                        (com les <em>Cookies</em> o els <em>Tokens</em>). Gestionar l'inici, l'aturada de la sessió i la
+                        privadesa és la pedra angular del curs PTD2.</p>
                 </div>
             </div>
         </section>

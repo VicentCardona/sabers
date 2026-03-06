@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saber B: Fonaments de Back-End | PTD2</title>
+    <meta name="description" content="Apunts teòrics sobre Frameworks i Tractament de dades amb Back-End.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="course-page">
+
+    <nav class="nav-pill">
+        <div class="nav-content">
+            <span class="logo">Prof. Vicent</span>
+            <ul class="nav-links">
+                <li><a href="ptd2.html">← Tornar a Sabers Bàsics</a></li>
+                <li><a href="#intro" class="active">Introducció back-end</a></li>
+                <li><a href="#arquitectura">Arquitectura MTV</a></li>
+                <li><a href="#orm">Tractament de dades (ORM)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <header class="page-header course-header" id="intro">
+            <div class="breadcrumb">
+                <a href="index.html">Cursos</a> / <a href="ptd2.html">PTD2</a> / <span>Teoria Back-End (Django)</span>
+            </div>
+            <div class="header-icon">🌐</div>
+            <h1 class="title-serif">Fonaments Teòrics de Back-End</h1>
+            <p class="subtitle">En aquesta secció teòrica explorarem què és un Web Framework, com processen la
+                informació els servidors i quines eines utilitzem per a tractar dades complexes des d'Internet.</p>
+            <div class="course-meta">
+                <span class="badge badge-red">Saber Bàsic B: Dades</span>
+                <span class="badge badge-blue">Conceptes</span>
+            </div>
+        </header>
+
+        <hr class="divider">
+
+        <section class="section">
+            <div class="section-header">
+                <h2>🖥️ 1. Front-End vs Back-End</h2>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <h3>El Front-End (Aparellador de l'usuari)</h3>
+                    <p>Tot allò que veiem i toquem al navegador. La seva feina és presentar la informació de manera
+                        agradable (HTML per l'estructura, CSS per la pintura, i una mica de JavaScript per fer que els
+                        botons reaccionin).</p>
+                    <div class="card-footer">
+                        <span class="badge badge-yellow">Allò Visible</span>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <h3>El Back-End (El cervell i la memòria)</h3>
+                    <p>El servidor amagat. És l'encarregat de validar els usuaris que entren, consultar el catàleg a la
+                        base de dades, realitzar càlculs complexos i enviar els paquets d'informació de tornada al
+                        navegador. Aquí és on conviu la programació robusta (C, Python) amb les dades (SQL).</p>
+                    <div class="card-footer">
+                        <span class="badge badge-red">L'Estructura Interna</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="arquitectura" class="section">
+            <div class="section-header">
+                <h2>📐 2. L'Arquitectura de Django (El patró MTV)</h2>
+            </div>
+
+            <div class="module-card">
+                <div class="module-body">
+                    <p>Quan estem construint plataformes gigantesques, no escrivim tot el codi al mateix fitxer. Els
+                        <strong>Frameworks</strong> (com Django per Python o Laravel per PHP) organitzen el projecte
+                        dividint-lo en tres parts clarament diferenciades. Aquest patró teòric s'anomena usualment MVC
+                        (Model, Vista, Controlador), però Django el simplifica a <strong>MTV:</strong></p>
+
+                    <ul style="margin-left: 2rem; margin-top: 1rem; color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>[M] Model:</strong> La lògica de dades. És l'esquema de com seran les taules a la
+                            Base de Dades i les regles per emmagatzemar la informació.</li>
+                        <li><strong>[T] Template (Plantilla):</strong> La cara visible. L'esquelet HTML que rebrà les
+                            dades enviades pel codi i les posarà maques per a l'usuari final.</li>
+                        <li><strong>[V] View (Vista):</strong> El director d'orquestra. Un codi en Python que decideix
+                            quina dada treure del Model (SQL) i a quina Plantilla (HTML) enviar-la segons la ruta
+                            sol·licitada (ex. l'usuari obre 'domini.com/inici').</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="orm" class="section">
+            <div class="section-header">
+                <h2>🗄️ 3. Què és un ORM? (Tractament d'Dades)</h2>
+            </div>
+
+            <div class="module-card">
+                <div class="module-body">
+                    <p>Un dels conceptes més potents en el món del desenvolupament de servidors és l'<strong>ORM
+                            (Object-Relational Mapping)</strong>.</p>
+                    <p>Tècnicament, les Bases de Dades només "parlen" el llenguatge SQL (ex.
+                        <code>SELECT * FROM usuaris;</code>). No obstant, nosaltres som programadors que treballem amb
+                        Classes i Objectes (POO). L'ORM fa de traductor simultani entre els dos mons.</p>
+
+                    <div class="project-box" style="margin-top: 2rem;">
+                        <h4>🎯 L'Avantatge de l'ORM per a la Consistència de Dades</h4>
+                        <p>En lloc de construir estructures SQL manuals i arriscar-nos a cometre errors de tipatge o
+                            vulnerabilitats (com la Injecció d'SQL), l'alumne defineix una simple <strong>Classe a
+                                Python</strong>.<br>
+                            L'ORM del framework llegirà aquesta classe i es connectarà ell sol a la Base de Dades per
+                            construir totes les columnes amb els tipus de dades adients, assegurant la integritat del
+                            model.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 PTD2 - Material Teòric de Suport - Prof. Vicent Cardona</p>
+        </footer>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

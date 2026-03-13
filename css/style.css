@@ -551,10 +551,10 @@ hr.divider {
     font-size: 0.95rem;
 }
 
-/* --- Navigation Pill (Floating Bottom) --- */
+/* --- Navigation Pill (Floating) --- */
 .nav-pill {
     position: fixed;
-    bottom: 2rem;
+    top: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
@@ -563,12 +563,12 @@ hr.divider {
 .nav-content {
     background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    border-radius: 50px;
-    padding: 0.5rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 40px;
+    padding: 0.4rem 1.2rem;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-pill .logo {

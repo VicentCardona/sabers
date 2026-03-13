@@ -147,6 +147,25 @@
             background-color: var(--badge-red-bg);
         }
 
+        /* Editor de Text integrat */
+        .inline-editor {
+            position: absolute;
+            display: none;
+            padding: 4px;
+            border: 2px solid #3B82F6;
+            border-radius: 4px;
+            outline: none;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.95);
+            text-align: center;
+            color: #475569;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            pointer-events: auto;
+        }
+
         /* Instruccions Ocultables */
         .tutorial-overlay {
             position: absolute;
@@ -258,6 +277,14 @@
                     Etiqueta de Text lliure
                 </div>
             </div>
+
+            <div class="toolbox-section" style="background-color: #F8FAFC; border-left: 3px solid #6366F1;">
+                <h3>💾 Circuits d'Exemple</h3>
+                <div class="component-btn" onclick="loadExample(1)" style="font-size: 0.8rem;">1. Bàsic: AND + NOT</div>
+                <div class="component-btn" onclick="loadExample(2)" style="font-size: 0.8rem;">2. Porta XOR manual</div>
+                <div class="component-btn" onclick="loadExample(3)" style="font-size: 0.8rem;">3. Semi-Sumador (H-Add)</div>
+                <div class="component-btn" onclick="loadExample(4)" style="font-size: 0.8rem;">4. Sumador (Full Adder)</div>
+            </div>
             
             <div style="padding: 10px 15px; font-size: 0.75rem; color: var(--text-secondary); margin-top: auto; background-color: var(--bg-card);">
                 <details style="cursor: pointer;">
@@ -277,6 +304,7 @@
 
         <!-- Àrea principal de dibuix -->
         <div id="workspace">
+            <input id="inline-text-editor" class="inline-editor" type="text" autocomplete="off" spellcheck="false" placeholder="Escriu aquí...">
             <canvas id="circuit-canvas"></canvas>
             
             <div class="floating-controls">

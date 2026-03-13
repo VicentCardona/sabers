@@ -233,6 +233,12 @@
                     <td>Dóna '1' si A=1 <strong>o</strong> B=1 (o tots dos).</td>
                 </tr>
                 <tr>
+                    <td><strong>XOR (OR Exclusiva)</strong></td>
+                    <td>S = A ⊕ B</td>
+                    <td>Polsadors commutats (passadissos escales). Actua només si són diferents.</td>
+                    <td>0,0 → 0 | 1,1 → 0<br> 0,1 → 1 | 1,0 → 1</td>
+                </tr>
+                <tr>
                     <td><strong>NAND / NOR</strong></td>
                     <td>S = <span class="ov">A·B</span> / <span class="ov">A+B</span></td>
                     <td>Portes Universals. Són AND i OR respectives, negades al final (bombolla).</td>
@@ -300,8 +306,7 @@
                 <div class="bento-card card-large">
                     <h3>2a Forma Canònica (Maxterms / Producte de Sumes)</h3>
                     <p>Ens fixem NOMÉS en les files on la Sortida és <strong>'0'</strong>.</p>
-                    <p>Sumem les variables d'aquella fila funcionant "al revés" (0 es variable normal A, 1 es negada
-                        <span class="ov">A</span>). Finalment, multipliquem els paquets.</p>
+                    <p>Per cada fila amb un '0', fem una "Suma" clàssica de les variables d'aquella fila. Vigileu: aquí funciona "al revés"; si la variable val 0, es posa normal (A), i si val 1 es posa negada (<span class="ov">A</span>). Finalment, multipliquem tots aquests paquets de sumes per construir la funció global.</p>
                     <div class="math-box">
                         S'acostuma a usar molt menys, només quan hi ha menys zeros que uns a la taula.
                     </div>
@@ -427,17 +432,120 @@
             </div>
         </section>
 
-        <footer class="site-footer" style="line-height: 1.8;">
-            <p>
-                &copy; 2026 Vicent Cardona<br>
-                Departament Tecnologia, IES Quartó de Portmany<br>
-                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" target="_blank"
-                    rel="noopener noreferrer" style="text-decoration: underline;">Llicència Creative Commons (CC
-                    BY-NC-SA 4.0)</a>
-            </p>
+        <section id="exercici" class="section">
+            <div class="section-header">
+                <h2>6. Exercici Pràctic Resolt (Disseny d'Hivernacle de 4 Sensors)</h2>
+            </div>
+            
+            <div class="module-card">
+                <div class="module-body">
+                    <p><strong>Enunciat:</strong> Un hivernacle té 4 sensors digitals: Temperatura (A), Humitat (B), Llum (C) i Nivell d'Aigua (D). S'ha d'activar una vàlvula de reg en forma de Sortida (F) EXCLUSIVAMENT sota les següents condicions de perill: quan la Llum està apagada (C=0) però la resta de sensors marquen alt (A=1, B=1, D=1), o bé quan l'aigua és crítica (D=0) i la temperatura baixa (A=0) sense importar com estiguin els altres sensors.</p>
+
+                    <div class="bento-grid">
+                        <div class="bento-card">
+                            <h3>1. Identificar Condicions ('1' lògics)</h3>
+                            <p><strong>Condició 1:</strong> A=1, B=1, C=0, D=1</p>
+                            <p><strong>Condició 2:</strong> A=0 i D=0 alhora (Tant fa el valor de B i C, és a dir, generaran varis '1s' per a les 4 combinacions on A=0 i D=0).</p>
+                        </div>
+                        <div class="bento-card">
+                            <h3>2. Primera Forma Canònica (Bruta)</h3>
+                            <p>Sumem els minterms resultants posant un overline a qui marca un '0':</p>
+                            <div class="math-box" style="font-size: 0.8em; margin:0;">
+                                F = (<span class="ov">A</span>·<span class="ov">B</span>·<span class="ov">C</span>·<span class="ov">D</span>) + (<span class="ov">A</span>·<span class="ov">B</span>·C·<span class="ov">D</span>) + (<span class="ov">A</span>·B·<span class="ov">C</span>·<span class="ov">D</span>) + (<span class="ov">A</span>·B·C·<span class="ov">D</span>) + (A·B·<span class="ov">C</span>·D)
+                            </div>
+                            <p style="font-size: 0.8rem; margin-top:5px; color:var(--text-secondary);">Muntar 5 xips AND gegants de 4 potes és caríssim. Toca reduir doncs.</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">3. Simplificació amb Mapa de Karnaugh de 4 variables</h3>
+                    <div style="background: white; padding: 20px; border: 1px dashed #CBD5E1; border-radius: 8px; margin-bottom: 2rem;">
+                        <table class="karnaugh-map" style="margin: 0 auto; width: 300px;">
+                            <tr><th>AB \ CD</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+                            <tr><th>00</th><td class="k-cell k-group-1">1</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell k-group-1">1</td></tr>
+                            <tr><th>01</th><td class="k-cell k-group-1">1</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell k-group-1">1</td></tr>
+                            <tr><th>11</th><td class="k-cell">0</td><td class="k-cell k-group-2">1</td><td class="k-cell">0</td><td class="k-cell">0</td></tr>
+                            <tr><th>10</th><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell">0</td></tr>
+                        </table>
+                        <p style="text-align: center; margin-top: 15px; font-family: monospace; line-height: 1.6;">
+                            <span style="background: rgba(253, 235, 236, 0.8); padding: 2px 6px; border: 1px solid #FCA5A5; border-radius: 4px;">Llaç Vermell (Columnes A=0 i D=0): <span class="ov">A</span>·<span class="ov">D</span></span><br>
+                            <span style="background: rgba(227, 245, 235, 0.8); padding: 2px 6px; border: 1px solid #86EFAC; border-radius: 4px;">Cel·la Verda Solitària (No es pot agrupar amb ningú): A·B·<span class="ov">C</span>·D</span><br>
+                            <br><strong>Funció Simplificada: F = <span class="ov">A</span>·<span class="ov">D</span> + A·B·<span class="ov">C</span>·D</strong>
+                        </p>
+                    </div>
+
+                    <div class="bento-grid">
+                        <div class="bento-card card-large">
+                            <h3>4. Implementació amb Portes Estàndard (AND, OR, NOT)</h3>
+                            <p>Com queda el circuit lògic gràficament amb les portes corresponents.</p>
+                            <div class="mermaid" style="text-align:center;">
+                                flowchart LR
+                                  A[A] --> NOTA((NOT))
+                                  D[D] --> NOTD((NOT))
+                                  C[C] --> NOTC((NOT))
+                                  B[B] --> AND2
+                                  A --> AND2
+                                  D --> AND2
+                                  
+                                  NOTA --> AND1{{AND}}
+                                  NOTD --> AND1
+                                  
+                                  NOTC --> AND2{{AND}}
+                                  
+                                  AND1 --> OR1((OR))
+                                  AND2 --> OR1
+                                  OR1 --> F(F - Vàlvula)
+                                  
+                                  style NOTA fill:#E2E8F0,stroke:#64748B
+                                  style NOTC fill:#E2E8F0,stroke:#64748B
+                                  style NOTD fill:#E2E8F0,stroke:#64748B
+                                  style AND1 fill:#A5B4FC,stroke:#4F46E5
+                                  style AND2 fill:#A5B4FC,stroke:#4F46E5
+                                  style OR1 fill:#FCA5A5,stroke:#DC2626
+                            </div>
+                        </div>
+                        
+                        <div class="bento-card card-large">
+                            <h3>5. Implementació Universal NAND (Economia)</h3>
+                            <p>Trobem la Doble Negació Final i trenquem el signe '+':</p>
+                            <div class="math-box">F = <span class="ov"><span class="ov">(<span class="ov">A</span>·<span class="ov">D</span>)</span> · <span class="ov">(A·B·<span class="ov">C</span>·D)</span></span></div>
+                            <div class="mermaid" style="text-align:center;">
+                                flowchart LR
+                                  A[A] --> NOTA{{NAND-NOT}}
+                                  D[D] --> NOTD{{NAND-NOT}}
+                                  C[C] --> NOTC{{NAND-NOT}}
+                                  B[B] --> NAND2
+                                  A --> NAND2
+                                  D --> NAND2
+                                  
+                                  NOTA --> NAND1{{NAND}}
+                                  NOTD --> NAND1
+                                  
+                                  NOTC --> NAND2{{NAND}}
+                                  
+                                  NAND1 --> NAND3{{NAND Final}}
+                                  NAND2 --> NAND3
+                                  NAND3 --> F(F - Vàlvula)
+                                  
+                                  style NOTA fill:#FEF3C7,stroke:#D97706
+                                  style NOTC fill:#FEF3C7,stroke:#D97706
+                                  style NOTD fill:#FEF3C7,stroke:#D97706
+                                  style NAND1 fill:#FEF3C7,stroke:#D97706
+                                  style NAND2 fill:#FEF3C7,stroke:#D97706
+                                  style NAND3 fill:#FEF3C7,stroke:#D97706
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Vicent Cardona | IES Quartó de Portmany | <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a></p>
         </footer>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'neutral'});</script>
     <script src="js/main.js"></script>
     <script>
         // Mini funcionalitat interactiva només per aquesta pàgina

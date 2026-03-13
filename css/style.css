@@ -607,8 +607,13 @@ hr.divider {
 .site-footer {
     text-align: center;
     color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-top: 4rem;
+    font-size: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+}
+.site-footer a {
+    text-decoration: underline;
 }
 
 /* --- Mobile Responsiveness --- */

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Circuits Lògics - Tecnologia i Enginyeria</title>
+    <!-- Utilitzarem la mateixa font i paleta, però amb un estil específic full-screen -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* No volem scroll al simulador */
+            background-color: #E2E8F0; /* Fons més tècnic (gris blavós) per al Grid */
+        }
+        
+        #app-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Sidebar Eines */
+        #toolbox {
+            width: 280px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-subtle);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .toolbox-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .toolbox-header h2 {
+            font-size: 1.2rem;
+            margin: 0 0 5px 0;
+            color: var(--text-primary);
+        }
+
+        .toolbox-header a.back-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: underline;
+        }
+
+        .toolbox-section {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .toolbox-section h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .component-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            cursor: grab;
+            user-select: none;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .component-btn:hover {
+            border-color: #A5B4FC;
+            background-color: #E0E7FF;
+        }
+        
+        .component-btn:active {
+            cursor: grabbing;
+        }
+
+        .component-icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-family: var(--font-sans);
+        }
+
+        /* Zona de Dibuix */
+        #workspace {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        #circuit-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Controls Flotants dins del Canvas */
+        .floating-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .btn-action:hover {
+            background-color: var(--bg-card-secondary);
+        }
+        
+        .btn-clear {
+            color: var(--badge-red-text);
+            border-color: #FCA5A5;
+        }
+        .btn-clear:hover {
+            background-color: var(--badge-red-bg);
+        }
+
+        /* Instruccions Ocultables */
+        .tutorial-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(47, 52, 55, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <!-- Sidebar Eines -->
+        <div id="toolbox">
+            <div class="toolbox-header">
+                <h2>⚡ Laboratori Digital</h2>
+                <a href="teoria_electronica_digital.html" class="back-link">← Tornar a la teoria</a>
+            </div>
+
+            <div class="toolbox-section">
+                <h3>Interfície (I/O)</h3>
+                <div class="component-btn" draggable="true" data-type="INPUT">
+                    <span class="component-icon">🔘</span>
+                    Interruptor (Entrada)
+                </div>
+                <div class="component-btn" draggable="true" data-type="CLOCK">
+                    <span class="component-icon">⏱️</span>
+                    Rellotge (Senyal Polsant)
+                </div>
+                <div class="component-btn" draggable="true" data-type="OUTPUT">
+                    <span class="component-icon">💡</span>
+                    Bombeta LED (Sortida)
+                </div>
+            </div>
+
+            <div class="toolbox-section">
+                <h3>Portes Lògiques BÀSIQUES</h3>
+                <div class="component-btn" draggable="true" data-type="AND" style="border-left: 4px solid #3B82F6;">
+                    <span class="component-icon" style="font-weight: bold; color: #3B82F6;">&amp;</span>
+                    Porta AND
+                </div>
+                <div class="component-btn" draggable="true" data-type="OR" style="border-left: 4px solid #10B981;">
+                    <span class="component-icon" style="font-weight: bold; color: #10B981;">≥1</span>
+                    Porta OR
+                </div>
+                <div class="component-btn" draggable="true" data-type="NOT" style="border-left: 4px solid #EF4444;">
+                    <span class="component-icon" style="font-weight: bold; color: #EF4444;">1</span>
+                    Porta NOT (Inversor)
+                </div>
+            </div>
+            
+            <div class="toolbox-section">
+                <h3>Portes AVANÇADES</h3>
+                <div class="component-btn" draggable="true" data-type="NAND" style="border-left: 4px solid #8B5CF6;">
+                    <span class="component-icon" style="font-weight: bold; color: #8B5CF6;">&amp;○</span>
+                    Porta NAND
+                </div>
+                <div class="component-btn" draggable="true" data-type="NOR" style="border-left: 4px solid #F59E0B;">
+                    <span class="component-icon" style="font-weight: bold; color: #F59E0B;">≥1○</span>
+                    Porta NOR
+                </div>
+                <div class="component-btn" draggable="true" data-type="XOR" style="border-left: 4px solid #EC4899;">
+                    <span class="component-icon" style="font-weight: bold; color: #EC4899;">=1</span>
+                    Porta XOR
+                </div>
+            </div>
+            
+            <div style="padding: 15px 20px; font-size: 0.8rem; color: var(--text-secondary); margin-top: auto;">
+                <strong>Consells:</strong>
+                <ul style="padding-left: 15px; margin-top: 5px;">
+                    <li>Arrossega elements al taulell.</li>
+                    <li>Clica en un cercle i arrossega cap a un altre per cablejar.</li>
+                    <li>Doble clic numèric per forçar estat d'un interruptor.</li>
+                    <li>Clic dret o Tecla Supr per eliminar element o cable.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Àrea principal de dibuix -->
+        <div id="workspace">
+            <canvas id="circuit-canvas"></canvas>
+            
+            <div class="floating-controls">
+                <button class="btn-action btn-clear" onclick="clearCircuit()">🗑️ Netejar Taulell</button>
+            </div>
+            
+            <div class="tutorial-overlay" id="tutorial-msg">
+                Instància components arrossegant-los des de la barra lateral
+            </div>
+        </div>
+    </div>
+
+    <!-- Càrrega de l'Engine del Simulador -->
+    <script src="js/simulador.js"></script>
+
+</body>
+</html>

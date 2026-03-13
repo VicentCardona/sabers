@@ -160,6 +160,32 @@
             font-size: 0.9rem;
             pointer-events: none;
             opacity: 0.8;
+            text-align: center;
+        }
+
+        /* --- MODE MÒBIL I TAULETES --- */
+        @media (max-width: 768px) {
+            #app-container {
+                flex-direction: column;
+            }
+            #toolbox {
+                width: 100%;
+                height: 180px; /* Alçada fixa inferior o superior */
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            .toolbox-header {
+                display: none; /* Amaguem el títol gran en mòbil per guanyar espai */
+            }
+            .toolbox-section {
+                flex: 0 0 auto;
+                min-width: 150px;
+                border-bottom: none;
+                border-right: 1px solid var(--border-subtle);
+            }
+            /* En mòbil farem scroll horitzontal sobre els blocs de botons */
         }
     </style>
 </head>
@@ -254,11 +280,12 @@
             <canvas id="circuit-canvas"></canvas>
             
             <div class="floating-controls">
+                <!-- Mostrem botó només de netejar. En mòbils, el botó està amunt a la dreta -->
                 <button class="btn-action btn-clear" onclick="clearCircuit()">🗑️ Netejar Taulell</button>
             </div>
             
             <div class="tutorial-overlay" id="tutorial-msg">
-                Instància components arrossegant-los des de la barra lateral
+                En PC: Arrossega components. En Tàctil: Toca la llista i toca el llenç.
             </div>
         </div>
     </div>

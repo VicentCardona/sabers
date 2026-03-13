@@ -13,8 +13,15 @@ let height = 0;
 let nodes = []; // Tots els components (Portes, Inputs, Outputs)
 let wires = []; // Tots els cables
 
+// Càmera i Historial
+let camera = { x: 0, y: 0, zoom: 1 };
+let isPanning = false;
+let history = [];
+let historyIndex = -1;
+let clipboard = [];
+
 // Estats d'interacció del Ratolí
-let mouse = { x: 0, y: 0, down: false, rightDown: false };
+let mouse = { x: 0, y: 0, worldX: 0, worldY: 0, down: false, rightDown: false };
 let draggingNode = null;
 let hoveringNode = null;
 let hoveringPin = null; 
@@ -49,6 +56,80 @@ const style = {
     activeInput: "#10B981" // Verd per quan polsem un interruptor
 };
 
+// --- Funcions de Càmera i Historial ---
+
+function screenToWorld(sx, sy) {
+    return {
+        x: (sx - camera.x) / camera.zoom,
+        y: (sy - camera.y) / camera.zoom
+    };
+}
+
+function saveState() {
+    if (historyIndex < history.length - 1) {
+        history = history.slice(0, historyIndex + 1);
+    }
+    
+    const snapshot = {
+        nodes: nodes.map(n => ({
+            id: n.id, type: n.type, x: n.x, y: n.y, text: n.text, active: n.active, width: n.width, height: n.height
+        })),
+        wires: wires.map(w => ({
+            fromNodeId: w.fromPin.node.id, fromPinIndex: w.fromPin.index, fromPinType: w.fromPin.type,
+            toNodeId: w.toPin.node.id, toPinIndex: w.toPin.index, toPinType: w.toPin.type
+        }))
+    };
+    
+    history.push(snapshot);
+    if (history.length > 50) history.shift();
+    else historyIndex++;
+}
+
+function loadState(snapshot) {
+    if (!snapshot) return;
+    
+    let oldNodes = snapshot.nodes;
+    nodes = oldNodes.map(n => {
+        let node = new LogicNode(n.type, n.x, n.y);
+        node.id = n.id;
+        if (n.text !== undefined) node.text = n.text;
+        if (n.active !== undefined) node.active = n.active;
+        if (n.width !== undefined) node.width = n.width;
+        if (n.height !== undefined) node.height = n.height;
+        return node;
+    });
+    
+    wires = [];
+    snapshot.wires.forEach(wDef => {
+        const fromNode = nodes.find(n => n.id === wDef.fromNodeId);
+        const toNode = nodes.find(n => n.id === wDef.toNodeId);
+        if (fromNode && toNode) {
+            const fromPin = fromNode.pins.find(p => p.type === wDef.fromPinType && p.index === wDef.fromPinIndex) || fromNode.getOutPins()[0];
+            const toPin = toNode.pins.find(p => p.type === wDef.toPinType && p.index === wDef.toPinIndex) || toNode.getInPins()[0];
+            if (fromPin && toPin) wires.push(new Wire(fromPin, toPin));
+        }
+    });
+
+    hoveringNode = null;
+    hoveringPin = null;
+    draggingNode = null;
+    wiringFromPin = null;
+}
+
+function undo() {
+    if (historyIndex > 0) {
+        historyIndex--;
+        loadState(history[historyIndex]);
+    }
+}
+
+function redo() {
+    if (historyIndex < history.length - 1) {
+        historyIndex++;
+        loadState(history[historyIndex]);
+    }
+}
+
 // --- Models de Dades OOP ---
 
 class Pin {
@@ -69,10 +150,10 @@ class Pin {
         };
     }
 
-    isHovered(mx, my) {
+    isHovered(worldX, worldY) {
         const pos = this.getAbsolutePos();
-        const dx = mx - pos.x;
-        const dy = my - pos.y;
+        const dx = worldX - pos.x;
+        const dy = worldY - pos.y;
         return (dx * dx + dy * dy) < (this.radius * 2.5) * (this.radius * 2.5); // Area generosa de clic
     }
 }
@@ -312,10 +393,10 @@ class LogicNode {
         });
     }
 
-    isHovered(mx, my) {
-        // Retorna true si el ratolí està dins la seva àrea principal
-        return (mx >= this.x && mx <= this.x + this.width &&
-                my >= this.y && my <= this.y + this.height);
+    isHovered(worldX, worldY) {
+        // Retorna true si el ratolí està dins la seva àrea principal (en coordenades mon)
+        return (worldX >= this.x && worldX <= this.x + this.width &&
+                worldY >= this.y && worldY <= this.y + this.height);
     }
 }
 
@@ -369,16 +450,38 @@ canvas.addEventListener('drop', (e) => {
     const type = e.dataTransfer.getData('type');
     if (type) {
         const rect = canvas.getBoundingClientRect();
-        // Calculem les coordenades en l'escala interna del canvas
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const sx = e.clientX - rect.left;
+        const sy = e.clientY - rect.top;
+        const worldPos = screenToWorld(sx, sy);
         
-        nodes.push(new LogicNode(type, x - 30, y - 30));
+        nodes.push(new LogicNode(type, worldPos.x - 30, worldPos.y - 30));
+        saveState();
         
-        // Amagar l'overlay tutorial quan s'afegeix un node
         const msg = document.getElementById('tutorial-msg');
         if (msg) msg.style.display = 'none';
     }
+});
+
+// Arrossegar fons (Càmera)
+canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left;
+    const sy = e.clientY - rect.top;
+    
+    // On apunta el ratolí al món abans de l'escalat
+    const worldBefore = screenToWorld(sx, sy);
+    
+    // Modificar zoom
+    const zoomFactor = 1.1;
+    if (e.deltaY < 0) camera.zoom *= zoomFactor;
+    else camera.zoom /= zoomFactor;
+    
+    camera.zoom = Math.max(0.1, Math.min(camera.zoom, 5));
+    
+    // Reajustar desplaçament perquè el punt del món estigui on apuntava el ratolí
+    camera.x = sx - worldBefore.x * camera.zoom;
+    camera.y = sy - worldBefore.y * camera.zoom;
 });
 
 // Ratolí a dins del Canvas (Lògica Interna)
@@ -386,22 +489,30 @@ canvas.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
     mouse.x = e.clientX - rect.left;
     mouse.y = e.clientY - rect.top;
+    const worldPos = screenToWorld(mouse.x, mouse.y);
+    mouse.worldX = worldPos.x;
+    mouse.worldY = worldPos.y;
     
+    if (isPanning) {
+        camera.x += e.movementX;
+        camera.y += e.movementY;
+        return;
+    }
+
     // Si arrosseguem un node
     if (draggingNode && !wiringFromPin) {
-        draggingNode.x = mouse.x - draggingNode.width/2;
-        draggingNode.y = mouse.y - draggingNode.height/2;
+        draggingNode.x = mouse.worldX - draggingNode.width/2;
+        draggingNode.y = mouse.worldY - draggingNode.height/2;
         return;
     }
 
     // Comprovar hover sobre pins
     hoveringPin = null;
     let foundPin = false;
-    // Donar prioritat a buscar pins primer
     for (let i = nodes.length - 1; i >= 0; i--) { // Busquem del més amunt al fons
         const node = nodes[i];
         for (let j = 0; j < node.pins.length; j++) {
-            if (node.pins[j].isHovered(mouse.x, mouse.y)) {
+            if (node.pins[j].isHovered(mouse.worldX, mouse.worldY)) {
                 hoveringPin = node.pins[j];
                 foundPin = true;
                 break;
@@ -414,7 +525,7 @@ canvas.addEventListener('mousemove', (e) => {
     hoveringNode = null;
     if (!foundPin && !wiringFromPin) {
         for (let i = nodes.length - 1; i >= 0; i--) {
-            if (nodes[i].isHovered(mouse.x, mouse.y)) {
+            if (nodes[i].isHovered(mouse.worldX, mouse.worldY)) {
                 hoveringNode = nodes[i];
                 // Canviarem cursor a agafar només si mirem node sencer (i no pin)
                 canvas.style.cursor = 'grab';
@@ -433,6 +544,13 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener('mousedown', (e) => {
     if (e.button === 0) mouse.down = true; // Click Esquerre
     
+    // Botó central o Shift+Esquerre per fer Pan
+    if (e.button === 1 || (e.button === 0 && e.shiftKey)) {
+        isPanning = true;
+        canvas.style.cursor = 'grabbing';
+        return;
+    }
+    
     // Si hem clicat un Pin, començar a cablejar
     if (hoveringPin && e.button === 0) {
         // Si el pin ja té connexió com a ENTRADA, desfem la connexió prèvia
@@ -442,7 +560,7 @@ canvas.addEventListener('mousedown', (e) => {
                 // Recuperem el cable per tirar-lo endarrere
                 wiringFromPin = wires[connectXIdx].fromPin;
                 wires.splice(connectXIdx, 1);
-                return;
+                return; // el save state el farem al deixar anar
             }
         }
         wiringFromPin = hoveringPin;
@@ -454,6 +572,7 @@ canvas.addEventListener('mousedown', (e) => {
         // Només els blocs INPUT sense clock poden fer toggle de polsador 0 i 1
         if (hoveringNode.type === 'INPUT') {
             hoveringNode.active = !hoveringNode.active;
+            saveState();
         }
     }
 
@@ -468,18 +587,16 @@ canvas.addEventListener('mousedown', (e) => {
     
     // ** Click Dret per Esborrar Components / Cables **
     if (e.button === 2) {
-        // Mirar si vull esborrar cable
         if (hoveringPin) {
             wires = wires.filter(w => w.fromPin !== hoveringPin && w.toPin !== hoveringPin);
+            saveState();
             return;
         }
-        // Mirar si vull esborrar node
         if (hoveringNode) {
-            // Eliminar cables vinculats al node
             wires = wires.filter(w => w.fromPin.node !== hoveringNode && w.toPin.node !== hoveringNode);
-            // Eliminar node
             nodes = nodes.filter(n => n !== hoveringNode);
             hoveringNode = null;
+            saveState();
         }
     }
 });
@@ -491,16 +608,26 @@ canvas.addEventListener('dblclick', (e) => {
             const result = prompt("Escriu el text de l'etiqueta:", hoveringNode.text);
             if (result !== null) {
                 hoveringNode.text = result;
+                saveState();
             }
         } else if (hoveringNode.type === 'INPUT') {
-            // Fixa de mode per si fa mandra clicar-lo molt en sistemes combinacionals complexos
             hoveringNode.active = !hoveringNode.active;
+            saveState();
         }
     }
 });
 
 canvas.addEventListener('mouseup', (e) => {
     if (e.button === 0) mouse.down = false;
+    
+    if (isPanning) {
+        isPanning = false;
+        canvas.style.cursor = 'default';
+        return;
+    }
+
+    let stateChanged = false;
+    if (draggingNode) stateChanged = true;
     draggingNode = null;
     
     // Deixar anar un cable sobre un altre Pin per finalitzar la connexió
@@ -522,22 +649,56 @@ canvas.addEventListener('mouseup', (e) => {
         if (valid) {
             wires = wires.filter(w => w.toPin !== inPin); // Treure cable antic que tingués
             wires.push(new Wire(outPin, inPin));
+            stateChanged = true;
         }
     }
     
     wiringFromPin = null;
+    if (stateChanged) saveState();
 });
 
 // Evitar menú de context del navegador al fer click dret al canvas
 canvas.addEventListener('contextmenu', e => e.preventDefault());
 
-// Suprimir nodes via Teclat
+// Suprimir nodes via Teclat i Undo/Redo/Copy/Paste
 window.addEventListener('keydown', (e) => {
+    // Esborrar
     if (e.key === 'Delete' || e.key === 'Backspace') {
-        if (hoveringNode) {
+        if (hoveringNode && e.target === document.body) {
             wires = wires.filter(w => w.fromPin.node !== hoveringNode && w.toPin.node !== hoveringNode);
             nodes = nodes.filter(n => n !== hoveringNode);
             hoveringNode = null;
+            saveState();
+        }
+    }
+    
+    // Undo / Redo
+    if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') { e.preventDefault(); undo(); }
+    if (e.ctrlKey && e.key.toLowerCase() === 'y') { e.preventDefault(); redo(); }
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'z') { e.preventDefault(); redo(); }
+    
+    // Copy / Cut / Paste
+    if (e.ctrlKey && e.key.toLowerCase() === 'c') {
+        if (hoveringNode) clipboard = [hoveringNode];
+    }
+    if (e.ctrlKey && e.key.toLowerCase() === 'x') {
+        if (hoveringNode) {
+            clipboard = [hoveringNode];
+            wires = wires.filter(w => w.fromPin.node !== hoveringNode && w.toPin.node !== hoveringNode);
+            nodes = nodes.filter(n => n !== hoveringNode);
+            hoveringNode = null;
+            saveState();
+        }
+    }
+    if (e.ctrlKey && e.key.toLowerCase() === 'v') {
+        if (clipboard.length > 0) {
+            clipboard.forEach(cc => {
+                let newNode = new LogicNode(cc.type, mouse.worldX, mouse.worldY);
+                if (cc.text !== undefined) newNode.text = cc.text;
+                if (cc.active !== undefined) newNode.active = cc.active;
+                nodes.push(newNode);
+            });
+            saveState();
         }
     }
 });
@@ -546,6 +707,8 @@ window.addEventListener('keydown', (e) => {
 window.clearCircuit = function() {
     nodes = [];
     wires = [];
+    camera = { x: 0, y: 0, zoom: 1 };
+    saveState();
     const msg = document.getElementById('tutorial-msg');
     if (msg) msg.style.display = 'block';
 };
@@ -553,9 +716,7 @@ window.clearCircuit = function() {
 // --- Bucle d'Animació i Simulació (Motor) ---
 
 function loop() {
-    // 1. Math Update (Actualitzar física lògica de portes endavant en l'ordre de l'array)
-    // Utilitzem un "sweep" simple per resoldre combinacional (això no resol sistemes seqüencials purs bé excepte que oscil·lin lentament)
-    // Executem un parell de passades per estabilitzar càlculs (propagació en cadena)
+    // 1. Math Update
     for(let pass = 0; pass < 3; pass++) {
         nodes.forEach(node => node.evaluate());
     }
@@ -563,15 +724,29 @@ function loop() {
     // 2. Render
     ctx.clearRect(0, 0, width, height);
 
-    // Dibuixar Quadrícula
-    ctx.lineWidth = 1;
+    ctx.save();
+    ctx.translate(camera.x, camera.y);
+    ctx.scale(camera.zoom, camera.zoom);
+
+    // Dibuixar Quadrícula (Adaptada al zoom/pan infinit)
+    ctx.lineWidth = 1 / camera.zoom;
     ctx.strokeStyle = style.bgGridFade;
     ctx.beginPath();
-    for (let x = 0; x < width; x += style.gridLine) {
-        ctx.moveTo(x, 0); ctx.lineTo(x, height);
+    
+    const startX = -camera.x / camera.zoom;
+    const startY = -camera.y / camera.zoom;
+    const endX = startX + width / camera.zoom;
+    const endY = startY + height / camera.zoom;
+    const step = style.gridLine;
+
+    const firstGridX = Math.floor(startX / step) * step;
+    const firstGridY = Math.floor(startY / step) * step;
+
+    for (let x = firstGridX; x < endX; x += step) {
+        ctx.moveTo(x, startY); ctx.lineTo(x, endY);
     }
-    for (let y = 0; y < height; y += style.gridLine) {
-        ctx.moveTo(0, y); ctx.lineTo(width, y);
+    for (let y = firstGridY; y < endY; y += step) {
+        ctx.moveTo(startX, y); ctx.lineTo(endX, y);
     }
     ctx.stroke();
 
@@ -583,7 +758,7 @@ function loop() {
         ctx.beginPath();
         const pos1 = wiringFromPin.getAbsolutePos();
         ctx.moveTo(pos1.x, pos1.y);
-        ctx.lineTo(mouse.x, mouse.y);
+        ctx.lineTo(mouse.worldX, mouse.worldY);
         ctx.lineWidth = 4;
         ctx.strokeStyle = style.wireDrag;
         ctx.lineCap = "round";
@@ -593,8 +768,10 @@ function loop() {
     // Dibuixar Tots els components (Portes lógiques)
     nodes.forEach(node => node.draw(ctx));
 
+    ctx.restore();
     requestAnimationFrame(loop);
 }
 
 // Iniciar Motor
+saveState();
 loop();

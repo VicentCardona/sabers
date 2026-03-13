@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnologia i Enginyeria | Prof. Vicent Cardona</title>
+    <meta name="description" content="Apunts teòrics de Tecnologia i Enginyeria segons els Sabers Bàsics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="course-page">
+    
+    <nav class="nav-pill">
+        <div class="nav-content">
+            <span class="logo">Prof. Vicent</span>
+            <ul class="nav-links">
+                <li><a href="index.html">← Tots els Cursos</a></li>
+                <li><a href="#mec" class="active">Sistemes Mecànics</a></li>
+                <li><a href="#elec">Sistemes Elèctrics/Electrònics</a></li>
+                <li><a href="#auto">Sistemes Automàtics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <header class="page-header course-header">
+            <div class="breadcrumb">
+                <a href="index.html">Cursos</a> / <span>Tecnologia i Enginyeria</span>
+            </div>
+            <div class="header-icon">⚙️</div>
+            <h1 class="title-serif">Tecnologia i Enginyeria (Batxillerat)</h1>
+            <p class="subtitle">Repositori teòric central de l'assignatura. Aquí trobaràs el desenvolupament conceptual dels Sabers Bàsics desglossats per mòduls tècnics, separats de les instruccions específiques de les pràctiques de taller o laboratori.</p>
+        </header>
+
+        <hr class="divider">
+
+        <!-- Saber D: Sistemes Elèctrics i Electrònics -->
+        <section id="elec" class="section">
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-badge badge-blue">Saber Bàsic D</div>
+                    <h3>Sistemes Elèctrics i Electrònics</h3>
+                </div>
+                <div class="module-body">
+                    <p>Estudi fonamental de l'energia elèctrica, des dels circuits clàssics de corrent continu (CC) i altern (CA) fins als profunds fonaments de l'<strong>electrònica digital</strong>, portes lògiques i arquitectura d'ordinadors.</p>
+
+                    <div class="resource-list">
+                        <h4>Suport Teòric Actiu</h4>
+                        <ul>
+                            <li><a href="teoria_electronica_digital.html" class="resource-link"><span class="icon">📗</span> Teoria: Electrònica Digital (Àlgebra de Boole, Karnaugh i Sistemes de Numeració)</a></li>
+                            <li><a href="#" class="resource-link" style="opacity: 0.6; cursor: not-allowed;"><span class="icon">📘</span> Teoria: Corrent Continu i Lleis de Kirchhoff (Pròximament)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="project-box">
+                        <h4>🔑 Conceptes Clau a Dominar</h4>
+                        <p><strong>- Sistemes Digitals:</strong> Diferències amb l'entorn analògic i transformacions de base numèrica (Binari, Hexadecimal, Octal).<br>
+                        <strong>- Lògica Booleana:</strong> Obtenció de funcions a partir de taules de veritat usant minterms (1a canònica) o maxterms (2a canònica).<br>
+                        <strong>- Simplificació:</strong> Ús magistral dels Mapes de Karnaugh per minimitzar de forma gràfica el cost dels components electrònics.<br>
+                        <strong>- Circuits Físics:</strong> Connexió i comprensió del traçat real mitjançant portes lògiques (AND, OR, NOT, NAND, XOR) i integrats combinacionals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placeholder per altres Sabers -->
+        <section id="mec" class="section">
+            <div class="module-card" style="opacity: 0.7;">
+                <div class="module-header">
+                    <div class="module-badge badge-yellow">Saber Bàsic C</div>
+                    <h3>Sistemes Mecànics (Pendent)</h3>
+                </div>
+                <div class="module-body">
+                    <p>Estudi d'estructures, càlcul d'esforços, màquines tèrmiques i principis de pneumàtica i hidràulica.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer" style="line-height: 1.8;">
+            <p>
+                &copy; 2026 Vicent Cardona<br>
+                Departament Tecnologia, IES Quartó de Portmany<br>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Llicència Creative Commons (CC BY-NC-SA 4.0)</a>
+            </p>
+        </footer>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

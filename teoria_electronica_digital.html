@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoria: Electrònica Digital i Karnaugh | Tecnologia i Enginyeria</title>
+    <meta name="description" content="Apunts complets sobre Electrònica Digital, Àlgebra de Boole i Mapes de Karnaugh.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estils específics per a les Taules de Karnaugh i Mates */
+        .math-box {
+            background-color: #F7F7F5;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: auto;
+            border: 1px solid rgba(0,0,0,0.05);
+            margin: 1rem 0;
+        }
+        .truth-table, .karnaugh-map {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .truth-table th, .karnaugh-map th {
+            background-color: #E1F0FE;
+            padding: 10px;
+            border: 1px solid #D1E8FF;
+        }
+        .truth-table td, .karnaugh-map td {
+            padding: 10px;
+            border: 1px solid #EEEEEE;
+        }
+        .k-cell {
+            width: 50px;
+            height: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        .k-group-1 { background-color: rgba(253, 235, 236, 0.8); border: 2px solid #FCA5A5 !important; } /* Vermell */
+        .k-group-2 { background-color: rgba(227, 245, 235, 0.8); border: 2px solid #86EFAC !important; } /* Verd */
+        
+        .interactive-tool {
+            border: 1px solid #E2E8F0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: #FFFFFF;
+            margin-top: 1rem;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #CBD5E1;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        button.btn-calc {
+            background: #2F3437;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button.btn-calc:hover {
+            background: #1a1c1e;
+        }
+    </style>
+</head>
+<body class="course-page">
+    
+    <nav class="nav-pill">
+        <div class="nav-content">
+            <span class="logo">Prof. Vicent</span>
+            <ul class="nav-links">
+                <li><a href="tecnologia_enginyeria.html">← Tornar a Enginyeria</a></li>
+                <li><a href="#conceptes" class="active">Sistemes</a></li>
+                <li><a href="#boole">Boole i Portes</a></li>
+                <li><a href="#funcions">Canòniques</a></li>
+                <li><a href="#karnaugh">Karnaugh i Disseny</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <header class="page-header course-header">
+            <div class="breadcrumb">
+                <a href="index.html">Cursos</a> / <a href="tecnologia_enginyeria.html">Enginyeria</a> / <span>Electrònica Digital</span>
+            </div>
+            <div class="header-icon">🔌</div>
+            <h1 class="title-serif">Fonaments d'Electrònica Digital</h1>
+            <p class="subtitle">Des dels sistemes de numeració, passant per l'Àlgebra de Boole, fins a la metodologia gràfica de Karnaugh per al disseny eficient de circuits combinacionals.</p>
+            <div class="course-meta">
+                <span class="badge badge-blue">Saber Bàsic D</span>
+                <span class="badge badge-yellow">Teoria Avançada</span>
+            </div>
+        </header>
+
+        <hr class="divider">
+
+        <section id="conceptes" class="section">
+            <div class="section-header">
+                <h2>1. Analògic vs Digital i Sistemes de Numeració</h2>
+            </div>
+            
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <h3>🌊 Senyals Analògics</h3>
+                    <p>Varien de forma contínua en el temps. Poden prendre infinits valors dins d'un rang (ex. la temperatura ambient, l'àudio d'un vinil). Són susceptibles al "soroll" i a interferències elèctriques.</p>
+                </div>
+
+                <div class="bento-card">
+                    <h3>🔢 Senyals Digitals / Nivells Lògics</h3>
+                    <p>Només poden prendre valors discrets predefinits. A nivell de maquinari (TTL/CMOS), l'ordinador llegeix la tensió i ho categoritza en dos <strong>Nivells Lògics</strong>:</p>
+                    <ul style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        <li><strong>0 Lògic (LOW):</strong> Absència de tensió (generalment 0V a 0.8V).</li>
+                        <li><strong>1 Lògic (HIGH):</strong> Presència de tensió (generalment 2V a 5V).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-card" style="margin-top: 2rem;">
+                <div class="module-body">
+                    <h3>Bases Numèriques (Base 10, 2, 8, 16)</h3>
+                    <p>Per entendre l'estat d'aquests nivells lògics en massa, la tecnologia utilitza diferents bases geomètriques:</p>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Decimal (Base 10):</strong> El del dia a dia (0 al 9).</li>
+                        <li><strong>Binari (Base 2):</strong> Comprèn a l'ordinador. Només 0 i 1.</li>
+                        <li><strong>Octal (Base 8):</strong> Del 0 al 7. Menys comú actualment, usat antigament en permisos POSIX.</li>
+                        <li><strong>Hexadecimal (Base 16):</strong> Del 0 al 9 i de la A a la F. Molt dens; s'utilitza per agrupar adreces de memòria, colors CSS o IPs (IPv6). Agrupa bits de 4 en 4 fàcilment.</li>
+                    </ul>
+
+                    <!-- Mini Simulador: Convertidor de Bases -->
+                    <div class="interactive-tool">
+                        <h4 style="margin-top:0;">⚡ Simulador: Conversor Ràpid de Bases</h4>
+                        <p style="font-size: 0.9em; color: var(--text-secondary);">Escriu un nombre decimal per veure'l ràpidament traduït al llenguatge màquina (Base 2 i 16).</p>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+                            <input type="number" id="decInput" placeholder="Ex: 255" min="0">
+                            <button class="btn-calc" onclick="convertBases()">Converteix</button>
+                        </div>
+                        <div id="baseResults" class="math-box" style="margin-top: 10px; display: none;">
+                            <strong>Bin (Base 2):</strong> <span id="resBin"></span><br>
+                            <strong>Oct (Base 8):</strong> <span id="resOct"></span><br>
+                            <strong>Hex (Base 16):</strong> <span id="resHex"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="boole" class="section">
+            <div class="section-header">
+                <h2>2. Àlgebra de Boole i Portes Lògiques</h2>
+            </div>
+            
+            <p style="margin-bottom: 2rem;">El matemàtic George Boole va definir les regles algebraiques per treballar només amb valors Binaris (Vertader '1', Fals '0'). I Claude Shannon ho va aplicar als circuits de relès i semiconductors, naixent les <strong>Portes lògiques</strong>.</p>
+            
+            <table class="truth-table">
+                <tr>
+                    <th>Porta / Operador</th>
+                    <th>Funció Booleana</th>
+                    <th>Explicació Física</th>
+                    <th>Comportament (Taula Ràpida)</th>
+                </tr>
+                <tr>
+                    <td><strong>NOT (Inversor)</strong></td>
+                    <td>S = A' (o A)</td>
+                    <td>Fa el contrari. Si entra corrent, el talla.</td>
+                    <td>0 → 1 <br> 1 → 0</td>
+                </tr>
+                <tr>
+                    <td><strong>AND (Producte)</strong></td>
+                    <td>S = A · B</td>
+                    <td>Circuits en Sèrie. Només actua si TOTS els polsadors estan premuts.</td>
+                    <td>Només dóna '1' si A=1 <strong>i</strong> B=1.</td>
+                </tr>
+                <tr>
+                    <td><strong>OR (Suma)</strong></td>
+                    <td>S = A + B</td>
+                    <td>Circuits en Paral·lel. Actua si ALMENYS UN polsador està premut.</td>
+                    <td>Dóna '1' si A=1 <strong>o</strong> B=1 (o tots dos).</td>
+                </tr>
+                <tr>
+                    <td><strong>NAND / NOR</strong></td>
+                    <td>S = (A·B)' / (A+B)'</td>
+                    <td>Portes Universals. Són AND i OR respectives, negades al final (bombolla).</td>
+                    <td>El contrari absolut de l'AND i l'OR.</td>
+                </tr>
+            </table>
+
+            <div class="bento-grid" style="margin-top: 2rem;">
+                <div class="bento-card">
+                    <h3>📜 Lleis i Teoremes Importants</h3>
+                    <p>Ens permeten simplificar algebraicament abans de dibuixar:</p>
+                    <ul>
+                        <li><strong>Identitat:</strong> A + 0 = A / A · 1 = A</li>
+                        <li><strong>Idempotència:</strong> A + A = A / A · A = A</li>
+                        <li><strong>Llei d'Involució (Doble Negació):</strong> (A')' = A</li>
+                        <li><strong>Element Absorbent:</strong> A + 1 = 1 / A · 0 = 0</li>
+                    </ul>
+                </div>
+                <div class="bento-card">
+                    <h3>🏆 Lleis de De Morgan</h3>
+                    <p>La pedra angular de l'electrònica. Canvia sumes per multiplicacions "trencant" negacions llargues.</p>
+                    <div class="math-box">
+                        1. (A + B)' = A' · B' <br>
+                        2. (A · B)' = A' + B'
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="funcions" class="section">
+            <div class="section-header">
+                <h2>3. De la Taula de la Veritat a la Funció (Formes Canòniques)</h2>
+            </div>
+            
+            <p>Quan tenim un problema real (ex: "vull que soni l'alarma depenent de 3 sensors"), primer muntem la taula de la veritat. Un cop feta, necessitem trobar la funció algebraica. Hi ha dos mètodes absoluts:</p>
+
+            <div class="bento-grid">
+                <div class="bento-card card-large">
+                    <h3>1a Forma Canònica (Minterms / Suma de Productes)</h3>
+                    <p>Ens fixem NOMÉS en les files on la Sortida és <strong>'1'</strong>.</p>
+                    <p>Multipliquem les variables d'aquella fila. Si la variable és 0, es posa negada (A'). Si és 1, sense negar (A). Finalment, sumem tots aquests productes.</p>
+                    <div class="math-box">
+                        Exemple per Sortides=1 en: A=0,B=1 i A=1,B=1<br>
+                        F = (A' · B) + (A · B)
+                    </div>
+                </div>
+                
+                <div class="bento-card card-large">
+                    <h3>2a Forma Canònica (Maxterms / Producte de Sumes)</h3>
+                    <p>Ens fixem NOMÉS en les files on la Sortida és <strong>'0'</strong>.</p>
+                    <p>Sumem les variables d'aquella fila funcionant "al revés" (0 es variable normal A, 1 es negada A'). Finalment, multipliquem els paquets.</p>
+                    <div class="math-box">
+                        S'acostuma a usar molt menys, només quan hi ha menys zeros que uns a la taula.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="karnaugh" class="section">
+            <div class="section-header">
+                <h2>4. Mètodes de Simplificació i Mapes de Karnaugh</h2>
+            </div>
+            
+            <div class="module-card">
+                <div class="module-body">
+                    <p>Construir la 1a Forma Canònica és fàcil, però produeix funcions GIGANTS que constarien molts diners en microxips. El <strong>Mètode Algebraic</strong> (usant treure factor comú o De Morgan) és lent i arriscat. Per això, la indústria utilitza el <strong>Mètode Gràfic de Karnaugh (K-Maps)</strong>.</p>
+                    
+                    <h3>Passos per dissenyar i simplificar amb Karnaugh:</h3>
+                    
+                    <ol style="line-height: 1.8; margin-top: 1rem;">
+                        <li><strong>Dibuixar la graella:</strong> Crea un quadre de 2<sup>N</sup> cel·les (on N és el num de sensors/variables). Atenció al codi Gray en marcar les coordenades (00, 01, 11, 10), només pot canviar un bit d'un salt a l'altre!.</li>
+                        <li><strong>Traspàs:</strong> Posa els '1' de la taula de la veritat (Minterms) dins de la graella a les seves coordenades corresponents.</li>
+                        <li><strong>Agrupacions (Llaços):</strong> Embolcalla els '1' adjacents. 
+                            <ul>
+                                <li>Han de ser grups de grandàries base 2: 1, 2, 4, 8, 16. Quant més gran el grup, millor simplificació!</li>
+                                <li>Només grups rectangulars o quadrats. (Mai en diagonal).</li>
+                                <li>Els costats del mapa estan "connectats" pacman-style (adalt amb abaix, esquerra amb dreta).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Llegir el mapa:</strong> Per cada grup creat, escriu el paquet multiplicatiu llegint quines variables NO canvien d'estat a la vora. Si una variable (ex. B) val 0 a un extrem de l'agrupació i 1 a un altre, s'elimina.</li>
+                    </ol>
+
+                    <!-- Example Karnaugh Visual -->
+                    <h4>Exemple Visual del Mapa (3 Variables: A, B, C)</h4>
+                    <div style="background: white; padding: 20px; border: 1px dashed #ccc; display: inline-block; border-radius: 8px;">
+                        <table class="karnaugh-map" style="width: 250px;">
+                            <tr>
+                                <th>A \ BC</th>
+                                <th>00</th>
+                                <th>01</th>
+                                <th>11</th>
+                                <th>10</th>
+                            </tr>
+                            <tr>
+                                <th>0</th>
+                                <td class="k-cell">0</td>
+                                <td class="k-cell k-group-1">1</td>
+                                <td class="k-cell k-group-1">1</td>
+                                <td class="k-cell">0</td>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <td class="k-cell">0</td>
+                                <td class="k-cell k-group-2">1</td>
+                                <td class="k-cell k-group-2">1</td>
+                                <td class="k-cell">0</td>
+                            </tr>
+                        </table>
+                        <p style="text-align: center; margin-top: 10px; font-family: monospace;">Funció simplificada a la vista: C</p>
+                    </div>
+
+                    <div class="project-box" style="margin-top: 2rem;">
+                        <h4>🎯 Metodologia Estàndard de Resolució de Problemes (Disseny Pràctic)</h4>
+                        <p>Quan se't planteja un text com: "Un dipòsit té 3 sensors (...)", aplica sempre l'algorisme de l'enginyer:</p>
+                        <ul style="color: var(--text-secondary);">
+                            <li><strong>Pas 1:</strong> Identificar Variables d'Entrada (Sensors) i de Sortida (Actuadors). Assignar conveni de 0 i 1 lògic a la situació física.</li>
+                            <li><strong>Pas 2:</strong> Dibuixar estricment la Taula de la Veritat.</li>
+                            <li><strong>Pas 3:</strong> Obtenir la Funció (en primera forma canònica directament i dibuixar K-Map).</li>
+                            <li><strong>Pas 4:</strong> Embolcallar grups màxims, extreure Funció Simplificada definitiva.</li>
+                            <li><strong>Pas 5 (Taller):</strong> Dibuixar el Cronograma i el Circuit lògic amb les Portes Lògiques corresponents a l'equació final, reduint màximament el consum elèctric del sistema.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer" style="line-height: 1.8;">
+            <p>
+                &copy; 2026 Vicent Cardona<br>
+                Departament Tecnologia, IES Quartó de Portmany<br>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Llicència Creative Commons (CC BY-NC-SA 4.0)</a>
+            </p>
+        </footer>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Mini funcionalitat interactiva només per aquesta pàgina
+        function convertBases() {
+            const input = document.getElementById("decInput").value;
+            const resBox = document.getElementById("baseResults");
+            
+            if(input === "" || isNaN(input) || input < 0) {
+                resBox.style.display = "none";
+                return;
+            }
+            
+            const num = parseInt(input, 10);
+            document.getElementById("resBin").innerText = num.toString(2);
+            document.getElementById("resOct").innerText = num.toString(8);
+            document.getElementById("resHex").innerText = num.toString(16).toUpperCase();
+            
+            resBox.style.display = "block";
+        }
+    </script>
+</body>
+</html>

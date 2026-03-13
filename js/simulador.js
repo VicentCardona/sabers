@@ -80,11 +80,22 @@ class Pin {
 class LogicNode {
     constructor(type, x, y) {
         this.id = Math.random().toString(36).substr(2, 9);
-        this.type = type; // 'AND', 'OR', 'INPUT', etc.
+        this.type = type; // 'AND', 'OR', 'INPUT', 'TEXT', 'WAYPOINT', etc.
         this.x = x;
         this.y = y;
-        this.width = 60;
-        this.height = 60;
+        
+        // Mides variables segons el tipus
+        if (this.type === 'WAYPOINT') {
+            this.width = 16;
+            this.height = 16;
+        } else if (this.type === 'TEXT') {
+            this.width = 100;
+            this.height = 30;
+            this.text = "Etiqueta text..."; // Text per defecte
+        } else {
+            this.width = 60;
+            this.height = 60;
+        }
         
         this.pins = [];
         this.setupPins();
@@ -94,8 +105,14 @@ class LogicNode {
     }
 
     setupPins() {
-        // Cada porta té un disseny de pins diferent
-        if (this.type === 'INPUT' || this.type === 'CLOCK') {
+        if (this.type === 'TEXT') {
+            // Els textos no tenen pins elèctrics
+            return;
+        } else if (this.type === 'WAYPOINT') {
+            // Pin in i pin out superposats al mig
+            this.pins.push(new Pin(this, this.width/2 - 6, this.height/2, 'in', 0));
+            this.pins.push(new Pin(this, this.width/2 + 6, this.height/2, 'out', 0));
+        } else if (this.type === 'INPUT' || this.type === 'CLOCK') {
             this.pins.push(new Pin(this, this.width, this.height/2, 'out', 0));
         } else if (this.type === 'OUTPUT') {
             this.pins.push(new Pin(this, 0, this.height/2, 'in', 0));
@@ -161,6 +178,12 @@ class LogicNode {
             case 'OUTPUT':
                 this.outputValue = a; // Simplement reflectir l'entrada per pintar el LED
                 break;
+            case 'WAYPOINT':
+                this.outputValue = a; // L'ancoratge simplement traspassa el senyal elèctric idèntic
+                break;
+            case 'TEXT':
+                // No cal calcular res per als textos
+                break;
         }
 
         // Actualitzar valor dels meus pins de sortida
@@ -208,6 +231,38 @@ class LogicNode {
                 ctx.fillStyle = "#E2E8F0";
                 ctx.fill();
             }
+        } else if (this.type === 'WAYPOINT') {
+            // Un punt petit i fi
+            ctx.fillStyle = (this.outputValue === 1) ? style.wireOn : style.wireOff;
+            ctx.strokeStyle = style.nodeBorder;
+            ctx.lineWidth = 1;
+            ctx.arc(this.width/2, this.height/2, this.width/2, 0, Math.PI*2);
+            ctx.fill();
+            ctx.stroke();
+        } else if (this.type === 'TEXT') {
+            // Node transparent només amb text
+            ctx.fillStyle = "transparent";
+            ctx.strokeStyle = "transparent";
+            ctx.roundRect(0, 0, this.width, this.height, 4);
+            ctx.fill();
+            ctx.stroke(); // Clicable transparent
+
+            // Calcular amplada real per ajustar la capsa màgica de hover
+            ctx.font = "bold 16px Inter";
+            const textMetrics = ctx.measureText(this.text);
+            this.width = Math.max(80, textMetrics.width + 20); // expandir la capsa per si el text és llarg
+
+            // Fons subtil grogós si està seleccionat, per fer-ho notar
+            if (this === hoveringNode) {
+                ctx.fillStyle = "rgba(252, 211, 77, 0.2)";
+                ctx.fillRect(0, 0, this.width, this.height);
+            }
+
+            ctx.fillStyle = "#475569"; // Color de text general a la UI
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(this.text, this.width/2, this.height/2);
+
         } else {
             // Caixa quadrada estàndard per totes les portes de moment
             // per a simplificar dibuix inicial, utilitzarem símbols dins
@@ -425,6 +480,21 @@ canvas.addEventListener('mousedown', (e) => {
             // Eliminar node
             nodes = nodes.filter(n => n !== hoveringNode);
             hoveringNode = null;
+        }
+    }
+});
+
+// Doble Clic per interaccions riques (Text o Interruptors fixos)
+canvas.addEventListener('dblclick', (e) => {
+    if (hoveringNode) {
+        if (hoveringNode.type === 'TEXT') {
+            const result = prompt("Escriu el text de l'etiqueta:", hoveringNode.text);
+            if (result !== null) {
+                hoveringNode.text = result;
+            }
+        } else if (hoveringNode.type === 'INPUT') {
+            // Fixa de mode per si fa mandra clicar-lo molt en sistemes combinacionals complexos
+            hoveringNode.active = !hoveringNode.active;
         }
     }
 });

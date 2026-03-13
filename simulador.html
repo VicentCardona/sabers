@@ -25,60 +25,67 @@
 
         /* Sidebar Eines */
         #toolbox {
-            width: 280px;
+            width: 250px; /* Reduït de 280 a 250 */
             background-color: var(--bg-card);
             border-right: 1px solid var(--border-subtle);
             box-shadow: 2px 0 10px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             z-index: 10;
+            overflow-y: auto; /* Permetre moure la caixa petita interior si és necessari */
         }
 
         .toolbox-header {
-            padding: 20px;
+            padding: 12px 15px; /* Reduït */
             border-bottom: 1px solid var(--border-subtle);
+            background: #f8fafc;
+            position: sticky;
+            top: 0;
+            z-index: 11;
         }
 
         .toolbox-header h2 {
-            font-size: 1.2rem;
-            margin: 0 0 5px 0;
+            font-size: 1rem; /* Més petit */
+            margin: 0 0 2px 0;
             color: var(--text-primary);
         }
 
         .toolbox-header a.back-link {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             text-decoration: underline;
         }
 
         .toolbox-section {
-            padding: 15px 20px;
+            padding: 10px 15px; /* Reduït paddings */
             border-bottom: 1px solid var(--border-subtle);
         }
 
         .toolbox-section h3 {
-            font-size: 0.85rem;
+            font-size: 0.75rem; /* Més petit */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-secondary);
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Menys marge baix */
         }
 
         .component-btn {
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 8px;
+            padding: 6px 10px; /* Menys alçada (6px bot/top) */
+            margin-bottom: 4px; /* Ocupa menys apilonat */
             background-color: var(--bg-main);
             border: 1px solid var(--border-subtle);
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: grab;
             user-select: none;
             font-family: var(--font-sans);
             font-weight: 500;
+            font-size: 0.85rem; /* Text més compactat */
             color: var(--text-primary);
             transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
         .component-btn:hover {
@@ -91,8 +98,8 @@
         }
 
         .component-icon {
-            margin-right: 12px;
-            font-size: 1.2rem;
+            margin-right: 8px;
+            font-size: 1.1rem; /* També menys font aqui */
             font-family: var(--font-sans);
         }
 
@@ -226,15 +233,19 @@
                 </div>
             </div>
             
-            <div style="padding: 15px 20px; font-size: 0.8rem; color: var(--text-secondary); margin-top: auto;">
-                <strong>Consells:</strong>
-                <ul style="padding-left: 15px; margin-top: 5px;">
-                    <li>Arrossega elements al taulell.</li>
-                    <li>Clica en un cercle i arrossega cap a un altre per cablejar.</li>
-                    <li>Doble clic a Polsador per fixar estat.</li>
-                    <li>Doble clic sobre Text lliure per editar.</li>
-                    <li>Click Dret o Sup. per eliminar.</li>
-                </ul>
+            <div style="padding: 10px 15px; font-size: 0.75rem; color: var(--text-secondary); margin-top: auto; background-color: var(--bg-card);">
+                <details style="cursor: pointer;">
+                    <summary style="font-weight: bold; outline: none;">ℹ️ Rerecull de Consells</summary>
+                    <ul style="padding-left: 15px; margin-top: 8px; line-height: 1.4;">
+                        <li>Arrossega elements al taulell.</li>
+                        <li>Clica en un cercle i arrossega cap a l'altre.</li>
+                        <li>Doble Clic per editar / encendre l'interruptor.</li>
+                        <li>Click Dret o Sup. per eliminar elements.</li>
+                        <li><kbd>Ctrl+C</kbd> Copiar, <kbd>Ctrl+V</kbd> Enganxar.</li>
+                        <li><kbd>Ctrl+Z</kbd> Desfer accions.</li>
+                        <li>Clic Central + Arrossega per moure't per l'àrea.</li>
+                    </ul>
+                </details>
             </div>
         </div>
 

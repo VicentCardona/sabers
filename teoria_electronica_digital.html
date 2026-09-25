@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teoria: Electrònica Digital i Karnaugh | Tecnologia i Enginyeria</title>
-    <meta name="description" content="Apunts complets sobre Electrònica Digital, Àlgebra de Boole i Mapes de Karnaugh.">
+    <title>Teoria: Circuits Seqüencials, Biestables, Registres i Comptadors | Tecnologia i Enginyeria</title>
+    <meta name="description" content="Apunts complets sobre Circuits Seqüencials: biestables RS, JK, D, T, registres de desplaçament i comptadors per a Tecnologia i Enginyeria.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,600;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,600;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <!-- MathJax per a fórmules lògiques i matemàtiques -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        /* Estils específics per a les Taules de Karnaugh i Mates */
+        /* Estils específics per a circuits seqüencials i integració web */
         .math-box {
             background-color: #F7F7F5;
             padding: 1rem;
@@ -24,51 +27,37 @@
             margin: 1rem 0;
         }
 
-        .truth-table,
-        .karnaugh-map {
+        .truth-table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
             text-align: center;
         }
 
-        .truth-table th,
-        .karnaugh-map th {
+        .truth-table th {
             background-color: #E1F0FE;
             padding: 10px;
             border: 1px solid #D1E8FF;
+            font-weight: 600;
         }
 
-        .truth-table td,
-        .karnaugh-map td {
-            padding: 10px;
+        .truth-table td {
+            padding: 9px 12px;
             border: 1px solid #EEEEEE;
         }
 
-        .k-cell {
-            width: 60px;
-            height: 60px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            position: relative;
+        .ov {
+            text-decoration: overline;
         }
-        .k-group-1 { background-color: rgba(253, 235, 236, 0.8); border: 2px solid #FCA5A5 !important; } /* Vermell */
-        .k-group-2 { background-color: rgba(227, 245, 235, 0.8); border: 2px solid #86EFAC !important; } /* Verd */
-        .k-group-3 { background-color: rgba(254, 243, 199, 0.8); border: 2px solid #FCD34D !important; } /* Groc */
-        .k-group-4 { background-color: rgba(224, 231, 255, 0.8); border: 2px solid #A5B4FC !important; } /* Blau */
-        
-        /* Negació Booleana Gràfica */
-        .ov { text-decoration: overline; }
-        
-        /* Simulador Pas a Pas */
-        .sim-steps {
-            font-size: 0.85em;
-            color: var(--text-secondary);
-            text-align: left;
-            margin-top: 10px;
-            padding: 10px;
-            background: #ffffff;
-            border-left: 3px solid #CBD5E1;
+
+        .svg-card {
+            background: #FFFFFF;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            padding: 18px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            text-align: center;
         }
 
         .interactive-tool {
@@ -76,30 +65,60 @@
             padding: 1.5rem;
             border-radius: 12px;
             background: #FFFFFF;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
-        input[type="number"],
-        input[type="text"] {
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid #CBD5E1;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        button.btn-calc {
+        .btn-calc {
             background: #2F3437;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 9px 16px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s ease;
         }
 
-        button.btn-calc:hover {
+        .btn-calc:hover {
             background: #1a1c1e;
         }
+
+        .btn-secondary {
+            background: #E2E8F0;
+            color: #1E293B;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #CBD5E1;
+        }
+
+        .badge-pau {
+            background-color: #FEF3C7;
+            color: #92400E;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Estils per a esquemes vectorials SVG */
+        .gate { fill: #E1F0FE; stroke: #1E293B; stroke-width: 2; }
+        .gate-nand { fill: #FAF3DD; stroke: #B78D00; stroke-width: 2; }
+        .wire { fill: none; stroke: #475569; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .wire-clk { fill: none; stroke: #D97706; stroke-width: 2; }
+        .wire-active { fill: none; stroke: #2563EB; stroke-width: 2.2; }
+        .wire-feedback { fill: none; stroke: #DC2626; stroke-width: 2; stroke-dasharray: 4,3; }
+        .text-diag { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; fill: #1E293B; }
+        .dot { fill: #1E293B; }
     </style>
 </head>
 
@@ -110,11 +129,11 @@
             <span class="logo">Prof. Vicent</span>
             <ul class="nav-links">
                 <li><a href="tecnologia_enginyeria.html">← Tornar a Enginyeria</a></li>
-                <li><a href="#conceptes" class="active">Sistemes</a></li>
-                <li><a href="#boole">Boole i Portes</a></li>
-                <li><a href="#funcions">Canòniques</a></li>
-                <li><a href="#karnaugh">Karnaugh i Disseny</a></li>
-                <li><a href="#circuits">Implementació i NAND</a></li>
+                <li><a href="#diferencia" class="active">Combinacional vs Seqüencial</a></li>
+                <li><a href="#biestables">Biestables</a></li>
+                <li><a href="#registres">Registres</a></li>
+                <li><a href="#comptadors">Comptadors</a></li>
+                <li><a href="#resum-pau">Síntesi PAU</a></li>
             </ul>
         </div>
     </nav>
@@ -124,502 +143,637 @@
         <header class="page-header course-header">
             <div class="breadcrumb">
                 <a href="index.html">Cursos</a> / <a href="tecnologia_enginyeria.html">Enginyeria</a> /
-                <span>Electrònica Digital</span>
+                <span>Circuits Seqüencials</span>
             </div>
-            <div class="header-icon">🔌</div>
-            <h1 class="title-serif">Fonaments d'Electrònica Digital</h1>
-            <p class="subtitle">Des dels sistemes de numeració, passant per l'Àlgebra de Boole, fins a la metodologia
-                gràfica de Karnaugh per al disseny eficient de circuits combinacionals.</p>
+            <div class="header-icon">🔄</div>
+            <h1 class="title-serif">Circuits Seqüencials i Memòria Digital</h1>
+            <p class="subtitle">Fonaments dels sistemes amb memòria: des de la realimentació lògica elemental fins als biestables (RS, JK, D, T), registres de desplaçament i comptadors binaris.</p>
             <div class="course-meta">
                 <span class="badge badge-blue">Saber Bàsic D</span>
-                <span class="badge badge-yellow">Teoria Avançada</span>
+                <span class="badge badge-yellow">2n Batxillerat / PAU</span>
+                <span class="badge-pau">Blocs de Memòria</span>
             </div>
         </header>
 
         <hr class="divider">
 
-        <section id="conceptes" class="section">
+        <section id="diferencia" class="section">
             <div class="section-header">
-                <h2>1. Analògic vs Digital i Sistemes de Numeració</h2>
+                <h2>1. Diferència entre Circuits Combinacionals i Seqüencials</h2>
             </div>
+
+            <p style="margin-bottom: 1.5rem;">
+                A l'automatització industrial i l'electrònica digital, els sistemes es divideixen en dues grans arquitectures segons la seva relació amb el temps i els esdeveniments passats:
+            </p>
 
             <div class="bento-grid">
                 <div class="bento-card">
-                    <h3>🌊 Senyals Analògics</h3>
-                    <p>Varien de forma contínua en el temps. Poden prendre infinits valors dins d'un rang (ex. la
-                        temperatura ambient, l'àudio d'un vinil). Són susceptibles al "soroll" i a interferències
-                        elèctriques.</p>
+                    <h3>⚡ Circuits Combinacionals</h3>
+                    <p>
+                        Desenvolupen funcions lògiques <strong>sense tenir en compte les operacions anteriors</strong>. La sortida depèn <em>exclusivament</em> de la combinació d'entrades present en aquest mateix instant:
+                    </p>
+                    <div class="math-box">
+                        Sortida = f(Entrades Actuals)
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.9em; line-height: 1.6;">
+                        <li><strong>Memòria:</strong> NO tenen capacitat d'emmagatzematge.</li>
+                        <li><strong>Realimentació:</strong> Inexistent (flux unidireccional d'entrada a sortida).</li>
+                        <li><strong>Exemples:</strong> Portes lògiques, multiplexors, descodificadors, sumadors.</li>
+                    </ul>
                 </div>
 
                 <div class="bento-card">
-                    <h3>🔢 Senyals Digitals / Nivells Lògics</h3>
-                    <p>Només poden prendre valors discrets predefinits. A nivell de maquinari (<a href="https://ca.wikipedia.org/wiki/L%C3%B2gica_transistor-transistor" target="_blank" rel="noopener noreferrer">TTL</a> o <a href="https://ca.wikipedia.org/wiki/Semiconductor_complementari_d%27%C3%B2xid_met%C3%A0l%C2%B7lic" target="_blank" rel="noopener noreferrer">CMOS</a>), l'ordinador llegeix la tensió i ho categoritza en dos <strong>Nivells Lògics</strong>:</p>
-                    <ul style="margin-top: 0.5rem; color: var(--text-secondary);">
-                        <li><strong>0 Lògic (LOW):</strong> Absència de tensió (generalment 0V a 0.8V).</li>
-                        <li><strong>1 Lògic (HIGH):</strong> Presència de tensió (generalment 2V a 5V).</li>
+                    <h3>🧠 Circuits Seqüencials</h3>
+                    <p>
+                        Aporten a les sortides estats que depenen <strong>tant de les entrades actuals com dels estats previs</strong> de la seqüència. Tenen capacitat de <strong>memòria</strong>:
+                    </p>
+                    <div class="math-box">
+                        Q<sub>t+1</sub> = f(Entrades, Q<sub>t</sub>)
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.9em; line-height: 1.6;">
+                        <li><strong>Memòria:</strong> SÍ guarden l'estat anterior (bit o paraula).</li>
+                        <li><strong>Realimentació:</strong> Imprescindible (la sortida es retorna cap a l'entrada).</li>
+                        <li><strong>Exemples:</strong> Biestables (flip-flops), registres, comptadors, memòries RAM.</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- Principi de realimentació -->
             <div class="module-card" style="margin-top: 2rem;">
                 <div class="module-body">
-                    <h3>Bases Numèriques (Base 10, 2, 8, 16)</h3>
-                    <p>Per entendre l'estat d'aquests nivells lògics en massa, la tecnologia utilitza diferents bases
-                        geomètriques:</p>
-                    <ul style="line-height: 1.8;">
-                        <li><strong>Decimal (Base 10):</strong> El del dia a dia (0 al 9).</li>
-                        <li><strong>Binari (Base 2):</strong> Comprèn a l'ordinador. Només 0 i 1.</li>
-                        <li><strong>Octal (Base 8):</strong> Del 0 al 7. Menys comú actualment, usat antigament en permisos <a href="https://es.wikipedia.org/wiki/Permisos_de_archivos" target="_blank" rel="noopener noreferrer">POSIX a Linux</a>.</li>
-                        <li><strong>Hexadecimal (Base 16):</strong> Del 0 al 9 i de la A a la F. Molt dens; s'utilitza per agrupar adreces de memòria, colors CSS o IPs (IPv6). Agrupa bits de 4 en 4 fàcilment.
-                        </li>
-                    </ul>
+                    <h3>El Principi de Realimentació (Memòria d'1 bit)</h3>
+                    <p>
+                        La realimentació consisteix a agafar el senyal de sortida actual (<code>Q<sub>t</sub></code>) i injectar-lo novament com a entrada del circuit combinacional. Així, el proper estat (<code>Q<sub>t+1</sub></code>) dependrà de la història prèvia del sistema.
+                    </p>
 
-                    <!-- Mini Simulador: Convertidor de Bases -->
-                    <div class="interactive-tool">
-                        <h4 style="margin-top:0;">⚡ Simulador: Conversor Ràpid de Bases</h4>
-                        <p style="font-size: 0.9em; color: var(--text-secondary);">Escriu un nombre decimal per veure'l
-                            ràpidament traduït al llenguatge màquina (Base 2 i 16).</p>
-                        <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
-                            <input type="number" id="decInput" placeholder="Ex: 255" min="0">
-                            <button class="btn-calc" onclick="convertBases()">Converteix i Mostra Procés</button>
-                        </div>
-                        <div id="baseResults" class="math-box" style="margin-top: 10px; display: none;">
-                            <strong>Bin (Base 2):</strong> <span id="resBin"></span><br>
-                            <div class="sim-steps" id="stepBin"></div>
+                    <div class="svg-card">
+                        <svg viewBox="0 0 520 160" width="520" height="160" style="max-width: 100%;">
+                            <!-- Entrades -->
+                            <path class="wire" d="M 30,50 L 120,50" />
+                            <text x="35" y="42" class="text-diag">Entrades</text>
                             
-                            <strong style="display:inline-block; margin-top:10px;">Oct (Base 8):</strong> <span id="resOct"></span><br>
+                            <!-- Bloc combinacional -->
+                            <rect x="120" y="20" width="180" height="90" rx="8" fill="#F1F5F9" stroke="#334155" stroke-width="2"/>
+                            <text x="210" y="60" text-anchor="middle" class="text-diag" font-size="14">Circuit</text>
+                            <text x="210" y="80" text-anchor="middle" class="text-diag" font-size="14">Combinacional</text>
                             
-                            <strong style="display:inline-block; margin-top:10px;">Hex (Base 16):</strong> <span id="resHex"></span><br>
-                            <div class="sim-steps" id="stepHex"></div>
-                        </div>
+                            <!-- Sortida Qt+1 -->
+                            <path class="wire-active" d="M 300,65 L 450,65" />
+                            <circle cx="360" cy="65" r="4" class="dot"/>
+                            <text x="410" y="55" class="text-diag" fill="#2563EB">Q<sub>t+1</sub></text>
+                            
+                            <!-- Llaç de realimentació -->
+                            <path class="wire-feedback" d="M 360,65 L 360,135 L 80,135 L 80,85 L 120,85" />
+                            <text x="220" y="150" text-anchor="middle" class="text-diag" fill="#DC2626">Llaç de Realimentació (Estat Previ: Q<sub>t</sub>)</text>
+                        </svg>
+                    </div>
+
+                    <h4>Exemple introductori dels apunts: Bombeta amb memòria (OR realimentada)</h4>
+                    <p>
+                        Si connectem un polsador <code>E<sub>1</sub></code> a una porta OR i realimentem la sortida, en prémer <code>E<sub>1</sub></code> la llàntia s'encén. En amollar el polsador, la realimentació manté un <code>1</code> permanent a l'entrada, fent que la làmpada <strong>romangui encesa indefinidament</strong>. És un circuit d'1 sol estat estable (no es pot apagar lògicament).
+                    </p>
+                    <p>
+                        Per aconseguir apagar-la, cal un segon polsador d'aturada <code>E<sub>2</sub></code> (Reset). D'aquesta manera s'obté un <strong>Biestable elemental (dos estats estables: Encès / Apagat)</strong> amb l'equació obtinguda per Karnaugh:
+                    </p>
+                    <div class="math-box">
+                        Q<sub>t+1</sub> = E<sub>1</sub> + <span class="ov">E<sub>2</sub></span> · Q<sub>t</sub>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <section id="boole" class="section">
+        <section id="biestables" class="section">
             <div class="section-header">
-                <h2>2. Àlgebra de Boole i Portes Lògiques</h2>
+                <h2>2. Blocs Bàsics de Memòria: Biestables (Flip-Flops)</h2>
             </div>
 
-            <p style="margin-bottom: 2rem;">El matemàtic George Boole va definir les regles algebraiques per treballar
-                només amb valors Binaris (Vertader '1', Fals '0'). I Claude Shannon ho va aplicar als circuits de relès
-                i semiconductors, naixent les <strong>Portes lògiques</strong>.</p>
+            <p style="margin-bottom: 2rem;">
+                Un <strong>biestable</strong> és un circuit seqüencials capaç d'emmagatzemar <strong>1 bit d'informació</strong> (0 o 1). Disposa de dues sortides complementàries: <code>Q</code> i <code><span class="ov">Q</span></code>.
+            </p>
 
-            <table class="truth-table">
-                <tr>
-                    <th>Porta / Operador</th>
-                    <th>Funció Booleana</th>
-                    <th>Explicació Física</th>
-                    <th>Comportament (Taula Ràpida)</th>
-                </tr>
-                <tr>
-                    <td><strong>NOT (Inversor)</strong></td>
-                    <td>S = <span class="ov">A</span></td>
-                    <td>Fa el contrari. Si entra corrent, el talla.</td>
-                    <td>0 → 1 <br> 1 → 0</td>
-                </tr>
-                <tr>
-                    <td><strong>AND (Producte)</strong></td>
-                    <td>S = A · B</td>
-                    <td>Circuits en Sèrie. Només actua si TOTS els polsadors estan premuts.</td>
-                    <td>Només dóna '1' si A=1 <strong>i</strong> B=1.</td>
-                </tr>
-                <tr>
-                    <td><strong>OR (Suma)</strong></td>
-                    <td>S = A + B</td>
-                    <td>Circuits en Paral·lel. Actua si ALMENYS UN polsador està premut.</td>
-                    <td>Dóna '1' si A=1 <strong>o</strong> B=1 (o tots dos).</td>
-                </tr>
-                <tr>
-                    <td><strong>XOR (OR Exclusiva)</strong></td>
-                    <td>S = A ⊕ B</td>
-                    <td>Polsadors commutats (passadissos escales). Actua només si són diferents.</td>
-                    <td>0,0 → 0 | 1,1 → 0<br> 0,1 → 1 | 1,0 → 1</td>
-                </tr>
-                <tr>
-                    <td><strong>NAND / NOR</strong></td>
-                    <td>S = <span class="ov">A·B</span> / <span class="ov">A+B</span></td>
-                    <td>Portes Universals. Són AND i OR respectives, negades al final (bombolla).</td>
-                    <td>El contrari absolut de l'AND i l'OR.</td>
-                </tr>
-            </table>
-
-            <div class="bento-grid" style="margin-top: 2rem;">
-                <div class="bento-card">
-                    <h3>📜 Lleis i Teoremes Importants</h3>
-                    <p>Ens permeten simplificar algebraicament abans de dibuixar:</p>
-                    <ul>
-                        <li><strong>Identitat:</strong> A + 0 = A / A · 1 = A</li>
-                        <li><strong>Idempotència:</strong> A + A = A / A · A = A</li>
-                        <li><strong>Llei d'Involució (Doble Negació):</strong> <span class="ov"><span class="ov">A</span></span> = A</li>
-                        <li><strong>Element Absorbent:</strong> A + 1 = 1 / A · 0 = 0</li>
-                    </ul>
-                </div>
-                <div class="bento-card">
-                    <h3>🏆 Lleis de De Morgan</h3>
-                    <p>La pedra angular de l'electrònica. Canvia sumes per multiplicacions "trencant" negacions
-                        llargues.</p>
-                    <div class="math-box">
-                        1. <span class="ov">A + B</span> = <span class="ov">A</span> · <span class="ov">B</span> <br>
-                        2. <span class="ov">A · B</span> = <span class="ov">A</span> + <span class="ov">B</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="funcions" class="section">
-            <div class="section-header">
-                <h2>3. De la Taula de la Veritat a la Funció (Formes Canòniques)</h2>
-            </div>
-
-            <p style="margin-bottom: 2rem;">Quan tenim un problema real (ex: "vull que soni l'alarma depenent de 3 sensors"), primer muntem la taula
-                de la veritat. Un cop feta, necessitem trobar la funció algebraica. Hi ha dos mètodes absoluts:</p>
-
-            <!-- Exemple visual Taula -->
-            <div class="math-box" style="margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
-                <h4 style="margin: 0 0 10px 0; text-align: center;">Exemple de Taula de la Veritat (2 Variables)</h4>
-                <table class="truth-table">
-                    <tr><th>A (Sensor 1)</th><th>B (Sensor 2)</th><th>F (Alarma)</th></tr>
-                    <tr><td>0</td><td>0</td><td>0</td></tr>
-                    <tr style="background: rgba(253, 235, 236, 0.5);"><td>0</td><td>1</td><td><strong>1</strong></td></tr>
-                    <tr><td>1</td><td>0</td><td>0</td></tr>
-                    <tr style="background: rgba(253, 235, 236, 0.5);"><td>1</td><td>1</td><td><strong>1</strong></td></tr>
-                </table>
-                <p style="font-size: 0.9em; color: var(--text-secondary); text-align: center; margin-bottom: 0;">Files grises: La màquina ha d'activar-se (S=1)</p>
-            </div>
-
-            <div class="bento-grid">
-                <div class="bento-card card-large">
-                    <h3>1a Forma Canònica (Minterms / Suma de Productes)</h3>
-                    <p>Ens fixem NOMÉS en les files on la Sortida és <strong>'1'</strong>.</p>
-                    <p>Multipliquem les variables d'aquella fila. Si la variable és 0, es posa negada (<span class="ov">A</span>). Si és 1,
-                        sense negar (A). Finalment, sumem tots aquests productes.</p>
-                    <div class="math-box">
-                        Exemple per Sortides=1 en: A=0,B=1 i A=1,B=1<br>
-                        F = (<span class="ov">A</span> · B) + (A · B)
-                    </div>
-                </div>
-
-                <div class="bento-card card-large">
-                    <h3>2a Forma Canònica (Maxterms / Producte de Sumes)</h3>
-                    <p>Ens fixem NOMÉS en les files on la Sortida és <strong>'0'</strong>.</p>
-                    <p>Per cada fila amb un '0', fem una "Suma" clàssica de les variables d'aquella fila. Vigileu: aquí funciona "al revés"; si la variable val 0, es posa normal (A), i si val 1 es posa negada (<span class="ov">A</span>). Finalment, multipliquem tots aquests paquets de sumes per construir la funció global.</p>
-                    <div class="math-box">
-                        <strong>Exemple ràpid:</strong> Si la taula dóna Sortida=0 només quan A=0,B=0 i quan A=1,B=0:<br>
-                        F = (A + B) · (<span class="ov">A</span> + B)
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="karnaugh" class="section">
-            <div class="section-header">
-                <h2>4. Mètodes de Simplificació i Mapes de Karnaugh</h2>
-            </div>
-
+            <!-- 2.1 Biestable R-S -->
             <div class="module-card">
                 <div class="module-body">
-                    <p>Construir la 1a Forma Canònica és fàcil, però produeix funcions GIGANTs que constarien molts
-                        diners en microxips. El <strong>Mètode Algebraic</strong> (usant treure factor comú o De Morgan)
-                        és lent i arriscat. Per això, la indústria utilitza el <strong>Mètode Gràfic de Karnaugh
-                            (K-Maps)</strong>.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="margin: 0;">2.1. Biestable R-S (Set - Reset)</h3>
+                        <span class="badge badge-blue">Asíncron i Síncron</span>
+                    </div>
 
-                    <h3>Passos per dissenyar i simplificar amb Karnaugh:</h3>
+                    <p style="margin-top: 1rem;">
+                        Té dues entrades de control: <strong>S (Set)</strong> per posar la sortida a <code>1</code>, i <strong>R (Reset)</strong> per posar-la a <code>0</code>. Si ambdues estan a 0, recorda l'estat previ. La combinació <code>S = 1</code> i <code>R = 1</code> està <strong>prohibida</strong> perquè produeix una indeterminació lògica.
+                    </p>
 
-                    <ol style="line-height: 1.8; margin-top: 1rem;">
-                        <li><strong>Dibuixar la graella:</strong> Crea un quadre de 2<sup>N</sup> cel·les (on N és el
-                            num de sensors/variables). Atenció al codi Gray en marcar les coordenades (00, 01, 11, 10),
-                            només pot canviar un bit d'un salt a l'altre!.</li>
-                        <li><strong>Traspàs:</strong> Posa els '1' de la taula de la veritat (Minterms) dins de la
-                            graella a les seves coordenades corresponents.</li>
-                        <li><strong>Agrupacions (Llaços):</strong> Embolcalla els '1' adjacents.
-                            <ul>
-                                <li>Han de ser grups de grandàries base 2: 1, 2, 4, 8, 16. Quant més gran el grup,
-                                    millor simplificació!</li>
-                                <li>Només grups rectangulars o quadrats. (Mai en diagonal).</li>
-                                <li>Els costats del mapa estan "connectats" pacman-style (adalt amb abaix, esquerra amb
-                                    dreta).</li>
-                            </ul>
-                        </li>
-                        <li><strong>Llegir el mapa:</strong> Per cada grup creat, escriu el paquet multiplicatiu llegint
-                            quines variables NO canvien d'estat a la vora. Si una variable (ex. B) val 0 a un extrem de
-                            l'agrupació i 1 a un altre, s'elimina.</li>
-                    </ol>
-
-                    <!-- Exemple Visuals Mapes -->
-                    <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
-                        <!-- Mapa 3 Variables -->
-                        <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border: 1px dashed #CBD5E1; border-radius: 8px;">
-                            <h4 style="margin-top:0; text-align:center;">Mapa 3 Variables (A, B, C)</h4>
-                            <table class="karnaugh-map" style="margin: 0 auto; width: 200px;">
-                                <tr><th>A \ BC</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
-                                <tr><th>0</th><td class="k-cell">0</td><td class="k-cell k-group-2">1</td><td class="k-cell k-group-2">1</td><td class="k-cell">0</td></tr>
-                                <tr><th>1</th><td class="k-cell">0</td><td class="k-cell k-group-2">1</td><td class="k-cell k-group-2">1</td><td class="k-cell">0</td></tr>
+                    <div class="bento-grid" style="margin-top: 1rem;">
+                        <div>
+                            <h4>Taula de la Veritat (R-S)</h4>
+                            <table class="truth-table">
+                                <tr><th>S (Set)</th><th>R (Reset)</th><th>Q<sub>t+1</sub></th><th>Funció</th></tr>
+                                <tr><td>0</td><td>0</td><td>Q<sub>t</sub></td><td>Memòria (Sense canvi)</td></tr>
+                                <tr style="background: rgba(227, 245, 235, 0.6);"><td>1</td><td>0</td><td><strong>1</strong></td><td>Set (Posada a 1)</td></tr>
+                                <tr style="background: rgba(253, 235, 236, 0.6);"><td>0</td><td>1</td><td><strong>0</strong></td><td>Reset (Posada a 0)</td></tr>
+                                <tr style="background: rgba(254, 243, 199, 0.7); font-weight: bold; color: #B45309;"><td>1</td><td>1</td><td>X</td><td>Estat Prohibit / Indeterminat</td></tr>
                             </table>
-                            <p style="text-align: center; margin-top: 10px; font-family: monospace;">Funció Simplificada: C</p>
                         </div>
-                        
-                        <!-- Mapa 4 Variables i Extrems -->
-                        <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border: 1px dashed #CBD5E1; border-radius: 8px;">
-                            <h4 style="margin-top:0; text-align:center;">Mapa 4 Variables (Extrems Connectats)</h4>
-                            <table class="karnaugh-map" style="margin: 0 auto; width: 250px;">
-                                <tr><th>AB \ CD</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
-                                <tr><th>00</th><td class="k-cell k-group-1">1</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell k-group-1">1</td></tr>
-                                <tr><th>01</th><td class="k-cell">0</td><td class="k-cell k-group-3">1</td><td class="k-cell k-group-3">1</td><td class="k-cell">0</td></tr>
-                                <tr><th>11</th><td class="k-cell">0</td><td class="k-cell k-group-3">1</td><td class="k-cell k-group-3">1</td><td class="k-cell">0</td></tr>
-                                <tr><th>10</th><td class="k-cell k-group-1">1</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell k-group-1">1</td></tr>
-                            </table>
-                            <p style="text-align: center; margin-top: 15px; font-family: monospace; line-height: 1.6;">
-                                <span style="background: rgba(253, 235, 236, 0.8); padding: 2px 6px; border: 1px solid #FCA5A5; border-radius: 4px;">Grup Vermell (Cantonades): <span class="ov">B</span>·<span class="ov">D</span></span><br>
-                                <span style="background: rgba(254, 243, 199, 0.8); padding: 2px 6px; border: 1px solid #FCD34D; border-radius: 4px;">Grup Groc (Centre): B·D</span>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="project-box" style="margin-top: 2rem;">
-                        <h4>🎯 Metodologia Estàndard de Resolució de Problemes (Disseny Pràctic)</h4>
-                        <p>Quan se't planteja un text com: "Un dipòsit té 3 sensors (...)", aplica sempre l'algorisme de
-                            l'enginyer:</p>
-                        <ul style="color: var(--text-secondary);">
-                            <li><strong>Pas 1:</strong> Identificar Variables d'Entrada (Sensors) i de Sortida
-                                (Actuadors). Assignar conveni de 0 i 1 lògic a la situació física.</li>
-                            <li><strong>Pas 2:</strong> Dibuixar estricament la Taula de la Veritat.</li>
-                            <li><strong>Pas 3:</strong> Obtenir la Funció (en primera forma canònica directament i
-                                dibuixar K-Map).</li>
-                            <li><strong>Pas 4:</strong> Embolcallar grups màxims, extreure Funció Simplificada
-                                definitiva.</li>
-                            <li><strong>Pas 5 (Taller):</strong> Dibuixar el Cronograma i el Circuit lògic amb les
-                                Portes Lògiques corresponents a l'equació final, reduint màximament el consum elèctric
-                                del sistema.</li>
-                        </ul>
-                    </div>
+                        <div class="svg-card" style="margin: 0;">
+                            <h4 style="margin-top: 0;">Esquema amb Portes NAND Creuades</h4>
+                            <svg viewBox="0 0 360 170" width="360" height="170" style="max-width: 100%;">
+                                <!-- Entrada S -->
+                                <path class="wire" d="M 20,40 L 90,40" />
+                                <text x="25" y="32" class="text-diag">S</text>
+                                <!-- Entrada R -->
+                                <path class="wire" d="M 20,130 L 90,130" />
+                                <text x="25" y="122" class="text-diag">R</text>
 
-                </div>
-            </div>
-        </section>
+                                <!-- NAND 1 -->
+                                <path class="gate-nand" d="M 90,25 L 115,25 A 20,20 0 0,1 115,65 L 90,65 Z" />
+                                <circle cx="138" cy="45" r="3.5" class="gate-nand" />
+                                
+                                <!-- NAND 2 -->
+                                <path class="gate-nand" d="M 90,115 L 115,115 A 20,20 0 0,1 115,155 L 90,155 Z" />
+                                <circle cx="138" cy="135" r="3.5" class="gate-nand" />
 
-        <section id="circuits" class="section">
-            <div class="section-header">
-                <h2>5. Implementació Final i Portes Universals (NAND)</h2>
-            </div>
-            
-            <div class="bento-grid">
-                <div class="bento-card card-large">
-                    <h3>🛠️ Del Paper a la Protoboard</h3>
-                    <p>Un cop l'equació està simplificada al màxim amb Karnaugh (ex: <code>F = A·B + <span class="ov">C</span></code>), passem a l'esquema elèctric digital:</p>
-                    <ol style="margin-top:10px;">
-                        <li>Tirem una línia general descendent per cada variable d'entrada (A, B, C...).</li>
-                        <li>Fem derivacions a través d'inversors (NOT) per aconseguir línies auxiliars negades (<span class="ov">A</span>, <span class="ov">B</span>...).</li>
-                        <li>Utilitzem portes AND consecutives per fabricar cada 'paquet multiplicatiu' de l'equació (els minterms simplificats que queden).</li>
-                        <li>Recolim les sortides de totes les portes AND cap a una porta OR gegant final, on pinçarem el LED de sortida F (l'actuador).</li>
-                    </ol>
-                </div>
-                
-                <div class="bento-card card-large">
-                    <h3>🔥 Implementació Només amb Portes NAND (Universalitat)</h3>
-                    <p>Comprar desenes de xips diferents d'AND, OR i NOT encareix i ocupa circuit imprès. Com que la NAND és una <strong>porta universal</strong>, podem construir qualsevol circuit lògic usant SÓC xips NAND, gràcies a De Morgan:</p>
-                    <div class="math-box">
-                        Si tenim una funció clàssica "Suma de Productes": F = (A·B) + (C·D)<br><br>
-                        1. Apliquem el teorema de la doble negació a F: F = <span class="ov"><span class="ov">(A·B) + (C·D)</span></span><br>
-                        2. Trenquem només la línia inferior de negació precisament pel símbol "+" (De Morgan):<br><br>
-                        F = <span class="ov"><span class="ov">(A·B)</span> · <span class="ov">(C·D)</span></span>
-                    </div>
-                    <p style="margin-top: 10px; font-weight: 500;">Si t'hi fixes bé, ara TOTA l'equació depèn matemàticament de productes negats (és a dir, NANDs pures multiplicant les NANDs primitives). Un circuit sencer implementat amb un sol tipus de component en sèrie!</p>
-                </div>
-            </div>
-        </section>
+                                <!-- Sortida Q -->
+                                <path class="wire-active" d="M 142,45 L 300,45" />
+                                <circle cx="210" cy="45" r="3.5" class="dot"/>
+                                <text x="310" y="50" class="text-diag" fill="#2563EB">Q</text>
 
-        <section id="exercici" class="section">
-            <div class="section-header">
-                <h2>6. Exercici Pràctic Resolt (Disseny d'Hivernacle de 4 Sensors)</h2>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-body">
-                    <p><strong>Enunciat:</strong> Un hivernacle té 4 sensors digitals: Temperatura (A), Humitat (B), Llum (C) i Nivell d'Aigua (D). S'ha d'activar una vàlvula de reg en forma de Sortida (F) EXCLUSIVAMENT sota les següents condicions de perill: quan la Llum està apagada (C=0) però la resta de sensors marquen alt (A=1, B=1, D=1), o bé quan l'aigua és crítica (D=0) i la temperatura baixa (A=0) sense importar com estiguin els altres sensors.</p>
+                                <!-- Sortida not Q -->
+                                <path class="wire-active" d="M 142,135 L 300,135" />
+                                <circle cx="210" cy="135" r="3.5" class="dot"/>
+                                <text x="310" y="140" class="text-diag" fill="#DC2626"><span class="ov">Q</span></text>
 
-                    <div class="bento-grid">
-                        <div class="bento-card">
-                            <h3>1. Identificació i Taula de la Veritat</h3>
-                            <p><strong>Condició 1:</strong> A=1, B=1, C=0, D=1</p>
-                            <p><strong>Condició 2:</strong> A=0 i D=0 alhora (Sense importar B ni C. Són 4 files).</p>
-                            <div style="max-height: 200px; overflow-y: auto; margin-top: 10px; border: 1px solid var(--border-subtle); border-radius: 8px;">
-                                <table class="truth-table" style="font-size: 0.85em; margin: 0; width: 100%;">
-                                    <tr><th>A</th><th>B</th><th>C</th><th>D</th><th style="background-color: var(--badge-blue-bg);">F (Sortida)</th></tr>
-                                    <tr style="background: rgba(253, 235, 236, 0.5);"><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong> (C2)</td></tr>
-                                    <tr style="background: rgba(253, 235, 236, 0.5);"><td>0</td><td>0</td><td>1</td><td>0</td><td><strong>1</strong> (C2)</td></tr>
-                                    <tr style="background: rgba(253, 235, 236, 0.5);"><td>0</td><td>1</td><td>0</td><td>0</td><td><strong>1</strong> (C2)</td></tr>
-                                    <tr style="background: rgba(253, 235, 236, 0.5);"><td>0</td><td>1</td><td>1</td><td>0</td><td><strong>1</strong> (C2)</td></tr>
-                                    <tr><td colspan="5" style="text-align:center; color: var(--text-secondary); font-style: italic;">... (La resta són 0 excepte el cas exacte següent) ...</td></tr>
-                                    <tr style="background: rgba(227, 245, 235, 0.5);"><td>1</td><td>1</td><td>0</td><td>1</td><td><strong>1</strong> (C1)</td></tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="bento-card">
-                            <h3>2. Primera Forma Canònica (Bruta)</h3>
-                            <p>Sumem els minterms resultants posant un overline a qui marca un '0':</p>
-                            <div class="math-box" style="font-size: 0.8em; margin:0;">
-                                F = (<span class="ov">A</span>·<span class="ov">B</span>·<span class="ov">C</span>·<span class="ov">D</span>) + (<span class="ov">A</span>·<span class="ov">B</span>·C·<span class="ov">D</span>) + (<span class="ov">A</span>·B·<span class="ov">C</span>·<span class="ov">D</span>) + (<span class="ov">A</span>·B·C·<span class="ov">D</span>) + (A·B·<span class="ov">C</span>·D)
-                            </div>
-                            <p style="font-size: 0.8rem; margin-top:5px; color:var(--text-secondary);">Muntar 5 xips AND gegants de 4 potes és caríssim. Toca reduir doncs.</p>
+                                <!-- Creuament feedback -->
+                                <path class="wire-feedback" d="M 210,45 L 210,75 L 75,100 L 75,123 L 90,123" />
+                                <path class="wire-feedback" d="M 210,135 L 210,105 L 75,80 L 75,57 L 90,57" />
+                            </svg>
                         </div>
                     </div>
 
-                    <h3 style="margin-top: 2rem;">3. Simplificació amb Mapa de Karnaugh de 4 variables</h3>
-                    <div style="background: white; padding: 20px; border: 1px dashed #CBD5E1; border-radius: 8px; margin-bottom: 2rem;">
-                        <table class="karnaugh-map" style="margin: 0 auto; width: 300px;">
-                            <tr><th>AB \ CD</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
-                            <tr><th>00</th><td class="k-cell k-group-1">1</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell k-group-1">1</td></tr>
-                            <tr><th>01</th><td class="k-cell k-group-1">1</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell k-group-1">1</td></tr>
-                            <tr><th>11</th><td class="k-cell">0</td><td class="k-cell k-group-2">1</td><td class="k-cell">0</td><td class="k-cell">0</td></tr>
-                            <tr><th>10</th><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell">0</td><td class="k-cell">0</td></tr>
-                        </table>
-                        <p style="text-align: center; margin-top: 15px; font-family: monospace; line-height: 1.6;">
-                            <span style="background: rgba(253, 235, 236, 0.8); padding: 2px 6px; border: 1px solid #FCA5A5; border-radius: 4px;">Llaç Vermell (Columnes A=0 i D=0): <span class="ov">A</span>·<span class="ov">D</span></span><br>
-                            <span style="background: rgba(227, 245, 235, 0.8); padding: 2px 6px; border: 1px solid #86EFAC; border-radius: 4px;">Cel·la Verda Solitària (No es pot agrupar amb ningú): A·B·<span class="ov">C</span>·D</span><br>
-                            <br><strong>Funció Simplificada: F = <span class="ov">A</span>·<span class="ov">D</span> + A·B·<span class="ov">C</span>·D</strong>
+                    <!-- Sincronisme per flanc -->
+                    <div style="margin-top: 1.5rem; background: #F8FAFC; padding: 1rem; border-radius: 8px; border-left: 4px solid #3B82F6;">
+                        <h4 style="margin: 0 0 0.5rem 0;">⏱️ Senyal de Rellotge (CK) i Activació per Flanc</h4>
+                        <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
+                            Per evitar inestabilitats si el pols de rellotge dura massa temps, els biestables moderns no s'activen per nivell sinó per <strong>transicions ultra-ràpides (Flancs)</strong>:
+                            <strong>Flanc de Pujada (↑)</strong> o <strong>Flanc de Baixada (↓)</strong>. A la simbologia es representen amb un triangle (&gt;) a l'entrada de rellotge (afegint una bombolla si és per flanc descendent).
                         </p>
                     </div>
+                </div>
+            </div>
 
-                    <div class="bento-grid">
-                        <div class="bento-card card-large">
-                            <h3>4. Implementació amb Portes Normatives ANSI</h3>
-                            <p style="margin-bottom: 20px;">Esquema elèctric del circuit <strong style="font-family: monospace;">F = <span class="ov">A</span><span class="ov">D</span> + AB<span class="ov">C</span>D</strong> usant AND, OR i NOT.</p>
-                            <div style="background: white; border-radius: 8px; border: 1px solid var(--border-subtle); text-align: center; padding: 20px; overflow-x: auto;">
-                                <svg width="550" height="250" viewBox="0 0 550 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%;">
-                                    <!-- Styles -->
-                                    <style>
-                                        .gate { fill: none; stroke: #2F3437; stroke-width: 2; }
-                                        .wire { fill: none; stroke: #64748B; stroke-width: 2; }
-                                        .text { font-family: monospace; font-size: 16px; font-weight: bold; fill: #2F3437; }
-                                        .dot { fill: #2F3437; }
-                                    </style>
-                                    
-                                    <!-- Inputs -->
-                                    <text x="20" y="45" class="text">A</text>
-                                    <text x="20" y="85" class="text">B</text>
-                                    <text x="20" y="125" class="text">C</text>
-                                    <text x="20" y="165" class="text">D</text>
+            <!-- 2.2 Biestable J-K -->
+            <div class="module-card" style="margin-top: 2rem;">
+                <div class="module-body">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="margin: 0;">2.2. Biestable J-K (Universal)</h3>
+                        <span class="badge-pau">Elimina l'estat prohibit</span>
+                    </div>
 
-                                    <!-- Main input lines down -->
-                                    <path class="wire" d="M 40,40 L 100,40" />
-                                    <path class="wire" d="M 40,80 L 100,80" />
-                                    <path class="wire" d="M 40,120 L 100,120" />
-                                    <path class="wire" d="M 40,160 L 100,160" />
+                    <p style="margin-top: 1rem;">
+                        És l'evolució directa de l'R-S (<code>J ≡ Set</code>, <code>K ≡ Reset</code>). Incorpora un llaç intern de realimentació des de les sortides <code>Q</code> i <code><span class="ov">Q</span></code> cap a les portes d'entrada. Gràcies a això, <strong>és impossible que les dues portes internes s'activin alhora</strong>.
+                    </p>
+                    <p>
+                        Quan <code>J = 1</code> i <code>K = 1</code>, el biestable entra en mode <strong>Basculació (Toggle)</strong>: inverteix el seu estat anterior a cada pols de rellotge (<code>Q<sub>t+1</sub> = <span class="ov">Q</span><sub>t</sub></code>).
+                    </p>
 
-                                    <!-- NOT Gates -->
-                                    <path class="gate" d="M 120,30 L 150,40 L 120,50 Z" /> <circle cx="154" cy="40" r="4" class="gate" />
-                                    <path class="gate" d="M 120,110 L 150,120 L 120,130 Z" /> <circle cx="154" cy="120" r="4" class="gate" />
-                                    <path class="gate" d="M 120,150 L 150,160 L 120,170 Z" /> <circle cx="154" cy="160" r="4" class="gate" />
+                    <table class="truth-table">
+                        <tr><th>CK</th><th>J</th><th>K</th><th>Q<sub>t+1</sub></th><th>Estat / Funció</th></tr>
+                        <tr><td>0 / 1 estàtic</td><td>X</td><td>X</td><td>Q<sub>t</sub></td><td>Inactiu (Sense canvi)</td></tr>
+                        <tr><td>↑</td><td>0</td><td>0</td><td>Q<sub>t</sub></td><td>Memòria (No varia)</td></tr>
+                        <tr style="background: rgba(253, 235, 236, 0.6);"><td>↑</td><td>0</td><td>1</td><td><strong>0</strong></td><td>Reset (Posada a zero)</td></tr>
+                        <tr style="background: rgba(227, 245, 235, 0.6);"><td>↑</td><td>1</td><td>0</td><td><strong>1</strong></td><td>Set (Posada a 1)</td></tr>
+                        <tr style="background: rgba(224, 231, 255, 0.7); font-weight: bold; color: #1E40AF;"><td>↑</td><td>1</td><td>1</td><td><strong><span class="ov">Q</span><sub>t</sub></strong></td><td>Basculació (Toggle / Inversió)</td></tr>
+                    </table>
+                </div>
+            </div>
 
-                                    <path class="wire" d="M 100,40 L 120,40" /> <circle cx="100" cy="40" r="3" class="dot"/>
-                                    <path class="wire" d="M 100,120 L 120,120" /> <circle cx="100" cy="120" r="3" class="dot"/>
-                                    <path class="wire" d="M 100,160 L 120,160" /> <circle cx="100" cy="160" r="3" class="dot"/>
+            <!-- 2.3 Biestables D i T -->
+            <div class="bento-grid" style="margin-top: 2rem;">
+                <div class="bento-card">
+                    <h3>2.3. Biestable D (Data)</h3>
+                    <p>Disposa d'una única entrada de dades (<code>D</code>). A cada flanc actiu de rellotge, la sortida <strong>copia fidelment</strong> el valor de D:</p>
+                    <div class="math-box" style="text-align: center; font-size: 1.1rem;">
+                        Q<sub>t+1</sub> = D
+                    </div>
+                    <p style="font-size: 0.9em; color: var(--text-secondary);">
+                        <strong>Com es construeix:</strong> A partir d'un RS connectant <code>S = D</code> i passant D per un inversor (NOT) cap a <code>R = <span class="ov">D</span></code>.<br>
+                        <strong>Aplicació:</strong> És la base dels <em>registres de dades</em> i de les cel·les de memòria RAM.
+                    </p>
+                </div>
 
-                                    <!-- Wires to AND1 (A'D') and AND2 (ABC'D) -->
-                                    <path class="wire" d="M 158,40 L 220,40 L 220,85 L 250,85" /> <!-- A' -->
-                                    <path class="wire" d="M 158,160 L 220,160 L 220,105 L 250,105" /> <!-- D' -->
+                <div class="bento-card">
+                    <h3>2.4. Biestable T (Toggle)</h3>
+                    <p>S'obté unint les entrades J i K d'un biestable J-K (<code>J = K = T</code>). Si es fixa <code>T = 1</code>, la sortida commuta d'estat a cada pols:</p>
+                    <div class="math-box" style="text-align: center; font-size: 1.1rem;">
+                        f<sub>sortida</sub> = f<sub>CK</sub> / 2
+                    </div>
+                    <p style="font-size: 0.9em; color: var(--text-secondary);">
+                        <strong>Comportament:</strong> Com que necessita 2 polsos de rellotge per completar un cicle sencer (0 → 1 → 0), el període es duplica (<code>T<sub>Q</sub> = 2 · T<sub>CK</sub></code>).<br>
+                        <strong>Aplicació:</strong> És el <strong>divisor de freqüència per 2</strong> elemental i l'ànima dels <em>comptadors</em>.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-                                    <path class="wire" d="M 100,40 L 100,15 L 240,15 L 240,175 L 250,175" /> <!-- A -->
-                                    <path class="wire" d="M 100,80 L 230,80 L 230,190 L 250,190" /> <!-- B -->
-                                    <path class="wire" d="M 158,120 L 220,120 L 220,205 L 250,205" /> <!-- C' -->
-                                    <path class="wire" d="M 100,160 L 100,145 L 210,145 L 210,220 L 250,220" /> <!-- D -->
+        <section id="registres" class="section">
+            <div class="section-header">
+                <h2>3. Registres de Desplaçament</h2>
+            </div>
 
-                                    <!-- AND Gates -->
-                                    <!-- AND 1 (Top, 2 inputs) -->
-                                    <path class="gate" d="M 250,75 L 270,75 A 20,20 0 0,1 270,115 L 250,115 Z" fill="#E1F0FE" />
-                                    <!-- AND 2 (Bottom, 4 inputs) -->
-                                    <path class="gate" d="M 250,165 L 270,165 A 30,30 0 0,1 270,230 L 250,230 Z" fill="#E1F0FE" />
+            <p style="margin-bottom: 1.5rem;">
+                Un <strong>registre de desplaçament</strong> és un conjunt de <code>n</code> biestables sincronitzats capaços d'emmagatzemar una paraula binària de <code>n</code> bits i desplaçar-la en cada pols de rellotge.
+            </p>
 
-                                    <!-- Wires to OR Gate -->
-                                    <path class="wire" d="M 290,95 L 350,95 L 350,135 L 390,135" />
-                                    <path class="wire" d="M 295,197 L 350,197 L 350,155 L 390,155" />
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <h4>Senyals de Control Asíncrons</h4>
+                    <p style="font-size: 0.9em; color: var(--text-secondary);">
+                        Tenen màxima prioritat sobre el rellotge:
+                    </p>
+                    <ul style="font-size: 0.9em; line-height: 1.8;">
+                        <li><strong><span class="ov">Clear</span> (Posada a 0):</strong> Actiu a nivell baix (0V), esborra tot el registre simultàniament.</li>
+                        <li><strong><span class="ov">Preset</span> (Preajust a 1):</strong> Posa les etapes a 1 de forma asíncrona per carregar un valor inicial.</li>
+                    </ul>
+                </div>
 
-                                    <!-- OR Gate -->
-                                    <path class="gate" d="M 390,120 Q 405,120 420,145 Q 405,170 390,170 Q 400,145 390,120 Z" fill="#FDEBEC" />
+                <div class="bento-card">
+                    <h4>Línies d'Habilitació de Bus</h4>
+                    <p style="font-size: 0.9em; color: var(--text-secondary);">
+                        Controlen la transferència simultània de paraules completes:
+                    </p>
+                    <ul style="font-size: 0.9em; line-height: 1.8;">
+                        <li><strong>HEP (Habilitació Entrada Paral·lel):</strong> Carrega en un sol pols les línies <code>E<sub>1</sub>..E<sub>n</sub></code>.</li>
+                        <li><strong>HSP (Habilitació Sortida Paral·lel):</strong> Obre les portes AND per abocar els bits <code>Q<sub>1</sub>..Q<sub>n</sub></code> al bus de sortida.</li>
+                    </ul>
+                </div>
+            </div>
 
-                                    <!-- Output Wire & Text -->
-                                    <path class="wire" d="M 420,145 L 480,145" />
-                                    <text x="490" y="150" class="text" fill="#D44C47">F (Vàlvula)</text>
-                                </svg>
-                            </div>
-                        </div>
-                        
-                        <div class="bento-card card-large">
-                            <h3>5. Implementació Universal NAND (ANSI)</h3>
-                            <p>Trobem la Doble Negació Final i trenquem el signe '+':</p>
-                            <div class="math-box">F = <span class="ov"><span class="ov">(<span class="ov">A</span>·<span class="ov">D</span>)</span> · <span class="ov">(A·B·<span class="ov">C</span>·D)</span></span></div>
-                            <div style="background: white; border-radius: 8px; border: 1px solid var(--border-subtle); text-align: center; padding: 20px; overflow-x: auto; margin-top: 20px;">
-                                <svg width="550" height="250" viewBox="0 0 550 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%;">
-                                    <style>
-                                        .gate { fill: #FAF3DD; stroke: #B78D00; stroke-width: 2; }
-                                        .wire { fill: none; stroke: #64748B; stroke-width: 2; }
-                                        .text { font-family: monospace; font-size: 16px; font-weight: bold; fill: #2F3437; }
-                                        .dot { fill: #2F3437; }
-                                    </style>
-                                    
-                                    <!-- Inputs -->
-                                    <text x="20" y="45" class="text">A</text>
-                                    <text x="20" y="85" class="text">B</text>
-                                    <text x="20" y="125" class="text">C</text>
-                                    <text x="20" y="165" class="text">D</text>
+            <!-- Classificació dels 4 tipus de registres -->
+            <div class="module-card" style="margin-top: 2rem;">
+                <div class="module-body">
+                    <h3>Les 4 Arquitectures Estàndard de Registres</h3>
 
-                                    <!-- Main input lines -->
-                                    <path class="wire" d="M 40,40 L 100,40" />
-                                    <path class="wire" d="M 40,80 L 250,80" />
-                                    <path class="wire" d="M 40,120 L 100,120" />
-                                    <path class="wire" d="M 40,160 L 100,160" />
+                    <table class="truth-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th>Acrònim</th>
+                            <th>Denominació</th>
+                            <th>Cicle de Treball</th>
+                            <th>Aplicació Típica</th>
+                        </tr>
+                        <tr>
+                            <td><strong>SISO</strong></td>
+                            <td>Sèrie - Sèrie (Serial In - Serial Out)</td>
+                            <td><code>n</code> polsos per carregar + <code>n</code> per extreure</td>
+                            <td>Línies de comunicació sèrie a llarga distància (estalvi de cables).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SIPO</strong></td>
+                            <td>Sèrie - Paral·lel (Serial In - Parallel Out)</td>
+                            <td><code>n</code> polsos de càrrega + 1 pols HSP</td>
+                            <td>Desmodulació de receptors (converteix sèrie USB a bus intern CPU).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PISO</strong></td>
+                            <td>Paral·lel - Sèrie (Parallel In - Serial Out)</td>
+                            <td>1 pols HEP per carregar + <code>n</code> polsos de sortida</td>
+                            <td>Transmissors (agafa dades de la CPU i les transmet per un sol fil).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PIPO</strong></td>
+                            <td>Paral·lel - Paral·lel (Registre de Magatzem)</td>
+                            <td>1 pols HEP (càrrega) + 1 pols HSP (lectura)</td>
+                            <td>Memòria cau (buffer), registres interns de la CPU (ex: Registre AX).</td>
+                        </tr>
+                    </table>
 
-                                    <!-- NAND as NOT -->
-                                    <path class="wire" d="M 100,40 L 100,30 L 120,30" /> <path class="wire" d="M 100,40 L 100,50 L 120,50" /> <circle cx="100" cy="40" r="3" class="dot"/>
-                                    <path class="gate" d="M 120,20 L 140,20 A 20,20 0 0,1 140,60 L 120,60 Z" /> <circle cx="164" cy="40" r="4" class="gate" />
+                    <!-- Esquema SIPO vectorial -->
+                    <h4 style="margin-top: 2rem;">Esquema d'un Registre SIPO de 4 bits amb Portes AND de sortida (HSP)</h4>
+                    <div class="svg-card">
+                        <svg viewBox="0 0 680 190" width="680" height="190" style="max-width: 100%;">
+                            <!-- Rellotge comú -->
+                            <path class="wire-clk" d="M 20,115 L 600,115" />
+                            <text x="25" y="108" class="text-diag" fill="#D97706">CK comú</text>
 
-                                    <path class="wire" d="M 100,120 L 100,110 L 120,110" /> <path class="wire" d="M 100,120 L 100,130 L 120,130" /> <circle cx="100" cy="120" r="3" class="dot"/>
-                                    <path class="gate" d="M 120,100 L 140,100 A 20,20 0 0,1 140,140 L 120,140 Z" /> <circle cx="164" cy="120" r="4" class="gate" />
+                            <!-- Línia HSP -->
+                            <path class="wire" d="M 20,145 L 600,145" stroke="#7C3AED" stroke-width="2"/>
+                            <text x="25" y="140" class="text-diag" fill="#7C3AED">HSP</text>
 
-                                    <path class="wire" d="M 100,160 L 100,150 L 120,150" /> <path class="wire" d="M 100,160 L 100,170 L 120,170" /> <circle cx="100" cy="160" r="3" class="dot"/>
-                                    <path class="gate" d="M 120,140 L 140,140 A 20,20 0 0,1 140,180 L 120,180 Z" /> <circle cx="164" cy="160" r="4" class="gate" />
+                            <!-- 4 Etapes (Biestables D) -->
+                            <!-- Etapa 1 -->
+                            <rect x="90" y="20" width="80" height="75" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="130" y="45" text-anchor="middle" class="text-diag">FF 1</text>
+                            <text x="155" y="70" class="text-diag" fill="#2563EB">Q1</text>
+                            <path class="wire" d="M 40,55 L 90,55" />
+                            <text x="40" y="47" class="text-diag">D In</text>
 
-                                    <!-- Wires to Middle NAND -->
-                                    <path class="wire" d="M 168,40 L 220,40 L 220,85 L 250,85" /> <!-- A' -->
-                                    <path class="wire" d="M 168,160 L 220,160 L 220,105 L 250,105" /> <!-- D' -->
+                            <!-- Etapa 2 -->
+                            <rect x="220" y="20" width="80" height="75" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="260" y="45" text-anchor="middle" class="text-diag">FF 2</text>
+                            <text x="285" y="70" class="text-diag" fill="#2563EB">Q2</text>
+                            <path class="wire-active" d="M 170,55 L 220,55" />
 
-                                    <path class="wire" d="M 100,40 L 100,15 L 240,15 L 240,175 L 250,175" /> <!-- A branch -->
-                                    <path class="wire" d="M 230,80 L 230,190 L 250,190" /> <!-- B branch --> <circle cx="230" cy="80" r="3" class="dot"/>
-                                    <path class="wire" d="M 168,120 L 220,120 L 220,205 L 250,205" /> <!-- C' -->
-                                    <path class="wire" d="M 100,160 L 100,145 L 210,145 L 210,220 L 250,220" /> <!-- D branch -->
+                            <!-- Etapa 3 -->
+                            <rect x="350" y="20" width="80" height="75" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="390" y="45" text-anchor="middle" class="text-diag">FF 3</text>
+                            <text x="415" y="70" class="text-diag" fill="#2563EB">Q3</text>
+                            <path class="wire-active" d="M 300,55 L 350,55" />
 
-                                    <!-- Middle NAND Gates -->
-                                    <path class="gate" d="M 250,75 L 270,75 A 20,20 0 0,1 270,115 L 250,115 Z" /> <circle cx="294" cy="95" r="4" class="gate" />
-                                    <path class="gate" d="M 250,165 L 270,165 A 30,30 0 0,1 270,230 L 250,230 Z" /> <circle cx="304" cy="197" r="4" class="gate" />
+                            <!-- Etapa 4 -->
+                            <rect x="480" y="20" width="80" height="75" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="520" y="45" text-anchor="middle" class="text-diag">FF 4</text>
+                            <text x="545" y="70" class="text-diag" fill="#2563EB">Q4</text>
+                            <path class="wire-active" d="M 430,55 L 480,55" />
 
-                                    <!-- Wires to Final NAND -->
-                                    <path class="wire" d="M 298,95 L 350,95 L 350,135 L 380,135" />
-                                    <path class="wire" d="M 308,197 L 350,197 L 350,155 L 380,155" />
+                            <!-- Baixades de rellotge -->
+                            <path class="wire-clk" d="M 130,115 L 130,95" />
+                            <path class="wire-clk" d="M 260,115 L 260,95" />
+                            <path class="wire-clk" d="M 390,115 L 390,95" />
+                            <path class="wire-clk" d="M 520,115 L 520,95" />
 
-                                    <!-- Final NAND Gate -->
-                                    <path class="gate" d="M 380,125 L 400,125 A 20,20 0 0,1 400,165 L 380,165 Z" /> <circle cx="424" cy="145" r="4" class="gate" />
+                            <!-- Portes AND de sortida en paral·lel -->
+                            <circle cx="160" cy="55" r="3" class="dot"/>
+                            <path class="wire" d="M 160,55 L 160,160 L 175,160" />
+                            <path class="wire" d="M 150,145 L 150,170 L 175,170" />
+                            <path class="gate" d="M 175,155 L 185,155 A 10,10 0 0,1 185,175 L 175,175 Z" />
+                            <path class="wire-active" d="M 195,165 L 210,165" />
+                            <text x="212" y="169" class="text-diag" font-size="11">S1 //</text>
 
-                                    <!-- Output -->
-                                    <path class="wire" d="M 428,145 L 480,145" />
-                                    <text x="490" y="150" class="text" fill="#D44C47">F</text>
-                                </svg>
-                            </div>
-                        </div>
+                            <circle cx="290" cy="55" r="3" class="dot"/>
+                            <path class="wire" d="M 290,55 L 290,160 L 305,160" />
+                            <path class="wire" d="M 280,145 L 280,170 L 305,170" />
+                            <path class="gate" d="M 305,155 L 315,155 A 10,10 0 0,1 315,175 L 305,175 Z" />
+                            <path class="wire-active" d="M 325,165 L 340,165" />
+                            <text x="342" y="169" class="text-diag" font-size="11">S2 //</text>
+
+                            <circle cx="420" cy="55" r="3" class="dot"/>
+                            <path class="wire" d="M 420,55 L 420,160 L 435,160" />
+                            <path class="wire" d="M 410,145 L 410,170 L 435,170" />
+                            <path class="gate" d="M 435,155 L 445,155 A 10,10 0 0,1 445,175 L 435,175 Z" />
+                            <path class="wire-active" d="M 455,165 L 470,165" />
+                            <text x="472" y="169" class="text-diag" font-size="11">S3 //</text>
+
+                            <circle cx="550" cy="55" r="3" class="dot"/>
+                            <path class="wire" d="M 550,55 L 550,160 L 565,160" />
+                            <path class="wire" d="M 540,145 L 540,170 L 565,170" />
+                            <path class="gate" d="M 565,155 L 575,155 A 10,10 0 0,1 575,175 L 565,175 Z" />
+                            <path class="wire-active" d="M 585,165 L 600,165" />
+                            <text x="602" y="169" class="text-diag" font-size="11">S4 //</text>
+                        </svg>
                     </div>
                 </div>
             </div>
-            
-            <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: var(--bg-card); border: 2px dashed #A5B4FC; border-radius: 12px;">
-                <h3 style="margin-top:0;">🎮 Laboratori de Pràctiques</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 20px;">Posa a prova tot el que has après construint els teus propis circuits.</p>
-                <a href="simulador.html" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3B82F6; color: white; border-radius: 8px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3); transition: transform 0.2s;">
-                    Obrir el Simulador de Circuits Lògics →
-                </a>
+        </section>
+
+        <section id="comptadors" class="section">
+            <div class="section-header">
+                <h2>4. Comptadors Digitals</h2>
+            </div>
+
+            <p style="margin-bottom: 2rem;">
+                Un <strong>comptador</strong> és un circuit seqüencials que recorre una seqüència ordenada d'estats binaris a cada impuls d'entrada. El nombre total d'estats diferents abans de reiniciar-se s'anomena <strong>Mòdul (M)</strong>.
+            </p>
+
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <h3>Fórmula del Mòdul Màxim</h3>
+                    <p>Amb <code>n</code> biestables, el comptador pot generar un màxim de 2<sup>n</sup> estats:</p>
+                    <div class="math-box">
+                        M ≤ 2<sup>n</sup> &nbsp; ➔ &nbsp; 2<sup>n-1</sup> &lt; M ≤ 2<sup>n</sup>
+                    </div>
+                    <p style="font-size: 0.9em; color: var(--text-secondary);">
+                        <em>Exemple:</em> Per comptar fins a 10 (estats 0 a 9), calen <strong>n = 4 biestables</strong> perquè 2<sup>3</sup> = 8 (es queda curt) i 2<sup>4</sup> = 16 (és suficient).
+                    </p>
+                </div>
+
+                <div class="bento-card">
+                    <h3>Divisió de Freqüència en Cascada</h3>
+                    <p>Cada etapa en basculació (Toggle) divideix per 2 la freqüència de l'anterior:</p>
+                    <div class="math-box">
+                        f<sub>Q0</sub> = f<sub>CK</sub> / 2 &nbsp;|&nbsp; f<sub>Q1</sub> = f<sub>CK</sub> / 4 &nbsp;|&nbsp; f<sub>Qn</sub> = f<sub>CK</sub> / 2<sup>n+1</sup>
+                    </div>
+                    <p style="font-size: 0.9em; color: var(--text-secondary);">
+                        Base essencial per construir bases de temps i rellotges de quars en sistemes encastats.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Comparativa Asíncron vs Síncron -->
+            <div class="module-card" style="margin-top: 2rem;">
+                <div class="module-body">
+                    <h3>4.1. Comptador Asíncron (*Ripple Counter*) vs. Síncron</h3>
+
+                    <div class="bento-grid" style="margin-top: 1rem;">
+                        <div class="bento-card">
+                            <h4 style="margin-top:0;">Comptador Asíncron</h4>
+                            <p style="font-size: 0.9em;">
+                                El senyal de rellotge entra <strong>únicament al primer biestable</strong> (LSB, Q<sub>0</sub>). La sortida de cada biestable s'utilitza com a rellotge del següent.
+                            </p>
+                            <ul style="font-size: 0.85em; color: var(--text-secondary);">
+                                <li><strong>Avantatge:</strong> Molt senzill de cablejar (sense portes intermèdies).</li>
+                                <li style="color: #DC2626;"><strong>Inconvenient crític: Retard acumulatiu.</strong> La commutació es transmet en cascada:
+                                    <div class="math-box" style="margin: 5px 0;">t<sub>total</sub> = n · t<sub>pd</sub></div>
+                                    Per exemple, 4 etapes a 15 ns donen 60 ns de retard total, limitant la freqüència de treball i creant estats transitoris espuris (*glitches*).
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bento-card">
+                            <h4 style="margin-top:0;">Comptador Síncron</h4>
+                            <p style="font-size: 0.9em;">
+                                <strong>Tots els biestables comparteixen la mateixa línia de rellotge en paral·lel</strong> i commuten exactament en el mateix instant.
+                            </p>
+                            <ul style="font-size: 0.85em; color: var(--text-secondary);">
+                                <li style="color: #16A34A;"><strong>Gran avantatge:</strong> El retard total és <strong>independent del nombre d'etapes</strong>:
+                                    <div class="math-box" style="margin: 5px 0;">t<sub>total</sub> = t<sub>pd</sub> + t<sub>AND</sub></div>
+                                    Permet freqüències de rellotge molt més elevades.
+                                </li>
+                                <li><strong>Condició de basculació:</strong> Calen portes AND intermèdies perquè una etapa només commuti si totes les anteriors estan a 1 (<code>J<sub>k</sub> = K<sub>k</sub> = Q<sub>0</sub> · Q<sub>1</sub> ··· Q<sub>k-1</sub></code>).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Esquema Comptador Síncron -->
+                    <h4 style="margin-top: 2rem;">Esquema de Comptador Síncron de 3 Bits amb Rellotge Paral·lel i Acarregament AND</h4>
+                    <div class="svg-card">
+                        <svg viewBox="0 0 720 180" width="720" height="180" style="max-width: 100%;">
+                            <!-- Rellotge comú -->
+                            <path class="wire-clk" d="M 30,150 L 660,150" />
+                            <text x="35" y="142" class="text-diag" fill="#D97706">CK Comú</text>
+
+                            <!-- Etapa 0 (LSB) -->
+                            <rect x="90" y="30" width="100" height="90" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="100" y="55" class="text-diag">J=1</text>
+                            <text x="100" y="105" class="text-diag">K=1</text>
+                            <text x="160" y="55" class="text-diag" fill="#2563EB">Q0</text>
+                            <path class="wire-clk" d="M 140,150 L 140,120" />
+                            <!-- Sortida Q0 -->
+                            <path class="wire-active" d="M 190,50 L 300,50" />
+                            <circle cx="230" cy="50" r="3.5" class="dot"/>
+                            <path class="wire" d="M 230,50 L 230,20 L 460,20" />
+                            <text x="240" y="42" class="text-diag">Q0 (LSB)</text>
+
+                            <!-- Etapa 1 -->
+                            <rect x="300" y="30" width="100" height="90" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="310" y="55" class="text-diag">J1</text>
+                            <text x="310" y="105" class="text-diag">K1</text>
+                            <text x="370" y="55" class="text-diag" fill="#2563EB">Q1</text>
+                            <path class="wire-clk" d="M 350,150 L 350,120" />
+                            <path class="wire" d="M 285,50 L 300,50" />
+                            <path class="wire" d="M 285,50 L 285,100 L 300,100" />
+                            <!-- Sortida Q1 -->
+                            <path class="wire-active" d="M 400,50 L 460,50" />
+                            <circle cx="430" cy="50" r="3.5" class="dot"/>
+                            <text x="415" y="42" class="text-diag">Q1</text>
+
+                            <!-- Porta AND d'habilitació per a etapa 2 -->
+                            <path class="wire" d="M 460,20 L 475,20 L 475,70 L 490,70" />
+                            <path class="wire" d="M 460,50 L 475,50 L 475,80 L 490,80" />
+                            <path class="gate" d="M 490,65 L 505,65 A 15,15 0 0,1 505,95 L 490,95 Z" />
+                            <path class="wire-active" d="M 520,80 L 540,80" />
+                            <path class="wire" d="M 540,80 L 540,50 L 560,50" />
+                            <path class="wire" d="M 540,80 L 540,100 L 560,100" />
+
+                            <!-- Etapa 2 (MSB) -->
+                            <rect x="560" y="30" width="100" height="90" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="1.8"/>
+                            <text x="570" y="55" class="text-diag">J2</text>
+                            <text x="570" y="105" class="text-diag">K2</text>
+                            <text x="630" y="55" class="text-diag" fill="#2563EB">Q2</text>
+                            <path class="wire-clk" d="M 610,150 L 610,120" />
+                            <path class="wire-active" d="M 660,50 L 700,50" />
+                            <text x="670" y="42" class="text-diag">Q2 (MSB)</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4.2 Comptadors de Mòdul Arbitrari (Truncat amb NAND) -->
+            <div class="module-card" style="margin-top: 2rem;">
+                <div class="module-body">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="margin:0;">4.2. Comptadors de Mòdul Arbitrari (M &lt; 2<sup>n</sup>) amb Reset Asíncron</h3>
+                        <span class="badge-pau">⭐ Tipus d'Examen PAU</span>
+                    </div>
+
+                    <p style="margin-top: 1rem;">
+                        Per dissenyar un comptador que no completi la seva seqüència natural (per exemple, un <strong>Comptador BCD / Dècada Mòdul 10</strong> que només compti de 0 a 9), es trunca la seqüència amb una porta <strong>NAND</strong> connectada a la línia general de posada a zero asíncrona (<code><span class="ov">Clear</span></code>):
+                    </p>
+
+                    <ol style="line-height: 1.8; color: var(--text-secondary);">
+                        <li><strong>Identificar l'estat de tall:</strong> El número <code>M</code> (el primer estat que <strong>NO</strong> ha de ser visible). Per a Mòdul 10, és el número <strong>10</strong>:
+                            <div class="math-box" style="margin: 5px 0;">10<sub>10</sub> = 1010<sub>2</sub> ➔ Q<sub>3</sub> Q<sub>2</sub> Q<sub>1</sub> Q<sub>0</sub></div>
+                        </li>
+                        <li><strong>Connectar a la porta NAND:</strong> S'agafen les sortides que valen <code>1</code> en aquell estat (en el 10, són <strong>Q<sub>3</sub></strong> i <strong>Q<sub>1</sub></strong>) i es porten a les entrades de la porta NAND.</li>
+                        <li><strong>Llaç de reinici cap a <span class="ov">Clear</span>:</strong> La sortida de la NAND s'introdueix als pins <code><span class="ov">Clear</span></code> de tots els biestables. En arribar al 10, la NAND genera un <code>0</code> durant nanosegons que reseteja el comptador immediatament a <code>0000</code>.</li>
+                    </ol>
+
+                    <div class="svg-card">
+                        <svg viewBox="0 0 540 160" width="540" height="160" style="max-width: 100%;">
+                            <!-- Caixa negra comptador 4 bits -->
+                            <rect x="50" y="30" width="280" height="100" rx="8" fill="#F1F5F9" stroke="#1E293B" stroke-width="2"/>
+                            <text x="190" y="55" text-anchor="middle" class="text-diag" font-size="14">Comptador 4 Bits (74LS93 / 4×JK)</text>
+
+                            <!-- Rellotge -->
+                            <path class="wire-clk" d="M 20,80 L 50,80" />
+                            <text x="22" y="72" class="text-diag" fill="#D97706">CK</text>
+
+                            <!-- Sortides Q0..Q3 -->
+                            <text x="90" y="115" class="text-diag" fill="#2563EB">Q0</text>
+                            <path class="wire" d="M 100,130 L 100,150" />
+
+                            <text x="150" y="115" class="text-diag" fill="#2563EB">Q1</text>
+                            <path class="wire" d="M 160,130 L 160,150" />
+                            <circle cx="160" cy="140" r="3" class="dot"/>
+
+                            <text x="210" y="115" class="text-diag" fill="#2563EB">Q2</text>
+                            <path class="wire" d="M 220,130 L 220,150" />
+
+                            <text x="270" y="115" class="text-diag" fill="#2563EB">Q3</text>
+                            <path class="wire" d="M 280,130 L 280,150" />
+                            <circle cx="280" cy="140" r="3" class="dot"/>
+
+                            <!-- Línies cap a la NAND -->
+                            <path class="wire" d="M 160,140 L 380,140 L 380,85 L 400,85" />
+                            <path class="wire" d="M 280,140 L 370,140 L 370,65 L 400,65" />
+
+                            <!-- Porta NAND -->
+                            <path class="gate-nand" d="M 400,55 L 415,55 A 20,20 0 0,1 415,95 L 400,95 Z" />
+                            <circle cx="438" cy="75" r="3.5" class="gate-nand" />
+
+                            <!-- Retorn a Clear -->
+                            <path class="wire-feedback" d="M 442,75 L 480,75 L 480,20 L 260,20 L 260,30" />
+                            <circle cx="260" cy="32" r="3" class="gate-nand" />
+                            <text x="268" y="27" class="text-diag" fill="#DC2626"><span class="ov">Clear</span></text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resum-pau" class="section">
+            <div class="section-header">
+                <h2>5. Síntesi i Formulari per a Examen (PAU / Selectivitat)</h2>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <h3>Taula Resum de Biestables</h3>
+                    <table class="truth-table" style="font-size: 0.85em;">
+                        <tr><th>Tipus</th><th>Equació d'Estat</th><th>Funció Clau</th></tr>
+                        <tr><td><strong>R-S</strong></td><td>Q<sub>t+1</sub> = S + <span class="ov">R</span>·Q<sub>t</sub> (SR=0)</td><td>Posada a 1/0 amb memòria. Estat 11 prohibit.</td></tr>
+                        <tr><td><strong>J-K</strong></td><td>Q<sub>t+1</sub> = J·<span class="ov">Q</span><sub>t</sub> + <span class="ov">K</span>·Q<sub>t</sub></td><td>Universal. JK=11 ➔ Toggle (Inversió).</td></tr>
+                        <tr><td><strong>D</strong></td><td>Q<sub>t+1</sub> = D</td><td>Copia l'entrada D al flanc. Base de registres.</td></tr>
+                        <tr><td><strong>T</strong></td><td>Q<sub>t+1</sub> = T ⊕ Q<sub>t</sub></td><td>Si T=1 commuta sempre (Divisor per 2).</td></tr>
+                    </table>
+                </div>
+
+                <div class="bento-card">
+                    <h3>Formulari de Càlcul Ràpid</h3>
+                    <ul style="line-height: 2; font-size: 0.9em;">
+                        <li><strong>Nombre de biestables per a Mòdul M:</strong> <code>2<sup>n-1</sup> &lt; M ≤ 2<sup>n</sup></code></li>
+                        <li><strong>Freqüència de sortida a l'etapa k:</strong> <code>f<sub>k</sub> = f<sub>CK</sub> / 2<sup>k+1</sup></code></li>
+                        <li><strong>Retard Asíncron (Ripple):</strong> <code>t<sub>total</sub> = n · t<sub>pd</sub></code></li>
+                        <li><strong>Retard Síncron:</strong> <code>t<sub>total</sub> = t<sub>pd</sub> + t<sub>AND</sub></code> (independent de <code>n</code>)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mini Simulador Interactiu de Comptador Binari -->
+            <div class="interactive-tool">
+                <h3 style="margin-top: 0;">⚡ Simulador Interactiu: Comptador Binari de 4 Bits (Mòdul 16)</h3>
+                <p style="font-size: 0.9em; color: var(--text-secondary);">
+                    Prem sobre «Pols de Rellotge (CK)» per veure l'evolució dels biestables, la divisió de freqüència i el recompte decimal/hexadecimal en temps real.
+                </p>
+
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 1rem;">
+                    <button class="btn-calc" onclick="incrementCounter()">Pols de Rellotge (↑ CK)</button>
+                    <button class="btn-secondary" onclick="resetCounter()">Reset Asíncron (<span class="ov">Clear</span>)</button>
+                </div>
+
+                <div class="math-box" style="margin-top: 1.5rem; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 1.1rem;">
+                    <div><strong>Decimal:</strong> <span id="dispDec" style="color: #2563EB; font-weight: bold; font-size: 1.4rem;">0</span></div>
+                    <div><strong>Binari (Q<sub>3</sub> Q<sub>2</sub> Q<sub>1</sub> Q<sub>0</sub>):</strong> <span id="dispBin" style="letter-spacing: 4px; font-weight: bold; color: #16A34A;">0 0 0 0</span></div>
+                    <div><strong>Hex:</strong> <span id="dispHex" style="color: #9333EA; font-weight: bold;">0x0</span></div>
+                    <div><strong>Freq. Relativa:</strong> <span id="dispFreq">f<sub>CK</sub> / 1</span></div>
+                </div>
+
+                <div style="margin-top: 1rem; display: flex; gap: 10px; justify-content: center;">
+                    <div style="text-align: center;">
+                        <div id="led3" style="width: 32px; height: 32px; border-radius: 50%; background: #CBD5E1; margin: 0 auto; border: 2px solid #94A3B8;"></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Q3 (MSB)</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="led2" style="width: 32px; height: 32px; border-radius: 50%; background: #CBD5E1; margin: 0 auto; border: 2px solid #94A3B8;"></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Q2</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="led1" style="width: 32px; height: 32px; border-radius: 50%; background: #CBD5E1; margin: 0 auto; border: 2px solid #94A3B8;"></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Q1</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="led0" style="width: 32px; height: 32px; border-radius: 50%; background: #CBD5E1; margin: 0 auto; border: 2px solid #94A3B8;"></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Q0 (LSB)</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -630,56 +784,41 @@
 
     <script src="js/main.js"></script>
     <script>
-        // Mini funcionalitat interactiva només per aquesta pàgina
-        function convertBases() {
-            const input = document.getElementById("decInput").value;
-            const resBox = document.getElementById("baseResults");
-            
-            if(input === "" || isNaN(input) || input < 0) {
-                resBox.style.display = "none";
-                return;
-            }
-            
-            let num = parseInt(input, 10);
-            document.getElementById("resBin").innerText = num.toString(2);
-            document.getElementById("resOct").innerText = num.toString(8);
-            document.getElementById("resHex").innerText = num.toString(16).toUpperCase();
-            
-            // Generate BinSteps
-            let tempNum = num;
-            let binSteps = "<strong>Mètode (Divisió per 2):</strong><br>";
-            if (tempNum === 0) {
-                binSteps += "0 / 2 = 0, residu <b>0</b><br>";
-            } else {
-                while(tempNum > 0) {
-                    let quotient = Math.floor(tempNum / 2);
-                    let remainder = tempNum % 2;
-                    binSteps += `${tempNum} / 2 = ${quotient}, residu <b>${remainder}</b><br>`;
-                    tempNum = quotient;
-                }
-                binSteps += "<br><em>➔ Llegint els residus de baix a dalt obtenim el nombre binari.</em>";
-            }
-            document.getElementById("stepBin").innerHTML = binSteps;
+        // Lògica interactiva per al simulador de comptador binari de 4 bits
+        let countValue = 0;
 
-            // Generate HexSteps
-            tempNum = num;
-            let hexSteps = "<strong>Mètode (Divisió per 16):</strong><br>";
-            const hexChars = "0123456789ABCDEF";
-            if (tempNum === 0) {
-                hexSteps += "0 / 16 = 0, residu <b>0</b><br>";
-            } else {
-                while(tempNum > 0) {
-                    let quotient = Math.floor(tempNum / 16);
-                    let remainder = tempNum % 16;
-                    hexSteps += `${tempNum} / 16 = ${quotient}, residu <b>${remainder} (${hexChars[remainder]})</b><br>`;
-                    tempNum = quotient;
-                }
-                hexSteps += "<br><em>➔ Llegint els residus de baix a dalt obtenim l'hexadecimal.</em>";
-            }
-            document.getElementById("stepHex").innerHTML = hexSteps;
+        function updateDisplay() {
+            document.getElementById("dispDec").innerText = countValue;
+            let binStr = countValue.toString(2).padStart(4, '0');
+            document.getElementById("dispBin").innerText = binStr.split('').join(' ');
+            document.getElementById("dispHex").innerText = "0x" + countValue.toString(16).toUpperCase();
 
-            resBox.style.display = "block";
+            // LEDs
+            const b = [
+                (countValue & 1) ? '#22C55E' : '#CBD5E1',
+                (countValue & 2) ? '#22C55E' : '#CBD5E1',
+                (countValue & 4) ? '#22C55E' : '#CBD5E1',
+                (countValue & 8) ? '#22C55E' : '#CBD5E1'
+            ];
+
+            document.getElementById("led0").style.backgroundColor = b[0];
+            document.getElementById("led1").style.backgroundColor = b[1];
+            document.getElementById("led2").style.backgroundColor = b[2];
+            document.getElementById("led3").style.backgroundColor = b[3];
         }
+
+        function incrementCounter() {
+            countValue = (countValue + 1) % 16;
+            updateDisplay();
+        }
+
+        function resetCounter() {
+            countValue = 0;
+            updateDisplay();
+        }
+
+        // Inicialització
+        updateDisplay();
     </script>
 </body>
 

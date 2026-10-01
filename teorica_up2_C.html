@@ -1,0 +1,585 @@
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.65;
+        padding-bottom: 5rem;
+    }
+
+    nav {
+        background-color: rgba(15, 23, 42, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0.75rem 1.5rem;
+    }
+
+    nav .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    nav .brand {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.1rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 2px;
+    }
+
+    nav ul li a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+    }
+
+    nav ul li a:hover {
+        color: var(--primary);
+    }
+
+    main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem;
+    }
+
+    header.course-header {
+        margin-bottom: 3rem;
+    }
+
+    .breadcrumbs {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+    }
+
+    .breadcrumbs a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .header-icon {
+        font-size: 2.75rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    h1 {
+        font-size: 2.35rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: #ffffff;
+        margin-bottom: 1rem;
+    }
+
+    .subtitle {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        max-width: 850px;
+        margin-bottom: 1.5rem;
+    }
+
+    .tag-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    .tag {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--primary);
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.3rem 0.8rem;
+        border-radius: 9999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background: var(--border);
+        margin: 2.5rem 0;
+    }
+
+    .section-badge {
+        display: inline-block;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    section {
+        margin-bottom: 3.5rem;
+        scroll-margin-top: 5rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #f1f5f9;
+    }
+
+    p {
+        margin-bottom: 1rem;
+        color: #cbd5e1;
+    }
+
+    ul, ol {
+        margin-bottom: 1.25rem;
+        padding-left: 1.5rem;
+        color: #cbd5e1;
+    }
+
+    li {
+        margin-bottom: 0.4rem;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .card {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .card:hover {
+        border-color: rgba(var(--primary-rgb), 0.5);
+        transform: translateY(-2px);
+    }
+
+    .terminal-box {
+        background-color: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin: 1.25rem 0;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.88rem;
+        position: relative;
+    }
+
+    .terminal-header {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 0.85rem;
+    }
+
+    .terminal-btn {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .btn-close { background-color: #ef4444; }
+    .btn-min { background-color: #f59e0b; }
+    .btn-max { background-color: #10b981; }
+
+    pre {
+        background-color: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin: 1.25rem 0;
+        overflow-x: auto;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.88rem;
+        color: #e2e8f0;
+        line-height: 1.55;
+    }
+
+    code {
+        font-family: 'Fira Code', monospace;
+        color: var(--primary);
+        background-color: rgba(56, 189, 248, 0.1);
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+    }
+
+    .comment { color: #64748b; font-style: italic; }
+    .keyword { color: #f43f5e; font-weight: 600; }
+    .string { color: #34d399; }
+    .func { color: #38bdf8; }
+    .var { color: #facc15; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        background-color: var(--bg-card);
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+
+    th, td {
+        padding: 0.85rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.92rem;
+    }
+
+    th {
+        background-color: #162032;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    .callout {
+        border-left: 4px solid var(--primary);
+        background: rgba(56, 189, 248, 0.08);
+        padding: 1rem 1.25rem;
+        border-radius: 0 8px 8px 0;
+        margin: 1.5rem 0;
+    }
+
+    .callout.warning {
+        border-left-color: var(--warning);
+        background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout strong {
+        color: #fff;
+    }
+
+    footer {
+        margin-top: 4rem;
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+    }
+</style>
+<!-- Navegació superior unificada -->
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="brand">👨‍🏫 Prof. Vicent</a>
+        <ul>
+            <li><a href="index.html">← Menú Cursos</a></li>
+            <li><a href="#entorn">cs50.dev</a></li>
+            <li><a href="#compilacio">Compilació</a></li>
+            <li><a href="#hello-world">Hola Món</a></li>
+            <li><a href="#tipus-dades">Tipus & Format</a></li>
+            <li><a href="#condicionals">Condicionals</a></li>
+            <li><a href="#bucles">Bucles</a></li>
+            <li><a href="#disseny">Bones Pràctiques</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Capçalera amb mateix patró que teoria_electronica_digital.html -->
+    <header class="course-header">
+        <div class="breadcrumbs">
+            <a href="index.html">Cursos</a> / <a href="#">Programació</a> /
+            <span>CS50x Setmana 1: Llenguatge C</span>
+        </div>
+        <div class="header-icon">💻</div>
+        <h1>Introducció a la Programació en C: De Scratch a la Consola</h1>
+        <p class="subtitle">Apunts complets de la Setmana 1 del curs CS50 d'Harvard. Transició visual a textual, entorn en el núvol (cs50.dev), cicle de compilació, gestió d'entrades amb la llibreria cs50.h, control de flux i bones pràctiques d'enginyeria.</p>
+        <div class="tag-group">
+            <span class="tag">Informàtica Bàsica</span>
+            <span class="tag">Llenguatge C</span>
+            <span class="tag">CS50x / GNU Linux</span>
+        </div>
+    </header>
+
+    <hr>
+
+    <div class="section-badge">
+        <span>PART I · FLUX DE TREBALL I PRIMERS PASSOS</span>
+    </div>
+
+    <!-- SECCIÓ 1: Entorn i Terminal -->
+    <section id="entorn">
+        <h2>1. L'Entorn cs50.dev i l'Ordinador per Terminal</h2>
+        <p>A diferència dels programes de disseny visual com Scratch, en C treballem directament amb la consola (CLI o <em>Command Line Interface</em>). Per estalviar configuracions locals de compiladors, emprem <strong>cs50.dev</strong>, una màquina virtual basada en VS Code allotjada al núvol.</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>📁 Ordres Bàsiques de Linux</h3>
+                <p>La consola no utilitza ratolí: ens movem per carpetes i arxius mitjançant text:</p>
+                <ul>
+                    <li><code>ls</code>: llista tots els fitxers i carpetes del directori actual.</li>
+                    <li><code>cd nom_carpeta</code>: canvia el directori de treball cap endavant.</li>
+                    <li><code>cd ..</code>: retrocedeix un nivell en l'arbre de directoris.</li>
+                    <li><code>mkdir nom</code>: crea una nova carpeta (<em>make directory</em>).</li>
+                    <li><code>rm nom_fitxer</code>: esborra de manera permanent un fitxer.</li>
+                    <li><code>cp</code> i <code>mv</code>: copia i mou (o reanomena) fitxers.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>☁️ Per què cs50.dev?</h3>
+                <p>Un dels problemes històrics d'ensenyar llenguatges de baix nivell com C és la instal·lació dels compiladors (GCC o Clang) i les dependències segons cada sistema operatiu (Windows, macOS o Linux).</p>
+                <p>Amb <strong>cs50.dev</strong>, cada alumne disposa d'un entorn idèntic configurat amb les eines <code>make</code>, <code>clang</code>, <code>check50</code> i <code>style50</code>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓ 2: Codi Font vs Codi Màquina -->
+    <section id="compilacio">
+        <h2>2. Codi Font, Compilador i Codi Màquina</h2>
+        <p>Els ordinadors només comprenen senyals binaris: patrons de <code>0</code>s i <code>1</code>s (codi màquina). Els humans, en canvi, escrivim en instruccions llegibles conegudes com a <strong>codi font</strong> (arxius acabats en <code>.c</code>).</p>
+
+        <div class="callout">
+            <strong>El procés de Compilació:</strong> És el programa traductor (compilador) que transforma les nostres sentències de C en zeros i uns executables pel microprocessador:
+            <br><br>
+            <code>Codi Font (.c)</code> &nbsp;→&nbsp; <strong>COMPILADOR (Clang / Make)</strong> &nbsp;→&nbsp; <code>Executable (Binari)</code>
+        </div>
+
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="terminal-btn btn-close"></span>
+                <span class="terminal-btn btn-min"></span>
+                <span class="terminal-btn btn-max"></span>
+            </div>
+            <span class="comment"># 1. Obrir l'arxiu i escriure el codi</span><br>
+            code hello.c<br><br>
+            <span class="comment"># 2. Compilar (NO posar l'extensió .c amb make!)</span><br>
+            make hello<br><br>
+            <span class="comment"># 3. Executar el fitxer generat en el directori actual</span><br>
+            ./hello
+        </div>
+    </section>
+
+    <!-- SECCIÓ 3: Hello World -->
+    <section id="hello-world">
+        <h2>3. El Primer Programa: "hello, world"</h2>
+        <p>Anatomia bàsica d'un programa en C. Cada símbol, clau i punt i coma compleix una funció estrictament necessària.</p>
+
+        <pre><code><span class="comment">// Programa inicial tradicional en C</span>
+#include <stdio.h>int main(void){printf("hello, world\n");}        <div class="grid-2">
+            <div class="card">
+                <h3>Anatomia del Codi</h3>
+                <ul>
+                    <li><code>#include &lt;stdio.h&gt;</code>: fitxer de capçalera (<em>header file</em>) que conté funcions d'entrada/eixida estàndard com <code>printf</code>.</li>
+                    <li><code>int main(void)</code>: el punt d'inici obligatori de qualsevol programa en C.</li>
+                    <li><code>\n</code>: seqüència d'escapament que representa un salt de línia.</li>
+                    <li><code>;</code>: cada sentència ha d'acabar amb punt i coma. Si l'ometem, el compilador llançarà un error de sintaxi.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Seqüències d'Escapament Comuns</h3>
+                <ul>
+                    <li><code>\n</code>: Salt de línia.</li>
+                    <li><code>\t</code>: Tabulació horitzontal.</li>
+                    <li><code>\"</code>: Permet imprimir unes cometes dobles sense tancar el string.</li>
+                    <li><code>\\</code>: Imprimeix una barra invertida literal.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <div class="section-badge">
+        <span>PART II · GESTIÓ DE DADES I ESTRUCTURES DE CONTROL</span>
+    </div>
+
+    <!-- SECCIÓ 4: Tipus de Dades i Format -->
+    <section id="tipus-dades">
+        <h2>4. Tipus de Dades i Especificadors de Format</h2>
+        <p>En Scratch les variables eren comodins que podien contindre nombres o text indistintament. En C, cal definir de manera explícita quant d'espai de memòria necessita cada variable.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipus</th>
+                    <th>Descripció</th>
+                    <th>Format <code>printf</code></th>
+                    <th>Funció d'Entrada (<code>cs50.h</code>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>int</code></td>
+                    <td>Sencers de 32 bits (aprox. -2.000 milions a +2.000 milions)</td>
+                    <td><code>%i</code> o <code>%d</code></td>
+                    <td><code>get_int()</code></td>
+                </tr>
+                <tr>
+                    <td><code>long</code></td>
+                    <td>Sencers llargs de 64 bits per a quantitats gegants</td>
+                    <td><code>%li</code></td>
+                    <td><code>get_long()</code></td>
+                </tr>
+                <tr>
+                    <td><code>float</code></td>
+                    <td>Nombres decimals (coma flotant de precisió simple)</td>
+                    <td><code>%f</code></td>
+                    <td><code>get_float()</code></td>
+                </tr>
+                <tr>
+                    <td><code>double</code></td>
+                    <td>Nombres decimals amb el doble de precisió (64 bits)</td>
+                    <td><code>%lf</code></td>
+                    <td><code>get_double()</code></td>
+                </tr>
+                <tr>
+                    <td><code>char</code></td>
+                    <td>Un sol caràcter entre cometes simples (ex: <code>'a'</code>, <code>'Y'</code>)</td>
+                    <td><code>%c</code></td>
+                    <td><code>get_char()</code></td>
+                </tr>
+                <tr>
+                    <td><code>string</code></td>
+                    <td>Cadena de text entre cometes dobles (proporcionat per <code>cs50.h</code>)</td>
+                    <td><code>%s</code></td>
+                    <td><code>get_string()</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Exemple interactiu: <code>hello.c</code> amb entrada d'usuari</h3>
+        <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+#include <stdio.h>int main(void){// Demanem el nom a l'usuari i el guardem en una variable de tipus stringstring name = get_string("Com et dius? ");<span class="comment">// Substituïm %s pel contingut de la variable name</span>
+<span class="func">printf</span>(<span class="string">"Hola, %s!\n"</span>, <span class="var">name</span>);
+}    <!-- SECCIÓ 5: Condicionals -->
+    <section id="condicionals">
+        <h2>5. Presa de Decisions (Condicionals)</h2>
+        <p>Permeten que el programa seguisca rutes diferents segons si una condició booleana avalua com a vertadera (<code>true</code> / <code>1</code>) o falsa (<code>false</code> / <code>0</code>).</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>Comparadors i Operadors Lògics</h3>
+                <ul>
+                    <li><code>==</code>: Igualtat (<strong>Molt important:</strong> un sol <code>=</code> és assignació!).</li>
+                    <li><code>!=</code>: Diferent de.</li>
+                    <li><code>&lt;</code> i <code>&gt;</code>: Menor i major que.</li>
+                    <li><code>&lt;=</code> i <code>&gt;=</code>: Menor o igual i major o igual.</li>
+                    <li><code>&amp;&amp;</code>: AND lògic (totes han de ser certs).</li>
+                    <li><code>||</code>: OR lògic (almenys una certa).</li>
+                    <li><code>!</code>: NOT lògic (inverteix el resultat).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Exemple d'elecció: <code>agree.c</code></h3>
+                <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+#include <stdio.h>int main(void){char c = get_char("Hi estàs d'acord? (s/n): ");<span class="keyword">if</span> (<span class="var">c</span> == <span class="string">'s'</span> || <span class="var">c</span> == <span class="string">'S'</span>)
+{
+    <span class="func">printf</span>(<span class="string">"D'acord.\n"</span>);
+}
+<span class="keyword">else if</span> (<span class="var">c</span> == <span class="string">'n'</span> || <span class="var">c</span> == <span class="string">'N'</span>)
+{
+    <span class="func">printf</span>(<span class="string">"No d'acord.\n"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="func">printf</span>(<span class="string">"Opció invàlida.\n"</span>);
+}
+}    <!-- SECCIÓ 6: Bucles -->
+    <section id="bucles">
+        <h2>6. Repetició de Tasques (Bucles)</h2>
+        <p>Per evitar repetir codi manualment, emprem estructures iteratives:</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>Bucle <code>while</code></h3>
+                <p>Executa el bloc mentre la condició siga vertadera. Comprovem la condició <strong>abans</strong> d'entrar:</p>
+                <pre><code><span class="keyword">int</span> <span class="var">i</span> = 0;
+while (i < 3){printf("meow\n");i++;}            <div class="card">
+                <h3>Bucle <code>for</code></h3>
+                <p>Ideal quan coneixem d'antemà quantes vegades s'ha de repetir el cicle:</p>
+                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; 3; <span class="var">i</span>++)
+{printf("meow\n");}        <div class="card">
+            <h3>Bucle <code>do-while</code>: Validació d'Entrades</h3>
+            <p>Aquest bucle executa el codi intern <strong>almenys una vegada</strong> i només al final comprova la condició. És l'estructura estàndard per forçar a l'usuari a introduir dades correctes (filtratge d'errors):</p>
+            <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+#include <stdio.h>int main(void){int n;// Obliguem a repetir mentre l'usuari pose valors menors a 1do{n = get_int("Introdueix un nombre positiu: ");}while (n < 1);<span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; <span class="var">n</span>; <span class="var">i</span>++)
+{
+    <span class="func">printf</span>(<span class="string">"meow\n"</span>);
+}
+}    <!-- SECCIÓ 7: Bones Pràctiques i Eines -->
+    <section id="disseny">
+        <h2>7. Bones Pràctiques, Disseny i Eines de Suport CS50</h2>
+        <p>A CS50 no només avaluem que el programa funcione (<em>Correctness</em>), sinó com està escrit (<em>Design</em> i <em>Style</em>):</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>🛠️ Ordres Pedagògiques de CS50</h3>
+                <ul>
+                    <li><code>style50 nom.c</code>: Revisa el codi font i ens indica si la sagnia, els espais o els comentaris compleixen amb l'estil formal.</li>
+                    <li><code>check50 cs50/problems/2026/x/hello</code>: Executa tests unitaris automàtics per comprovar la correcció del programa abans d'entregar.</li>
+                    <li><code>debug50 ./nom</code>: Obre el depurador gràfic amb punts de ruptura (<em>breakpoints</em>) per analitzar el canvi de variables pas a pas.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>💡 Consells per a l'Alumnat</h3>
+                <ul>
+                    <li><strong>Indexació en zero:</strong> Recorda que en ciències de la computació els comptadors comencen habitualment des de <code>0</code>, no des d'<code>1</code>.</li>
+                    <li><strong>Evita els números màgics:</strong> Empra variables clares per definir límits o constants.</li>
+                    <li><strong>Abstracció:</strong> Si un tros de codi es repeteix més de dues vegades, converteix-lo en un bucle o en una funció pròpia.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Departament de Tecnologia i Informàtica · Adaptació dels continguts oberts de CS50x (Harvard University) per al curs del Prof. Vicent.</p>
+    </footer>
+
+</main>

@@ -1,317 +1,342 @@
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+ <!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50x Setmana 1: Llenguatge C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0b1120;
+            --bg-card: #151f32;
+            --code-bg: #030712;
+            --border: #1e293b;
+            --text-main: #cbd5e1;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --primary-rgb: 56, 189, 248;
+            --accent: #a855f7;
+            --warning: #f59e0b;
+        }
 
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background-color: var(--bg-body);
-        color: var(--text-main);
-        line-height: 1.65;
-        padding-bottom: 5rem;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    nav {
-        background-color: rgba(15, 23, 42, 0.92);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        padding: 0.75rem 1.5rem;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding-bottom: 5rem;
+        }
 
-    nav .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    }
+        nav {
+            background-color: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1.5rem;
+        }
 
-    nav .brand {
-        font-weight: 700;
-        color: var(--primary);
-        font-size: 1.1rem;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
 
-    nav ul {
-        display: flex;
-        list-style: none;
-        gap: 1rem;
-        overflow-x: auto;
-        padding-bottom: 2px;
-    }
+        nav .brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    nav ul li a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-size: 0.88rem;
-        font-weight: 500;
-        transition: color 0.2s ease;
-        white-space: nowrap;
-    }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
 
-    nav ul li a:hover {
-        color: var(--primary);
-    }
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
 
-    main {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 2.5rem 1.5rem;
-    }
+        nav ul li a:hover {
+            color: var(--primary);
+        }
 
-    header.course-header {
-        margin-bottom: 3rem;
-    }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
 
-    .breadcrumbs {
-        color: var(--text-muted);
-        font-size: 0.875rem;
-        margin-bottom: 1rem;
-    }
+        header.course-header {
+            margin-bottom: 3rem;
+        }
 
-    .breadcrumbs a {
-        color: var(--primary);
-        text-decoration: none;
-    }
+        .breadcrumbs {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
 
-    .header-icon {
-        font-size: 2.75rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-    }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
 
-    h1 {
-        font-size: 2.35rem;
-        font-weight: 800;
-        line-height: 1.25;
-        color: #ffffff;
-        margin-bottom: 1rem;
-    }
+        .header-icon {
+            font-size: 2.75rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
 
-    .subtitle {
-        font-size: 1.15rem;
-        color: var(--text-muted);
-        max-width: 850px;
-        margin-bottom: 1.5rem;
-    }
+        h1 {
+            font-size: 2.35rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
 
-    .tag-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-    }
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin-bottom: 1.5rem;
+        }
 
-    .tag {
-        background-color: var(--bg-card);
-        border: 1px solid var(--border);
-        color: var(--primary);
-        font-size: 0.78rem;
-        font-weight: 600;
-        padding: 0.3rem 0.8rem;
-        border-radius: 9999px;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-    }
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
 
-    hr {
-        border: 0;
-        height: 1px;
-        background: var(--border);
-        margin: 2.5rem 0;
-    }
+        .tag {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
 
-    .section-badge {
-        display: inline-block;
-        color: var(--accent);
-        font-weight: 700;
-        font-size: 0.82rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-    }
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border);
+            margin: 2.5rem 0;
+        }
 
-    section {
-        margin-bottom: 3.5rem;
-        scroll-margin-top: 5rem;
-    }
+        .section-badge {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
 
-    h2 {
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 1.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-    }
+        section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 5rem;
+        }
 
-    h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-        color: #f1f5f9;
-    }
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
 
-    p {
-        margin-bottom: 1rem;
-        color: #cbd5e1;
-    }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #f1f5f9;
+        }
 
-    ul, ol {
-        margin-bottom: 1.25rem;
-        padding-left: 1.5rem;
-        color: #cbd5e1;
-    }
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
 
-    li {
-        margin-bottom: 0.4rem;
-    }
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+            color: #cbd5e1;
+        }
 
-    .grid-2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 1.5rem;
-        margin: 1.5rem 0;
-    }
+        li {
+            margin-bottom: 0.4rem;
+        }
 
-    .card {
-        background-color: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-        transition: border-color 0.2s ease, transform 0.2s ease;
-    }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
 
-    .card:hover {
-        border-color: rgba(var(--primary-rgb), 0.5);
-        transform: translateY(-2px);
-    }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
 
-    .terminal-box {
-        background-color: var(--code-bg);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 1.25rem;
-        margin: 1.25rem 0;
-        font-family: 'Fira Code', monospace;
-        font-size: 0.88rem;
-        position: relative;
-    }
+        .card:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-2px);
+        }
 
-    .terminal-header {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 0.85rem;
-    }
+        .terminal-box {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            position: relative;
+        }
 
-    .terminal-btn {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        display: inline-block;
-    }
+        .terminal-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 0.85rem;
+        }
 
-    .btn-close { background-color: #ef4444; }
-    .btn-min { background-color: #f59e0b; }
-    .btn-max { background-color: #10b981; }
+        .terminal-btn {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
 
-    pre {
-        background-color: var(--code-bg);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 1.25rem;
-        margin: 1.25rem 0;
-        overflow-x: auto;
-        font-family: 'Fira Code', monospace;
-        font-size: 0.88rem;
-        color: #e2e8f0;
-        line-height: 1.55;
-    }
+        .btn-close { background-color: #ef4444; }
+        .btn-min { background-color: #f59e0b; }
+        .btn-max { background-color: #10b981; }
 
-    code {
-        font-family: 'Fira Code', monospace;
-        color: var(--primary);
-        background-color: rgba(56, 189, 248, 0.1);
-        padding: 0.15rem 0.4rem;
-        border-radius: 4px;
-        font-size: 0.9em;
-    }
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.55;
+        }
 
-    pre code {
-        background: none;
-        padding: 0;
-        color: inherit;
-    }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
 
-    .comment { color: #64748b; font-style: italic; }
-    .keyword { color: #f43f5e; font-weight: 600; }
-    .string { color: #34d399; }
-    .func { color: #38bdf8; }
-    .var { color: #facc15; }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1.5rem 0;
-        background-color: var(--bg-card);
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px solid var(--border);
-    }
+        .comment { color: #64748b; font-style: italic; }
+        .keyword { color: #f43f5e; font-weight: 600; }
+        .string { color: #34d399; }
+        .func { color: #38bdf8; }
+        .var { color: #facc15; }
 
-    th, td {
-        padding: 0.85rem 1rem;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-        font-size: 0.92rem;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
 
-    th {
-        background-color: #162032;
-        color: var(--primary);
-        font-weight: 600;
-    }
+        th, td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
 
-    tr:last-child td {
-        border-bottom: none;
-    }
+        th {
+            background-color: #162032;
+            color: var(--primary);
+            font-weight: 600;
+        }
 
-    .callout {
-        border-left: 4px solid var(--primary);
-        background: rgba(56, 189, 248, 0.08);
-        padding: 1rem 1.25rem;
-        border-radius: 0 8px 8px 0;
-        margin: 1.5rem 0;
-    }
+        tr:last-child td {
+            border-bottom: none;
+        }
 
-    .callout.warning {
-        border-left-color: var(--warning);
-        background: rgba(245, 158, 11, 0.08);
-    }
+        .callout {
+            border-left: 4px solid var(--primary);
+            background: rgba(56, 189, 248, 0.08);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
 
-    .callout strong {
-        color: #fff;
-    }
+        .callout.warning {
+            border-left-color: var(--warning);
+            background: rgba(245, 158, 11, 0.08);
+        }
 
-    footer {
-        margin-top: 4rem;
-        border-top: 1px solid var(--border);
-        padding-top: 2rem;
-        text-align: center;
-        color: var(--text-muted);
-        font-size: 0.85rem;
-    }
-</style>
-<!-- Navegació superior unificada -->
+        .callout strong {
+            color: #fff;
+        }
+
+        footer {
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
 <nav>
     <div class="nav-container">
         <a href="index.html" class="brand">👨‍🏫 Prof. Vicent</a>
@@ -320,7 +345,8 @@
             <li><a href="#entorn">cs50.dev</a></li>
             <li><a href="#compilacio">Compilació</a></li>
             <li><a href="#hello-world">Hola Món</a></li>
-            <li><a href="#tipus-dades">Tipus & Format</a></li>
+            <li><a href="#tipus-dades">Tipus de Dades</a></li>
+            <li><a href="#operadors">Operadors</a></li>
             <li><a href="#condicionals">Condicionals</a></li>
             <li><a href="#bucles">Bucles</a></li>
             <li><a href="#disseny">Bones Pràctiques</a></li>
@@ -329,8 +355,6 @@
 </nav>
 
 <main>
-
-    <!-- Capçalera amb mateix patró que teoria_electronica_digital.html -->
     <header class="course-header">
         <div class="breadcrumbs">
             <a href="index.html">Cursos</a> / <a href="#">Programació</a> /
@@ -338,7 +362,7 @@
         </div>
         <div class="header-icon">💻</div>
         <h1>Introducció a la Programació en C: De Scratch a la Consola</h1>
-        <p class="subtitle">Apunts complets de la Setmana 1 del curs CS50 d'Harvard. Transició visual a textual, entorn en el núvol (cs50.dev), cicle de compilació, gestió d'entrades amb la llibreria cs50.h, control de flux i bones pràctiques d'enginyeria.</p>
+        <p class="subtitle">Apunts complets de la Setmana 1 del curs CS50 d'Harvard. Transició visual a textual, entorn al núvol (cs50.dev), cicle de compilació, gestió d'entrades amb cs50.h, tipus de dades en memòria, operadors i estructures de control.</p>
         <div class="tag-group">
             <span class="tag">Informàtica Bàsica</span>
             <span class="tag">Llenguatge C</span>
@@ -354,15 +378,14 @@
 
     <!-- SECCIÓ 1: Entorn i Terminal -->
     <section id="entorn">
-        <h2>1. L'Entorn cs50.dev i l'Ordinador per Terminal</h2>
-        <p>A diferència dels programes de disseny visual com Scratch, en C treballem directament amb la consola (CLI o <em>Command Line Interface</em>). Per estalviar configuracions locals de compiladors, emprem <strong>cs50.dev</strong>, una màquina virtual basada en VS Code allotjada al núvol.</p>
+        <h2>1. L'Entorn cs50.dev i la Consola Linux</h2>
+        <p>A diferència dels llenguatges visuals per blocs com Scratch, en C treballem directament amb la línia d'ordres (CLI). Per evitar discrepàncies de configuració entre sistemes operatius, utilitzem <strong>cs50.dev</strong>, un entorn basat en VS Code executat en un contenidor al núvol.</p>
 
         <div class="grid-2">
             <div class="card">
-                <h3>📁 Ordres Bàsiques de Linux</h3>
-                <p>La consola no utilitza ratolí: ens movem per carpetes i arxius mitjançant text:</p>
+                <h3>📁 Ordres Fonamentals de la Shell</h3>
                 <ul>
-                    <li><code>ls</code>: llista tots els fitxers i carpetes del directori actual.</li>
+                    <li><code>ls</code>: llista fitxers i carpetes del directori actual.</li>
                     <li><code>cd nom_carpeta</code>: canvia el directori de treball cap endavant.</li>
                     <li><code>cd ..</code>: retrocedeix un nivell en l'arbre de directoris.</li>
                     <li><code>mkdir nom</code>: crea una nova carpeta (<em>make directory</em>).</li>
@@ -373,8 +396,7 @@
 
             <div class="card">
                 <h3>☁️ Per què cs50.dev?</h3>
-                <p>Un dels problemes històrics d'ensenyar llenguatges de baix nivell com C és la instal·lació dels compiladors (GCC o Clang) i les dependències segons cada sistema operatiu (Windows, macOS o Linux).</p>
-                <p>Amb <strong>cs50.dev</strong>, cada alumne disposa d'un entorn idèntic configurat amb les eines <code>make</code>, <code>clang</code>, <code>check50</code> i <code>style50</code>.</p>
+                <p>Garanteix que cada estudiant dispose del mateix conjunt de ferramentes preconfigurades: compilador <code>clang</code>, automatització amb <code>make</code>, la biblioteca docent <code>cs50.h</code>, i les eines de verificació <code>check50</code> i <code>style50</code>.</p>
             </div>
         </div>
     </section>
@@ -382,12 +404,11 @@
     <!-- SECCIÓ 2: Codi Font vs Codi Màquina -->
     <section id="compilacio">
         <h2>2. Codi Font, Compilador i Codi Màquina</h2>
-        <p>Els ordinadors només comprenen senyals binaris: patrons de <code>0</code>s i <code>1</code>s (codi màquina). Els humans, en canvi, escrivim en instruccions llegibles conegudes com a <strong>codi font</strong> (arxius acabats en <code>.c</code>).</p>
+        <p>El maquinari només executa patrons binaris de <code>0</code>s i <code>1</code>s (codi màquina). El text que escrivim en arxius <code>.c</code> és <strong>codi font</strong>, comprensible per humans, que requereix un compilador per traduir-se:</p>
 
         <div class="callout">
-            <strong>El procés de Compilació:</strong> És el programa traductor (compilador) que transforma les nostres sentències de C en zeros i uns executables pel microprocessador:
-            <br><br>
-            <code>Codi Font (.c)</code> &nbsp;→&nbsp; <strong>COMPILADOR (Clang / Make)</strong> &nbsp;→&nbsp; <code>Executable (Binari)</code>
+            <strong>Cicle de Compilació:</strong><br>
+            <code>Codi Font (.c)</code> &nbsp;→&nbsp; <strong>COMPILADOR (Clang / Make)</strong> &nbsp;→&nbsp; <code>Binari Executable</code>
         </div>
 
         <div class="terminal-box">
@@ -396,11 +417,11 @@
                 <span class="terminal-btn btn-min"></span>
                 <span class="terminal-btn btn-max"></span>
             </div>
-            <span class="comment"># 1. Obrir l'arxiu i escriure el codi</span><br>
+            <span class="comment"># 1. Obrir l'arxiu i escriure el codi font</span><br>
             code hello.c<br><br>
-            <span class="comment"># 2. Compilar (NO posar l'extensió .c amb make!)</span><br>
+            <span class="comment"># 2. Compilar invocant make (sense l'extensió .c!)</span><br>
             make hello<br><br>
-            <span class="comment"># 3. Executar el fitxer generat en el directori actual</span><br>
+            <span class="comment"># 3. Executar l'executable binari generat</span><br>
             ./hello
         </div>
     </section>
@@ -408,26 +429,33 @@
     <!-- SECCIÓ 3: Hello World -->
     <section id="hello-world">
         <h2>3. El Primer Programa: "hello, world"</h2>
-        <p>Anatomia bàsica d'un programa en C. Cada símbol, clau i punt i coma compleix una funció estrictament necessària.</p>
+        <p>Anatomia bàsica d'un programa en C:</p>
 
         <pre><code><span class="comment">// Programa inicial tradicional en C</span>
-#include <stdio.h>int main(void){printf("hello, world\n");}        <div class="grid-2">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
+{
+    <span class="func">printf</span>(<span class="string">"hello, world\n"</span>);
+}</code></pre>
+
+        <div class="grid-2">
             <div class="card">
                 <h3>Anatomia del Codi</h3>
                 <ul>
-                    <li><code>#include &lt;stdio.h&gt;</code>: fitxer de capçalera (<em>header file</em>) que conté funcions d'entrada/eixida estàndard com <code>printf</code>.</li>
-                    <li><code>int main(void)</code>: el punt d'inici obligatori de qualsevol programa en C.</li>
-                    <li><code>\n</code>: seqüència d'escapament que representa un salt de línia.</li>
-                    <li><code>;</code>: cada sentència ha d'acabar amb punt i coma. Si l'ometem, el compilador llançarà un error de sintaxi.</li>
+                    <li><code>#include &lt;stdio.h&gt;</code>: fitxer de capçalera (<em>header file</em>) que declara funcions estàndard com <code>printf</code>.</li>
+                    <li><code>int main(void)</code>: punt d'entrada del programa. La paraula clau <code>void</code> entre parèntesis indica que la funció no rep cap argument[cite: 19].</li>
+                    <li><code>\n</code>: salt de línia.</li>
+                    <li><code>;</code>: tanca cada instrucció; sense ell el compilador llança un error sintàctic.</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Seqüències d'Escapament Comuns</h3>
+                <h3>Seqüències d'Escapament Habituals</h3>
                 <ul>
                     <li><code>\n</code>: Salt de línia.</li>
                     <li><code>\t</code>: Tabulació horitzontal.</li>
-                    <li><code>\"</code>: Permet imprimir unes cometes dobles sense tancar el string.</li>
-                    <li><code>\\</code>: Imprimeix una barra invertida literal.</li>
+                    <li><code>\"</code>: Cometes dobles literals dins d'un string.</li>
+                    <li><code>\\</code>: Barra invertida literal.</li>
                 </ul>
             </div>
         </div>
@@ -436,143 +464,267 @@
     <hr>
 
     <div class="section-badge">
-        <span>PART II · GESTIÓ DE DADES I ESTRUCTURES DE CONTROL</span>
+        <span>PART II · GESTIÓ DE DADES I OPERADORS</span>
     </div>
 
-    <!-- SECCIÓ 4: Tipus de Dades i Format -->
+    <!-- SECCIÓ 4: Tipus de Dades i Memòria -->
     <section id="tipus-dades">
-        <h2>4. Tipus de Dades i Especificadors de Format</h2>
-        <p>En Scratch les variables eren comodins que podien contindre nombres o text indistintament. En C, cal definir de manera explícita quant d'espai de memòria necessita cada variable.</p>
+        <h2>4. Tipus de Dades, Memòria i Variables</h2>
+        <p>En llenguatges moderns com PHP o JavaScript les variables determinen el seu tipus dinàmicament[cite: 13]. En C, cal especificar de forma explícita el tipus de cada variable en crear-la per indicar al compilador quants bytes de memòria reservar[cite: 13, 14, 16, 17, 18, 24].</p>
 
         <table>
             <thead>
                 <tr>
                     <th>Tipus</th>
-                    <th>Descripció</th>
+                    <th>Mida</th>
+                    <th>Rang i Característiques</th>
                     <th>Format <code>printf</code></th>
-                    <th>Funció d'Entrada (<code>cs50.h</code>)</th>
+                    <th>Funció <code>cs50.h</code></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><code>int</code></td>
-                    <td>Sencers de 32 bits (aprox. -2.000 milions a +2.000 milions)</td>
+                    <td>4 bytes (32 bits)[cite: 14]</td>
+                    <td>Sencers amb signe: de -2<sup>31</sup> a 2<sup>31</sup> - 1 (~ &plusmn;2.000 milions)[cite: 14]</td>
                     <td><code>%i</code> o <code>%d</code></td>
                     <td><code>get_int()</code></td>
                 </tr>
                 <tr>
-                    <td><code>long</code></td>
-                    <td>Sencers llargs de 64 bits per a quantitats gegants</td>
-                    <td><code>%li</code></td>
-                    <td><code>get_long()</code></td>
+                    <td><code>unsigned int</code></td>
+                    <td>4 bytes (32 bits)[cite: 14, 15]</td>
+                    <td>Qualificador que duplica el rang positiu eliminant els negatius: de 0 a 2<sup>32</sup> - 1 (~ 0 a 4.000 milions)[cite: 15]</td>
+                    <td><code>%u</code></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><code>char</code></td>
+                    <td>1 byte (8 bits)[cite: 16]</td>
+                    <td>Caràcter únic entre cometes simples (-128 a 127). Mapeig ASCII: 'A'=65, 'a'=97, '0'=48[cite: 16]</td>
+                    <td><code>%c</code></td>
+                    <td><code>get_char()</code></td>
                 </tr>
                 <tr>
                     <td><code>float</code></td>
-                    <td>Nombres decimals (coma flotant de precisió simple)</td>
+                    <td>4 bytes (32 bits)[cite: 17]</td>
+                    <td>Nombres reals en coma flotant (precisió limitada de 32 bits)[cite: 17]</td>
                     <td><code>%f</code></td>
                     <td><code>get_float()</code></td>
                 </tr>
                 <tr>
                     <td><code>double</code></td>
-                    <td>Nombres decimals amb el doble de precisió (64 bits)</td>
+                    <td>8 bytes (64 bits)[cite: 18]</td>
+                    <td>Nombres reals amb doble precisió (per a càlculs científics o molts decimals)[cite: 18]</td>
                     <td><code>%lf</code></td>
                     <td><code>get_double()</code></td>
                 </tr>
                 <tr>
-                    <td><code>char</code></td>
-                    <td>Un sol caràcter entre cometes simples (ex: <code>'a'</code>, <code>'Y'</code>)</td>
-                    <td><code>%c</code></td>
-                    <td><code>get_char()</code></td>
+                    <td><code>bool</code></td>
+                    <td>1 byte[cite: 16, 21]</td>
+                    <td>Valors lògics: <code>true</code> o <code>false</code> (requereix <code>&lt;cs50.h&gt;</code>)[cite: 21]</td>
+                    <td><code>%i</code></td>
+                    <td>—</td>
                 </tr>
                 <tr>
                     <td><code>string</code></td>
-                    <td>Cadena de text entre cometes dobles (proporcionat per <code>cs50.h</code>)</td>
+                    <td>Variable</td>
+                    <td>Cadena de text entre cometes dobles (proporcionat per <code>&lt;cs50.h&gt;</code>)[cite: 22]</td>
                     <td><code>%s</code></td>
                     <td><code>get_string()</code></td>
+                </tr>
+                <tr>
+                    <td><code>void</code></td>
+                    <td>—</td>
+                    <td>Tipus que indica absència de valor/retorn. No es pot assignar a una variable[cite: 19].</td>
+                    <td>—</td>
+                    <td>—</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>Exemple interactiu: <code>hello.c</code> amb entrada d'usuari</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Declaració vs Inicialització</h3>
+                <p>Crear una variable requereix tipus i nom[cite: 24]. Si li assignem valor d'immediat, s'anomena <strong>inicialització</strong>[cite: 25]:</p>
+                <pre><code><span class="comment">// 1. Declaració i assignació en línies separades</span>
+<span class="keyword">int</span> <span class="var">number</span>;         <span class="comment">// Declaració</span>[cite: 24, 25]
+<span class="var">number</span> = 17;        <span class="comment">// Assignació</span>[cite: 25]
+
+<span class="comment">// 2. Inicialització directa</span>
+<span class="keyword">int</span> <span class="var">edat</span> = 20;      <span class="comment">// Inicialització</span>[cite: 25]
+<span class="keyword">char</span> <span class="var">lletra</span> = <span class="string">'A'</span>;   <span class="comment">// Mapeig ASCII 65</span>[cite: 16, 25]
+
+<span class="comment">// Declaració múltiple del mateix tipus:</span>
+<span class="keyword">int</span> <span class="var">ample</span>, <span class="var">alt</span>;     <span class="comment">// Vàlid en C</span>[cite: 24]</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Bones Pràctiques i Advertències</h3>
+                <ul>
+                    <li><strong>No redeclarar:</strong> Un cop declarada una variable (ex: <code>int x;</code>), utilitza-la directament (<code>x = 10;</code>)[cite: 25]. Tornar a escriure <code>int x = 10;</code> pot produir comportaments imprevistos[cite: 25].</li>
+                    <li><strong>Declaració sota demanda:</strong> És millor declarar les variables just quan es necessiten i no necessàriament totes al principi del fitxer[cite: 24].</li>
+                    <li><strong>El tipus <code>void</code>:</strong> S'empra per a funcions que no retornen cap dada (com <code>printf</code>) o que no prenen paràmetres (<code>int main(void)</code>)[cite: 19].</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Exemple interactiu: <code>hello.c</code> amb la llibreria <code>cs50.h</code></h3>
         <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
-#include <stdio.h>int main(void){// Demanem el nom a l'usuari i el guardem en una variable de tipus stringstring name = get_string("Com et dius? ");<span class="comment">// Substituïm %s pel contingut de la variable name</span>
-<span class="func">printf</span>(<span class="string">"Hola, %s!\n"</span>, <span class="var">name</span>);
-}    <!-- SECCIÓ 5: Condicionals -->
-    <section id="condicionals">
-        <h2>5. Presa de Decisions (Condicionals)</h2>
-        <p>Permeten que el programa seguisca rutes diferents segons si una condició booleana avalua com a vertadera (<code>true</code> / <code>1</code>) o falsa (<code>false</code> / <code>0</code>).</p>
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
+{
+    <span class="comment">// Demanem el nom a l'usuari i el guardem en una variable de tipus string</span>
+    <span class="keyword">string</span> <span class="var">name</span> = <span class="func">get_string</span>(<span class="string">"Com et dius? "</span>);
+
+    <span class="comment">// Substituïm %s pel contingut de la variable name</span>
+    <span class="func">printf</span>(<span class="string">"Hola, %s!\n"</span>, <span class="var">name</span>);
+}</code></pre>
+    </section>
+
+    <!-- SECCIÓ 5: Operadors -->
+    <section id="operadors">
+        <h2>5. Operadors Aritmètics, Relacionals i Lògics</h2>
+        <p>C disposa d'un conjunt d'operadors per transformar valors i avaluar condicions[cite: 2].</p>
 
         <div class="grid-2">
             <div class="card">
-                <h3>Comparadors i Operadors Lògics</h3>
+                <h3>Aritmètica i l'Operador Mòdul (<code>%</code>)</h3>
+                <p>A més de la suma (<code>+</code>), resta (<code>-</code>), multiplicació (<code>*</code>) i divisió (<code>/</code>), disposem del mòdul[cite: 3]:</p>
                 <ul>
-                    <li><code>==</code>: Igualtat (<strong>Molt important:</strong> un sol <code>=</code> és assignació!).</li>
-                    <li><code>!=</code>: Diferent de.</li>
-                    <li><code>&lt;</code> i <code>&gt;</code>: Menor i major que.</li>
-                    <li><code>&lt;=</code> i <code>&gt;=</code>: Menor o igual i major o igual.</li>
-                    <li><code>&amp;&amp;</code>: AND lògic (totes han de ser certs).</li>
-                    <li><code>||</code>: OR lògic (almenys una certa).</li>
-                    <li><code>!</code>: NOT lògic (inverteix el resultat).</li>
+                    <li><code>%</code>: Retorna el <strong>residu</strong> d'una divisió entera[cite: 3]. Ex: <code>13 % 4</code> dóna com a resultat <code>1</code> (ja que 13 = 4 &times; 3 + 1)[cite: 3].</li>
+                    <li>Molt útil per acotar nombres en un rang (ex. en generadors de números aleatoris) o per determinar si un nombre és parell (<code>n % 2 == 0</code>).</li>
+                </ul>
+                <pre><code><span class="comment">// Operadors aritmètics abreujats</span>
+<span class="var">x</span> += 5;   <span class="comment">// Equivalent a: x = x + 5</span>[cite: 4]
+<span class="var">x</span> *= 2;   <span class="comment">// Equivalent a: x = x * 2</span>[cite: 4]
+
+<span class="comment">// Increment i decrement unitari</span>
+<span class="var">x</span>++;      <span class="comment">// Incrementa x en 1 (x = x + 1)</span>[cite: 4]
+<span class="var">x</span>--;      <span class="comment">// Decrementa x en 1 (x = x - 1)</span>[cite: 4]</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Expressions Booleanes i Lògiques</h3>
+                <p>En C, qualsevol valor <strong>diferent de zero s'interpreta com a vertader (<code>true</code>)</strong>, mentre que <strong>zero és fals (<code>false</code>)</strong>[cite: 6].</p>
+                <ul>
+                    <li><code>==</code>: Igualtat[cite: 11]. <span style="color: var(--warning);">Compte:</span> <code>=</code> és assignació, mentre que <code>==</code> és comparació[cite: 11].</li>
+                    <li><code>!=</code>: Diferent de (desigualtat)[cite: 11].</li>
+                    <li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>: Menor, major, menor o igual, major o igual[cite: 10].</li>
+                    <li><code>&amp;&amp;</code> (AND): Cert només si <strong>tots dos</strong> operands són certs[cite: 7].</li>
+                    <li><code>||</code> (OR): Cert si <strong>com a mínim un</strong> operand és cert[cite: 8].</li>
+                    <li><code>!</code> (NOT): Inverteix el valor lògic (de fals a cert i viceversa)[cite: 9].</li>
                 </ul>
             </div>
-            <div class="card">
-                <h3>Exemple d'elecció: <code>agree.c</code></h3>
-                <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
-#include <stdio.h>int main(void){char c = get_char("Hi estàs d'acord? (s/n): ");<span class="keyword">if</span> (<span class="var">c</span> == <span class="string">'s'</span> || <span class="var">c</span> == <span class="string">'S'</span>)
+        </div>
+    </section>
+
+    <hr>
+
+    <div class="section-badge">
+        <span>PART III · CONTROL DE FLUX</span>
+    </div>
+
+    <!-- SECCIÓ 6: Condicionals -->
+    <section id="condicionals">
+        <h2>6. Presa de Decisions (Condicionals)</h2>
+        <p>Permeten que el programa seguisca rutes diferents segons si una condició avalua com a certa o falsa[cite: 5].</p>
+
+        <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
 {
-    <span class="func">printf</span>(<span class="string">"D'acord.\n"</span>);
-}
-<span class="keyword">else if</span> (<span class="var">c</span> == <span class="string">'n'</span> || <span class="var">c</span> == <span class="string">'N'</span>)
-{
-    <span class="func">printf</span>(<span class="string">"No d'acord.\n"</span>);
-}
-<span class="keyword">else</span>
-{
-    <span class="func">printf</span>(<span class="string">"Opció invàlida.\n"</span>);
-}
-}    <!-- SECCIÓ 6: Bucles -->
+    <span class="keyword">char</span> <span class="var">c</span> = <span class="func">get_char</span>(<span class="string">"Hi estàs d'acord? (s/n): "</span>);
+
+    <span class="comment">// Comprovem si l'usuari ha introduït 's' o 'S'</span>
+    <span class="keyword">if</span> (<span class="var">c</span> == <span class="string">'s'</span> || <span class="var">c</span> == <span class="string">'S'</span>)
+    {
+        <span class="func">printf</span>(<span class="string">"D'acord.\n"</span>);
+    }
+    <span class="keyword">else if</span> (<span class="var">c</span> == <span class="string">'n'</span> || <span class="var">c</span> == <span class="string">'N'</span>)
+    {
+        <span class="func">printf</span>(<span class="string">"No d'acord.\n"</span>);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="func">printf</span>(<span class="string">"Opció invàlida.\n"</span>);
+    }
+}</code></pre>
+    </section>
+
+    <!-- SECCIÓ 7: Bucles -->
     <section id="bucles">
-        <h2>6. Repetició de Tasques (Bucles)</h2>
-        <p>Per evitar repetir codi manualment, emprem estructures iteratives:</p>
+        <h2>7. Repetició de Tasques (Bucles)</h2>
+        <p>Estructures iteratives per executar instruccions de manera repetida mentre es complisca una condició[cite: 5]:</p>
 
         <div class="grid-2">
             <div class="card">
                 <h3>Bucle <code>while</code></h3>
-                <p>Executa el bloc mentre la condició siga vertadera. Comprovem la condició <strong>abans</strong> d'entrar:</p>
+                <p>Executa el bloc mentre la condició siga certa. La condició es comprova <strong>abans</strong> d'entrar:</p>
                 <pre><code><span class="keyword">int</span> <span class="var">i</span> = 0;
-while (i < 3){printf("meow\n");i++;}            <div class="card">
-                <h3>Bucle <code>for</code></h3>
-                <p>Ideal quan coneixem d'antemà quantes vegades s'ha de repetir el cicle:</p>
-                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; 3; <span class="var">i</span>++)
-{printf("meow\n");}        <div class="card">
-            <h3>Bucle <code>do-while</code>: Validació d'Entrades</h3>
-            <p>Aquest bucle executa el codi intern <strong>almenys una vegada</strong> i només al final comprova la condició. És l'estructura estàndard per forçar a l'usuari a introduir dades correctes (filtratge d'errors):</p>
-            <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
-#include <stdio.h>int main(void){int n;// Obliguem a repetir mentre l'usuari pose valors menors a 1do{n = get_int("Introdueix un nombre positiu: ");}while (n < 1);<span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; <span class="var">n</span>; <span class="var">i</span>++)
+<span class="keyword">while</span> (<span class="var">i</span> &lt; 3)
 {
     <span class="func">printf</span>(<span class="string">"meow\n"</span>);
-}
-}    <!-- SECCIÓ 7: Bones Pràctiques i Eines -->
+    <span class="var">i</span>++;
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Bucle <code>for</code></h3>
+                <p>Estructura idònia quan sabem per endavant el nombre de repeticions:</p>
+                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; 3; <span class="var">i</span>++)
+{
+    <span class="func">printf</span>(<span class="string">"meow\n"</span>);
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Bucle <code>do-while</code>: Validació d'Entrades</h3>
+            <p>Executa el codi intern <strong>almenys una vegada</strong> i avalua la condició al final. És el patró estàndard a CS50 per filtrar entrades d'usuari i rebutjar dades no vàlides:</p>
+            <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
+{
+    <span class="keyword">int</span> <span class="var">n</span>;
+    <span class="comment">// Forcem la repetició mentre l'usuari introduïsca un valor menor a 1</span>
+    <span class="keyword">do</span>
+    {
+        <span class="var">n</span> = <span class="func">get_int</span>(<span class="string">"Introdueix un nombre positiu: "</span>);
+    }
+    <span class="keyword">while</span> (<span class="var">n</span> &lt; 1);
+
+    <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; <span class="var">n</span>; <span class="var">i</span>++)
+    {
+        <span class="func">printf</span>(<span class="string">"meow\n"</span>);
+    }
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- SECCIÓ 8: Bones Pràctiques i Eines -->
     <section id="disseny">
-        <h2>7. Bones Pràctiques, Disseny i Eines de Suport CS50</h2>
-        <p>A CS50 no només avaluem que el programa funcione (<em>Correctness</em>), sinó com està escrit (<em>Design</em> i <em>Style</em>):</p>
+        <h2>8. Bones Pràctiques, Disseny i Eines de Suport CS50</h2>
+        <p>A CS50 no només s'avalua el funcionament (<em>Correctness</em>), sinó el disseny i la claredat (<em>Style</em>):</p>
 
         <div class="grid-2">
             <div class="card">
-                <h3>🛠️ Ordres Pedagògiques de CS50</h3>
+                <h3>🛠️ Eines Pedagògiques</h3>
                 <ul>
-                    <li><code>style50 nom.c</code>: Revisa el codi font i ens indica si la sagnia, els espais o els comentaris compleixen amb l'estil formal.</li>
-                    <li><code>check50 cs50/problems/2026/x/hello</code>: Executa tests unitaris automàtics per comprovar la correcció del programa abans d'entregar.</li>
-                    <li><code>debug50 ./nom</code>: Obre el depurador gràfic amb punts de ruptura (<em>breakpoints</em>) per analitzar el canvi de variables pas a pas.</li>
+                    <li><code>style50 nom.c</code>: Avalua si la sagnia, espais i comentaris compleixen amb l'estil formal.</li>
+                    <li><code>check50 cs50/problems/2026/x/hello</code>: Executa bateries de proves automàtiques per comprovar la correcció abans de l'entrega.</li>
+                    <li><code>debug50 ./nom</code>: Inicia el depurador gràfic amb punts d'interrupció (<em>breakpoints</em>) per analitzar el canvi d'estat pas a pas.</li>
                 </ul>
             </div>
 
             <div class="card">
                 <h3>💡 Consells per a l'Alumnat</h3>
                 <ul>
-                    <li><strong>Indexació en zero:</strong> Recorda que en ciències de la computació els comptadors comencen habitualment des de <code>0</code>, no des d'<code>1</code>.</li>
-                    <li><strong>Evita els números màgics:</strong> Empra variables clares per definir límits o constants.</li>
-                    <li><strong>Abstracció:</strong> Si un tros de codi es repeteix més de dues vegades, converteix-lo en un bucle o en una funció pròpia.</li>
+                    <li><strong>Indexació en zero:</strong> En informàtica els comptadors comencen habitualment a <code>0</code>, no a <code>1</code>.</li>
+                    <li><strong>Evita números màgics:</strong> Empra variables descriptives o constants amb <code>const</code> per aclarir el significat dels límits.</li>
+                    <li><strong>Abstracció:</strong> Si un fragment de codi es repeteix més de dues vegades, encapsula'l dins d'un bucle o funció.</li>
                 </ul>
             </div>
         </div>
@@ -581,5 +733,8 @@ while (i < 3){printf("meow\n");i++;}            <div class="card">
     <footer>
         <p>Departament de Tecnologia i Informàtica · Adaptació dels continguts oberts de CS50x (Harvard University) per al curs del Prof. Vicent.</p>
     </footer>
-
 </main>
+
+</body>
+</html>
+

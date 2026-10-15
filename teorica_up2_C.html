@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS50x Setmana 1: Llenguatge C</title>
+    <title>Programació i Tractament de Dades 1 · UP2: El meu primer llenguatge - C</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -348,7 +348,7 @@
             <li><a href="#tipus-dades">Tipus de Dades</a></li>
             <li><a href="#operadors">Operadors</a></li>
             <li><a href="#condicionals">Condicionals</a></li>
-            <li><a href="#bucles">Bucles</a></li>
+            <li><a href="#funcions">Funcions</a></li>
             <li><a href="#disseny">Bones Pràctiques</a></li>
         </ul>
     </div>
@@ -357,16 +357,16 @@
 <main>
     <header class="course-header">
         <div class="breadcrumbs">
-            <a href="index.html">Cursos</a> / <a href="#">Programació</a> /
-            <span>CS50x Setmana 1: Llenguatge C</span>
+            <a href="index.html">Cursos</a> / <a href="#">Programació i Tractament de Dades 1</a> /
+            <span>UP2 - El meu primer llenguatge - C</span>
         </div>
         <div class="header-icon">💻</div>
-        <h1>Introducció a la Programació en C: De Scratch a la Consola</h1>
-        <p class="subtitle">Apunts complets de la Setmana 1 del curs CS50 d'Harvard. Transició visual a textual, entorn al núvol (cs50.dev), cicle de compilació, gestió d'entrades amb cs50.h, tipus de dades en memòria, operadors i estructures de control.</p>
+        <h1>UP2: El meu primer llenguatge - C</h1>
+        <p class="subtitle">Apunts complets de la Unitat de Programació 2 (UP2) de Programació i Tractament de Dades 1. Entorn de desenvolupament al núvol (cs50.dev), cicle de compilació, tipus de dades en memòria, entrades i eixides amb <code>stdio.h</code> i <code>cs50.h</code>, operadors, condicionals i disseny modular amb funcions.</p>
         <div class="tag-group">
-            <span class="tag">Informàtica Bàsica</span>
-            <span class="tag">Llenguatge C</span>
-            <span class="tag">CS50x / GNU Linux</span>
+            <span class="tag">Programació i Tractament de Dades 1</span>
+            <span class="tag">UP2 · Llenguatge C</span>
+            <span class="tag">GNU Linux / Consola</span>
         </div>
     </header>
 
@@ -378,8 +378,8 @@
 
     <!-- SECCIÓ 1: Entorn i Terminal -->
     <section id="entorn">
-        <h2>1. L'Entorn cs50.dev i la Consola Linux</h2>
-        <p>A diferència dels llenguatges visuals per blocs com Scratch, en C treballem directament amb la línia d'ordres (CLI). Per evitar discrepàncies de configuració entre sistemes operatius, utilitzem <strong>cs50.dev</strong>, un entorn basat en VS Code executat en un contenidor al núvol.</p>
+        <h2>1. L'Entorn al Núvol (cs50.dev) i la Consola Linux</h2>
+        <p>A diferència dels llenguatges visuals per blocs com Scratch, en C treballem directament amb codi textual i la línia d'ordres (CLI). Per evitar discrepàncies de configuració entre sistemes operatius, utilitzem <strong>cs50.dev</strong>, un entorn de treball basat en Visual Studio Code que s'executa en un contenidor Linux al núvol.</p>
 
         <div class="grid-2">
             <div class="card">
@@ -395,8 +395,8 @@
             </div>
 
             <div class="card">
-                <h3>☁️ Per què cs50.dev?</h3>
-                <p>Garanteix que cada estudiant dispose del mateix conjunt de ferramentes preconfigurades: compilador <code>clang</code>, automatització amb <code>make</code>, la biblioteca docent <code>cs50.h</code>, i les eines de verificació <code>check50</code> i <code>style50</code>.</p>
+                <h3>☁️ Avantatges de l'Entorn Preconfigurat</h3>
+                <p>Garanteix que tot l'alumnat dispose exactament de les mateixes ferramentes ja instal·lades: el compilador <code>clang</code>, l'automatització amb <code>make</code>, la llibreria docent <code>cs50.h</code> per facilitar la lectura de dades per teclat, i utilitats d'anàlisi com <code>debug50</code> i <code>style50</code>.</p>
             </div>
         </div>
     </section>
@@ -428,8 +428,8 @@
 
     <!-- SECCIÓ 3: Hello World -->
     <section id="hello-world">
-        <h2>3. El Primer Programa: "hello, world"</h2>
-        <p>Anatomia bàsica d'un programa en C:</p>
+        <h2>3. El Primer Programa: "hello, world" i Eixida per Pantalla</h2>
+        <p>Anatomia bàsica d'un programa en C i impressió de text per consola:</p>
 
         <pre><code><span class="comment">// Programa inicial tradicional en C</span>
 <span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
@@ -443,10 +443,10 @@
             <div class="card">
                 <h3>Anatomia del Codi</h3>
                 <ul>
-                    <li><code>#include &lt;stdio.h&gt;</code>: fitxer de capçalera (<em>header file</em>) que declara funcions estàndard com <code>printf</code>.</li>
-                    <li><code>int main(void)</code>: punt d'entrada del programa. La paraula clau <code>void</code> entre parèntesis indica que la funció no rep cap argument[cite: 19].</li>
-                    <li><code>\n</code>: salt de línia.</li>
-                    <li><code>;</code>: tanca cada instrucció; sense ell el compilador llança un error sintàctic.</li>
+                    <li><code>#include &lt;stdio.h&gt;</code>: fitxer de capçalera (<em>header file</em>) d'entrada/eixida estàndard que ens permet utilitzar funcions com <code>printf</code>.</li>
+                    <li><code>int main(void)</code>: punt d'entrada principal del programa. La paraula clau <code>void</code> entre parèntesis indica que la funció no rep cap argument inicial.</li>
+                    <li><code>\n</code>: seqüència d'escapament que produeix un salt de línia.</li>
+                    <li><code>;</code>: tanca cada instrucció; oblidar-lo genera un error sintàctic de compilació.</li>
                 </ul>
             </div>
             <div class="card">
@@ -464,13 +464,13 @@
     <hr>
 
     <div class="section-badge">
-        <span>PART II · GESTIÓ DE DADES I OPERADORS</span>
+        <span>PART II · TIPUS DE DADES, ENTRADES/EIXIDES I OPERADORS</span>
     </div>
 
     <!-- SECCIÓ 4: Tipus de Dades i Memòria -->
     <section id="tipus-dades">
-        <h2>4. Tipus de Dades, Memòria i Variables</h2>
-        <p>En llenguatges moderns com PHP o JavaScript les variables determinen el seu tipus dinàmicament[cite: 13]. En C, cal especificar de forma explícita el tipus de cada variable en crear-la per indicar al compilador quants bytes de memòria reservar[cite: 13, 14, 16, 17, 18, 24].</p>
+        <h2>4. Tipus de Dades, Variables i Entrades/Eixides</h2>
+        <p>A diferència d'altres llenguatges on les variables determinen el seu tipus de forma dinàmica, en C cal especificar explícitament el tipus de cada variable en declarar-la per indicar al compilador quants bytes de memòria ha de reservar i com interpretar-los.</p>
 
         <table>
             <thead>
@@ -478,64 +478,64 @@
                     <th>Tipus</th>
                     <th>Mida</th>
                     <th>Rang i Característiques</th>
-                    <th>Format <code>printf</code></th>
-                    <th>Funció <code>cs50.h</code></th>
+                    <th>Format <code>printf</code> (Eixida)</th>
+                    <th>Funció <code>cs50.h</code> (Entrada)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><code>int</code></td>
-                    <td>4 bytes (32 bits)[cite: 14]</td>
-                    <td>Sencers amb signe: de -2<sup>31</sup> a 2<sup>31</sup> - 1 (~ &plusmn;2.000 milions)[cite: 14]</td>
+                    <td>4 bytes (32 bits)</td>
+                    <td>Sencers amb signe: de -2<sup>31</sup> a 2<sup>31</sup> - 1 (~ &plusmn;2.000 milions)</td>
                     <td><code>%i</code> o <code>%d</code></td>
                     <td><code>get_int()</code></td>
                 </tr>
                 <tr>
                     <td><code>unsigned int</code></td>
-                    <td>4 bytes (32 bits)[cite: 14, 15]</td>
-                    <td>Qualificador que duplica el rang positiu eliminant els negatius: de 0 a 2<sup>32</sup> - 1 (~ 0 a 4.000 milions)[cite: 15]</td>
+                    <td>4 bytes (32 bits)</td>
+                    <td>Qualificador que duplica el rang positiu eliminant els negatius: de 0 a 2<sup>32</sup> - 1 (~ 0 a 4.000 milions)</td>
                     <td><code>%u</code></td>
                     <td>—</td>
                 </tr>
                 <tr>
                     <td><code>char</code></td>
-                    <td>1 byte (8 bits)[cite: 16]</td>
-                    <td>Caràcter únic entre cometes simples (-128 a 127). Mapeig ASCII: 'A'=65, 'a'=97, '0'=48[cite: 16]</td>
+                    <td>1 byte (8 bits)</td>
+                    <td>Caràcter únic entre cometes simples (-128 a 127). Mapeig ASCII: 'A'=65, 'a'=97, '0'=48</td>
                     <td><code>%c</code></td>
                     <td><code>get_char()</code></td>
                 </tr>
                 <tr>
                     <td><code>float</code></td>
-                    <td>4 bytes (32 bits)[cite: 17]</td>
-                    <td>Nombres reals en coma flotant (precisió limitada de 32 bits)[cite: 17]</td>
-                    <td><code>%f</code></td>
+                    <td>4 bytes (32 bits)</td>
+                    <td>Nombres reals en coma flotant (precisió simple de 32 bits)</td>
+                    <td><code>%f</code> (ex: <code>%.2f</code>)</td>
                     <td><code>get_float()</code></td>
                 </tr>
                 <tr>
                     <td><code>double</code></td>
-                    <td>8 bytes (64 bits)[cite: 18]</td>
-                    <td>Nombres reals amb doble precisió (per a càlculs científics o molts decimals)[cite: 18]</td>
+                    <td>8 bytes (64 bits)</td>
+                    <td>Nombres reals amb doble precisió (per a càlculs científics o molts decimals)</td>
                     <td><code>%lf</code></td>
                     <td><code>get_double()</code></td>
                 </tr>
                 <tr>
                     <td><code>bool</code></td>
-                    <td>1 byte[cite: 16, 21]</td>
-                    <td>Valors lògics: <code>true</code> o <code>false</code> (requereix <code>&lt;cs50.h&gt;</code>)[cite: 21]</td>
+                    <td>1 byte</td>
+                    <td>Valors lògics: <code>true</code> o <code>false</code> (disponible incloent <code>&lt;cs50.h&gt;</code> o <code>&lt;stdbool.h&gt;</code>)</td>
                     <td><code>%i</code></td>
                     <td>—</td>
                 </tr>
                 <tr>
                     <td><code>string</code></td>
                     <td>Variable</td>
-                    <td>Cadena de text entre cometes dobles (proporcionat per <code>&lt;cs50.h&gt;</code>)[cite: 22]</td>
+                    <td>Cadena de text entre cometes dobles (tipus proporcionat per <code>&lt;cs50.h&gt;</code>)</td>
                     <td><code>%s</code></td>
                     <td><code>get_string()</code></td>
                 </tr>
                 <tr>
                     <td><code>void</code></td>
                     <td>—</td>
-                    <td>Tipus que indica absència de valor/retorn. No es pot assignar a una variable[cite: 19].</td>
+                    <td>Tipus especial que indica absència de valor o de paràmetres. No es pot assignar a una variable.</td>
                     <td>—</td>
                     <td>—</td>
                 </tr>
@@ -545,75 +545,77 @@
         <div class="grid-2">
             <div class="card">
                 <h3>Declaració vs Inicialització</h3>
-                <p>Crear una variable requereix tipus i nom[cite: 24]. Si li assignem valor d'immediat, s'anomena <strong>inicialització</strong>[cite: 25]:</p>
+                <p>Crear una variable requereix indicar el seu tipus i el seu nom. Si li assignem un valor en el mateix moment de crear-la, s'anomena <strong>inicialització</strong>:</p>
                 <pre><code><span class="comment">// 1. Declaració i assignació en línies separades</span>
-<span class="keyword">int</span> <span class="var">number</span>;         <span class="comment">// Declaració</span>[cite: 24, 25]
-<span class="var">number</span> = 17;        <span class="comment">// Assignació</span>[cite: 25]
+<span class="keyword">int</span> <span class="var">number</span>;          <span class="comment">// Declaració</span>
+<span class="var">number</span> = 17;         <span class="comment">// Assignació</span>
 
 <span class="comment">// 2. Inicialització directa</span>
-<span class="keyword">int</span> <span class="var">edat</span> = 20;      <span class="comment">// Inicialització</span>[cite: 25]
-<span class="keyword">char</span> <span class="var">lletra</span> = <span class="string">'A'</span>;   <span class="comment">// Mapeig ASCII 65</span>[cite: 16, 25]
+<span class="keyword">int</span> <span class="var">edat</span> = 20;      <span class="comment">// Inicialització</span>
+<span class="keyword">char</span> <span class="var">lletra</span> = <span class="string">'A'</span>;   <span class="comment">// Mapeig ASCII 65</span>
 
 <span class="comment">// Declaració múltiple del mateix tipus:</span>
-<span class="keyword">int</span> <span class="var">ample</span>, <span class="var">alt</span>;     <span class="comment">// Vàlid en C</span>[cite: 24]</code></pre>
+<span class="keyword">int</span> <span class="var">ample</span>, <span class="var">alt</span>;     <span class="comment">// Vàlid en C</span></code></pre>
             </div>
 
             <div class="card">
-                <h3>Bones Pràctiques i Advertències</h3>
+                <h3>Bones Pràctiques amb Variables</h3>
                 <ul>
-                    <li><strong>No redeclarar:</strong> Un cop declarada una variable (ex: <code>int x;</code>), utilitza-la directament (<code>x = 10;</code>)[cite: 25]. Tornar a escriure <code>int x = 10;</code> pot produir comportaments imprevistos[cite: 25].</li>
-                    <li><strong>Declaració sota demanda:</strong> És millor declarar les variables just quan es necessiten i no necessàriament totes al principi del fitxer[cite: 24].</li>
-                    <li><strong>El tipus <code>void</code>:</strong> S'empra per a funcions que no retornen cap dada (com <code>printf</code>) o que no prenen paràmetres (<code>int main(void)</code>)[cite: 19].</li>
+                    <li><strong>No redeclarar:</strong> Un cop declarada una variable (ex: <code>int x;</code>), utilitza-la directament pel seu nom (<code>x = 10;</code>). Tornar a escriure <code>int x = 10;</code> en el mateix bloc donarà error de compilació.</li>
+                    <li><strong>Format de decimals en <code>printf</code>:</strong> Pots limitar els decimals mostrats escrivint <code>%.2f</code> per mostrar exactament 2 decimals.</li>
+                    <li><strong>Correspondència de marcadors:</strong> Cada marcador (<code>%i</code>, <code>%f</code>, <code>%s</code>...) dins de <code>printf</code> ha de coincidir en ordre i en tipus amb les variables passades després de la coma.</li>
                 </ul>
             </div>
         </div>
 
-        <h3>Exemple interactiu: <code>hello.c</code> amb la llibreria <code>cs50.h</code></h3>
+        <h3>Exemple d'Entrada i Eixida amb <code>cs50.h</code> i <code>stdio.h</code></h3>
         <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
 <span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
 
 <span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
 {
-    <span class="comment">// Demanem el nom a l'usuari i el guardem en una variable de tipus string</span>
-    <span class="keyword">string</span> <span class="var">name</span> = <span class="func">get_string</span>(<span class="string">"Com et dius? "</span>);
+    <span class="comment">// Lectura de diferents tipus de dades per teclat</span>
+    <span class="keyword">string</span> <span class="var">nom</span> = <span class="func">get_string</span>(<span class="string">"Com et dius? "</span>);
+    <span class="keyword">int</span> <span class="var">edat</span> = <span class="func">get_int</span>(<span class="string">"Quants anys tens? "</span>);
+    <span class="keyword">float</span> <span class="var">nota</span> = <span class="func">get_float</span>(<span class="string">"Quina nota esperes treure? "</span>);
 
-    <span class="comment">// Substituïm %s pel contingut de la variable name</span>
-    <span class="func">printf</span>(<span class="string">"Hola, %s!\n"</span>, <span class="var">name</span>);
+    <span class="comment">// Impressió combinant diversos marcadors de format</span>
+    <span class="func">printf</span>(<span class="string">"Hola, %s! Tens %i anys i esperes un %.2f en l'examen.\n"</span>, <span class="var">nom</span>, <span class="var">edat</span>, <span class="var">nota</span>);
 }</code></pre>
     </section>
 
     <!-- SECCIÓ 5: Operadors -->
     <section id="operadors">
         <h2>5. Operadors Aritmètics, Relacionals i Lògics</h2>
-        <p>C disposa d'un conjunt d'operadors per transformar valors i avaluar condicions[cite: 2].</p>
+        <p>C disposa d'un conjunt d'operadors per transformar valors numèrics i avaluar condicions lògiques.</p>
 
         <div class="grid-2">
             <div class="card">
                 <h3>Aritmètica i l'Operador Mòdul (<code>%</code>)</h3>
-                <p>A més de la suma (<code>+</code>), resta (<code>-</code>), multiplicació (<code>*</code>) i divisió (<code>/</code>), disposem del mòdul[cite: 3]:</p>
+                <p>A més de la suma (<code>+</code>), resta (<code>-</code>), multiplicació (<code>*</code>) i divisió (<code>/</code>), disposem del mòdul:</p>
                 <ul>
-                    <li><code>%</code>: Retorna el <strong>residu</strong> d'una divisió entera[cite: 3]. Ex: <code>13 % 4</code> dóna com a resultat <code>1</code> (ja que 13 = 4 &times; 3 + 1)[cite: 3].</li>
-                    <li>Molt útil per acotar nombres en un rang (ex. en generadors de números aleatoris) o per determinar si un nombre és parell (<code>n % 2 == 0</code>).</li>
+                    <li><code>%</code>: Retorna el <strong>residu</strong> d'una divisió entera. Ex: <code>13 % 4</code> dóna com a resultat <code>1</code> (ja que 13 = 4 &times; 3 + 1).</li>
+                    <li><strong>Divisió entera:</strong> En C, si divideixes dos enters (ex: <code>5 / 2</code>), el resultat es trunca a enter (<code>2</code>). Per conservar els decimals cal convertir un dels operands a <code>float</code>: <code>(float) 5 / 2</code>.</li>
                 </ul>
                 <pre><code><span class="comment">// Operadors aritmètics abreujats</span>
-<span class="var">x</span> += 5;   <span class="comment">// Equivalent a: x = x + 5</span>[cite: 4]
-<span class="var">x</span> *= 2;   <span class="comment">// Equivalent a: x = x * 2</span>[cite: 4]
+<span class="var">x</span> += 5;   <span class="comment">// Equivalent a: x = x + 5</span>
+<span class="var">x</span> *= 2;   <span class="comment">// Equivalent a: x = x * 2</span>
 
 <span class="comment">// Increment i decrement unitari</span>
-<span class="var">x</span>++;      <span class="comment">// Incrementa x en 1 (x = x + 1)</span>[cite: 4]
-<span class="var">x</span>--;      <span class="comment">// Decrementa x en 1 (x = x - 1)</span>[cite: 4]</code></pre>
+<span class="var">x</span>++;      <span class="comment">// Incrementa x en 1 (x = x + 1)</span>
+<span class="var">x</span>--;      <span class="comment">// Decrementa x en 1 (x = x - 1)</span></code></pre>
             </div>
 
             <div class="card">
                 <h3>Expressions Booleanes i Lògiques</h3>
-                <p>En C, qualsevol valor <strong>diferent de zero s'interpreta com a vertader (<code>true</code>)</strong>, mentre que <strong>zero és fals (<code>false</code>)</strong>[cite: 6].</p>
+                <p>En C, qualsevol valor <strong>diferent de zero s'interpreta com a vertader (<code>true</code>)</strong>, mentre que <strong>zero és fals (<code>false</code>)</strong>.</p>
                 <ul>
-                    <li><code>==</code>: Igualtat[cite: 11]. <span style="color: var(--warning);">Compte:</span> <code>=</code> és assignació, mentre que <code>==</code> és comparació[cite: 11].</li>
-                    <li><code>!=</code>: Diferent de (desigualtat)[cite: 11].</li>
-                    <li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>: Menor, major, menor o igual, major o igual[cite: 10].</li>
-                    <li><code>&amp;&amp;</code> (AND): Cert només si <strong>tots dos</strong> operands són certs[cite: 7].</li>
-                    <li><code>||</code> (OR): Cert si <strong>com a mínim un</strong> operand és cert[cite: 8].</li>
-                    <li><code>!</code> (NOT): Inverteix el valor lògic (de fals a cert i viceversa)[cite: 9].</li>
+                    <li><code>==</code>: Igualtat. <span style="color: var(--warning);">Compte:</span> <code>=</code> és assignació, mentre que <code>==</code> és comparació.</li>
+                    <li><code>!=</code>: Diferent de (desigualtat).</li>
+                    <li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>: Menor, major, menor o igual, major o igual.</li>
+                    <li><code>&amp;&amp;</code> (AND): Cert només si <strong>tots dos</strong> operands són certs.</li>
+                    <li><code>||</code> (OR): Cert si <strong>com a mínim un</strong> operand és cert.</li>
+                    <li><code>!</code> (NOT): Inverteix el valor lògic (de fals a cert i viceversa).</li>
                 </ul>
             </div>
         </div>
@@ -622,13 +624,13 @@
     <hr>
 
     <div class="section-badge">
-        <span>PART III · CONTROL DE FLUX</span>
+        <span>PART III · CONTROL DE FLUX I MODULARITAT</span>
     </div>
 
     <!-- SECCIÓ 6: Condicionals -->
     <section id="condicionals">
         <h2>6. Presa de Decisions (Condicionals)</h2>
-        <p>Permeten que el programa seguisca rutes diferents segons si una condició avalua com a certa o falsa[cite: 5].</p>
+        <p>Permeten que el programa seguisca rutes d'execució diferents segons si una condició booleana s'avalua com a certa o falsa.</p>
 
         <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
 <span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
@@ -653,87 +655,163 @@
 }</code></pre>
     </section>
 
-    <!-- SECCIÓ 7: Bucles -->
-    <section id="bucles">
-        <h2>7. Repetició de Tasques (Bucles)</h2>
-        <p>Estructures iteratives per executar instruccions de manera repetida mentre es complisca una condició[cite: 5]:</p>
+    <!-- SECCIÓ 7: Funcions -->
+    <section id="funcions">
+        <h2>7. Disseny Modular: Funcions en C</h2>
+        <p>Una <strong>funció</strong> és un bloc de codi independent dissenyat per realitzar una tasca concreta. Les funcions ens permeten dividir un problema complex en parts més menudes, evitar repetir codi i fer que el programa principal (<code>main</code>) siga molt més fàcil de llegir i mantenir.</p>
 
-        <div class="grid-2">
-            <div class="card">
-                <h3>Bucle <code>while</code></h3>
-                <p>Executa el bloc mentre la condició siga certa. La condició es comprova <strong>abans</strong> d'entrar:</p>
-                <pre><code><span class="keyword">int</span> <span class="var">i</span> = 0;
-<span class="keyword">while</span> (<span class="var">i</span> &lt; 3)
-{
-    <span class="func">printf</span>(<span class="string">"meow\n"</span>);
-    <span class="var">i</span>++;
-}</code></pre>
-            </div>
-
-            <div class="card">
-                <h3>Bucle <code>for</code></h3>
-                <p>Estructura idònia quan sabem per endavant el nombre de repeticions:</p>
-                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; 3; <span class="var">i</span>++)
-{
-    <span class="func">printf</span>(<span class="string">"meow\n"</span>);
-}</code></pre>
-            </div>
+        <div class="callout">
+            <strong>Estructura general d'una funció:</strong><br>
+            <code>tipus_retorn nom_funcio(tipus_param1 nom1, tipus_param2 nom2)</code><br>
+            <ul>
+                <li><strong>Tipus de retorn:</strong> El tipus de dada del resultat que la funció retorna a qui l'ha cridada (<code>int</code>, <code>float</code>, <code>char</code>...) o <code>void</code> si no retorna cap valor.</li>
+                <li><strong>Paràmetres d'entrada:</strong> Les variables que rep la funció entre parèntesis per poder treballar (o <code>void</code> si no necessita rebre cap dada).</li>
+            </ul>
         </div>
 
-        <div class="card">
-            <h3>Bucle <code>do-while</code>: Validació d'Entrades</h3>
-            <p>Executa el codi intern <strong>almenys una vegada</strong> i avalua la condició al final. És el patró estàndard a CS50 per filtrar entrades d'usuari i rebutjar dades no vàlides:</p>
-            <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
-<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+        <div class="callout warning">
+            <strong>Important: El Prototip de la Funció</strong><br>
+            El compilador de C llegeix el fitxer de dalt a baix. Si definim les nostres funcions a sota de <code>main</code>, hem d'escriure el seu <strong>prototip</strong> (la primera línia de la funció acabada en punt i coma <code>;</code>) a dalt del tot, abans de <code>int main(void)</code>, perquè el compilador sàpia que existeixen.
+        </div>
+
+        <h3>Nivell 1: Funcions sense entrades ni retorn — <code>void funcio(void)</code></h3>
+        <p>Són funcions que no reben cap dada d'entrada (<code>void</code> entre parèntesis) ni retornen cap resultat numèric o de text (<code>void</code> al principi). S'utilitzen habitualment per mostrar missatges fixos, capçaleres o menús per pantalla.</p>
+
+        <pre><code><span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="comment">// 1. Prototip de la funció (avisa al compilador)</span>
+<span class="keyword">void</span> <span class="func">mostrar_benvinguda</span>(<span class="keyword">void</span>);
 
 <span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
 {
-    <span class="keyword">int</span> <span class="var">n</span>;
-    <span class="comment">// Forcem la repetició mentre l'usuari introduïsca un valor menor a 1</span>
-    <span class="keyword">do</span>
-    {
-        <span class="var">n</span> = <span class="func">get_int</span>(<span class="string">"Introdueix un nombre positiu: "</span>);
-    }
-    <span class="keyword">while</span> (<span class="var">n</span> &lt; 1);
+    <span class="comment">// 2. Crida a la funció des de main (sense paràmetres)</span>
+    <span class="func">mostrar_benvinguda</span>();
+    <span class="func">printf</span>(<span class="string">"Iniciant el programa principal...\n"</span>);
+}
 
-    <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = 0; <span class="var">i</span> &lt; <span class="var">n</span>; <span class="var">i</span>++)
-    {
-        <span class="func">printf</span>(<span class="string">"meow\n"</span>);
-    }
+<span class="comment">// 3. Definició de la funció</span>
+<span class="keyword">void</span> <span class="func">mostrar_benvinguda</span>(<span class="keyword">void</span>)
+{
+    <span class="func">printf</span>(<span class="string">"====================================\n"</span>);
+    <span class="func">printf</span>(<span class="string">"  PROGRAMACIÓ I TRACTAMENT DADES 1  \n"</span>);
+    <span class="func">printf</span>(<span class="string">"====================================\n"</span>);
 }</code></pre>
+
+        <h3>Nivell 2: Funcions amb paràmetres d'entrada i sense retorn — <code>void funcio(int a, int b)</code></h3>
+        <p>Aquestes funcions tampoc retornen cap valor a <code>main</code> (comencen per <code>void</code>), però <strong>reben dades per paràmetre</strong> entre els parèntesis per poder operar amb elles i mostrar el resultat directament des de dins de la funció.</p>
+
+        <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="comment">// Prototip: rep dos enters, però no retorna res (void)</span>
+<span class="keyword">void</span> <span class="func">imprimir_suma</span>(<span class="keyword">int</span> <span class="var">a</span>, <span class="keyword">int</span> <span class="var">b</span>);
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
+{
+    <span class="keyword">int</span> <span class="var">num1</span> = <span class="func">get_int</span>(<span class="string">"Introdueix el primer nombre: "</span>);
+    <span class="keyword">int</span> <span class="var">num2</span> = <span class="func">get_int</span>(<span class="string">"Introdueix el segon nombre: "</span>);
+
+    <span class="comment">// Passem els valors de num1 i num2 a la funció</span>
+    <span class="func">imprimir_suma</span>(<span class="var">num1</span>, <span class="var">num2</span>);
+}
+
+<span class="comment">// Definició: 'a' rep el valor de 'num1' i 'b' rep el valor de 'num2'</span>
+<span class="keyword">void</span> <span class="func">imprimir_suma</span>(<span class="keyword">int</span> <span class="var">a</span>, <span class="keyword">int</span> <span class="var">b</span>)
+{
+    <span class="keyword">int</span> <span class="var">resultat</span> = <span class="var">a</span> + <span class="var">b</span>;
+    <span class="func">printf</span>(<span class="string">"La suma de %i i %i és: %i\n"</span>, <span class="var">a</span>, <span class="var">b</span>, <span class="var">resultat</span>);
+}</code></pre>
+
+        <h3>Nivell 3: Funcions amb entrades i valor de retorn — <code>tipus funcio(paràmetres)</code></h3>
+        <p>És el format més complet i versàtil. La funció rep dades d'entrada (d'un o diversos tipus), fa un càlcul i <strong>retorna el resultat</strong> mitjançant la paraula clau <code>return</code>. Al <code>main</code> podem guardar aquest valor retornat dins d'una variable per seguir treballant amb ell.</p>
+
+        <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="comment">// Prototips amb diferents tipus de retorn i paràmetres</span>
+<span class="keyword">int</span> <span class="func">calcular_area</span>(<span class="keyword">int</span> <span class="var">base</span>, <span class="keyword">int</span> <span class="var">altura</span>);
+<span class="keyword">float</span> <span class="func">calcular_mitjana</span>(<span class="keyword">float</span> <span class="var">nota1</span>, <span class="keyword">float</span> <span class="var">nota2</span>);
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
+{
+    <span class="comment">// Exemple 1: Funció que retorna un int</span>
+    <span class="keyword">int</span> <span class="var">b</span> = <span class="func">get_int</span>(<span class="string">"Base del rectangle: "</span>);
+    <span class="keyword">int</span> <span class="var">h</span> = <span class="func">get_int</span>(<span class="string">"Altura del rectangle: "</span>);
+    
+    <span class="keyword">int</span> <span class="var">area</span> = <span class="func">calcular_area</span>(<span class="var">b</span>, <span class="var">h</span>);
+    <span class="func">printf</span>(<span class="string">"L'àrea del rectangle és: %i\n\n"</span>, <span class="var">area</span>);
+
+    <span class="comment">// Exemple 2: Funció que retorna un float</span>
+    <span class="keyword">float</span> <span class="var">n1</span> = <span class="func">get_float</span>(<span class="string">"Nota del primer examen: "</span>);
+    <span class="keyword">float</span> <span class="var">n2</span> = <span class="func">get_float</span>(<span class="string">"Nota del segon examen: "</span>);
+    
+    <span class="keyword">float</span> <span class="var">final</span> = <span class="func">calcular_mitjana</span>(<span class="var">n1</span>, <span class="var">n2</span>);
+    <span class="func">printf</span>(<span class="string">"La nota mitjana és: %.2f\n"</span>, <span class="var">final</span>);
+}
+
+<span class="comment">// Rep dos int i retorna un int</span>
+<span class="keyword">int</span> <span class="func">calcular_area</span>(<span class="keyword">int</span> <span class="var">base</span>, <span class="keyword">int</span> <span class="var">altura</span>)
+{
+    <span class="keyword">int</span> <span class="var"> resultat</span> = <span class="var">base</span> * <span class="var">altura</span>;
+    <span class="keyword">return</span> <span class="var">resultat</span>;
+}
+
+<span class="comment">// Rep dos float i retorna un float</span>
+<span class="keyword">float</span> <span class="func">calcular_mitjana</span>(<span class="keyword">float</span> <span class="var">nota1</span>, <span class="keyword">float</span> <span class="var">nota2</span>)
+{
+    <span class="keyword">return</span> (<span class="var">nota1</span> + <span class="var">nota2</span>) / 2.0;
+}</code></pre>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>Resum dels 3 Tipus de Funcions</h3>
+                <ul>
+                    <li><code>void f(void)</code>: No rep dades ni retorna res. Fa una acció tancada.</li>
+                    <li><code>void f(int a, float b)</code>: Rep dades per treballar, però no retorna cap valor amb <code>return</code>.</li>
+                    <li><code>int f(int a, int b)</code>: Rep dades, les processa i retorna un resultat del tipus indicat amb <code>return</code>.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Àmbit de les Variables (<em>Scope</em>)</h3>
+                <p>Les variables creades dins d'una funció (inclosos els seus paràmetres) són <strong>variables locals</strong>: només existeixen dins d'aquella funció. Per comunicar dades entre <code>main</code> i una funció, cal passar-les com a <strong>paràmetres</strong> i recollir el resultat amb <strong><code>return</code></strong>.</p>
+            </div>
         </div>
     </section>
 
     <!-- SECCIÓ 8: Bones Pràctiques i Eines -->
     <section id="disseny">
-        <h2>8. Bones Pràctiques, Disseny i Eines de Suport CS50</h2>
-        <p>A CS50 no només s'avalua el funcionament (<em>Correctness</em>), sinó el disseny i la claredat (<em>Style</em>):</p>
+        <h2>8. Bones Pràctiques, Disseny i Preparació per a l'Avaluació (UP2)</h2>
+        <p>En programació no només s'avalua que el programa compile i funcione (<em>Correcció</em>), sinó també l'ordre, l'estructura modular i la claredat del codi (<em>Estil i Disseny</em>):</p>
 
         <div class="grid-2">
             <div class="card">
-                <h3>🛠️ Eines Pedagògiques</h3>
+                <h3>🛠️ Eines de Suport en l'Entorn</h3>
                 <ul>
-                    <li><code>style50 nom.c</code>: Avalua si la sagnia, espais i comentaris compleixen amb l'estil formal.</li>
-                    <li><code>check50 cs50/problems/2026/x/hello</code>: Executa bateries de proves automàtiques per comprovar la correcció abans de l'entrega.</li>
-                    <li><code>debug50 ./nom</code>: Inicia el depurador gràfic amb punts d'interrupció (<em>breakpoints</em>) per analitzar el canvi d'estat pas a pas.</li>
+                    <li><code>style50 nom.c</code>: Avalua si la sagnia (indentació), els espais i els comentaris compleixen amb l'estil formal del curs.</li>
+                    <li><code>debug50 ./nom</code>: Inicia el depurador gràfic pas a pas emprant punts d'interrupció (<em>breakpoints</em>) per comprovar quin valor prenen les variables en cada línia.</li>
+                    <li><code>make nom</code>: Compila el programa i mostra avisos d'error (<em>warnings</em> o <em>errors</em>) indicant el número de línia exacte.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h3>💡 Consells per a l'Alumnat</h3>
+                <h3>🎯 Punts Clau per a l'Examen de la UP2</h3>
                 <ul>
-                    <li><strong>Indexació en zero:</strong> En informàtica els comptadors comencen habitualment a <code>0</code>, no a <code>1</code>.</li>
-                    <li><strong>Evita números màgics:</strong> Empra variables descriptives o constants amb <code>const</code> per aclarir el significat dels límits.</li>
-                    <li><strong>Abstracció:</strong> Si un fragment de codi es repeteix més de dues vegades, encapsula'l dins d'un bucle o funció.</li>
+                    <li><strong>Tipus de dades:</strong> Tria sempre el tipus adequat (<code>int</code> per a enters, <code>float</code>/<code>double</code> per a decimals, <code>char</code> amb cometes simples <code>'a'</code>, <code>string</code> amb dobles <code>"hola"</code>).</li>
+                    <li><strong>Entrades i Eixides:</strong> Associa cada <code>get_...()</code> amb el seu tipus de variable i cada variable amb el seu marcador en <code>printf</code> (<code>%i</code>, <code>%f</code>, <code>%c</code>, <code>%s</code>).</li>
+                    <li><strong>Funcions:</strong> Recorda posar sempre el <strong>prototip</strong> abans de <code>main</code> acabat en <code>;</code>, especificar el tipus de cada paràmetre i utilitzar <code>return</code> quan la funció no siga <code>void</code>.</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>Departament de Tecnologia i Informàtica · Adaptació dels continguts oberts de CS50x (Harvard University) per al curs del Prof. Vicent.</p>
+        <p>Departament de Tecnologia i Informàtica · Programació i Tractament de Dades 1 (UP2: El meu primer llenguatge - C)</p>
     </footer>
 </main>
+
+</body>
+</html>
 
 </body>
 </html>

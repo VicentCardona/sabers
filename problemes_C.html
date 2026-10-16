@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activitats Pràctiques UP2 · Programació en C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0b1120;
+            --bg-card: #151f32;
+            --code-bg: #030712;
+            --border: #1e293b;
+            --text-main: #cbd5e1;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --primary-rgb: 56, 189, 248;
+            --accent: #a855f7;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #f43f5e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding-bottom: 5rem;
+        }
+
+        nav {
+            background-color: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1.5rem;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        nav .brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        header.course-header {
+            margin-bottom: 3rem;
+        }
+
+        .breadcrumbs {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .header-icon {
+            font-size: 2.75rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 2.35rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .tag.easy {
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .tag.hard {
+            color: var(--warning);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border);
+            margin: 2.5rem 0;
+        }
+
+        .section-badge {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 5rem;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #f1f5f9;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 0.45rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-2px);
+        }
+
+        .terminal-box {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            position: relative;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 0.85rem;
+        }
+
+        .terminal-btn {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .btn-close { background-color: #ef4444; }
+        .btn-min { background-color: #f59e0b; }
+        .btn-max { background-color: #10b981; }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.55;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .comment { color: #64748b; font-style: italic; }
+        .keyword { color: #f43f5e; font-weight: 600; }
+        .string { color: #34d399; }
+        .func { color: #38bdf8; }
+        .var { color: #facc15; }
+        .input-user { color: #facc15; font-weight: 600; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+
+        th {
+            background-color: #162032;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .callout {
+            border-left: 4px solid var(--primary);
+            background: rgba(56, 189, 248, 0.08);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout.warning {
+            border-left-color: var(--warning);
+            background: rgba(245, 158, 11, 0.08);
+        }
+
+        .callout.success {
+            border-left-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .callout strong {
+            color: #fff;
+        }
+
+        footer {
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="brand">👨‍🏫 Prof. Vicent</a>
+        <ul>
+            <li><a href="index.html">← Tornar als Apunts UP2</a></li>
+            <li><a href="#instruccions">Com Entregar</a></li>
+            <li><a href="#activitat1">Activitat 1: notes.c (Nivell 1)</a></li>
+            <li><a href="#activitat2">Activitat 2: botiga.c (Nivell 2)</a></li>
+            <li><a href="#rubrica">Criteris d'Avaluació</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <header class="course-header">
+        <div class="breadcrumbs">
+            <a href="index.html">Cursos</a> / <a href="#">Programació i Tractament de Dades 1</a> /
+            <span>UP2 · Activitats Avaluables</span>
+        </div>
+        <div class="header-icon">🚀</div>
+        <h1>Activitats Pràctiques UP2: Tipus de Dades, E/S i Funcions en C</h1>
+        <p class="subtitle">Enunciats detallats de les dues pràctiques avaluables de la Unitat de Programació 2. Resol els reptes en <code>cs50.dev</code> aplicant l'estructura modular amb funcions i lliura els fitxers <code>.c</code> a Google Classroom.</p>
+        <div class="tag-group">
+            <span class="tag">UP2 · Llenguatge C</span>
+            <span class="tag easy">Activitat 1: Nivell Inicial (notes.c)</span>
+            <span class="tag hard">Activitat 2: Nivell Avançat (botiga.c)</span>
+        </div>
+    </header>
+
+    <hr>
+
+    <!-- INSTRUCCIONS D'ENTREGA -->
+    <section id="instruccions">
+        <h2>📥 Instruccions Generals i Com Entregar des del Chromebook</h2>
+        <p>Totes les activitats s'han de programar i provar dins del teu espai de treball a <strong>cs50.dev</strong>. És imprescindible que els fitxers s'anomenen <strong>exactament</strong> com s'indica a cada enunciat perquè el sistema de correcció automàtica els reconega.</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>1. Creació i Compilació a cs50.dev</h3>
+                <ol>
+                    <li>Obre la terminal de <code>cs50.dev</code> i escriu <code>code nom_fitxer.c</code> per crear l'arxiu.</li>
+                    <li>Escriu el teu codi incloent les llibreries <code>&lt;cs50.h&gt;</code> i <code>&lt;stdio.h&gt;</code>.</li>
+                    <li>Compila sempre amb <code>make nom_fitxer</code> (sense el <code>.c</code>) i comprova que no hi ha cap error.</li>
+                    <li>Prova el programa executant <code>./nom_fitxer</code> amb diferents valors.</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>2. Descàrrega i Entrega a Classroom</h3>
+                <ol>
+                    <li>A la barra lateral esquerra de <code>cs50.dev</code> (Explorer), busca el teu fitxer <code>.c</code> (<strong>no</strong> l'executable sense extensió!).</li>
+                    <li>Fes <strong>clic dret sobre el fitxer <code>.c</code> &rarr; Download</strong> per descarregar-lo al teu Chromebook.</li>
+                    <li>Entra a la tasca corresponent de <strong>Google Classroom</strong>, adjunta el fitxer <code>.c</code> i prem <strong>Entregar</strong>.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <div class="section-badge">
+        <span>REPTE 1 · NIVELL INICIAL (GUIAT)</span>
+    </div>
+
+    <!-- ACTIVITAT 1: notes.c -->
+    <section id="activitat1">
+        <h2>🟢 Activitat 1: Butlletí de Qualificacions (<code>notes.c</code>)</h2>
+        <p>En aquesta primera activitat crearàs un programa anomenat <code>notes.c</code> que demane les dades d'un alumne/a i les notes de dos exàmens, calcule la seua nota mitjana i mostre per pantalla si ha aprovat o suspès la unitat.</p>
+
+        <div class="callout success">
+            <strong>Objectiu de l'activitat:</strong> Practicar els tipus <code>string</code> i <code>float</code>, la lectura amb <code>get_string()</code> i <code>get_float()</code>, el format de decimals <code>%.2f</code> i la creació dels <strong>3 tipus de funcions</strong> vistes a classe.
+        </div>
+
+        <h3>Especificacions i Funcions Obligatòries</h3>
+        <p>El teu programa ha d'incloure i utilitzar obligatòriament les <strong>3 funcions següents</strong> (recorda declarar els seus prototips abans de <code>main</code>):</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Prototip de la Funció</th>
+                    <th>Tipus de Funció</th>
+                    <th>Què ha de fer?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>void mostrar_capcalera(void);</code></td>
+                    <td>Sense entrades ni retorn</td>
+                    <td>Imprimeix per pantalla un títol o bàner decoratiu per al butlletí de notes.</td>
+                </tr>
+                <tr>
+                    <td><code>float calcular_mitjana(float n1, float n2);</code></td>
+                    <td>Amb entrades i retorn (<code>return</code>)</td>
+                    <td>Rep les dues notes amb decimals, calcula la mitjana aritmètica <code>(n1 + n2) / 2.0</code> i retorna el resultat.</td>
+                </tr>
+                <tr>
+                    <td><code>void mostrar_resultat(string nom, float mitjana);</code></td>
+                    <td>Amb entrades i sense retorn</td>
+                    <td>Mostra el nom de l'alumne i la seua mitjana amb <strong>2 decimals</strong> (<code>%.2f</code>). Si la mitjana és major o igual a <code>5.0</code>, imprimeix <code>APROVAT</code>; en cas contrari, imprimeix <code>SUSPES</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Plantilla d'Estructura Recomanada</h3>
+        <pre><code><span class="keyword">#include</span> <span class="string">&lt;cs50.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="comment">// 1. Prototips de les funcions</span>
+<span class="keyword">void</span> <span class="func">mostrar_capcalera</span>(<span class="keyword">void</span>);
+<span class="keyword">float</span> <span class="func">calcular_mitjana</span>(<span class="keyword">float</span> <span class="var">n1</span>, <span class="keyword">float</span> <span class="var">n2</span>);
+<span class="keyword">void</span> <span class="func">mostrar_resultat</span>(<span class="keyword">string</span> <span class="var">nom</span>, <span class="keyword">float</span> <span class="var">mitjana</span>);
+
+<span class="keyword">int</span> <span class="func">main</span>(<span class="keyword">void</span>)
+{
+    <span class="comment">// Crida a la funció de capçalera</span>
+    <span class="func">mostrar_capcalera</span>();
+
+    <span class="comment">// Demanar el nom i les dues notes a l'usuari</span>
+    <span class="comment">// TODO: Usa get_string i get_float</span>
+
+    <span class="comment">// Calcular la mitjana cridant a calcular_mitjana()</span>
+    <span class="comment">// TODO: Guarda el resultat en una variable float</span>
+
+    <span class="comment">// Mostrar el resultat final cridant a mostrar_resultat()</span>
+    <span class="comment">// TODO</span>
+}
+
+<span class="comment">// 2. Definició de les 3 funcions a sota de main...</span></code></pre>
+
+        <h3>Exemples d'Execució Esperada</h3>
+        <div class="grid-2">
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <span class="terminal-btn btn-close"></span>
+                    <span class="terminal-btn btn-min"></span>
+                    <span class="terminal-btn btn-max"></span>
+                </div>
+                $ ./notes<br>
+                === SISTEMA D'AVALUACIÓ UP2 ===<br>
+                Nom de l'alumne/a: <span class="input-user">Marta</span><br>
+                Nota Examen 1: <span class="input-user">6.5</span><br>
+                Nota Examen 2: <span class="input-user">8.0</span><br>
+                Alumne/a: Marta | Mitjana: 7.25<br>
+                Estat final: APROVAT
+            </div>
+
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <span class="terminal-btn btn-close"></span>
+                    <span class="terminal-btn btn-min"></span>
+                    <span class="terminal-btn btn-max"></span>
+                </div>
+                $ ./notes<br>
+                === SISTEMA D'AVALUACIÓ UP2 ===<br>
+                Nom de l'alumne/a: <span class="input-user">Carles</span><br>
+                Nota Examen 1: <span class="input-user">3.5</span><br>
+                Nota Examen 2: <span class="input-user">4.2</span><br>
+                Alumne/a: Carles | Mitjana: 3.85<br>
+                Estat final: SUSPES
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <div class="section-badge">
+        <span>REPTE 2 · NIVELL AVANÇAT (INTEGRADOR)</span>
+    </div>
+
+    <!-- ACTIVITAT 2: botiga.c -->
+    <section id="activitat2">
+        <h2>🟠 Activitat 2: Caixa Registradora i Descomptes (<code>botiga.c</code>)</h2>
+        <p>En aquesta segona activitat programaràs un simulador de facturació anomenat <code>botiga.c</code> per a una botiga d'informàtica. El programa demanarà el nom del producte, el preu unitari, el nombre d'unitats i el tipus de client per aplicar descomptes automàtics, afegir l'IVA (21%) i imprimir el tiquet de compra.</p>
+
+        <div class="callout warning">
+            <strong>Objectiu de l'activitat:</strong> Combinar tots els tipus de dades (<code>string</code>, <code>float</code>, <code>int</code>, <code>char</code>), operadors lògics (<code>||</code>, <code>&amp;&amp;</code>), condicionals encadenats (<code>if / else if / else</code>) i disseny modular amb múltiples funcions que es comuniquen entre si.
+        </div>
+
+        <h3>Regles de Negoci i Tarifes de la Botiga</h3>
+        <ul>
+            <li><strong>Tipus de client (<code>char</code>):</strong> L'usuari introduirà una lletra que pot ser majúscula o minúscula:
+                <ul>
+                    <li><code>'E'</code> o <code>'e'</code> (Estudiant): S'aplica un <strong>15% de descompte</strong> sobre el subtotal (multiplica per <code>0.85</code>).</li>
+                    <li><code>'V'</code> o <code>'v'</code> (Client VIP): S'aplica un <strong>25% de descompte</strong> sobre el subtotal (multiplica per <code>0.75</code>).</li>
+                    <li><code>'N'</code> o <code>'n'</code> (Client Normal) o qualsevol altra lletra: <strong>0% de descompte</strong> (preu íntegre).</li>
+                </ul>
+            </li>
+            <li><strong>Càlcul d'IVA:</strong> Sobre el preu ja rebaixat s'afegeix un <strong>21% d'IVA</strong> (multiplica per <code>1.21</code>).</li>
+            <li><strong>Enviament Gratuït:</strong> Si el total final amb IVA és <strong>igual o superior a 50.00 €</strong>, el tiquet ha d'indicar <code>Enviament: GRATUIT</code>. Si és inferior a 50.00 €, ha d'indicar <code>Enviament: 4.99 EUR</code>.</li>
+        </ul>
+
+        <h3>Funcions Obligatòries a Implementar</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prototip de la Funció</th>
+                    <th>Descripció</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>void mostrar_tarifes(void);</code></td>
+                    <td>Mostra per pantalla la capçalera de la botiga i el resum de codis de client (<code>E</code> = -15%, <code>V</code> = -25%, <code>N</code> = 0%).</td>
+                </tr>
+                <tr>
+                    <td><code>float calcular_subtotal(float preu, int unitats);</code></td>
+                    <td>Rep el preu d'una unitat i la quantitat comprada, i retorna el subtotal sense descompte (<code>preu * unitats</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>float aplicar_descompte(float subtotal, char tipus);</code></td>
+                    <td>Avalua la lletra <code>tipus</code> amb <code>if / else if / else</code> i l'operador <code>||</code> (per acceptar majúscules i minúscules) i retorna l'import amb el descompte aplicat.</td>
+                </tr>
+                <tr>
+                    <td><code>float afegir_iva(float base);</code></td>
+                    <td>Rep l'import amb descompte i retorna el preu final multiplicat per <code>1.21</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>void imprimir_tiquet(string prod, int unitats, float subtotal, float total_final);</code></td>
+                    <td>Imprimeix el tiquet de compra ben formatat (amb 2 decimals <code>%.2f</code>) i comprova si té dret a <code>Enviament: GRATUIT</code> (<code>&gt;= 50.0</code>) o <code>Enviament: 4.99 EUR</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Exemples d'Execució Esperada</h3>
+        <div class="grid-2">
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <span class="terminal-btn btn-close"></span>
+                    <span class="terminal-btn btn-min"></span>
+                    <span class="terminal-btn btn-max"></span>
+                </div>
+                $ ./botiga<br>
+                === TECH STORE · TARIFES ===<br>
+                [E] Estudiant (-15%) | [V] VIP (-25%) | [N] Normal (0%)<br><br>
+                Producte: <span class="input-user">Teclat Mecànic</span><br>
+                Preu unitari: <span class="input-user">40</span><br>
+                Unitats: <span class="input-user">2</span><br>
+                Tipus de client (E/V/N): <span class="input-user">e</span><br><br>
+                --- TIQUET DE COMPRA ---<br>
+                Producte: Teclat Mecànic (2 unitats)<br>
+                Subtotal: 80.00 EUR<br>
+                Total amb descompte i IVA: 82.28 EUR<br>
+                Enviament: GRATUIT
+            </div>
+
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <span class="terminal-btn btn-close"></span>
+                    <span class="terminal-btn btn-min"></span>
+                    <span class="terminal-btn btn-max"></span>
+                </div>
+                $ ./botiga<br>
+                === TECH STORE · TARIFES ===<br>
+                [E] Estudiant (-15%) | [V] VIP (-25%) | [N] Normal (0%)<br><br>
+                Producte: <span class="input-user">Ratolí USB</span><br>
+                Preu unitari: <span class="input-user">15.50</span><br>
+                Unitats: <span class="input-user">1</span><br>
+                Tipus de client (E/V/N): <span class="input-user">N</span><br><br>
+                --- TIQUET DE COMPRA ---<br>
+                Producte: Ratolí USB (1 unitats)<br>
+                Subtotal: 15.50 EUR<br>
+                Total amb descompte i IVA: 18.76 EUR<br>
+                Enviament: 4.99 EUR
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- RÚBRICA D'AVALUACIÓ -->
+    <section id="rubrica">
+        <h2>📋 Rúbrica d'Avaluació Automàtica</h2>
+        <p>Tots dos programes es corregiran automàticament seguint aquesta distribució de punts sobre 10:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Criteri</th>
+                    <th>Pes</th>
+                    <th>Detall de la comprovació</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Compilació sense errors</strong></td>
+                    <td>2.0 punts</td>
+                    <td>El fitxer compila netament amb <code>clang</code> / <code>make</code> sense errors sintàctics.</td>
+                </tr>
+                <tr>
+                    <td><strong>Disseny Modular (Funcions)</strong></td>
+                    <td>3.0 punts</td>
+                    <td>S'han declarat els prototips abans de <code>main</code> i s'han implementat les funcions amb els seus tipus d'entrada i <code>return</code> corresponents.</td>
+                </tr>
+                <tr>
+                    <td><strong>Entrades, Eixides i Càlculs</strong></td>
+                    <td>3.0 punts</td>
+                    <td>Ús adequat de <code>get_...()</code> i <code>printf</code> amb dos decimals (<code>%.2f</code>). Els càlculs matemàtics són exactes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Condicionals i Casos Límit</strong></td>
+                    <td>2.0 punts</td>
+                    <td>Funciona tant amb majúscules com amb minúscules (<code>'e'</code> i <code>'E'</code>) i classifica correctament els llindars (<code>5.0</code> en notes o <code>50.0</code> en enviament).</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Departament de Tecnologia i Informàtica · Programació i Tractament de Dades 1 (UP2: El meu primer llenguatge - C) · Prof. Vicent.</p>
+    </footer>
+</main>
+
+</body>
+</html>

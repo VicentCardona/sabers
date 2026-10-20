@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnologia 4t ESO · UP1: Sistemes Mecànics — Prof. Vicent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0b1120;
+            --bg-card: #151f32;
+            --code-bg: #030712;
+            --border: #1e293b;
+            --text-main: #cbd5e1;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --primary-rgb: 56, 189, 248;
+            --accent: #a855f7;
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding-bottom: 5rem;
+        }
+        nav {
+            background-color: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1.5rem;
+        }
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        nav .brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            align-items: center;
+        }
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        .lang-switcher {
+            display: flex;
+            gap: 0.35rem;
+            align-items: center;
+        }
+        .lang-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.28rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-btn:hover {
+            border-color: var(--primary);
+            color: #fff;
+        }
+        .lang-btn.active {
+            background-color: rgba(var(--primary-rgb), 0.18);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .action-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .action-btn:hover {
+            background-color: rgba(var(--primary-rgb), 0.15);
+            color: #fff;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+        header.course-header {
+            margin-bottom: 3rem;
+        }
+        .breadcrumbs {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .header-icon {
+            font-size: 2.75rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        h1 {
+            font-size: 2.35rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin-bottom: 1.5rem;
+        }
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .tag {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border);
+            margin: 2.5rem 0;
+        }
+        .section-badge {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 5rem;
+        }
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #f1f5f9;
+        }
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+            color: #cbd5e1;
+        }
+        li {
+            margin-bottom: 0.4rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .card:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-2px);
+        }
+        .terminal-box {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            position: relative;
+        }
+        .terminal-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 0.85rem;
+            align-items: center;
+        }
+        .terminal-btn {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .btn-close { background-color: #ef4444; }
+        .btn-min { background-color: #f59e0b; }
+        .btn-max { background-color: #10b981; }
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.86rem;
+            color: #e2e8f0;
+            line-height: 1.55;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        .comment { color: #64748b; font-style: italic; }
+        .keyword { color: #f43f5e; font-weight: 600; }
+        .string { color: #34d399; }
+        .func { color: #38bdf8; }
+        .var { color: #facc15; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        th, td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+        th {
+            background-color: #162032;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .callout {
+            border-left: 4px solid var(--primary);
+            background: rgba(56, 189, 248, 0.08);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+        .callout.warning {
+            border-left-color: var(--warning);
+            background: rgba(245, 158, 11, 0.08);
+        }
+        .callout.success {
+            border-left-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+        }
+        .callout strong {
+            color: #fff;
+        }
+        .problem-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.35rem;
+            margin-bottom: 1.25rem;
+        }
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.65rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .problem-num {
+            background-color: rgba(var(--primary-rgb), 0.15);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+        }
+        footer {
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        @media print {
+            nav { display: none; }
+            body { background-color: #fff; color: #000; padding: 0; }
+            .card, .problem-card, table, pre, .terminal-box {
+                background-color: #fff !important;
+                color: #000 !important;
+                border: 1px solid #ccc !important;
+                break-inside: avoid;
+            }
+            h1, h2, h3, p, li, td, th, strong { color: #000 !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="brand">👨‍🏫 Prof. Vicent</a>
+        <ul id="nav-links">
+            <!-- Renderitzat dinàmicament segons l'idioma -->
+        </ul>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLang('ca')" id="btn-ca">CA</button>
+            <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+            <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+            <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+            <button class="action-btn no-print" onclick="window.print()" title="Print / PDF">🖨️ PDF</button>
+        </div>
+    </div>
+</nav>
+
+<main id="app-content">
+    <!-- Contingut injectat dinàmicament pel motor multilingüe -->
+</main>
+
+<script>
+let currentLang = 'ca';
+let showExamSolutions = true;
+
+const i18n = {
+    ca: {
+        nav: [
+            { href: "index.html", label: "← Menú Cursos" },
+            { href: "#mapes-mentals", label: "Mapes Mentals" },
+            { href: "#formulari", label: "Formulari i Trampes" },
+            { href: "#sol-palanques", label: "Sol. Palanques" },
+            { href: "#sol-politges", label: "Sol. Politges" },
+            { href: "#sol-transmissio", label: "Sol. Transmissió" },
+            { href: "#examen", label: "Examen Oficial" }
+        ],
+        breadcrumbCourse: "Cursos",
+        breadcrumbSubj: "Tecnologia 4t d'ESO",
+        breadcrumbUnit: "UP1 - Sistemes Mecànics",
+        title: "UP1: Sistemes Mecànics (Màquines i Mecanismes)",
+        subtitle: "Material didàctic complet per a 4t d'ESO: Mapes mentals i esquemes d'estudi, taula resum de fórmules en el Sistema Internacional, solucionari pas a pas de les 26 activitats del dossier i proposta d'examen oficial amb rúbrica.",
+        tags: ["Tecnologia 4t ESO", "UP1 · Sistemes Mecànics", "Mapes Mentals + Solucionari + Examen", "Multilingüe (CA/ES/EN/FR)"],
+        part1Badge: "PART I · MAPES MENTALS, FORMULARI I GUIA D'ESTUDI",
+        sec1Title: "1. Mapes Mentals d'Estudi",
+        sec1Intro: "Esquemes conceptuals per repassar l'estructura de les màquines, les magnituds físiques fonamentals i els mecanismes de transmissió lineal i circular.",
+        mm1Title: "Mapa Mental 1: Màquines, Energia, Treball, Potència i Rendiment",
+        mm1Code: `MÀQUINES I ENERGIA (Principi de conservació: l'energia ni es crea ni es destrueix, es transforma)
+ │
+ ├──► 1. ESTRUCTURA DE TOTA MÀQUINA
+ │     ├── [Element Motor / Conductor] ──► Transforma l'energia en treball (ex: pistó, motor elèctric)
+ │     ├── [Mecanismes (Conversor)]    ──► Transmet o transforma força i moviment (ex: biela-maneta, corretges)
+ │     └── [Element Conduït / Receptor]──► Rep la força i el moviment per fer el treball (ex: turbina, roda)
+ │
+ ├──► 2. TIPUS DE MOVIMENTS BÀSICS
+ │     ├── Lineal     ──► Trajectòria en línia recta i sentit únic (ex: carretó)
+ │     ├── Alternatiu ──► Línia recta d'avanç i retrocés (ex: pistó, agulla de màquina de cosir)
+ │     ├── Rotació    ──► Trajectòria de circumferència (ex: politja, roda, engranatge)
+ │     └── Oscil·lant ──► Trajectòria d'arc d'avanç i retrocés (ex: pèndol d'un rellotge)
+ │
+ └──► 3. MAGNITUDS FÍSIQUES I RENDIMENT (Unitats SI)
+       ├── Treball i Energia (W, E) ──► W = F · d         [Joules, J = N · m]
+       ├── Potència mecànica (P)    ──► P = W / t         [Watts, W = J / s]
+       └── Rendiment (η)            ──► η = (W_útil / E_consumida) · 100  [% - Sempre < 100% per fregament]`,
+        mm2Title: "Mapa Mental 2: Mecanismes de Transmissió Lineal (Palanques i Politges)",
+        mm2Code: `MECANISMES DE TRANSMISSIÓ LINEAL (Entrada lineal ──► Sortida lineal)
+ │
+ ├──► A) PALANQUES (Barra rígida que gira sobre un Punt de Suport o Fulcre Δ)
+ │     ├── Llei de la Palanca:  F · dF = R · dR
+ │     ├── Avantatge Mecànic:   AM = R / F = dF / dR
+ │     │    ├── AM > 1: Multiplica força / estalvia esforç (dF > dR)
+ │     │    ├── AM = 1: No estalvia força, canvia direcció (dF = dR)
+ │     │    └── AM < 1: Cal fer més força, però guanya velocitat/desplaçament (dF < dR)
+ │     └── Classificació per Gèneres (segons qui està al MIG):
+ │          ├── 1r Gènere [ Δ al mig: F ── Δ ── R ] ──► AM pot ser >1, =1 o <1 (ex: tisores, alicates, balança)
+ │          ├── 2n Gènere [ R al mig: Δ ── R ── F ] ──► Sempre dF > dR (AM > 1, estalvia força. Ex: carretó, trencanous)
+ │          └── 3r Gènere [ F al mig: Δ ── F ── R ] ──► Sempre dF < dR (AM < 1, guanya precisió/abast. Ex: pinces, braç)
+ │
+ └──► B) POLITGES I POLISPASTOS (Roda acanalada amb corda)
+       ├── 1. Politja Fixa            ──► F = R        │ AM = 1   │ Corda estirada: L = h (només canvia direcció)
+       ├── 2. Politja Mòbil (1 fixa+1 mòbil) ► F = R/2 │ AM = 2   │ Corda estirada: L = 2·h
+       ├── 3. Polispast Factorial (Lineal)   ► F = R/(2·n) │ AM = 2·n │ n = nombre de politges mòbils
+       └── 4. Polispast Potencial (Expon.)   ► F = R/(2^n) │ AM = 2^n │ n = nombre de politges mòbils`,
+        mm3Title: "Mapa Mental 3: Transmissió Circular i Cinemàtica de Rotació",
+        mm3Code: `MECANISMES DE TRANSMISSIÓ CIRCULAR I CINEMÀTICA (Rotació entre eixos: Conductor 1 ──► Conduït 2)
+ │
+ ├──► 1. SISTEMES DE TRANSMISSIÓ
+ │     ├── Politges amb corretja ──► Llei: D1 · N1 = D2 · N2  (Mateix sentit de gir; s'inverteix si es creua la corretja)
+ │     └── Engranatges (dents Z) ──► Llei: Z1 · N1 = Z2 · N2  (Sentit de gir s'inverteix en contacte directe; sense lliscament)
+ │
+ ├──► 2. RELACIÓ DE TRANSMISSIÓ (i)
+ │     ├── Fórmula general:  i = N2 / N1 = D1 / D2 = Z1 / Z2
+ │     ├── Si i > 1: Sistema MULTIPLICADOR de velocitat (N2 > N1: gira més ràpid però amb menys força/parell)
+ │     ├── Si i = 1: Manté la velocitat (N2 = N1)
+ │     └── Si i < 1: Sistema REDUCTOR de velocitat (N2 < N1: gira més lent però multiplica la força/parell)
+ │
+ └──► 3. VELOCITAT DE GIR (N), ANGULAR (ω) I LINEAL (v)
+       ├── Velocitat de gir (N)     ──► Mesurada en rpm (revolucions o voltes per minut)
+       ├── Velocitat angular (ω)    ──► ω = (N · 2 · π) / 60   [rad/s - Igual per a tots els punts del disc]
+       └── Velocitat lineal (v)     ──► v = ω · r              [m/s - Depèn del radi r en metres! Per passar a km/h: · 3,6]`,
+        sec2Title: "2. Formulari Resum i Les 5 Trampes Clàssiques d'Examen",
+        tableHeaders: ["Magnitud / Concepte", "Símbol", "Fórmula Principal", "Unitats SI / Habituals"],
+        tableRows: [
+            ["Pes / Força de gravetat", "P, F, R", "P = m · g  (g = 9,8 m/s²)", "Newtons [N]"],
+            ["Treball mecànic / Energia", "W, E", "W = F · d", "Joules [J] (1 J = 1 N·m)"],
+            ["Potència mecànica", "P", "P = W / t", "Watts [W] (1 W = 1 J/s)"],
+            ["Rendiment", "η", "η = (W_útil / E_consumida) · 100", "Percentatge [%]"],
+            ["Llei de la Palanca", "—", "F · dF = R · dR", "F, R en [N] ; dF, dR mateixa unitat [m o cm]"],
+            ["Avantatge Mecànic", "AM", "AM = R / F  (en palanca: dF / dR)", "Adimensional (sense unitats)"],
+            ["Polispast Factorial vs Potencial", "F", "Factorial: F = R / (2·n) │ Potencial: F = R / 2^n", "n = núm. de politges mòbils"],
+            ["Relació de transmissió", "i", "i = N2 / N1 = D1 / D2 = Z1 / Z2", "Adimensional (N en rpm, D en mm/cm, Z en dents)"],
+            ["Velocitat angular", "ω", "ω = (N · 2 · π) / 60", "Radians per segon [rad/s]"],
+            ["Velocitat lineal", "v", "v = ω · r  (on r = D / 2)", "Metres per segon [m/s] (× 3,6 per a km/h)"]
+        ],
+        trapsTitle: "⚠️ Les 5 Trampes Clàssiques d'Examen (Compte!)",
+        trapsList: [
+            "<strong>Confondre Massa (kg) amb Força/Pes (N):</strong> Si l'enunciat dóna una càrrega en quilograms (ex: <code>200 kg</code>), multiplica-la primer per <code>g = 9,8 m/s²</code> per passar-la a Newtons (<code>1960 N</code>) abans d'aplicar la llei de la palanca.",
+            "<strong>El braç del carretó (2n gènere):</strong> Quan un dibuix mostra dos trams acotats (ex: <code>0,4 m</code> de la roda a la càrrega i <code>1,2 m</code> de la càrrega al mànec), el braç de potència total des del fulcre és la <strong>suma</strong>: <code>dF = 0,4 + 1,2 = 1,6 m</code>!",
+            "<strong>Diàmetre vs. Radi en la velocitat lineal (v = ω · r):</strong> Els problemes de politges i rodes gairebé sempre donen el <strong>diàmetre en cm</strong>. Cal dividir-lo entre 2 per tenir el radi i passar-lo a <strong>metres</strong> abans de multiplicar per ω.",
+            "<strong>Fórmula de la Relació de Transmissió (i):</strong> Les velocitats van a l'inrevés que els diàmetres i les dents: <code>i = N2 / N1 = D1 / D2 = Z1 / Z2</code>. Comprova sempre la lògica: la roda petita sempre gira més ràpid que la gran!",
+            "<strong>Desplaçament de la corda en politges i polispastos:</strong> Si un polispast redueix la força per un factor (<code>AM</code>), hauràs d'estirar <code>AM</code> vegades més longitud de corda (<code>L = AM · h</code>) i la càrrega pujarà <code>AM</code> vegades més lenta (<code>v_càrrega = v_corda / AM</code>)."
+        ],
+        part2Badge: "PART II · SOLUCIONARI PAS A PAS DEL DOSSIER D'ACTIVITATS (26 EXERCICIS)",
+        sec3Title: "3. Solucionari Bloc A: Palanques (Exercicis 1 a 11)",
+        sec4Title: "4. Solucionari Bloc B: Politges i Polispastos (Exercicis 12 a 20)",
+        sec5Title: "5. Solucionari Bloc C: Transmissió Circular i Cinemàtica (Exercicis 21 a 26)",
+        part3Badge: "PART III · PROPOSTA D'EXAMEN OFICIAL 4t ESO + RÚBRICA DE CORRECCIÓ",
+        sec6Title: "6. Examen d'Avaluació: UP1 Sistemes Mecànics (10 Punts)",
+        toggleBtnShow: "👁️ Mostrar Solucionari de l'Examen",
+        toggleBtnHide: "🙈 Ocultar Solucionari (Mode Impressió Alumnat)",
+        footerText: "Departament de Tecnologia i Informàtica · Tecnologia 4t d'ESO (UP1: Sistemes Mecànics) — Prof. Vicent"
+    },
+    es: {
+        nav: [
+            { href: "index.html", label: "← Menú Cursos" },
+            { href: "#mapes-mentals", label: "Mapas Mentales" },
+            { href: "#formulari", label: "Formulario y Trampas" },
+            { href: "#sol-palanques", label: "Sol. Palancas" },
+            { href: "#sol-politges", label: "Sol. Poleas" },
+            { href: "#sol-transmissio", label: "Sol. Transmisión" },
+            { href: "#examen", label: "Examen Oficial" }
+        ],
+        breadcrumbCourse: "Cursos",
+        breadcrumbSubj: "Tecnología 4.º de ESO",
+        breadcrumbUnit: "UP1 - Sistemas Mecánicos",
+        title: "UP1: Sistemas Mecánicos (Máquinas y Mecanismos)",
+        subtitle: "Material didáctico completo para 4.º de ESO: Mapas mentales y esquemas de estudio, tabla resumen de fórmulas en el Sistema Internacional, solucionario paso a paso de las 26 actividades del dosier y propuesta de examen oficial con rúbrica.",
+        tags: ["Tecnología 4.º ESO", "UP1 · Sistemas Mecánicos", "Mapas Mentales + Solucionario + Examen", "Multilingüe (CA/ES/EN/FR)"],
+        part1Badge: "PARTE I · MAPAS MENTALES, FORMULARIO Y GUÍA DE ESTUDIO",
+        sec1Title: "1. Mapas Mentales de Estudio",
+        sec1Intro: "Esquemas conceptuales para repasar la estructura de las máquinas, las magnitudes físicas fundamentales y los mecanismos de transmisión lineal y circular.",
+        mm1Title: "Mapa Mental 1: Máquinas, Energía, Trabajo, Potencia y Rendimiento",
+        mm1Code: `MÁQUINAS Y ENERGÍA (Principio de conservación: la energía ni se crea ni se destruye, se transforma)
+ │
+ ├──► 1. ESTRUCTURA DE TODA MÁQUINA
+ │     ├── [Elemento Motor / Conductor] ──► Transforma la energía en trabajo (ej: pistón, motor eléctrico)
+ │     ├── [Mecanismos (Conversor)]     ──► Transmite o transforma fuerza y movimiento (ej: biela-manivela, correas)
+ │     └── [Elemento Conducido/Receptor]──► Recibe la fuerza y el movimiento para realizar el trabajo (ej: turbina, rueda)
+ │
+ ├──► 2. TIPOS DE MOVIMIENTOS BÁSICOS
+ │     ├── Lineal      ──► Trayectoria en línea recta y sentido único (ej: carretilla)
+ │     ├── Alternativo ──► Línea recta de avance y retroceso (ej: pistón, aguja de máquina de coser)
+ │     ├── Rotación    ──► Trayectoria de circunferencia (ej: polea, rueda, engranaje)
+ │     └── Oscilante   ──► Trayectoria de arco de avance y retroceso (ej: péndulo de un reloj)
+ │
+ └──► 3. MAGNITUDES FÍSICAS Y RENDIMIENTO (Unidades SI)
+       ├── Trabajo y Energía (W, E) ──► W = F · d         [Julios, J = N · m]
+       ├── Potencia mecánica (P)    ──► P = W / t         [Vatios, W = J / s]
+       └── Rendimiento (η)          ──► η = (W_útil / E_consumida) · 100  [% - Siempre < 100% por rozamiento]`,
+        mm2Title: "Mapa Mental 2: Mecanismos de Transmisión Lineal (Palancas y Poleas)",
+        mm2Code: `MECANISMOS DE TRANSMISIÓN LINEAL (Entrada lineal ──► Salida lineal)
+ │
+ ├──► A) PALANCAS (Barra rígida que gira sobre un Punto de Apoyo o Fulcro Δ)
+ │     ├── Ley de la Palanca:   F · dF = R · dR
+ │     ├── Ventaja Mecánica:    AM = R / F = dF / dR
+ │     │    ├── AM > 1: Multiplica fuerza / ahorra esfuerzo (dF > dR)
+ │     │    ├── AM = 1: No ahorra fuerza, cambia dirección (dF = dR)
+ │     │    └── AM < 1: Requiere más fuerza, pero gana velocidad/desplazamiento (dF < dR)
+ │     └── Clasificación por Géneros (según quién está en el MEDIO):
+ │          ├── 1.er Género [ Δ en medio: F ── Δ ── R ] ──► AM puede ser >1, =1 o <1 (ej: tijeras, alicates, balanza)
+ │          ├── 2.º Género  [ R en medio: Δ ── R ── F ] ──► Siempre dF > dR (AM > 1, ahorra fuerza. Ej: carretilla, cascanueces)
+ │          └── 3.er Género [ F en medio: Δ ── F ── R ] ──► Siempre dF < dR (AM < 1, gana precisión/alcance. Ej: pinzas, brazo)
+ │
+ └──► B) POLEAS Y POLIPASTOS (Rueda acanalada con cuerda)
+       ├── 1. Polea Fija              ──► F = R        │ AM = 1   │ Cuerda tirada: L = h (solo cambia dirección)
+       ├── 2. Polea Móvil (1 fija+1 móvil) ► F = R/2   │ AM = 2   │ Cuerda tirada: L = 2·h
+       ├── 3. Polipasto Factorial (Lineal) ► F = R/(2·n) │ AM = 2·n │ n = número de poleas móviles
+       └── 4. Polipasto Potencial (Expon.) ► F = R/(2^n) │ AM = 2^n │ n = número de poleas móviles`,
+        mm3Title: "Mapa Mental 3: Transmisión Circular y Cinemática de Rotación",
+        mm3Code: `MECANISMOS DE TRANSMISIÓN CIRCULAR Y CINEMÁTICA (Rotación entre ejes: Conductor 1 ──► Conducido 2)
+ │
+ ├──► 1. SISTEMAS DE TRANSMISIÓN
+ │     ├── Poleas con correa    ──► Ley: D1 · N1 = D2 · N2  (Mismo sentido de giro; se invierte si se cruza la correa)
+ │     └── Engranajes (dientes Z)─► Ley: Z1 · N1 = Z2 · N2  (Sentido de giro se invierte en contacto directo; sin deslizamiento)
+ │
+ ├──► 2. RELACIÓN DE TRANSMISIÓN (i)
+ │     ├── Fórmula general:  i = N2 / N1 = D1 / D2 = Z1 / Z2
+ │     ├── Si i > 1: Sistema MULTIPLICADOR de velocidad (N2 > N1: gira más rápido pero con menos fuerza/par)
+ │     ├── Si i = 1: Mantiene la velocidad (N2 = N1)
+ │     └── Si i < 1: Sistema REDUCTOR de velocidad (N2 < N1: gira más lento pero multiplica la fuerza/par)
+ │
+ └──► 3. VELOCIDAD DE GIRO (N), ANGULAR (ω) Y LINEAL (v)
+       ├── Velocidad de giro (N)  ──► Medida en rpm (revoluciones o vueltas por minuto)
+       ├── Velocidad angular (ω)  ──► ω = (N · 2 · π) / 60   [rad/s - Igual para todos los puntos del disco]
+       └── Velocidad lineal (v)   ──► v = ω · r              [m/s - ¡Depende del radio r en metros! Para pasar a km/h: · 3,6]`,
+        sec2Title: "2. Formulario Resumen y Las 5 Trampas Clásicas de Examen",
+        tableHeaders: ["Magnitud / Concepto", "Símbolo", "Fórmula Principal", "Unidades SI / Habituales"],
+        tableRows: [
+            ["Peso / Fuerza de gravedad", "P, F, R", "P = m · g  (g = 9,8 m/s²)", "Newtons [N]"],
+            ["Trabajo mecánico / Energía", "W, E", "W = F · d", "Julios [J] (1 J = 1 N·m)"],
+            ["Potencia mecánica", "P", "P = W / t", "Vatios [W] (1 W = 1 J/s)"],
+            ["Rendimiento", "η", "η = (W_útil / E_consumida) · 100", "Porcentaje [%]"],
+            ["Ley de la Palanca", "—", "F · dF = R · dR", "F, R en [N] ; dF, dR misma unidad [m o cm]"],
+            ["Ventaja Mecánica", "AM", "AM = R / F  (en palanca: dF / dR)", "Adimensional (sin unidades)"],
+            ["Polipasto Factorial vs Potencial", "F", "Factorial: F = R / (2·n) │ Potencial: F = R / 2^n", "n = núm. de poleas móviles"],
+            ["Relación de transmisión", "i", "i = N2 / N1 = D1 / D2 = Z1 / Z2", "Adimensional (N en rpm, D en mm/cm, Z en dientes)"],
+            ["Velocidad angular", "ω", "ω = (N · 2 · π) / 60", "Radianes por segundo [rad/s]"],
+            ["Velocidad lineal", "v", "v = ω · r  (donde r = D / 2)", "Metros por segundo [m/s] (× 3,6 para km/h)"]
+        ],
+        trapsTitle: "⚠️ Las 5 Trampas Clásicas de Examen (¡Atención!)",
+        trapsList: [
+            "<strong>Confundir Masa (kg) con Fuerza/Peso (N):</strong> Si el enunciado da una carga en kilogramos (ej: <code>200 kg</code>), multiplícala primero por <code>g = 9,8 m/s²</code> para pasarla a Newtons (<code>1960 N</code>) antes de aplicar la ley de la palanca.",
+            "<strong>El brazo de la carretilla (2.º género):</strong> Cuando un dibujo muestra dos tramos acotados (ej: <code>0,4 m</code> de la rueda a la carga y <code>1,2 m</code> de la carga al mango), el brazo de potencia total desde el fulcro es la <strong>suma</strong>: <code>dF = 0,4 + 1,2 = 1,6 m</code>.",
+            "<strong>Diámetro vs. Radio en la velocidad lineal (v = ω · r):</strong> Los problemas de poleas y ruedas casi siempre dan el <strong>diámetro en cm</strong>. Hay que dividirlo entre 2 para obtener el radio y pasarlo a <strong>metros</strong> antes de multiplicar por ω.",
+            "<strong>Fórmula de la Relación de Transmisión (i):</strong> Las velocidades van al revés que los diámetros y los dientes: <code>i = N2 / N1 = D1 / D2 = Z1 / Z2</code>. Comprueba siempre la lógica: ¡la rueda pequeña siempre gira más rápido que la grande!",
+            "<strong>Desplazamiento de la cuerda en poleas y polipastos:</strong> Si un polipasto reduce la fuerza por un factor (<code>AM</code>), tendrás que tirar <code>AM</code> veces más longitud de cuerda (<code>L = AM · h</code>) y la carga subirá <code>AM</code> veces más lenta (<code>v_carga = v_cuerda / AM</code>)."
+        ],
+        part2Badge: "PARTE II · SOLUCIONARIO PASO A PASO DEL DOSIER DE ACTIVIDADES (26 EJERCICIOS)",
+        sec3Title: "3. Solucionario Bloque A: Palancas (Ejercicios 1 a 11)",
+        sec4Title: "4. Solucionario Bloque B: Poleas y Polipastos (Ejercicios 12 a 20)",
+        sec5Title: "5. Solucionario Bloque C: Transmisión Circular y Cinemática (Ejercicios 21 a 26)",
+        part3Badge: "PARTE III · PROPUESTA DE EXAMEN OFICIAL 4.º ESO + RÚBRICA DE CORRECCIÓN",
+        sec6Title: "6. Examen de Evaluación: UP1 Sistemas Mecánicos (10 Puntos)",
+        toggleBtnShow: "👁️ Mostrar Solucionario del Examen",
+        toggleBtnHide: "🙈 Ocultar Solucionario (Modo Impresión Alumnado)",
+        footerText: "Departamento de Tecnología e Informática · Tecnología 4.º de ESO (UP1: Sistemas Mecánicos) — Prof. Vicent"
+    },
+    en: {
+        nav: [
+            { href: "index.html", label: "← Courses Menu" },
+            { href: "#mapes-mentals", label: "Mind Maps" },
+            { href: "#formulari", label: "Formulas & Traps" },
+            { href: "#sol-palanques", label: "Sol. Levers" },
+            { href: "#sol-politges", label: "Sol. Pulleys" },
+            { href: "#sol-transmissio", label: "Sol. Transmission" },
+            { href: "#examen", label: "Official Exam" }
+        ],
+        breadcrumbCourse: "Courses",
+        breadcrumbSubj: "Technology Year 10 (4th ESO)",
+        breadcrumbUnit: "UP1 - Mechanical Systems",
+        title: "UP1: Mechanical Systems (Machines & Mechanisms)",
+        subtitle: "Complete teaching package for 4th ESO (Year 10): Concept mind maps and study guides, SI formula reference sheet, step-by-step solutions to all 26 workbook problems, and an official exam with grading rubric.",
+        tags: ["Technology 4th ESO", "UP1 · Mechanical Systems", "Mind Maps + Solutions + Exam", "Multilingual (CA/ES/EN/FR)"],
+        part1Badge: "PART I · MIND MAPS, FORMULA SHEET & STUDY GUIDE",
+        sec1Title: "1. Study Mind Maps",
+        sec1Intro: "Conceptual diagrams to review machine structure, fundamental physical quantities, and linear and rotary transmission mechanisms.",
+        mm1Title: "Mind Map 1: Machines, Energy, Work, Power & Efficiency",
+        mm1Code: `MACHINES & ENERGY (Conservation Principle: energy is neither created nor destroyed, only transformed)
+ │
+ ├──► 1. STRUCTURE OF EVERY MACHINE
+ │     ├── [Driver / Motor Element]    ──► Transforms energy into work (e.g., piston, electric motor)
+ │     ├── [Mechanisms (Converter)]    ──► Transmits or transforms force & motion (e.g., crank-rod, belts)
+ │     └── [Driven / Output Element]   ──► Receives force & motion to perform useful work (e.g., turbine, wheel)
+ │
+ ├──► 2. FOUR BASIC TYPES OF MOTION
+ │     ├── Linear        ──► Straight-line path in one direction (e.g., wheelbarrow)
+ │     ├── Reciprocating ──► Back-and-forth straight-line path (e.g., piston, sewing machine needle)
+ │     ├── Rotary        ──► Circular path around an axis (e.g., pulley, wheel, gear)
+ │     └── Oscillating   ──► Back-and-forth arc path (e.g., clock pendulum)
+ │
+ └──► 3. PHYSICAL QUANTITIES & EFFICIENCY (SI Units)
+       ├── Work & Energy (W, E)     ──► W = F · d         [Joules, J = N · m]
+       ├── Mechanical Power (P)     ──► P = W / t         [Watts, W = J / s]
+       └── Efficiency (η)           ──► η = (W_useful / E_consumed) · 100  [% - Always < 100% due to friction]`,
+        mm2Title: "Mind Map 2: Linear Transmission Mechanisms (Levers & Pulleys)",
+        mm2Code: `LINEAR TRANSMISSION MECHANISMS (Linear input ──► Linear output)
+ │
+ ├──► A) LEVERS (Rigid bar rotating around a Pivot / Fulcrum Δ)
+ │     ├── Law of the Lever:    F · dF = R · dR
+ │     ├── Mechanical Advantage: AM = R / F = dF / dR
+ │     │    ├── AM > 1: Multiplies force / saves effort (dF > dR)
+ │     │    ├── AM = 1: Does not save force, changes direction (dF = dR)
+ │     │    └── AM < 1: Requires more effort, but gains speed/range of motion (dF < dR)
+ │     └── Classification by Class (depending on what is in the MIDDLE):
+ │          ├── Class 1 [ Δ in middle: F ── Δ ── R ] ──► AM can be >1, =1 or <1 (e.g., scissors, pliers, seesaw)
+ │          ├── Class 2 [ R in middle: Δ ── R ── F ] ──► Always dF > dR (AM > 1, saves effort. E.g., wheelbarrow, nutcracker)
+ │          └── Class 3 [ F in middle: Δ ── F ── R ] ──► Always dF < dR (AM < 1, gains precision/reach. E.g., tweezers, human arm)
+ │
+ └──► B) PULLEYS & BLOCK AND TACKLE (Grooved wheel with rope)
+       ├── 1. Fixed Pulley             ──► F = R        │ AM = 1   │ Rope pulled: L = h (only changes direction)
+       ├── 2. Movable Pulley (1 fix+1 mov)► F = R/2     │ AM = 2   │ Rope pulled: L = 2·h
+       ├── 3. Linear/Factorial Hoist     ► F = R/(2·n)  │ AM = 2·n │ n = number of movable pulleys
+       └── 4. Exponential/Potential Hoist► F = R/(2^n)  │ AM = 2^n │ n = number of movable pulleys`,
+        mm3Title: "Mind Map 3: Rotary Transmission & Rotational Kinematics",
+        mm3Code: `ROTARY TRANSMISSION & KINEMATICS (Rotation between shafts: Driver 1 ──► Driven 2)
+ │
+ ├──► 1. TRANSMISSION SYSTEMS
+ │     ├── Belt & Pulley system ──► Law: D1 · N1 = D2 · N2  (Same rotation sense; reversed if belt is crossed)
+ │     └── Meshed Gears (teeth Z)─► Law: Z1 · N1 = Z2 · N2  (Rotation sense reverses on direct contact; no slip)
+ │
+ ├──► 2. TRANSMISSION RATIO (i)
+ │     ├── General formula:  i = N2 / N1 = D1 / D2 = Z1 / Z2
+ │     ├── If i > 1: Speed MULTIPLIER system (N2 > N1: spins faster but transmits less torque/force)
+ │     ├── If i = 1: Constant speed (N2 = N1)
+ │     └── If i < 1: Speed REDUCER system (N2 < N1: spins slower but multiplies torque/force)
+ │
+ └──► 3. ROTATIONAL SPEED (N), ANGULAR VELOCITY (ω) & LINEAR VELOCITY (v)
+       ├── Rotational speed (N)  ──► Measured in rpm (revolutions per minute)
+       ├── Angular velocity (ω)  ──► ω = (N · 2 · π) / 60   [rad/s - Identical for all points on the rigid disc]
+       └── Linear velocity (v)   ──► v = ω · r              [m/s - Depends on radius r in meters! To km/h: · 3.6]`,
+        sec2Title: "2. Formula Summary Sheet & The 5 Classic Exam Traps",
+        tableHeaders: ["Quantity / Concept", "Symbol", "Main Formula", "SI / Standard Units"],
+        tableRows: [
+            ["Weight / Gravitational force", "P, F, R", "P = m · g  (g = 9.8 m/s²)", "Newtons [N]"],
+            ["Mechanical Work / Energy", "W, E", "W = F · d", "Joules [J] (1 J = 1 N·m)"],
+            ["Mechanical Power", "P", "P = W / t", "Watts [W] (1 W = 1 J/s)"],
+            ["Efficiency", "η", "η = (W_useful / E_consumed) · 100", "Percentage [%]"],
+            ["Law of the Lever", "—", "F · dF = R · dR", "F, R in [N] ; dF, dR in same unit [m or cm]"],
+            ["Mechanical Advantage", "AM", "AM = R / F  (for lever: dF / dR)", "Dimensionless (no units)"],
+            ["Factorial vs Exponential Hoist", "F", "Factorial: F = R / (2·n) │ Exponential: F = R / 2^n", "n = number of movable pulleys"],
+            ["Transmission Ratio", "i", "i = N2 / N1 = D1 / D2 = Z1 / Z2", "Dimensionless (N in rpm, D in mm/cm, Z in teeth)"],
+            ["Angular Velocity", "ω", "ω = (N · 2 · π) / 60", "Radians per second [rad/s]"],
+            ["Linear Velocity", "v", "v = ω · r  (where r = D / 2)", "Meters per second [m/s] (× 3.6 for km/h)"]
+        ],
+        trapsTitle: "⚠️ The 5 Classic Exam Traps (Watch Out!)",
+        trapsList: [
+            "<strong>Confusing Mass (kg) with Force/Weight (N):</strong> If the problem gives a load in kilograms (e.g., <code>200 kg</code>), multiply it first by <code>g = 9.8 m/s²</code> to convert it to Newtons (<code>1960 N</code>) before applying the law of the lever.",
+            "<strong>The Wheelbarrow Effort Arm (Class 2 Lever):</strong> When a diagram shows two separate segments (e.g., <code>0.4 m</code> from wheel to load and <code>1.2 m</code> from load to handles), the total effort arm from the fulcrum is the <strong>sum</strong>: <code>dF = 0.4 + 1.2 = 1.6 m</code>!",
+            "<strong>Diameter vs. Radius in Linear Velocity (v = ω · r):</strong> Pulley and wheel problems almost always state the <strong>diameter in cm</strong>. Always divide by 2 to get the radius and convert to <strong>meters</strong> before multiplying by ω.",
+            "<strong>Transmission Ratio Formula (i):</strong> Speeds are inversely proportional to diameters and teeth: <code>i = N2 / N1 = D1 / D2 = Z1 / Z2</code>. Always check with common sense: the smaller wheel always spins faster than the larger wheel!",
+            "<strong>Rope Length Pulled in Pulleys/Hoists:</strong> If a pulley system reduces force by a factor (<code>AM</code>), you must pull <code>AM</code> times more rope length (<code>L = AM · h</code>) and the load rises <code>AM</code> times slower (<code>v_load = v_rope / AM</code>)."
+        ],
+        part2Badge: "PART II · STEP-BY-STEP SOLUTIONS TO WORKBOOK ACTIVITIES (26 EXERCISES)",
+        sec3Title: "3. Solutions Block A: Levers (Exercises 1 to 11)",
+        sec4Title: "4. Solutions Block B: Pulleys & Hoists (Exercises 12 to 20)",
+        sec5Title: "5. Solutions Block C: Rotary Transmission & Kinematics (Exercises 21 to 26)",
+        part3Badge: "PART III · OFFICIAL 4th ESO EXAM PROPOSAL + GRADING RUBRIC",
+        sec6Title: "6. Assessment Exam: UP1 Mechanical Systems (10 Points)",
+        toggleBtnShow: "👁️ Show Exam Answer Key",
+        toggleBtnHide: "🙈 Hide Answer Key (Student Print Mode)",
+        footerText: "Department of Technology & Computer Science · Technology 4th ESO (UP1: Mechanical Systems) — Prof. Vicent"
+    },
+    fr: {
+        nav: [
+            { href: "index.html", label: "← Menu Cours" },
+            { href: "#mapes-mentals", label: "Cartes Mentales" },
+            { href: "#formulari", label: "Formules et Pièges" },
+            { href: "#sol-palanques", label: "Sol. Leviers" },
+            { href: "#sol-politges", label: "Sol. Poulies" },
+            { href: "#sol-transmissio", label: "Sol. Transmission" },
+            { href: "#examen", label: "Examen Officiel" }
+        ],
+        breadcrumbCourse: "Cours",
+        breadcrumbSubj: "Technologie 4e ESO (Seconde)",
+        breadcrumbUnit: "UP1 - Systèmes Mécaniques",
+        title: "UP1 : Systèmes Mécaniques (Machines et Mécanismes)",
+        subtitle: "Support pédagogique complet pour 4e ESO : Cartes mentales et fiches de révision, formulaire officiel du Système International, corrigé détaillé pas à pas des 26 exercices du dossier et sujet d'examen officiel avec barème.",
+        tags: ["Technologie 4e ESO", "UP1 · Systèmes Mécaniques", "Cartes Mentales + Corrigé + Examen", "Multilingue (CA/ES/EN/FR)"],
+        part1Badge: "PARTIE I · CARTES MENTALES, FORMULAIRE ET GUIDE D'ÉTUDE",
+        sec1Title: "1. Cartes Mentales de Révision",
+        sec1Intro: "Schémas conceptuels pour réviser la structure des machines, les grandeurs physiques fondamentales et les mécanismes de transmission linéaire et circulaire.",
+        mm1Title: "Carte Mentale 1 : Machines, Énergie, Travail, Puissance et Rendement",
+        mm1Code: `MACHINES ET ÉNERGIE (Principe de conservation : l'énergie ne se crée ni ne se détruit, elle se transforme)
+ │
+ ├──► 1. STRUCTURE DE TOUTE MACHINE
+ │     ├── [Élément Moteur / Conducteur] ──► Transforme l'énergie en travail (ex : piston, moteur électrique)
+ │     ├── [Mécanismes (Convertisseur)]  ──► Transmet ou transforme force et mouvement (ex : bielle-manivelle, courroies)
+ │     └── [Élément Conduit / Récepteur] ──► Reçoit la force et le mouvement pour effectuer le travail (ex : turbine, roue)
+ │
+ ├──► 2. QUATRE MOUVEMENTS DE BASE
+ │     ├── Linéaire     ──► Trajectoire en ligne droite et sens unique (ex : brouette)
+ │     ├── Alternatif   ──► Ligne droite d'avance et de recul (ex : piston, aiguille de machine à coudre)
+ │     ├── Rotation     ──► Trajectoire circulaire autour d'un axe (ex : poulie, roue, engrenage)
+ │     └── Oscillant    ──► Trajectoire en arc d'avance et de recul (ex : pendule d'horloge)
+ │
+ └──► 3. GRANDEURS PHYSIQUES ET RENDEMENT (Unités SI)
+       ├── Travail et Énergie (W, E) ──► W = F · d         [Joules, J = N · m]
+       ├── Puissance mécanique (P)   ──► P = W / t         [Watts, W = J / s]
+       └── Rendement (η)             ──► η = (W_utile / E_consommée) · 100  [% - Toujours < 100% à cause des frottements]`,
+        mm2Title: "Carte Mentale 2 : Mécanismes de Transmission Linéaire (Leviers et Poulies)",
+        mm2Code: `MÉCANISMES DE TRANSMISSION LINÉAIRE (Entrée linéaire ──► Sortie linéaire)
+ │
+ ├──► A) LEVIERS (Barre rigide tournant autour d'un Point d'Appui ou Pivot Δ)
+ │     ├── Loi du Levier :      F · dF = R · dR
+ │     ├── Avantage Mécanique : AM = R / F = dF / dR
+ │     │    ├── AM > 1 : Multiplie la force / économise l'effort (dF > dR)
+ │     │    ├── AM = 1 : N'économise pas d'effort, change la direction (dF = dR)
+ │     │    └── AM < 1 : Demande plus de force, mais gagne en vitesse/déplacement (dF < dR)
+ │     └── Classification par Genres (selon l'élément situé au MILIEU) :
+ │          ├── 1er Genre [ Δ au milieu : F ── Δ ── R ] ──► AM peut être >1, =1 ou <1 (ex : ciseaux, tenailles, balance)
+ │          ├── 2e Genre  [ R au milieu : Δ ── R ── F ] ──► Toujours dF > dR (AM > 1, économise l'effort. Ex : brouette, casse-noix)
+ │          └── 3e Genre  [ F au milieu : Δ ── F ── R ] ──► Toujours dF < dR (AM < 1, gagne en précision. Ex : pince à épiler, bras)
+ │
+ └──► B) POULIES ET PALANS (Roue à gorge avec corde)
+       ├── 1. Poulie Fixe              ──► F = R        │ AM = 1   │ Corde tirée : L = h (change uniquement la direction)
+       ├── 2. Poulie Mobile (1 fixe+1 mob)► F = R/2     │ AM = 2   │ Corde tirée : L = 2·h
+       ├── 3. Palan Factoriel (Linéaire)  ► F = R/(2·n) │ AM = 2·n │ n = nombre de poulies mobiles
+       └── 4. Palan Potentiel (Expon.)    ► F = R/(2^n) │ AM = 2^n │ n = nombre de poulies mobiles`,
+        mm3Title: "Carte Mentale 3 : Transmission Circulaire et Cinématique de Rotation",
+        mm3Code: `TRANSMISSION CIRCULAIRE ET CINÉMATIQUE (Rotation entre arbres : Conducteur 1 ──► Conduit 2)
+ │
+ ├──► 1. SYSTÈMES DE TRANSMISSION
+ │     ├── Poulies et courroie ──► Loi : D1 · N1 = D2 · N2  (Même sens de rotation ; inversé si la courroie est croisée)
+ │     └── Engrenages (dents Z)──► Loi : Z1 · N1 = Z2 · N2  (Sens de rotation inversé en contact direct ; sans glissement)
+ │
+ ├──► 2. RAPPORT DE TRANSMISSION (i)
+ │     ├── Formule générale :  i = N2 / N1 = D1 / D2 = Z1 / Z2
+ │     ├── Si i > 1 : Système MULTIPLICATEUR de vitesse (N2 > N1 : tourne plus vite mais avec moins de couple/force)
+ │     ├── Si i = 1 : Maintient la vitesse (N2 = N1)
+ │     └── Si i < 1 : Système RÉDUCTEUR de vitesse (N2 < N1 : tourne plus lentement mais multiplie le couple/force)
+ │
+ └──► 3. VITESSE DE ROTATION (N), ANGULAIRE (ω) ET LINÉAIRE (v)
+       ├── Vitesse de rotation (N) ──► Mesurée en tr/min (rpm - tours par minute)
+       ├── Vitesse angulaire (ω)   ──► ω = (N · 2 · π) / 60   [rad/s - Identique pour tous les points du disque]
+       └── Vitesse linéaire (v)    ──► v = ω · r              [m/s - Dépend du rayon r en mètres ! Pour km/h : · 3,6]`,
+        sec2Title: "2. Formulaire Résumé et Les 5 Pièges Classiques d'Examen",
+        tableHeaders: ["Grandeur / Concept", "Symbole", "Formule Principale", "Unités SI / Habituelles"],
+        tableRows: [
+            ["Poids / Force de gravité", "P, F, R", "P = m · g  (g = 9,8 m/s²)", "Newtons [N]"],
+            ["Travail mécanique / Énergie", "W, E", "W = F · d", "Joules [J] (1 J = 1 N·m)"],
+            ["Puissance mécanique", "P", "P = W / t", "Watts [W] (1 W = 1 J/s)"],
+            ["Rendement", "η", "η = (W_utile / E_consommée) · 100", "Pourcentage [%]"],
+            ["Loi du Levier", "—", "F · dF = R · dR", "F, R en [N] ; dF, dR même unité [m ou cm]"],
+            ["Avantage Mécanique", "AM", "AM = R / F  (levier : dF / dR)", "Sans dimension (sans unité)"],
+            ["Palan Factoriel vs Potentiel", "F", "Factoriel : F = R / (2·n) │ Potentiel : F = R / 2^n", "n = nombre de poulies mobiles"],
+            ["Rapport de transmission", "i", "i = N2 / N1 = D1 / D2 = Z1 / Z2", "Sans dimension (N en rpm, D en mm/cm, Z en dents)"],
+            ["Vitesse angulaire", "ω", "ω = (N · 2 · π) / 60", "Radians par seconde [rad/s]"],
+            ["Vitesse linéaire", "v", "v = ω · r  (où r = D / 2)", "Mètres par seconde [m/s] (× 3,6 pour km/h)"]
+        ],
+        trapsTitle: "⚠️ Les 5 Pièges Classiques d'Examen (Attention !)",
+        trapsList: [
+            "<strong>Confondre Masse (kg) et Force/Poids (N) :</strong> Si l'énoncé donne une charge en kilogrammes (ex : <code>200 kg</code>), multipliez-la d'abord par <code>g = 9,8 m/s²</code> pour la convertir en Newtons (<code>1960 N</code>) avant d'appliquer la loi du levier.",
+            "<strong>Le bras de la brouette (2e genre) :</strong> Lorsqu'un schéma indique deux segments cotés (ex : <code>0,4 m</code> de la roue à la charge et <code>1,2 m</code> de la charge aux poignées), le bras de force total depuis le pivot est la <strong>somme</strong> : <code>dF = 0,4 + 1,2 = 1,6 m</code> !",
+            "<strong>Diamètre vs Rayon dans la vitesse linéaire (v = ω · r) :</strong> Les problèmes de poulies et de roues donnent presque toujours le <strong>diamètre en cm</strong>. Il faut le diviser par 2 pour obtenir le rayon et le convertir en <strong>mètres</strong> avant de multiplier par ω.",
+            "<strong>Formule du Rapport de Transmission (i) :</strong> Les vitesses sont inversement proportionnelles aux diamètres et aux dents : <code>i = N2 / N1 = D1 / D2 = Z1 / Z2</code>. Vérifiez toujours la logique : la petite roue tourne toujours plus vite que la grande !",
+            "<strong>Longueur de corde tirée dans les poulies et palans :</strong> Si un palan réduit la force d'un facteur (<code>AM</code>), il faut tirer <code>AM</code> fois plus de longueur de corde (<code>L = AM · h</code>) et la charge monte <code>AM</code> fois moins vite (<code>v_charge = v_corde / AM</code>)."
+        ],
+        part2Badge: "PARTIE II · CORRIGÉ PAS À PAS DU DOSSIER D'ACTIVITÉS (26 EXERCICES)",
+        sec3Title: "3. Corrigé Bloc A : Leviers (Exercices 1 à 11)",
+        sec4Title: "4. Corrigé Bloc B : Poulies et Palans (Exercices 12 à 20)",
+        sec5Title: "5. Corrigé Bloc C : Transmission Circulaire et Cinématique (Exercices 21 à 26)",
+        part3Badge: "PARTIE III · PROPOSITION D'EXAMEN OFFICIEL 4e ESO + BARÈME DE CORRECTION",
+        sec6Title: "6. Examen d'Évaluation : UP1 Systèmes Mécaniques (10 Points)",
+        toggleBtnShow: "👁️ Afficher le Corrigé de l'Examen",
+        toggleBtnHide: "🙈 Masquer le Corrigé (Mode Impression Élèves)",
+        footerText: "Département de Technologie et d'Informatique · Technologie 4e ESO (UP1 : Systèmes Mécaniques) — Prof. Vicent"
+    }
+};
+
+const exercisesData = [
+    // BLOC A: PALANQUES (1-11)
+    {
+        id: 1, block: "A",
+        q: {
+            ca: "Identificació de gèneres. Indica on és el fulcre (Δ), la força (F) i la resistència (R) en els següents objectes i digues de quin grau (1r, 2n o 3r) són: a) Un carretó d'obra, b) Unes pinces de depilar, c) Unes tisores.",
+            es: "Identificación de géneros. Indica dónde está el fulcro (Δ), la fuerza (F) y la resistencia (R) en los siguientes objetos y di de qué grado (1.º, 2.º o 3.º) son: a) Una carretilla de obra, b) Unas pinzas de depilar, c) Unas tijeras.",
+            en: "Identifying lever classes. Indicate the position of the fulcrum (Δ), effort force (F), and load/resistance (R) in the following objects and state their class (1st, 2nd, or 3rd): a) A wheelbarrow, b) Tweezers, c) Scissors.",
+            fr: "Identification des genres. Indiquez où se trouvent le point d'appui/pivot (Δ), la force motrice (F) et la résistance (R) dans les objets suivants et précisez leur genre (1er, 2e ou 3e) : a) Une brouette, b) Une pince à épiler, c) Des ciseaux."
+        },
+        sol: {
+            ca: `<ul>
+                <li><strong>a) Carretó d'obra → Palanca de 2n gènere:</strong> El fulcre (Δ) és a l'eix de la roda (extrem), la resistència (R) és la càrrega dins la caixa (<strong>al mig</strong>) i la força (F) s'aplica a les nanses ( a l'altre extrem). Com que R està al mig (<code>dF > dR</code>), sempre té avantatge mecànic <code>AM > 1</code>.</li>
+                <li><strong>b) Pinces de depilar → Palanca de 3r gènere:</strong> El fulcre (Δ) és a l'extrem on s'uneixen les dues làmines, la força (F) es fa amb els dits <strong>al mig</strong> i la resistència (R) és el pèl a l'extrem oposat. Com que F està al mig (<code>dF < dR</code>), té <code>AM < 1</code> (guanya precisió).</li>
+                <li><strong>c) Tisores → Palanca de 1r gènere:</strong> El fulcre (Δ) és el cargol central (<strong>al mig</strong>), la força (F) s'aplica a les nanses en un extrem i la resistència (R) és el cartró o paper a les fulles de tall a l'altre extrem.</li>
+            </ul>`,
+            es: `<ul>
+                <li><strong>a) Carretilla de obra → Palanca de 2.º género:</strong> El fulcro (Δ) está en el eje de la rueda (extremo), la resistencia (R) es la carga en la cubeta (<strong>en medio</strong>) y la fuerza (F) se aplica en las empuñaduras (otro extremo). Siempre ahorra esfuerzo (<code>AM > 1</code>).</li>
+                <li><strong>b) Pinzas de depilar → Palanca de 3.er género:</strong> El fulcro (Δ) está en el extremo unido, la fuerza (F) se aplica con los dedos <strong>en medio</strong> y la resistencia (R) está en la punta. Tiene <code>AM < 1</code> (gana precisión).</li>
+                <li><strong>c) Tijeras → Palanca de 1.er género:</strong> El fulcro (Δ) es el tornillo central (<strong>en medio</strong>), la fuerza (F) se aplica en los mangos y la resistencia (R) es el material en las hojas de corte.</li>
+            </ul>`,
+            en: `<ul>
+                <li><strong>a) Wheelbarrow → Class 2 Lever:</strong> The fulcrum (Δ) is at the wheel axle (end), the resistance/load (R) is inside the tray (<strong>in the middle</strong>), and the effort (F) is applied at the handles (other end). Always saves effort (<code>AM > 1</code>).</li>
+                <li><strong>b) Tweezers → Class 3 Lever:</strong> The fulcrum (Δ) is at the joined end, the effort (F) is applied by the fingers <strong>in the middle</strong>, and the resistance (R) is at the tip. Has <code>AM < 1</code> (gains precision).</li>
+                <li><strong>c) Scissors → Class 1 Lever:</strong> The fulcrum (Δ) is the central pivot screw (<strong>in the middle</strong>), the effort (F) is at the handles, and the resistance (R) is the material between the blades.</li>
+            </ul>`,
+            fr: `<ul>
+                <li><strong>a) Brouette → Levier du 2e genre :</strong> Le pivot (Δ) est sur l'axe de la roue (extrémité), la résistance (R) est la charge dans la cuve (<strong>au milieu</strong>) et la force (F) est appliquée aux poignées. Économise toujours l'effort (<code>AM > 1</code>).</li>
+                <li><strong>b) Pince à épiler → Levier du 3e genre :</strong> Le pivot (Δ) est à l'extrémité soudée, la force (F) est exercée par les doigts <strong>au milieu</strong> et la résistance (R) est à la pointe. <code>AM < 1</code> (gagne en précision).</li>
+                <li><strong>c) Ciseaux → Levier du 1er genre :</strong> Le pivot (Δ) est la vis centrale (<strong>au milieu</strong>), la force (F) s'exerce sur les anneaux et la résistance (R) est le matériau entre les lames.</li>
+            </ul>`
+        }
+    },
+    {
+        id: 2, block: "A",
+        q: {
+            ca: "Unes tisores tenen el punt de suport a 10 cm de les nanses i a 5 cm de les fulles de tall. Si s'aplica una força de 20 N a les nanses, quina força s'exerceix sobre el material a tallar?",
+            es: "Unas tijeras tienen el punto de apoyo a 10 cm de los mangos y a 5 cm de las hojas de corte. Si se aplica una fuerza de 20 N en los mangos, ¿qué fuerza se ejerce sobre el material a cortar?",
+            en: "A pair of scissors has its pivot 10 cm from the handles and 5 cm from the cutting blades. If an effort force of 20 N is applied to the handles, what force is exerted on the material being cut?",
+            fr: "Des ciseaux ont leur point d'appui à 10 cm des anneaux et à 5 cm des lames de coupe. Si l'on applique une force de 20 N sur les anneaux, quelle force s'exerce sur le matériau à couper ?"
+        },
+        math: `Dades: dF = 10 cm | dR = 5 cm | F = 20 N
+Llei de la palanca: F · dF = R · dR
+20 N · 10 cm = R · 5 cm  ──►  200 = 5 · R  ──►  R = 200 / 5 = 40 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> S'exerceix una força de resistència de <strong>40 N</strong> sobre el material a tallar (<code>AM = 10 / 5 = 2</code>, multiplica la força per 2).",
+            es: "<strong>Resultado:</strong> Se ejerce una fuerza de corte de <strong>40 N</strong> sobre el material (<code>AM = 10 / 5 = 2</code>, duplica la fuerza aplicada).",
+            en: "<strong>Result:</strong> A cutting force of <strong>40 N</strong> is exerted on the material (<code>AM = 10 / 5 = 2</code>, doubling the input force).",
+            fr: "<strong>Résultat :</strong> Une force de coupe de <strong>40 N</strong> s'exerce sur le matériau (<code>AM = 10 / 5 = 2</code>, la force est doublée)."
+        }
+    },
+    {
+        id: 3, block: "A",
+        q: {
+            ca: "En una palanca, calcula la força que cal exercir per aixecar un pes de 200 kg (braç de potència = 2 m i braç de resistència = 0,5 m). Quin és l'avantatge mecànic d'aquesta palanca? De quin gènere podria ser?",
+            es: "En una palanca, calcula la fuerza que hay que ejercer para levantar un peso de 200 kg (brazo de potencia = 2 m y brazo de resistencia = 0,5 m). ¿Cuál es la ventaja mecánica de esta palanca? ¿De qué género podría ser?",
+            en: "For a lever, calculate the effort force needed to lift a 200 kg mass (effort arm = 2 m, resistance arm = 0.5 m). What is the mechanical advantage? What class of lever could it be?",
+            fr: "Dans un levier, calculez la force à exercer pour soulever une masse de 200 kg (bras de force = 2 m et bras de résistance = 0,5 m). Quel est l'avantage mécanique ? De quel genre pourrait-il être ?"
+        },
+        math: `1) Passem la massa a força pes (R) amb g = 9,8 m/s² (o g ≈ 10 m/s²):
+   R = m · g = 200 kg · 9,8 m/s² = 1960 N   (amb g = 10 m/s² ──► R = 2000 N)
+2) Llei de la palanca (F · dF = R · dR):
+   F · 2 m = 1960 N · 0,5 m  ──►  F = 980 / 2 = 490 N   (amb g = 10 ──► F = 500 N)
+3) Avantatge Mecànic (AM):
+   AM = dF / dR = 2 m / 0,5 m = 4   (o bé AM = R / F = 1960 / 490 = 4)`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Cal exercir una força de <strong>490 N</strong> (o 500 N si s'usa g = 10 m/s²). L'avantatge mecànic és <strong>AM = 4</strong>. Com que <code>AM > 1</code> (<code>dF > dR</code>), podria ser una palanca de <strong>1r gènere</strong> (amb el fulcre més a prop de la càrrega) o de <strong>2n gènere</strong> (però mai de 3r gènere).",
+            es: "<strong>Resultado:</strong> Hay que ejercer una fuerza de <strong>490 N</strong> (o 500 N con g = 10 m/s²). La ventaja mecánica es <strong>AM = 4</strong>. Como <code>AM > 1</code> (<code>dF > dR</code>), podría ser de <strong>1.er género</strong> o de <strong>2.º género</strong>.",
+            en: "<strong>Result:</strong> An effort force of <strong>490 N</strong> is required (or 500 N using g = 10 m/s²). The mechanical advantage is <strong>AM = 4</strong>. Since <code>AM > 1</code> (<code>dF > dR</code>), it could be a <strong>Class 1</strong> or <strong>Class 2</strong> lever.",
+            fr: "<strong>Résultat :</strong> Il faut exercer une force de <strong>490 N</strong> (ou 500 N avec g = 10 m/s²). L'avantage mécanique est <strong>AM = 4</strong>. Comme <code>AM > 1</code> (<code>dF > dR</code>), ce levier peut être du <strong>1er genre</strong> ou du <strong>2e genre</strong>."
+        }
+    },
+    {
+        id: 4, block: "A",
+        q: {
+            ca: "Unes pinces de cuina tenen el punt de pressió dels dits a 6 cm de l'articulació. Si el menjar està a 18 cm i cal exercir una força d'agafada sobre ell de 4 N, quina força cal fer amb els dits?",
+            es: "Unas pinzas de cocina tienen el punto de presión de los dedos a 6 cm de la articulación. Si la comida está a 18 cm y hay que ejercer una fuerza de agarre sobre ella de 4 N, ¿qué fuerza hay que hacer con los dedos?",
+            en: "Kitchen tongs have the finger grip point 6 cm from the pivot hinge. If the food is at 18 cm and requires a gripping force of 4 N, what effort force must the fingers apply?",
+            fr: "Des pinces de cuisine ont le point de pression des doigts à 6 cm de l'articulation. Si l'aliment est à 18 cm et nécessite une force de serrage de 4 N, quelle force faut-il exercer avec les doigts ?"
+        },
+        math: `Dades: dF = 6 cm | dR = 18 cm | R = 4 N  (Palanca de 3r gènere)
+Llei de la palanca: F · dF = R · dR
+F · 6 cm = 4 N · 18 cm  ──►  6 · F = 72  ──►  F = 72 / 6 = 12 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Cal fer una força de <strong>12 N</strong> amb els dits (el triple de la força d'agafada, ja que és una palanca de 3r gènere amb <code>AM = 6 / 18 = 0,33</code>).",
+            es: "<strong>Resultado:</strong> Hay que aplicar una fuerza de <strong>12 N</strong> con los dedos (palanca de 3.er género con <code>AM = 6 / 18 = 0,33</code>).",
+            en: "<strong>Result:</strong> The fingers must apply a force of <strong>12 N</strong> (Class 3 lever with <code>AM = 6 / 18 = 0.33</code>).",
+            fr: "<strong>Résultat :</strong> Il faut exercer une force de <strong>12 N</strong> avec les doigts (levier du 3e genre avec <code>AM = 6 / 18 = 0,33</code>)."
+        }
+    },
+    {
+        id: 5, block: "A",
+        q: {
+            ca: "Amb un carretó es vol moure una càrrega de 600 N situada a 0,4 m de la roda. Quina longitud mínima ha de tenir el braç de la força si la força màxima que pot fer una persona és de 150 N?",
+            es: "Con una carretilla se quiere mover una carga de 600 N situada a 0,4 m de la rueda. ¿Qué longitud mínima debe tener el brazo de la fuerza si la fuerza máxima que puede hacer una persona es de 150 N?",
+            en: "A wheelbarrow is used to move a 600 N load located 0.4 m from the wheel axle. What is the minimum length of the effort arm if the person's maximum effort force is 150 N?",
+            fr: "Avec une brouette, on veut déplacer une charge de 600 N située à 0,4 m de la roue. Quelle longueur minimale doit avoir le bras de force si la force maximale de la personne est de 150 N ?"
+        },
+        math: `Dades: R = 600 N | dR = 0,4 m | F = 150 N
+Llei de la palanca: F · dF = R · dR
+150 N · dF = 600 N · 0,4 m  ──►  150 · dF = 240  ──►  dF = 240 / 150 = 1,6 m`,
+        sol: {
+            ca: "<strong>Resultat:</strong> El braç de la força ha de tenir una longitud mínima d'<strong>1,6 m</strong> des de l'eix de la roda.",
+            es: "<strong>Resultado:</strong> El brazo de la fuerza debe tener una longitud mínima de <strong>1,6 m</strong> desde el eje de la rueda.",
+            en: "<strong>Result:</strong> The effort arm must have a minimum length of <strong>1.6 m</strong> measured from the wheel axle.",
+            fr: "<strong>Résultat :</strong> Le bras de force doit avoir une longueur minimale de <strong>1,6 m</strong> depuis l'axe de la roue."
+        }
+    },
+    {
+        id: 6, block: "A",
+        q: {
+            ca: "Unes alicates tenen el punt d'articulació a 15 cm del mànec (on apliquem la força) i a 3 cm de la boca de tall. Si premem el mànec amb una força de 30 N, calcula la força exercida a la boca de tall i digues quin gènere i quin avantatge mecànic té.",
+            es: "Unos alicates tienen el punto de articulación a 15 cm del mango (donde aplicamos la fuerza) y a 3 cm de la boca de corte. Si apretamos el mango con una fuerza de 30 N, calcula la fuerza ejercida en la boca de corte y di qué género y qué ventaja mecánica tiene.",
+            en: "A pair of pliers has its pivot hinge 15 cm from the handle (where effort is applied) and 3 cm from the cutting jaws. If we squeeze the handle with 30 N of force, calculate the cutting force at the jaws, the lever class, and its mechanical advantage.",
+            fr: "Une pince coupante a son articulation à 15 cm du manche (où la force est appliquée) et à 3 cm des mâchoires de coupe. Si l'on serre le manche avec une force de 30 N, calculez la force exercée aux mâchoires, son genre et son avantage mécanique."
+        },
+        math: `Dades: dF = 15 cm | dR = 3 cm | F = 30 N
+1) Llei de la palanca: 30 N · 15 cm = R · 3 cm  ──►  R = 450 / 3 = 150 N
+2) Avantatge Mecànic: AM = dF / dR = 15 cm / 3 cm = 5  (o AM = 150 N / 30 N = 5)`,
+        sol: {
+            ca: "<strong>Resultat:</strong> La força exercida a la boca de tall és de <strong>150 N</strong>. És una palanca de <strong>1r gènere</strong> (l'articulació està al mig) i té un avantatge mecànic <strong>AM = 5</strong>.",
+            es: "<strong>Resultado:</strong> La fuerza en la boca de corte es de <strong>150 N</strong>. Es una palanca de <strong>1.er género</strong> y su ventaja mecánica es <strong>AM = 5</strong>.",
+            en: "<strong>Result:</strong> The cutting force at the jaws is <strong>150 N</strong>. It is a <strong>Class 1 lever</strong> with a mechanical advantage of <strong>AM = 5</strong>.",
+            fr: "<strong>Résultat :</strong> La force exercée aux mâchoires est de <strong>150 N</strong>. C'est un levier du <strong>1er genre</strong> avec un avantage mécanique <strong>AM = 5</strong>."
+        }
+    },
+    {
+        id: 7, block: "A",
+        q: {
+            ca: "Calcula quina força cal exercir per transportar un sac de 20 kg amb el carretó de la figura (cotes: 0,4 m de la roda a R, i 1,2 m de R a F). Quin avantatge mecànic s'obté? De quin gènere és aquesta palanca?",
+            es: "Calcula qué fuerza hay que ejercer para transportar un saco de 20 kg con la carretilla de la figura (cotas: 0,4 m de la rueda a R, y 1,2 m de R a F). ¿Qué ventaja mecánica se obtiene? ¿De qué género es esta palanca?",
+            en: "Calculate the effort force needed to carry a 20 kg sack with the pictured wheelbarrow (dimensions: 0.4 m from wheel to R, and 1.2 m from R to F). What mechanical advantage is obtained? What class of lever is it?",
+            fr: "Calculez la force nécessaire pour transporter un sac de 20 kg avec la brouette de la figure (cotes : 0,4 m de la roue à R, et 1,2 m de R à F). Quel avantage mécanique obtient-on ? De quel genre est ce levier ?"
+        },
+        math: `⚠️ ATENCIÓ DOCENT AL BRAÇ DE FORÇA:
+   dR = 0,4 m
+   dF = 0,4 m + 1,2 m = 1,6 m  (distància total des del fulcre de la roda fins al puny!)
+1) Pes del sac (R): R = m · g = 20 kg · 9,8 m/s² = 196 N  (amb g = 10 ──► R = 200 N)
+2) Llei de la palanca: F · 1,6 m = 196 N · 0,4 m  ──►  F = 78,4 / 1,6 = 49 N  (amb g = 10 ──► F = 50 N)
+3) Avantatge Mecànic: AM = dF / dR = 1,6 m / 0,4 m = 4`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Cal exercir una força de <strong>49 N</strong> (o 50 N amb g = 10 m/s²). L'avantatge mecànic és <strong>AM = 4</strong> i és una palanca de <strong>2n gènere</strong> (la resistència R està entre la roda i les mans).",
+            es: "<strong>Resultado:</strong> Hay que ejercer una fuerza de <strong>49 N</strong> (o 50 N con g = 10 m/s²). La ventaja mecánica es <strong>AM = 4</strong> y es una palanca de <strong>2.º género</strong>.",
+            en: "<strong>Resultado:</strong> An effort force of <strong>49 N</strong> (or 50 N with g = 10 m/s²) is required. The mechanical advantage is <strong>AM = 4</strong> and it is a <strong>Class 2 lever</strong>.",
+            fr: "<strong>Résultat :</strong> Il faut exercer une force de <strong>49 N</strong> (ou 50 N avec g = 10 m/s²). L'avantage mécanique est <strong>AM = 4</strong> et c'est un levier du <strong>2e genre</strong>."
+        }
+    },
+    {
+        id: 8, block: "A",
+        q: {
+            ca: "En una barra d'acer de 3 m que funciona com a palanca de 1r grau, en el braç esquerre pengen dues càrregues: R1 = 200 N a 0,5 m del fulcre i R2 = 400 N a 1,0 m del fulcre. a) A quina distància del fulcre (bf), en el braç dret, s'ha d'aplicar una força de 250 N per mantenir l'equilibri? b) Quina és la força total vertical que suporta el fulcre?",
+            es: "En una barra de acero de 3 m (palanca de 1.er grado), en el brazo izquierdo cuelgan dos cargas: R1 = 200 N a 0,5 m del fulcro y R2 = 400 N a 1,0 m del fulcro. a) ¿A qué distancia del fulcro (bf), en el brazo derecho, debe aplicarse una fuerza de 250 N para mantener el equilibrio? b) ¿Cuál es la fuerza total vertical que soporta el fulcro?",
+            en: "On a 3 m steel bar acting as a Class 1 lever, two loads hang on the left arm: R1 = 200 N at 0.5 m from the fulcrum and R2 = 400 N at 1.0 m from the fulcrum. a) At what distance from the fulcrum (bf) on the right arm must a 250 N force be applied for horizontal equilibrium? b) What is the total vertical reaction force supported by the fulcrum?",
+            fr: "Sur une barre d'acier de 3 m (levier du 1er genre), deux charges pendent sur le bras gauche : R1 = 200 N à 0,5 m du pivot et R2 = 400 N à 1,0 m du pivot. a) À quelle distance du pivot (bf), sur le bras droit, faut-il appliquer une force de 250 N pour maintenir l'équilibre ? b) Quelle est la force verticale totale supportée par le pivot ?"
+        },
+        math: `a) Equilibri de moments (Suma moments esquerra = Moment dreta):
+   R1 · dR1 + R2 · dR2 = F · bf
+   (200 N · 0,5 m) + (400 N · 1,0 m) = 250 N · bf
+   100 + 400 = 250 · bf  ──►  500 = 250 · bf  ──►  bf = 500 / 250 = 2,0 m
+   (Comprovació geomètrica: 1,0 m a l'esquerra + 2,0 m a la dreta = 3,0 m totals de la barra, és possible!)
+b) Equilibri de forces verticals sobre el fulcre (N_fulcre):
+   N_fulcre = R1 + R2 + F = 200 N + 400 N + 250 N = 850 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> a) La força de 250 N s'ha d'aplicar a <strong>2,0 m</strong> a la dreta del fulcre. b) El punt de suport suporta una força vertical total (reacció) de <strong>850 N</strong>.",
+            es: "<strong>Resultado:</strong> a) La fuerza debe aplicarse a <strong>2,0 m</strong> del fulcro. b) El fulcro soporta una reacción vertical total de <strong>850 N</strong>.",
+            en: "<strong>Result:</strong> a) The 250 N force must be applied at <strong>2.0 m</strong> from the fulcrum. b) The fulcrum supports a total vertical reaction force of <strong>850 N</strong>.",
+            fr: "<strong>Résultat :</strong> a) La force doit être appliquée à <strong>2,0 m</strong> du pivot. b) Le pivot supporte une réaction verticale totale de <strong>850 N</strong>."
+        }
+    },
+    {
+        id: 9, block: "A",
+        q: {
+            ca: "Un operari vol utilitzar una barra de ferro de 2,5 m de longitud total per dissenyar una palanca de 1r grau i aixecar un contenidor de 200 kg (g = 9,8 m/s²) aplicant una força màxima de 400 N a l'extrem oposat. a) A quina distància màxima de la càrrega (br) s'ha de col·locar el fulcre? b) Quin avantatge mecànic (AM) tindrà?",
+            es: "Un operario quiere usar una barra de hierro de 2,5 m de longitud total para diseñar una palanca de 1.er grado y levantar un contenedor de 200 kg (g = 9,8 m/s²) aplicando una fuerza máxima de 400 N en el extremo opuesto. a) ¿A qué distancia máxima de la carga (br) debe colocarse el fulcro? b) ¿Qué ventaja mecánica (AM) tendrá?",
+            en: "A worker wants to use a 2.5 m iron bar as a Class 1 lever to lift a 200 kg container (g = 9.8 m/s²) by applying a maximum force of 400 N at the opposite end. a) At what maximum distance from the load (br) must the fulcrum be placed? b) What mechanical advantage (AM) will it have?",
+            fr: "Un opérateur veut utiliser une barre de fer de 2,5 m de longueur totale comme levier du 1er genre pour soulever un conteneur de 200 kg (g = 9,8 m/s²) en appliquant une force maximale de 400 N à l'extrémité opposée. a) À quelle distance maximale de la charge (br) faut-il placer le pivot ? b) Quel sera son avantage mécanique (AM) ?"
+        },
+        math: `1) Pes del contenidor: R = 200 kg · 9,8 m/s² = 1960 N
+2) Com que la barra fa 2,5 m i és de 1r grau: bf + br = 2,5 m  ──►  bf = 2,5 - br
+3) Llei de la palanca: F · bf = R · br
+   400 · (2,5 - br) = 1960 · br
+   1000 - 400 · br = 1960 · br  ──►  1000 = 2360 · br  ──►  br = 1000 / 2360 ≈ 0,424 m (42,4 cm)
+   (I el braç de força serà bf = 2,5 - 0,424 = 2,076 m)
+4) Avantatge Mecànic: AM = R / F = 1960 N / 400 N = 4,9`,
+        sol: {
+            ca: "<strong>Resultat:</strong> a) El fulcre s'ha de col·locar com a màxim a <strong>0,424 m (42,4 cm)</strong> de la càrrega. b) L'avantatge mecànic és <strong>AM = 4,9</strong>.",
+            es: "<strong>Resultado:</strong> a) El fulcro debe colocarse como máximo a <strong>0,424 m (42,4 cm)</strong> de la carga. b) La ventaja mecánica es <strong>AM = 4,9</strong>.",
+            en: "<strong>Result:</strong> a) The fulcrum must be placed at most <strong>0.424 m (42.4 cm)</strong> from the load. b) The mechanical advantage is <strong>AM = 4.9</strong>.",
+            fr: "<strong>Résultat :</strong> a) Le pivot doit être placé au maximum à <strong>0,424 m (42,4 cm)</strong> de la charge. b) L'avantage mécanique est <strong>AM = 4,9</strong>."
+        }
+    },
+    {
+        id: 10, block: "A",
+        q: {
+            ca: "El braç humà funciona com una palanca de 3r grau on el colze és el fulcre. El bíceps s'insereix a 4 cm del colze i la mà sosté una mancorna de 10 kg a 32 cm del colze (g = 9,8 m/s²). a) Calcula la força del bíceps (F). b) Calcula l'AM i explica per què el cos humà utilitza palanques amb AM < 1.",
+            es: "El brazo humano funciona como una palanca de 3.er grado donde el codo es el fulcro. El bíceps se inserta a 4 cm del codo y la mano sostiene una mancuerna de 10 kg a 32 cm del codo (g = 9,8 m/s²). a) Calcula la fuerza del bíceps (F). b) Calcula la AM y explica por qué el cuerpo humano usa palancas con AM < 1.",
+            en: "The human arm acts as a Class 3 lever with the elbow as the fulcrum. The biceps attaches 4 cm from the elbow, and the hand holds a 10 kg dumbbell 32 cm from the elbow (g = 9.8 m/s²). a) Calculate the biceps contraction force (F). b) Calculate the AM and explain why the human body uses levers with AM < 1.",
+            fr: "Le bras humain fonctionne comme un levier du 3e genre où le coude est le pivot. Le biceps s'insère à 4 cm du coude et la main tient un haltère de 10 kg à 32 cm du coude (g = 9,8 m/s²). a) Calculez la force du biceps (F). b) Calculez l'AM et expliquez pourquoi le corps humain utilise des leviers avec AM < 1."
+        },
+        math: `1) Pes de la mancorna: R = 10 kg · 9,8 m/s² = 98 N
+2) Llei de la palanca: F · 4 cm = 98 N · 32 cm  ──►  F = 3136 / 4 = 784 N
+3) Avantatge Mecànic: AM = dF / dR = 4 cm / 32 cm = 1/8 = 0,125`,
+        sol: {
+            ca: "<strong>Resultat:</strong> a) El múscul bíceps ha de fer una força de contracció de <strong>784 N</strong> (8 vegades el pes de la mancorna!). b) <strong>AM = 0,125</strong>. Tot i que cal fer molta més força, el cos humà utilitza palanques de 3r grau perquè permeten un disseny anatòmic compacte i, amb una contracció muscular molt petita (pocs centímetres), s'obté un <strong>gran desplaçament i gran velocitat de moviment a la mà</strong>.",
+            es: "<strong>Resultado:</strong> a) El bíceps debe ejercer <strong>784 N</strong>. b) <strong>AM = 0,125</strong>. El cuerpo humano usa palancas de 3.er género porque permiten que una pequeña contracción del músculo produzca un <strong>gran recorrido y alta velocidad en el extremo de la mano</strong>.",
+            en: "<strong>Result:</strong> a) The biceps must exert <strong>784 N</strong>. b) <strong>AM = 0.125</strong>. The human body uses Class 3 levers because a short muscle contraction produces a <strong>wide range of motion and high speed at the hand</strong>.",
+            fr: "<strong>Résultat :</strong> a) Le biceps doit exercer <strong>784 N</strong>. b) <strong>AM = 0,125</strong>. Le corps humain utilise des leviers du 3e genre car une petite contraction musculaire permet d'obtenir une <strong>grande amplitude et une grande vitesse de déplacement de la main</strong>."
+        }
+    },
+    {
+        id: 11, block: "A",
+        q: {
+            ca: "Una premsa mecànica manual combina dues palanques en sèrie: Palanca 1 (1r grau: F1 = 100 N, bf1 = 0,8 m, br1 = 0,2 m) la sortida de la qual actua com a força d'entrada F2 sobre la Palanca 2 (2n grau: bf2 = 1,2 m, br2 = 0,3 m). a) Calcula la força final R2. b) Calcula AM1, AM2 i AM_total.",
+            es: "Una prensa mecánica manual combina dos palancas en serie: Palanca 1 (1.er grado: F1 = 100 N, bf1 = 0,8 m, br1 = 0,2 m) cuya salida actúa como entrada F2 sobre la Palanca 2 (2.º grado: bf2 = 1,2 m, br2 = 0,3 m). a) Calcula la fuerza final R2. b) Calcula AM1, AM2 y AM_total.",
+            en: "A manual mechanical press combines two levers in series: Lever 1 (Class 1: F1 = 100 N, bf1 = 0.8 m, br1 = 0.2 m) whose output acts as input F2 on Lever 2 (Class 2: bf2 = 1.2 m, br2 = 0.3 m). a) Calculate the final crushing force R2. b) Calculate AM1, AM2, and AM_total.",
+            fr: "Une presse mécanique manuelle combine deux leviers en série : Levier 1 (1er genre : F1 = 100 N, bf1 = 0,8 m, br1 = 0,2 m) dont la sortie agit comme entrée F2 sur le Levier 2 (2e genre : bf2 = 1,2 m, br2 = 0,3 m). a) Calculez la force finale R2. b) Calculez AM1, AM2 et AM_total."
+        },
+        math: `1) Primera palanca: AM1 = bf1 / br1 = 0,8 / 0,2 = 4
+   R1 = F1 · AM1 = 100 N · 4 = 400 N  (aquesta força es transmet com F2 = 400 N)
+2) Segona palanca: AM2 = bf2 / br2 = 1,2 / 0,3 = 4
+   R2 = F2 · AM2 = 400 N · 4 = 1600 N
+3) Avantatge Mecànic Total: AM_total = AM1 · AM2 = 4 · 4 = 16  (o R2 / F1 = 1600 / 100 = 16)`,
+        sol: {
+            ca: "<strong>Resultat:</strong> a) La força final sobre el material és de <strong>1600 N</strong>. b) <strong>AM1 = 4</strong>, <strong>AM2 = 4</strong> i l'avantatge mecànic total del sistema en sèrie és el producte: <strong>AM_total = 16</strong>.",
+            es: "<strong>Resultado:</strong> a) La fuerza final es de <strong>1600 N</strong>. b) <strong>AM1 = 4</strong>, <strong>AM2 = 4</strong> y <strong>AM_total = 16</strong>.",
+            en: "<strong>Result:</strong> a) The final force is <strong>1600 N</strong>. b) <strong>AM1 = 4</strong>, <strong>AM2 = 4</strong>, and <strong>AM_total = 16</strong>.",
+            fr: "<strong>Résultat :</strong> a) La force finale est de <strong>1600 N</strong>. b) <strong>AM1 = 4</strong>, <strong>AM2 = 4</strong> et <strong>AM_total = 16</strong>."
+        }
+    },
+
+    // BLOC B: POLITGES I POLISPASTOS (12-20)
+    {
+        id: 12, block: "B",
+        q: {
+            ca: "Es vol aixecar un encofrat de 350 N de pes mitjançant una politja fixa. Quina força F cal exercir per mantenir la càrrega en equilibri?",
+            es: "Se quiere levantar un encofrado de 350 N de peso mediante una polea fija. ¿Qué fuerza F hay que ejercer para mantener la carga en equilibrio?",
+            en: "A 350 N formwork load is lifted using a single fixed pulley. What effort force F is required to keep the load in equilibrium?",
+            fr: "On veut soulever un coffrage de 350 N à l'aide d'une poulie fixe. Quelle force F faut-il exercer pour maintenir la charge en équilibre ?"
+        },
+        math: `Politja fixa: AM = 1  ──►  F = R = 350 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Cal exercir una força de <strong>350 N</strong>. Una politja fixa no redueix l'esforç (<code>AM = 1</code>), només canvia la direcció de la força per comoditat.",
+            es: "<strong>Resultado:</strong> Hay que ejercer <strong>350 N</strong>. La polea fija tiene <code>AM = 1</code> (solo cambia el sentido de la fuerza).",
+            en: "<strong>Result:</strong> An effort force of <strong>350 N</strong> is required. A fixed pulley has <code>AM = 1</code> (it only changes the direction of pull).",
+            fr: "<strong>Résultat :</strong> Il faut exercer <strong>350 N</strong>. Une poulie fixe a un <code>AM = 1</code> (elle ne fait que changer la direction de la force)."
+        }
+    },
+    {
+        id: 13, block: "B",
+        q: {
+            ca: "En un sistema format per una politja mòbil i una fixa auxiliar, quina força F cal fer per aixecar un pes de 600 N?",
+            es: "En un sistema formado por una polea móvil y una fija auxiliar, ¿qué fuerza F hay que hacer para levantar un peso de 600 N?",
+            en: "In a system consisting of one movable pulley and one auxiliary fixed pulley, what force F is needed to lift a 600 N load?",
+            fr: "Dans un système formé d'une poulie mobile et d'une poulie fixe auxiliaire, quelle force F faut-il exercer pour soulever un poids de 600 N ?"
+        },
+        math: `Politja mòbil: AM = 2  ──►  F = R / 2 = 600 N / 2 = 300 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Cal fer una força de <strong>300 N</strong> (la politja mòbil reparteix el pes en 2 trams de corda, <code>AM = 2</code>).",
+            es: "<strong>Resultado:</strong> Hay que hacer una fuerza de <strong>300 N</strong> (<code>AM = 2</code>).",
+            en: "<strong>Result:</strong> A force of <strong>300 N</strong> is needed (<code>AM = 2</code>).",
+            fr: "<strong>Résultat :</strong> Il faut exercer une force de <strong>300 N</strong> (<code>AM = 2</code>)."
+        }
+    },
+    {
+        id: 14, block: "B",
+        q: {
+            ca: "Utilitzant una politja mòbil, si volem elevar una càrrega una alçada de 2,5 m, quina longitud de corda hem d'estirar?",
+            es: "Utilizando una polea móvil, si queremos elevar una carga una altura de 2,5 m, ¿qué longitud de cuerda debemos tirar?",
+            en: "Using a movable pulley, if we want to raise a load by a height of 2.5 m, what length of rope must we pull?",
+            fr: "En utilisant une poulie mobile, si l'on veut élever une charge d'une hauteur de 2,5 m, quelle longueur de corde devons-nous tirer ?"
+        },
+        math: `Conservació del treball en politja mòbil (AM = 2):
+L_corda = AM · h = 2 · 2,5 m = 5 m`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Hem d'estirar <strong>5 m</strong> de corda (el doble de l'alçada que puja la càrrega).",
+            es: "<strong>Resultado:</strong> Debemos tirar de <strong>5 m</strong> de cuerda.",
+            en: "<strong>Result:</strong> We must pull <strong>5 m</strong> of rope.",
+            fr: "<strong>Résultat :</strong> Nous devons tirer <strong>5 m</strong> de corde."
+        }
+    },
+    {
+        id: 15, block: "B",
+        q: {
+            ca: "Un polispast lineal (factorial) està format per 3 politges fixes i 3 politges mòbils. Si la càrrega a aixecar és de 1200 N, quina força cal aplicar?",
+            es: "Un polipasto lineal (factorial) está formado por 3 poleas fijas y 3 poleas móviles. Si la carga a levantar es de 1200 N, ¿qué fuerza hay que aplicar?",
+            en: "A linear (factorial) block and tackle consists of 3 fixed pulleys and 3 movable pulleys. If the load to be lifted is 1200 N, what effort force must be applied?",
+            fr: "Un palan linéaire (factoriel) est composé de 3 poulies fixes et de 3 poulies mobiles. Si la charge à soulever est de 1200 N, quelle force faut-il appliquer ?"
+        },
+        math: `Polispast factorial amb n = 3 politges mòbils:
+AM = 2 · n = 2 · 3 = 6
+F = R / (2 · n) = 1200 N / 6 = 200 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Cal aplicar una força de <strong>200 N</strong> (<code>AM = 6</code>).",
+            es: "<strong>Resultado:</strong> Hay que aplicar una fuerza de <strong>200 N</strong> (<code>AM = 6</code>).",
+            en: "<strong>Result:</strong> An effort force of <strong>200 N</strong> must be applied (<code>AM = 6</code>).",
+            fr: "<strong>Résultat :</strong> Il faut appliquer une force de <strong>200 N</strong> (<code>AM = 6</code>)."
+        }
+    },
+    {
+        id: 16, block: "B",
+        q: {
+            ca: "Quin és l'avantatge mecànic (AM) d'un polispast lineal (factorial) que conté n = 4 politges mòbils?",
+            es: "¿Cuál es la ventaja mecánica (AM) de un polipasto lineal (factorial) que contiene n = 4 poleas móviles?",
+            en: "What is the mechanical advantage (AM) of a linear (factorial) block and tackle containing n = 4 movable pulleys?",
+            fr: "Quel est l'avantage mécanique (AM) d'un palan linéaire (factoriel) contenant n = 4 poulies mobiles ?"
+        },
+        math: `Polispast lineal/factorial: AM = 2 · n = 2 · 4 = 8`,
+        sol: {
+            ca: "<strong>Resultat:</strong> L'avantatge mecànic és <strong>AM = 8</strong> (divideix la força necessària entre 8).",
+            es: "<strong>Resultado:</strong> La ventaja mecánica es <strong>AM = 8</strong>.",
+            en: "<strong>Result:</strong> The mechanical advantage is <strong>AM = 8</strong>.",
+            fr: "<strong>Résultat :</strong> L'avantage mécanique est <strong>AM = 8</strong>."
+        }
+    },
+    {
+        id: 17, block: "B",
+        q: {
+            ca: "Es disposa d'un polispast potencial (exponencial) format per 3 politges mòbils. Si s'aplica una força d'entrada de 50 N, quina càrrega màxima es pot elevar?",
+            es: "Se dispone de un polipasto potencial (exponencial) formado por 3 poleas móviles. Si se aplica una fuerza de entrada de 50 N, ¿qué carga máxima se puede elevar?",
+            en: "An exponential (potential) pulley system has 3 movable pulleys. If an input force of 50 N is applied, what is the maximum load that can be lifted?",
+            fr: "On dispose d'un palan potentiel (exponentiel) formé de 3 poulies mobiles. Si l'on applique une force d'entrée de 50 N, quelle charge maximale peut-on soulever ?"
+        },
+        math: `Polispast potencial (n = 3):
+F = R / 2^n  ──►  R = F · 2^n = 50 N · 2³ = 50 N · 8 = 400 N`,
+        sol: {
+            ca: "<strong>Resultat:</strong> Es pot elevar una càrrega màxima de <strong>400 N</strong> (<code>AM = 2³ =

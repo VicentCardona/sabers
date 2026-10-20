@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnologia 4t ESO · UP1: Solucionari d'Activitats (Pas a Pas)</title>
+    <style>
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: #151c2c;
+    --bg-card-alt: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-indigo: #818cf8;
+    --accent-emerald: #34d399;
+    --accent-amber: #fbbf24;
+    --accent-rose: #fb7185;
+    --border-color: #334155;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding-bottom: 4rem;
+}
+
+/* Header Prof. Vicent */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 15, 25, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.4rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--text-main);
+    background: var(--bg-card-alt);
+}
+
+.nav-link.active {
+    color: var(--accent-blue);
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.lang-btn, .pdf-btn {
+    background: var(--bg-card);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lang-btn:hover, .pdf-btn:hover {
+    color: var(--text-main);
+    border-color: var(--accent-blue);
+}
+
+.lang-btn.active {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+.pdf-btn {
+    color: var(--accent-blue);
+    border-color: rgba(56, 189, 248, 0.5);
+    margin-left: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.hero {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.08));
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+.badge-emerald { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+.badge-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.3); }
+.badge-rose { background: rgba(251, 113, 133, 0.15); color: var(--accent-rose); border: 1px solid rgba(251, 113, 133, 0.3); }
+.badge-indigo { background: rgba(129, 140, 248, 0.15); color: var(--accent-indigo); border: 1px solid rgba(129, 140, 248, 0.3); }
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.card h2 {
+    font-size: 1.35rem;
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.formula-box {
+    background: #090d16;
+    border-left: 4px solid var(--accent-blue);
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    font-family: 'Cambria Math', 'Consolas', monospace;
+    font-size: 1.08rem;
+    color: var(--accent-amber);
+    margin: 0.75rem 0;
+    overflow-x: auto;
+}
+
+.step-list {
+    list-style: none;
+    margin: 0.75rem 0;
+}
+
+.step-list li {
+    background: rgba(30, 41, 59, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-list li strong {
+    color: var(--accent-blue);
+}
+
+.result-highlight {
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    color: var(--accent-emerald);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-top: 0.75rem;
+}
+
+.teacher-note {
+    background: rgba(251, 191, 36, 0.1);
+    border-left: 4px solid var(--accent-amber);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    color: #fde68a;
+    margin-top: 0.75rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    text-align: left;
+}
+
+th {
+    background: var(--bg-card-alt);
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Mind map tree nodes */
+.mindmap-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mm-branch {
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.2rem;
+    position: relative;
+}
+
+.mm-branch-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Filter bar */
+.filter-bar {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.filter-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--accent-blue);
+    color: #0b0f19;
+    border-color: var(--accent-blue);
+}
+
+.search-input {
+    flex: 1;
+    min-width: 220px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.svg-diagram {
+    background: #0d1322;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+    text-align: center;
+}
+
+/* Print / PDF Styles */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+    }
+    .topbar, .filter-bar, .no-print {
+        display: none !important;
+    }
+    .container {
+        max-width: 100% !important;
+        padding: 0.5cm !important;
+    }
+    .card, .hero, .mm-branch, .step-list li {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        margin-bottom: 0.8rem !important;
+    }
+    .hero h1, .card h2, .card h3, th, .step-list li strong {
+        color: #0f172a !important;
+    }
+    .formula-box {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border-left: 4px solid #0284c7 !important;
+    }
+    .result-highlight {
+        background: #f0fdf4 !important;
+        color: #166534 !important;
+        border: 1px solid #86efac !important;
+    }
+    .teacher-note {
+        background: #fefce8 !important;
+        color: #854d0e !important;
+        border-left: 4px solid #eab308 !important;
+    }
+}
+</style>
+</head>
+<body>
+    
+    <header class="topbar">
+        <a href="1_mapa_mental_mecanismes.html" class="brand">👨‍🏫 Prof. Vicent</a>
+        <nav class="nav-links">
+            <a href="1_mapa_mental_mecanismes.html" class="nav-link " data-i18n="nav_map">🧠 1. Mapa Mental i Estudi</a>
+            <a href="2_solucionari_activitats_mecanismes.html" class="nav-link active" data-i18n="nav_sol">✅ 2. Solucionari Activitats (26)</a>
+            <a href="3_examen_mecanismes.html" class="nav-link " data-i18n="nav_exam">📝 3. Examen i Rúbrica</a>
+        </nav>
+        <div class="controls">
+            <button class="lang-btn active" data-lang="ca" onclick="setLang('ca')">CA</button>
+            <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+            <button class="pdf-btn" onclick="window.print()">🖨️ PDF</button>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="hero">
+            <span class="badge badge-emerald" data-i18n="badge_sol">Solucionari Complet · 26 Problemes Resolts</span>
+            <h1 data-i18n="w2_title">✅ Solucionari Pas a Pas: Sistemes Mecànics</h1>
+            <p data-i18n="w2_sub">Resolució detallada de totes les activitats del dossier (Palanques, Politges/Polipastos i Transmissió Circular) amb dades, fórmules, conversions i notes didàctiques.</p>
+        </section>
+
+        <!-- Barra de filtres i cerca -->
+        <div class="filter-bar no-print">
+            <button class="filter-btn active" onclick="filterCards('all', this)">Totes (26)</button>
+            <button class="filter-btn" onclick="filterCards('palanques', this)">A. Palanques (1-11)</button>
+            <button class="filter-btn" onclick="filterCards('politges', this)">B. Politges i Polipastos (12-20)</button>
+            <button class="filter-btn" onclick="filterCards('transmissio', this)">C. Transmissió Circular (21-26)</button>
+            <input type="text" id="searchBox" class="search-input" placeholder="🔍 Cerca un exercici (ex: carretó, bíceps, trepant, polispast...)" oninput="searchCards()">
+        </div>
+
+        <div id="activities-list">
+            <!-- BLOC A: PALANQUES -->
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 1</span> Identificació de gèneres de palanques</h2>
+                <p><strong>Enunciat:</strong> Indica on és el fulcre (&Delta;), la força (F) i la resistència (R) en els següents objectes i digues de quin grau (1r, 2n o 3r) són: a) Un carretó d'obra, b) Unes pinces de depilar, c) Unes tisores.</p>
+                <ul class="step-list">
+                    <li><strong>a) Carretó d'obra &rarr; 2n grau (interresistent):</strong> El fulcre (&Delta;) és a l'eix de la roda davantera, la resistència (R) és al centre de la caixa on va la càrrega (al mig), i la força (F) s'aplica a les nanses de l'extrem.</li>
+                    <li><strong>b) Pinces de depilar &rarr; 3r grau (interpotent):</strong> El fulcre (&Delta;) és a l'extrem unit de les dues làmines, la força (F) s'aplica amb els dits al centre de les pinces, i la resistència (R) és a la punta que agafa el pèl.</li>
+                    <li><strong>c) Tisores &rarr; 1r grau (interfixa):</strong> El fulcre (&Delta;) és el cargol central (articulació), la força (F) s'aplica a les nanses amb els dits, i la resistència (R) l'oposa el material a les fulles de tall.</li>
+                </ul>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 2</span> Problema de palanca: Tisores</h2>
+                <p><strong>Enunciat:</strong> Unes tisores tenen el punt de suport a 10 cm de les nanses i a 5 cm de les fulles de tall. Si s'aplica una força de 20 N a les nanses, quina força s'exerceix sobre el material a tallar?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>d<sub>F</sub> = 10 cm</code> &nbsp;|&nbsp; <code>d<sub>R</sub> = 5 cm</code> &nbsp;|&nbsp; <code>F = 20 N</code> &nbsp;|&nbsp; <code>R = ?</code></li>
+                    <li><strong>2. Fórmula (Llei de la Palanca):</strong> <code>F · d<sub>F</sub> = R · d<sub>R</sub> &rArr; R = (F · d<sub>F</sub>) / d<sub>R</sub></code></li>
+                    <li><strong>3. Càlcul:</strong> <code>R = (20 N · 10 cm) / 5 cm = 200 / 5 = 40 N</code></li>
+                </ul>
+                <div class="result-highlight">Resultat: S'exerceix una força de resistència (tall) de R = 40 N (AM = 2).</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 3</span> Palanca per aixecar 200 kg</h2>
+                <p><strong>Enunciat:</strong> En una palanca, calcula la força que cal exercir per aixecar un pes de 200 kg (braç de potència = 2 m i braç de resistència = 0,5 m). Quin és l'avantatge mecànic d'aquesta palanca? De quin gènere podria ser?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades i conversió a Newtons:</strong> Massa <code>m = 200 kg</code> &rArr; Pes <code>R = m · g = 200 · 9,8 = 1960 N</code> <em>(o 2000 N si s'agafa g &approx; 10 m/s²)</em>. Braços: <code>d<sub>F</sub> = 2 m</code>, <code>d<sub>R</sub> = 0,5 m</code>.</li>
+                    <li><strong>2. Càlcul de la força (F):</strong> <code>F = (R · d<sub>R</sub>) / d<sub>F</sub> = (1960 N · 0,5 m) / 2 m = 490 N</code> <em>(amb g=10 m/s²: <code>F = 500 N</code>)</em>.</li>
+                    <li><strong>3. Avantatge Mecànic (AM):</strong> <code>AM = d<sub>F</sub> / d<sub>R</sub> = 2 m / 0,5 m = 4</code> (multiplica la força per 4).</li>
+                    <li><strong>4. Gènere de la palanca:</strong> Com que <code>AM = 4 &gt; 1</code>, pot ser de <strong>1r gènere</strong> (amb el fulcre més a prop de la càrrega) o de <strong>2n gènere</strong> (on sempre es compleix d<sub>F</sub> &gt; d<sub>R</sub>). Mai podria ser de 3r gènere.</li>
+                </ul>
+                <div class="result-highlight">Resultat: F = 490 N (o 500 N amb g=10) | AM = 4 | Pot ser de 1r o 2n gènere.</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 4</span> Pinces de cuina (3r gènere)</h2>
+                <p><strong>Enunciat:</strong> Unes pinces de cuina tenen el punt de pressió dels dits a 6 cm de l'articulació. Si el menjar està a 18 cm i cal exercir una força d'agafada sobre ell de 4 N, quina força cal fer amb els dits?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>d<sub>F</sub> = 6 cm</code> &nbsp;|&nbsp; <code>d<sub>R</sub> = 18 cm</code> &nbsp;|&nbsp; <code>R = 4 N</code> &nbsp;|&nbsp; <code>F = ?</code></li>
+                    <li><strong>2. Fórmula i càlcul:</strong> <code>F · d<sub>F</sub> = R · d<sub>R</sub> &rArr; F = (4 N · 18 cm) / 6 cm = 72 / 6 = 12 N</code></li>
+                </ul>
+                <div class="result-highlight">Resultat: Cal exercir una força amb els dits de F = 12 N (AM = 1/3 = 0,33).</div>
+                <div class="teacher-note"><strong>Nota docent sobre la il·lustració:</strong> En el dibuix del dossier, la fletxa de cota de 18 cm comença on acaba la de 6 cm. Si un alumne interpreta que la distància total des de l'articulació és <code>d<sub>R</sub> = 6 + 18 = 24 cm</code>, el resultat seria <code>F = (4 · 24) / 6 = 16 N</code>. Es recomana donar per vàlides ambdues interpretacions.</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 5</span> Disseny del braç d'un carretó (600 N)</h2>
+                <p><strong>Enunciat:</strong> Amb un carretó es vol moure una càrrega de 600 N situada a 0,4 m de la roda. Quina longitud mínima ha de tenir el braç de la força si la força màxima que pot fer una persona és de 150 N?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>R = 600 N</code> &nbsp;|&nbsp; <code>d<sub>R</sub> = 0,4 m</code> &nbsp;|&nbsp; <code>F<sub>màx</sub> = 150 N</code> &nbsp;|&nbsp; <code>d<sub>F</sub> = ?</code></li>
+                    <li><strong>2. Fórmula i càlcul:</strong> <code>d<sub>F</sub> = (R · d<sub>R</sub>) / F = (600 N · 0,4 m) / 150 N = 240 / 150 = 1,6 m</code></li>
+                </ul>
+                <div class="result-highlight">Resultat: El braç de potència ha de tenir una longitud mínima de d<sub>F</sub> = 1,6 m des de l'eix de la roda.</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 6</span> Alicates de tall</h2>
+                <p><strong>Enunciat:</strong> Unes alicates tenen el punt d'articulació a 15 cm del mànec (on apliquem la força) i a 3 cm de la boca de tall. Si premem el mànec amb una força de 30 N, calcula la força exercida a la boca de tall i digues quin gènere i quin avantatge mecànic té.</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>d<sub>F</sub> = 15 cm</code> &nbsp;|&nbsp; <code>d<sub>R</sub> = 3 cm</code> &nbsp;|&nbsp; <code>F = 30 N</code></li>
+                    <li><strong>2. Força a la boca de tall (R):</strong> <code>R = (F · d<sub>F</sub>) / d<sub>R</sub> = (30 N · 15 cm) / 3 cm = 150 N</code></li>
+                    <li><strong>3. Gènere i Avantatge Mecànic:</strong> És una palanca de <strong>1r gènere</strong> (l'articulació és entre el mànec i la boca de tall). L'avantatge mecànic és <code>AM = d<sub>F</sub> / d<sub>R</sub> = 15 / 3 = 5</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: R = 150 N | Palanca de 1r gènere | AM = 5.</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 7</span> Carretó amb sac de 20 kg (amb figura)</h2>
+                <p><strong>Enunciat:</strong> Calcula quina força cal exercir per transportar un sac de 20 kg amb el carretó de la figura (cotes: 1,2 m entre F i R; 0,4 m entre R i la roda). Quin avantatge mecànic s'obté? De quin gènere és aquesta palanca?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades i braços (atenció a la suma de cotes!):</strong>
+                        <br>Pes: <code>R = 20 kg · 9,8 m/s² = 196 N</code> <em>(o 200 N amb g=10)</em>.
+                        <br>Braç de resistència: <code>d<sub>R</sub> = 0,4 m</code> (distància de la càrrega a l'eix de la roda).
+                        <br>Braç de potència total: <code>d<sub>F</sub> = 1,2 m + 0,4 m = 1,6 m</code> (distància total de les mans a l'eix de la roda!).
+                    </li>
+                    <li><strong>2. Càlcul de la força (F):</strong> <code>F = (R · d<sub>R</sub>) / d<sub>F</sub> = (196 N · 0,4 m) / 1,6 m = 49 N</code> <em>(o 50 N amb g=10)</em>.</li>
+                    <li><strong>3. Avantatge Mecànic i Gènere:</strong> <code>AM = d<sub>F</sub> / d<sub>R</sub> = 1,6 / 0,4 = 4</code>. És una palanca de <strong>2n gènere</strong>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: F = 49 N (o 50 N) | AM = 4 | Palanca de 2n gènere.</div>
+                <div class="teacher-note"><strong>Error típic de l'alumnat:</strong> Prendre <code>d<sub>F</sub> = 1,2 m</code> sense sumar-li els <code>0,4 m</code> fins al fulcre. Recordeu sempre que tots els braços es mesuren des del punt de suport!</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 8</span> Barra d'acer en equilibri amb múltiples càrregues</h2>
+                <p><strong>Enunciat:</strong> En una barra d'acer de 3 m (1r grau), al braç esquerre hi pengen dues càrregues simultànies: R<sub>1</sub> = 200 N a 0,5 m del fulcre i R<sub>2</sub> = 400 N a 1,0 m del fulcre. a) A quina distància del fulcre (b<sub>f</sub>), al braç dret, s'ha d'aplicar F = 250 N per mantenir l'equilibri? b) Quina és la força total vertical (reacció) que suporta el fulcre?</p>
+                <ul class="step-list">
+                    <li><strong>a) Equilibri de moments (&Sigma;M<sub>esquerra</sub> = &Sigma;M<sub>dreta</sub>):</strong>
+                        <br><code>R<sub>1</sub> · d<sub>1</sub> + R<sub>2</sub> · d<sub>2</sub> = F · b<sub>f</sub></code>
+                        <br><code>(200 N · 0,5 m) + (400 N · 1,0 m) = 250 N · b<sub>f</sub></code>
+                        <br><code>100 N·m + 400 N·m = 250 · b<sub>f</sub> &rArr; 500 = 250 · b<sub>f</sub> &rArr; b<sub>f</sub> = 500 / 250 = 2,0 m</code>
+                    </li>
+                    <li><strong>b) Reacció vertical al fulcre (&Sigma;F<sub>verticals</sub>):</strong>
+                        <br>Com que tant R<sub>1</sub>, R<sub>2</sub> com F tiren cap avall a banda i banda del fulcre:
+                        <br><code>N<sub>fulcre</sub> = R<sub>1</sub> + R<sub>2</sub> + F = 200 N + 400 N + 250 N = 850 N</code>
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) S'ha d'aplicar a b<sub>f</sub> = 2,0 m del fulcre | b) El fulcre suporta una reacció total de 850 N.</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 9</span> Disseny de palanca d'1r grau amb longitud total fixa (2,5 m)</h2>
+                <p><strong>Enunciat:</strong> Un operari té una barra de ferro de L = 2,5 m per dissenyar una palanca de 1r grau. Vol aixecar un contenidor de 200 kg (g = 9,8 m/s²) aplicant F<sub>màx</sub> = 400 N a l'extrem oposat. a) A quina distància màxima de la càrrega (b<sub>r</sub>) s'ha de col·locar el fulcre? b) Quin avantatge mecànic (AM) tindrà?</p>
+                <ul class="step-list">
+                    <li><strong>1. Plantejament del sistema d'equacions:</strong>
+                        <br>Pes del contenidor: <code>R = 200 kg · 9,8 m/s² = 1960 N</code>.
+                        <br>Com que la barra fa 2,5 m en total i el fulcre és entre mig: <code>b<sub>f</sub> + b<sub>r</sub> = 2,5 m &rArr; b<sub>f</sub> = 2,5 - b<sub>r</sub></code>.
+                    </li>
+                    <li><strong>a) Substitució a la Llei de la Palanca:</strong>
+                        <br><code>F · (2,5 - b<sub>r</sub>) = R · b<sub>r</sub> &rArr; 400 · (2,5 - b<sub>r</sub>) = 1960 · b<sub>r</sub></code>
+                        <br><code>1000 - 400 · b<sub>r</sub> = 1960 · b<sub>r</sub> &rArr; 1000 = 2360 · b<sub>r</sub> &rArr; b<sub>r</sub> = 1000 / 2360 &approx; 0,424 m (42,4 cm)</code>
+                        <br><em>(Per tant, <code>b<sub>f</sub> = 2,5 - 0,424 = 2,076 m</code>).</em>
+                    </li>
+                    <li><strong>b) Avantatge Mecànic (AM):</strong>
+                        <br><code>AM = R / F = 1960 N / 400 N = 4,9</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) b<sub>r</sub> = 0,424 m (42,4 cm) de la càrrega | b) AM = 4,9.</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 10</span> Biomecànica del braç humà (múscul bíceps)</h2>
+                <p><strong>Enunciat:</strong> El braç humà és una palanca de 3r grau (fulcre al colze). El bíceps s'insereix a d<sub>F</sub> = 4 cm del colze, i la mà sosté una mancorna de m = 10 kg a d<sub>R</sub> = 32 cm del colze (g = 9,8 m/s²). a) Calcula la força F del bíceps. b) Calcula l'AM i explica per què el cos humà utilitza palanques amb AM &lt; 1.</p>
+                <ul class="step-list">
+                    <li><strong>a) Força de contracció del bíceps (F):</strong>
+                        <br>Pes de la mancorna: <code>R = 10 kg · 9,8 m/s² = 98 N</code>.
+                        <br><code>F · 4 cm = 98 N · 32 cm &rArr; F = (98 · 32) / 4 = 98 · 8 = 784 N</code>.
+                    </li>
+                    <li><strong>b) Avantatge Mecànic i raonament biològic:</strong>
+                        <br><code>AM = d<sub>F</sub> / d<sub>R</sub> = 4 cm / 32 cm = 1/8 = 0,125</code>.
+                        <br><strong>Explicació:</strong> Tot i que el múscul ha de fer 8 vegades més força que el pes aixecat, una petita contracció del bíceps (ex: escurçar-se 1 cm) produeix un <strong>gran desplaçament i molta velocitat a l'extrem de la mà</strong> (8 cm d'arc), a més de permetre que els músculs quedin compactes i pegats als ossos.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) F = 784 N | b) AM = 0,125 (guanya amplitud de moviment, abast i velocitat a la mà).</div>
+            </article>
+
+            <article class="card act-card" data-cat="palanques">
+                <h2><span class="badge badge-blue">Act. 11</span> Premsa mecànica composta (dues palanques en sèrie)</h2>
+                <p><strong>Enunciat:</strong> Palanca 1 (1r grau): F<sub>1</sub> = 100 N, b<sub>f1</sub> = 0,8 m, b<sub>r1</sub> = 0,2 m. Palanca 2 (2n grau): rep F<sub>2</sub> = R<sub>1</sub>, amb b<sub>f2</sub> = 1,2 m i b<sub>r2</sub> = 0,3 m. a) Calcula la força final R<sub>2</sub>. b) Calcula AM<sub>1</sub>, AM<sub>2</sub> i AM<sub>total</sub>.</p>
+                <ul class="step-list">
+                    <li><strong>1. Primera palanca:</strong>
+                        <br><code>AM<sub>1</sub> = b<sub>f1</sub> / b<sub>r1</sub> = 0,8 m / 0,2 m = 4</code>
+                        <br>Força transmesa a l'eix intermedi: <code>R<sub>1</sub> = F<sub>1</sub> · AM<sub>1</sub> = 100 N · 4 = 400 N</code>.
+                    </li>
+                    <li><strong>2. Segona palanca (F<sub>2</sub> = R<sub>1</sub> = 400 N):</strong>
+                        <br><code>AM<sub>2</sub> = b<sub>f2</sub> / b<sub>r2</sub> = 1,2 m / 0,3 m = 4</code>
+                        <br>Força final de premsat: <code>R<sub>2</sub> = F<sub>2</sub> · AM<sub>2</sub> = 400 N · 4 = 1600 N</code>.
+                    </li>
+                    <li><strong>3. Avantatge Mecànic Total del sistema en sèrie:</strong>
+                        <br><code>AM<sub>total</sub> = AM<sub>1</sub> · AM<sub>2</sub> = 4 · 4 = 16</code> (comprovació: <code>R<sub>2</sub> / F<sub>1</sub> = 1600 / 100 = 16</code>).
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) Força final R<sub>2</sub> = 1600 N | b) AM<sub>1</sub> = 4, AM<sub>2</sub> = 4, AM<sub>total</sub> = 16.</div>
+            </article>
+
+            <!-- BLOC B: POLITGES I POLIPASTOS -->
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 12</span> Politja fixa (Encofrat de 350 N)</h2>
+                <p><strong>Enunciat:</strong> Es vol aixecar un encofrat de 350 N de pes mitjançant una politja fixa. Quina força F cal exercir per mantenir la càrrega en equilibri?</p>
+                <ul class="step-list">
+                    <li><strong>Resolució:</strong> Una politja fixa funciona com una palanca de 1r grau de braços iguals (<code>r = r &rArr; AM = 1</code>). No multiplica la força, només canvia el sentit de tir per comoditat.</li>
+                    <li><strong>Càlcul:</strong> <code>F = R = 350 N</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: Cal exercir una força F = 350 N.</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 13</span> Sistema de politja mòbil + politja fixa (600 N)</h2>
+                <p><strong>Enunciat:</strong> En un sistema format per una politja mòbil i una fixa auxiliar, quina força F cal fer per aixecar un pes de 600 N?</p>
+                <ul class="step-list">
+                    <li><strong>Resolució:</strong> El pes de la politja mòbil es reparteix entre dos ramals de corda paral·lels (<code>AM = 2</code>).</li>
+                    <li><strong>Càlcul:</strong> <code>F = R / 2 = 600 N / 2 = 300 N</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: Cal exercir una força F = 300 N.</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 14</span> Longitud de corda en politja mòbil</h2>
+                <p><strong>Enunciat:</strong> Utilitzant una politja mòbil, si volem elevar una càrrega una alçada de 2,5 m, quina longitud de corda hem d'estirar?</p>
+                <ul class="step-list">
+                    <li><strong>Resolució:</strong> Pel principi de conservació del treball (<code>W<sub>entrada</sub> = W<sub>sortida</sub> &rArr; F · L<sub>corda</sub> = R · h</code>), com que la força es redueix a la meitat (<code>AM = 2</code>), cal recollir el doble de corda (<code>2,5 m</code> per cadascun dels dos ramals).</li>
+                    <li><strong>Càlcul:</strong> <code>L<sub>corda</sub> = 2 · h = 2 · 2,5 m = 5 m</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: Hem d'estirar L = 5 m de corda.</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 15</span> Polispast lineal/factorial (3 fixes i 3 mòbils)</h2>
+                <p><strong>Enunciat:</strong> Un polispast lineal està format per 3 politges fixes i 3 politges mòbils. Si la càrrega a aixecar és de 1200 N, quina força cal aplicar?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>n = 3</code> politges mòbils &nbsp;|&nbsp; <code>R = 1200 N</code>.</li>
+                    <li><strong>2. Fórmula i càlcul:</strong> <code>F = R / (2 · n) = 1200 N / (2 · 3) = 1200 / 6 = 200 N</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: Cal aplicar una força F = 200 N (AM = 6).</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 16</span> Avantatge mecànic d'un polispast lineal (n = 4)</h2>
+                <p><strong>Enunciat:</strong> Quin és l'avantatge mecànic (AM) d'un polispast lineal que conté n = 4 politges mòbils?</p>
+                <ul class="step-list">
+                    <li><strong>Fórmula i càlcul:</strong> En un polispast lineal (factorial), cada politja mòbil és sostinguda per 2 trams de corda: <code>AM = 2 · n = 2 · 4 = 8</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: L'avantatge mecànic és AM = 8.</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 17</span> Polispast potencial o exponencial (n = 3)</h2>
+                <p><strong>Enunciat:</strong> Es disposa d'un polispast potencial (exponencial) format per 3 politges mòbils. Si s'aplica una força d'entrada de 50 N, quina càrrega màxima es pot elevar?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>n = 3</code> politges mòbils &nbsp;|&nbsp; <code>F = 50 N</code>.</li>
+                    <li><strong>2. Fórmula i càlcul:</strong> <code>F = R / 2<sup>n</sup> &rArr; R = F · 2<sup>n</sup> = 50 N · 2<sup>3</sup> = 50 N · 8 = 400 N</code>.</li>
+                </ul>
+                <div class="result-highlight">Resultat: Es pot elevar una càrrega màxima de R = 400 N (AM = 8).</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 18</span> Nombre mínim de politges mòbils</h2>
+                <p><strong>Enunciat:</strong> Una persona pot exercir una força màxima de 250 N. Quin nombre de politges mòbils n necessita com a mínim en un polispast lineal per aixecar una càrrega de 200 N (o 2000 N)?</p>
+                <ul class="step-list">
+                    <li><strong>Cas 1 (Literal amb R = 200 N):</strong> Com que la força màxima de la persona (250 N) ja és superior al pes de la càrrega (200 N), no cal cap politja mòbil (<code>n = 0</code>, amb una simple politja fixa n'hi ha prou) o bé el polispast mínim d'<code>n = 1</code> politja mòbil (on faria 100 N).</li>
+                    <li><strong>Cas 2 (Amb R = 2000 N, probable errada tipogràfica de l'enunciat original):</strong>
+                        <br><code>F = R / (2 · n) &rArr; n = R / (2 · F) = 2000 N / (2 · 250 N) = 2000 / 500 = 4 politges mòbils</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: Per a 200 N: n = 0 (o 1). Per a 2000 N: n = 4 politges mòbils.</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 19</span> Motor elèctric de grua amb polispast factorial</h2>
+                <p><strong>Enunciat:</strong> Un motor elèctric de grua pot exercir F<sub>màx</sub> = 150 N i estirar la corda a v<sub>corda</sub> = 3 m/s. Es vol elevar R = 900 N a v<sub>càrrega</sub> = 0,5 m/s. a) Quin és el nombre mínim de politges mòbils (n) en un polispast factorial? b) A quina velocitat s'elevarà la càrrega si el motor estira la corda a 3 m/s? Assolirem l'objectiu de 0,5 m/s?</p>
+                <ul class="step-list">
+                    <li><strong>a) Càlcul del nombre mínim de politges mòbils (n):</strong>
+                        <br><code>F &le; 150 N &rArr; R / (2 · n) &le; 150 &rArr; 900 / (2 · n) &le; 150 &rArr; 2 · n &ge; 6 &rArr; n = 3 politges mòbils</code> (amb un avantatge mecànic <code>AM = 2 · 3 = 6</code>).
+                    </li>
+                    <li><strong>b) Velocitat d'elevació de la càrrega:</strong>
+                        <br>Com que <code>AM = 6</code>, per cada 6 metres de corda que recull el motor, la càrrega puja 1 metre:
+                        <br><code>v<sub>càrrega</sub> = v<sub>corda</sub> / (2 · n) = (3 m/s) / 6 = 0,5 m/s</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) n = 3 politges mòbils | b) v<sub>càrrega</sub> = 0,5 m/s. Sí, s'assoleix exactament l'objectiu!</div>
+            </article>
+
+            <article class="card act-card" data-cat="politges">
+                <h2><span class="badge badge-emerald">Act. 20</span> Mecanisme combinat (Politja mòbil + Palanca de 2n grau)</h2>
+                <p><strong>Enunciat:</strong> Una càrrega de 1200 N penja d'una politja mòbil. La corda d'aquesta politja mòbil està enganxada a una palanca de 2n grau a d<sub>R</sub> = 0,6 m del seu fulcre. L'operador fa la força F a l'extrem de la palanca, situat a d<sub>F</sub> = 1,8 m del fulcre. a) Quina força de tracció fa la corda sobre la palanca? b) Quina força final F ha de fer l'operador? c) Quin és l'AM<sub>total</sub>?</p>
+                <ul class="step-list">
+                    <li><strong>a) Força de tracció de la corda sobre la palanca (T):</strong>
+                        <br>La politja mòbil divideix el pes entre 2 (<code>AM<sub>politja</sub> = 2</code>):
+                        <br><code>T = R / 2 = 1200 N / 2 = 600 N</code>.
+                    </li>
+                    <li><strong>b) Força final de l'operador a la palanca (F):</strong>
+                        <br>Apliquem la llei de la palanca on la resistència d'entrada és <code>T = 600 N</code>:
+                        <br><code>F · 1,8 m = 600 N · 0,6 m &rArr; F = (600 · 0,6) / 1,8 = 360 / 1,8 = 200 N</code>.
+                    </li>
+                    <li><strong>c) Avantatge Mecànic Total (AM<sub>total</sub>):</strong>
+                        <br><code>AM<sub>palanca</sub> = 1,8 / 0,6 = 3</code> &nbsp;&rArr;&nbsp; <code>AM<sub>total</sub> = AM<sub>politja</sub> · AM<sub>palanca</sub> = 2 · 3 = 6</code> (comprovació: <code>1200 N / 200 N = 6</code>).
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) Tracció corda = 600 N | b) Força operador F = 200 N | c) AM<sub>total</sub> = 6.</div>
+            </article>
+
+            <!-- BLOC C: TRANSMISSIÓ CIRCULAR -->
+            <article class="card act-card" data-cat="transmissio">
+                <h2><span class="badge badge-indigo">Act. 21</span> Transmissió per politges i corretja</h2>
+                <p><strong>Enunciat:</strong> Un motor gira a N<sub>1</sub> = 1200 rpm i té una politja de D<sub>1</sub> = 10 cm. Està connectada amb corretja a una politja conduïda de D<sub>2</sub> = 30 cm. a) Calcula la relació de transmissió (i). b) Calcula la velocitat de la politja conduïda (N<sub>2</sub>). c) És reductor o multiplicador?</p>
+                <ul class="step-list">
+                    <li><strong>a) Relació de transmissió (i):</strong> <code>i = D<sub>1</sub> / D<sub>2</sub> = 10 cm / 30 cm = 1/3 &approx; 0,33</code>.</li>
+                    <li><strong>b) Velocitat de sortida (N<sub>2</sub>):</strong> <code>N<sub>2</sub> = N<sub>1</sub> · i = 1200 rpm · (1/3) = 400 rpm</code>.</li>
+                    <li><strong>c) Tipus de sistema:</strong> És un <strong>sistema reductor de velocitat</strong> perquè <code>i &lt; 1</code> (la politja conduïda és més gran que la motriu, de manera que redueix la velocitat de gir a la tercera part però multiplica la força/parell per 3).</li>
+                </ul>
+                <div class="result-highlight">Resultat: a) i = 1/3 (0,33) | b) N<sub>2</sub> = 400 rpm | c) Sistema reductor (i &lt; 1).</div>
+            </article>
+
+            <article class="card act-card" data-cat="transmissio">
+                <h2><span class="badge badge-indigo">Act. 22</span> Transmissió per engranatges simples</h2>
+                <p><strong>Enunciat:</strong> L'engranatge motriu té Z<sub>1</sub> = 15 dents i gira a N<sub>1</sub> = 100 rpm. L'engranatge de sortida té Z<sub>2</sub> = 45 dents. a) Calcula la velocitat de sortida en rpm. b) Si volguéssim que la sortida girés a 100 rpm, quantes dents hauria de tenir Z<sub>2</sub>?</p>
+                <ul class="step-list">
+                    <li><strong>a) Velocitat de sortida (N<sub>2</sub>):</strong>
+                        <br><code>N<sub>1</sub> · Z<sub>1</sub> = N<sub>2</sub> · Z<sub>2</sub> &rArr; N<sub>2</sub> = (100 rpm · 15 dents) / 45 dents = 1500 / 45 = 33,33 rpm</code>.
+                    </li>
+                    <li><strong>b) Dents per mantenir la mateixa velocitat (N<sub>2</sub> = N<sub>1</sub> = 100 rpm):</strong>
+                        <br>Perquè <code>i = 1</code>, tots dos engranatges han de tenir el mateix nombre de dents: <code>Z<sub>2</sub> = Z<sub>1</sub> = 15 dents</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) N<sub>2</sub> = 33,33 rpm | b) Hauria de tenir Z<sub>2</sub> = 15 dents.</div>
+            </article>
+
+            <article class="card act-card" data-cat="transmissio">
+                <h2><span class="badge badge-indigo">Act. 23</span> Mecanisme reductor d'engranatges (i = 1/5)</h2>
+                <p><strong>Enunciat:</strong> Un mecanisme reductor té una relació de transmissió i = 1/5. Si l'engranatge d'entrada té Z<sub>1</sub> = 12 dents: a) Quantes dents té l'engranatge de sortida (Z<sub>2</sub>)? b) Si el motor gira a 3000 rpm, a quina velocitat gira la sortida?</p>
+                <ul class="step-list">
+                    <li><strong>a) Nombre de dents de sortida (Z<sub>2</sub>):</strong>
+                        <br><code>i = Z<sub>1</sub> / Z<sub>2</sub> &rArr; 1/5 = 12 / Z<sub>2</sub> &rArr; Z<sub>2</sub> = 12 · 5 = 60 dents</code>.
+                    </li>
+                    <li><strong>b) Velocitat de gir de sortida (N<sub>2</sub>):</strong>
+                        <br><code>N<sub>2</sub> = N<sub>1</sub> · i = 3000 rpm · (1/5) = 600 rpm</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) Z<sub>2</sub> = 60 dents | b) N<sub>2</sub> = 600 rpm.</div>
+            </article>
+
+            <article class="card act-card" data-cat="transmissio">
+                <h2><span class="badge badge-indigo">Act. 24</span> Velocitat angular (&omega;) i lineal (v) d'una politja</h2>
+                <p><strong>Enunciat:</strong> Un motor elèctric gira a N = 3000 rpm. A l'eix de sortida hi ha muntada una politja de D = 12 cm de diàmetre. a) Calcula la velocitat angular (&omega;) en rad/s. b) Calcula la velocitat lineal (v) de la corretja en m/s.</p>
+                <ul class="step-list">
+                    <li><strong>a) Velocitat angular (&omega;):</strong>
+                        <br><code>&omega; = (N · 2 · &pi;) / 60 = (3000 · 2 · &pi;) / 60 = 100 · &pi; &approx; 314,16 rad/s</code>.
+                    </li>
+                    <li><strong>b) Velocitat lineal (v):</strong>
+                        <br>Atenció al radi en metres! Si <code>D = 12 cm</code>, aleshores el radi és <code>r = D / 2 = 6 cm = 0,06 m</code>.
+                        <br><code>v = &omega; · r = 314,16 rad/s · 0,06 m &approx; 18,85 m/s</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) &omega; = 314,16 rad/s | b) v = 18,85 m/s.</div>
+            </article>
+
+            <article class="card act-card" data-cat="transmissio">
+                <h2><span class="badge badge-indigo">Act. 25</span> Cinemàtica de la roda d'una bicicleta</h2>
+                <p><strong>Enunciat:</strong> La roda d'una bicicleta de D = 70 cm de diàmetre gira amb una velocitat angular &omega; = 20 rad/s. a) A quantes rpm correspon? b) Quina és la velocitat lineal en m/s i en km/h?</p>
+                <ul class="step-list">
+                    <li><strong>a) Conversió de rad/s a rpm (N):</strong>
+                        <br><code>&omega; = (N · 2 · &pi;) / 60 &rArr; N = (&omega; · 60) / (2 · &pi;) = (20 · 60) / (6,2832) &approx; 190,99 rpm</code>.
+                    </li>
+                    <li><strong>b) Velocitat lineal (v) en m/s i km/h:</strong>
+                        <br>Radi de la roda: <code>r = 70 cm / 2 = 35 cm = 0,35 m</code>.
+                        <br>En m/s: <code>v = &omega; · r = 20 rad/s · 0,35 m = 7 m/s</code>.
+                        <br>En km/h (multiplicant per 3,6): <code>v = 7 · 3,6 = 25,2 km/h</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: a) N = 190,99 rpm | b) v = 7 m/s = 25,2 km/h.</div>
+            </article>
+
+            <article class="card act-card" data-cat="transmissio">
+                <h2><span class="badge badge-indigo">Act. 26</span> Trepant de columna (Càlcul de diàmetre conduït)</h2>
+                <p><strong>Enunciat:</strong> En un trepant de columna, volem que la broca giri a N<sub>2</sub> = 2000 rpm. El motor gira a N<sub>1</sub> = 1000 rpm i té muntada una politja de D<sub>1</sub> = 80 mm de diàmetre. Quin diàmetre D<sub>2</sub> ha de tenir la politja de la broca?</p>
+                <ul class="step-list">
+                    <li><strong>1. Dades:</strong> <code>N<sub>1</sub> = 1000 rpm</code> &nbsp;|&nbsp; <code>D<sub>1</sub> = 80 mm</code> &nbsp;|&nbsp; <code>N<sub>2</sub> = 2000 rpm</code> &nbsp;|&nbsp; <code>D<sub>2</sub> = ?</code></li>
+                    <li><strong>2. Fórmula i càlcul:</strong>
+                        <br><code>N<sub>1</sub> · D<sub>1</sub> = N<sub>2</sub> · D<sub>2</sub> &rArr; D<sub>2</sub> = (N<sub>1</sub> · D<sub>1</sub>) / N<sub>2</sub> = (1000 rpm · 80 mm) / 2000 rpm = 40 mm (4 cm)</code>.
+                    </li>
+                </ul>
+                <div class="result-highlight">Resultat: La politja de l'eix de la broca ha de tenir un diàmetre D<sub>2</sub> = 40 mm (4 cm).</div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        function filterCards(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            document.querySelectorAll('.act-card').forEach(card => {
+                if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchCards() {
+            const q = document.getElementById('searchBox').value.toLowerCase();
+            document.querySelectorAll('.act-card').forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(q) ? 'block' : 'none';
+            });
+        }
+
+        window.i18nDict = {
+            ca: {
+                nav_map: "🧠 1. Mapa Mental i Estudi",
+                nav_sol: "✅ 2. Solucionari Activitats (26)",
+                nav_exam: "📝 3. Examen i Rúbrica",
+                badge_sol: "Solucionari Complet · 26 Problemes Resolts",
+                w2_title: "✅ Solucionari Pas a Pas: Sistemes Mecànics",
+                w2_sub: "Resolució detallada de totes les activitats del dossier (Palanques, Politges/Polipastos i Transmissió Circular) amb dades, fórmules, conversions i notes didàctiques."
+            },
+            es: {
+                nav_map: "🧠 1. Mapa Mental y Estudio",
+                nav_sol: "✅ 2. Solucionario Actividades (26)",
+                nav_exam: "📝 3. Examen y Rúbrica",
+                badge_sol: "Solucionario Completo · 26 Problemas Resueltos",
+                w2_title: "✅ Solucionario Paso a Paso: Sistemas Mecánicos",
+                w2_sub: "Resolución detallada de todas las actividades del dosier (Palancas, Poleas/Polipastos y Transmisión Circular) con datos, fórmulas, conversiones y notas didácticas."
+            },
+            en: {
+                nav_map: "🧠 1. Mind Map & Study Guide",
+                nav_sol: "✅ 2. Activities Solutions (26)",
+                nav_exam: "📝 3. Exam & Rubric",
+                badge_sol: "Complete Solutions · 26 Solved Problems",
+                w2_title: "✅ Step-by-Step Solutions: Mechanical Systems",
+                w2_sub: "Detailed solutions for all workbook activities (Levers, Pulleys/Hoists, and Circular Transmission) with data, formulas, unit conversions, and teaching notes."
+            },
+            fr: {
+                nav_map: "🧠 1. Carte Mentale et Étude",
+                nav_sol: "✅ 2. Corrigé des Activités (26)",
+                nav_exam: "📝 3. Examen et Barème",
+                badge_sol: "Corrigé Complet · 26 Problèmes Résolus",
+                w2_title: "✅ Corrigé Pas à Pas : Systèmes Mécaniques",
+                w2_sub: "Résolution détaillée de toutes les activités du dossier (Leviers, Poulies/Palans et Transmission Circulaire) avec données, formules et notes pédagogiques."
+            }
+        };
+        
+function setLang(lang) {
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    const dict = window.i18nDict && window.i18nDict[lang];
+    if (!dict) return;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+            el.innerHTML = dict[key];
+        }
+    });
+}
+
+    </script>
+</body>
+</html>

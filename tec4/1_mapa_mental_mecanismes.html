@@ -18,13 +18,7 @@
     --accent-rose: #fb7185;
     --border-color: #334155;
 }
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
@@ -32,372 +26,133 @@ body {
     line-height: 1.6;
     padding-bottom: 4rem;
 }
-
-/* Header Prof. Vicent */
 .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
     background: rgba(11, 15, 25, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 0.75rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
 }
-
 .brand {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--accent-blue);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
+    font-size: 1.25rem; font-weight: 700; color: var(--accent-blue);
+    display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
 }
-
-.nav-links {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
+.nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .nav-link {
-    color: var(--text-muted);
-    text-decoration: none;
-    padding: 0.4rem 0.85rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border: 1px solid transparent;
-    transition: all 0.2s;
+    color: var(--text-muted); text-decoration: none;
+    padding: 0.4rem 0.85rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600;
+    border: 1px solid transparent; transition: all 0.2s;
 }
-
-.nav-link:hover {
-    color: var(--text-main);
-    background: var(--bg-card-alt);
-}
-
+.nav-link:hover { color: var(--text-main); background: var(--bg-card-alt); }
 .nav-link.active {
     color: var(--accent-blue);
     background: rgba(56, 189, 248, 0.12);
     border-color: rgba(56, 189, 248, 0.4);
 }
-
-.controls {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-}
-
+.controls { display: flex; align-items: center; gap: 0.4rem; }
 .lang-btn, .pdf-btn {
-    background: var(--bg-card);
-    color: var(--text-muted);
+    background: var(--bg-card); color: var(--text-muted);
     border: 1px solid var(--border-color);
-    padding: 0.35rem 0.7rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
+    padding: 0.35rem 0.7rem; border-radius: 6px;
+    font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
 }
-
-.lang-btn:hover, .pdf-btn:hover {
-    color: var(--text-main);
-    border-color: var(--accent-blue);
-}
-
+.lang-btn:hover, .pdf-btn:hover { color: var(--text-main); border-color: var(--accent-blue); }
 .lang-btn.active {
     background: rgba(56, 189, 248, 0.15);
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
+    color: var(--accent-blue); border-color: var(--accent-blue);
 }
-
 .pdf-btn {
-    color: var(--accent-blue);
-    border-color: rgba(56, 189, 248, 0.5);
-    margin-left: 0.4rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
+    color: var(--accent-blue); border-color: rgba(56, 189, 248, 0.5);
+    margin-left: 0.4rem; display: inline-flex; align-items: center; gap: 0.35rem;
 }
-
-.container {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-}
-
+.container { max-width: 1180px; margin: 0 auto; padding: 2rem 1.5rem; }
 .hero {
     background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.08));
     border: 1px solid rgba(56, 189, 248, 0.25);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 2rem;
+    border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
 }
-
-.hero h1 {
-    font-size: 2rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-}
-
-.hero p {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-}
-
+.hero h1 { font-size: 2rem; color: #fff; margin-bottom: 0.5rem; }
+.hero p { color: var(--text-muted); font-size: 1.05rem; }
 .badge {
-    display: inline-block;
-    padding: 0.25rem 0.65rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    display: inline-block; padding: 0.25rem 0.65rem; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
 }
-
 .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
 .badge-emerald { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
 .badge-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.3); }
 .badge-rose { background: rgba(251, 113, 133, 0.15); color: var(--accent-rose); border: 1px solid rgba(251, 113, 133, 0.3); }
 .badge-indigo { background: rgba(129, 140, 248, 0.15); color: var(--accent-indigo); border: 1px solid rgba(129, 140, 248, 0.3); }
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-}
-
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem; }
 .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
-
 .card h2 {
-    font-size: 1.35rem;
-    color: var(--accent-blue);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.6rem;
+    font-size: 1.35rem; color: var(--accent-blue); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem;
 }
-
-.card h3 {
-    font-size: 1.1rem;
-    color: #fff;
-    margin: 0.75rem 0 0.5rem;
-}
-
+.card h3 { font-size: 1.1rem; color: #fff; margin: 0.75rem 0 0.5rem; }
 .formula-box {
-    background: #090d16;
-    border-left: 4px solid var(--accent-blue);
-    padding: 0.9rem 1.2rem;
-    border-radius: 8px;
+    background: #090d16; border-left: 4px solid var(--accent-blue);
+    padding: 0.9rem 1.2rem; border-radius: 8px;
     font-family: 'Cambria Math', 'Consolas', monospace;
-    font-size: 1.08rem;
-    color: var(--accent-amber);
-    margin: 0.75rem 0;
-    overflow-x: auto;
+    font-size: 1.08rem; color: var(--accent-amber); margin: 0.75rem 0; overflow-x: auto;
 }
-
-.step-list {
-    list-style: none;
-    margin: 0.75rem 0;
-}
-
+.step-list { list-style: none; margin: 0.75rem 0; }
 .step-list li {
-    background: rgba(30, 41, 59, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.5rem;
+    background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem;
 }
-
-.step-list li strong {
-    color: var(--accent-blue);
-}
-
-.result-highlight {
-    background: rgba(52, 211, 153, 0.12);
-    border: 1px solid rgba(52, 211, 153, 0.4);
-    color: var(--accent-emerald);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    font-weight: 700;
-    margin-top: 0.75rem;
-}
-
-.teacher-note {
-    background: rgba(251, 191, 36, 0.1);
-    border-left: 4px solid var(--accent-amber);
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    font-size: 0.92rem;
-    color: #fde68a;
-    margin-top: 0.75rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-}
-
-th, td {
-    border: 1px solid var(--border-color);
-    padding: 0.75rem;
-    text-align: left;
-}
-
-th {
-    background: var(--bg-card-alt);
-    color: var(--accent-blue);
-    font-weight: 700;
-}
-
-tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-/* Mind map tree nodes */
-.mindmap-tree {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
+.step-list li strong { color: var(--accent-blue); }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { border: 1px solid var(--border-color); padding: 0.75rem; text-align: left; }
+th { background: var(--bg-card-alt); color: var(--accent-blue); font-weight: 700; }
+tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
 .mm-branch {
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 1.2rem;
-    position: relative;
+    background: var(--bg-card-alt); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: 1.2rem; position: relative;
 }
-
-.mm-branch-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-/* Filter bar */
-.filter-bar {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    align-items: center;
-}
-
-.filter-btn {
-    background: var(--bg-card);
-    color: var(--text-main);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s;
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background: var(--accent-blue);
-    color: #0b0f19;
-    border-color: var(--accent-blue);
-}
-
-.search-input {
-    flex: 1;
-    min-width: 220px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 0.55rem 1rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-}
-
+.mm-branch-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
 .svg-diagram {
-    background: #0d1322;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 0.75rem;
-    margin: 0.75rem 0;
-    text-align: center;
+    background: #0d1322; border: 1px solid var(--border-color);
+    border-radius: 10px; padding: 0.75rem; margin: 0.75rem 0; text-align: center;
 }
-
-/* Print / PDF Styles */
 @media print {
-    body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        padding: 0 !important;
-    }
-    .topbar, .filter-bar, .no-print {
-        display: none !important;
-    }
-    .container {
-        max-width: 100% !important;
-        padding: 0.5cm !important;
-    }
+    body { background: #ffffff !important; color: #000000 !important; padding: 0 !important; }
+    .topbar, .no-print { display: none !important; }
+    .container { max-width: 100% !important; padding: 0.5cm !important; }
     .card, .hero, .mm-branch, .step-list li {
-        background: #ffffff !important;
-        color: #000000 !important;
-        border: 1px solid #cbd5e1 !important;
-        box-shadow: none !important;
-        break-inside: avoid;
-        margin-bottom: 0.8rem !important;
+        background: #ffffff !important; color: #000000 !important;
+        border: 1px solid #cbd5e1 !important; box-shadow: none !important;
+        break-inside: avoid; margin-bottom: 0.8rem !important;
     }
-    .hero h1, .card h2, .card h3, th, .step-list li strong {
-        color: #0f172a !important;
-    }
-    .formula-box {
-        background: #f8fafc !important;
-        color: #0f172a !important;
-        border-left: 4px solid #0284c7 !important;
-    }
-    .result-highlight {
-        background: #f0fdf4 !important;
-        color: #166534 !important;
-        border: 1px solid #86efac !important;
-    }
-    .teacher-note {
-        background: #fefce8 !important;
-        color: #854d0e !important;
-        border-left: 4px solid #eab308 !important;
-    }
+    .hero h1, .card h2, .card h3, th, .step-list li strong { color: #0f172a !important; }
+    .formula-box { background: #f8fafc !important; color: #0f172a !important; border-left: 4px solid #0284c7 !important; }
 }
-</style>
+    </style>
 </head>
 <body>
-    
     <header class="topbar">
         <a href="1_mapa_mental_mecanismes.html" class="brand">👨‍🏫 Prof. Vicent</a>
         <nav class="nav-links">
-            <a href="1_mapa_mental_mecanismes.html" class="nav-link active" data-i18n="nav_map">🧠 1. Mapa Mental i Estudi</a>
-            <a href="2_solucionari_activitats_mecanismes.html" class="nav-link " data-i18n="nav_sol">✅ 2. Solucionari Activitats (26)</a>
-            <a href="3_examen_mecanismes.html" class="nav-link " data-i18n="nav_exam">📝 3. Examen i Rúbrica</a>
+            <a href="1_mapa_mental_mecanismes.html" class="nav-link active"
+               data-es="🧠 1. Mapa Mental y Estudio"
+               data-en="🧠 1. Mind Map & Study Guide"
+               data-fr="🧠 1. Carte Mentale et Étude">🧠 1. Mapa Mental i Estudi</a>
+            <a href="2_solucionari_activitats_mecanismes.html" class="nav-link"
+               data-es="✅ 2. Solucionario Actividades (26)"
+               data-en="✅ 2. Activities Solutions (26)"
+               data-fr="✅ 2. Corrigé des Activités (26)">✅ 2. Solucionari Activitats (26)</a>
+            <a href="3_examen_mecanismes.html" class="nav-link"
+               data-es="📝 3. Examen y Rúbrica"
+               data-en="📝 3. Exam & Rubric"
+               data-fr="📝 3. Examen et Barème">📝 3. Examen i Rúbrica</a>
         </nav>
         <div class="controls">
             <button class="lang-btn active" data-lang="ca" onclick="setLang('ca')">CA</button>
@@ -407,60 +162,103 @@ tr:nth-child(even) {
             <button class="pdf-btn" onclick="window.print()">🖨️ PDF</button>
         </div>
     </header>
-    
+
     <main class="container">
         <section class="hero">
-            <span class="badge badge-blue" data-i18n="badge_unit">Tecnologia 4t ESO · Unitat 1</span>
-            <h1 data-i18n="w1_title">🧠 Mapes Mentals i Guia d'Estudi: Sistemes Mecànics</h1>
-            <p data-i18n="w1_sub">Esquemes visuals, classificació de mecanismes, formulari complet del Sistema Internacional i les 5 trampes clàssiques d'examen.</p>
+            <span class="badge badge-blue"
+                  data-es="Tecnología 4º ESO · Unidad 1"
+                  data-en="Technology Grade 10 · Unit 1"
+                  data-fr="Technologie 4e ESO · Unité 1">Tecnologia 4t ESO · Unitat 1</span>
+            <h1 data-es="🧠 Mapas Mentales y Guía de Estudio: Sistemas Mecánicos"
+                data-en="🧠 Mind Maps & Study Guide: Mechanical Systems"
+                data-fr="🧠 Cartes Mentales et Guide d'Étude : Systèmes Mécaniques">🧠 Mapes Mentals i Guia d'Estudi: Sistemes Mecànics</h1>
+            <p data-es="Esquemas visuales, clasificación de mecanismos y formulario completo del Sistema Internacional."
+               data-en="Visual diagrams, mechanism classification, and complete International System (SI) formula sheet."
+               data-fr="Schémas visuels, classification des mécanismes et formulaire complet du Système International.">Esquemes visuals, classificació de mecanismes i formulari complet del Sistema Internacional.</p>
         </section>
 
         <!-- MAPA MENTAL 1: ESTRUCTURA DE LES MÀQUINES I MAGNITUDS -->
         <section class="card">
-            <h2 data-i18n="mm1_h2">1. Arquitectura d'una Màquina i Magnituds Físiques</h2>
+            <h2 data-es="1. Arquitectura de una Máquina y Magnitudes Físicas"
+                data-en="1. Machine Architecture & Physical Quantities"
+                data-fr="1. Architecture d'une Machine et Grandeurs Physiques">1. Arquitectura d'una Màquina i Magnituds Físiques</h2>
             <div class="svg-diagram">
                 <svg viewBox="0 0 850 130" width="100%" height="130">
-                    <!-- Element Conductor -->
                     <rect x="20" y="20" width="220" height="90" rx="12" fill="#0f2942" stroke="#38bdf8" stroke-width="2"/>
-                    <text x="130" y="50" fill="#38bdf8" font-weight="bold" font-size="15" text-anchor="middle">1. ELEMENT CONDUCTOR</text>
-                    <text x="130" y="72" fill="#e2e8f0" font-size="12" text-anchor="middle">(Element Motor / Entrada)</text>
-                    <text x="130" y="92" fill="#94a3b8" font-size="11" text-anchor="middle">Transforma l'energia en treball</text>
-                    <!-- Arrow 1 -->
+                    <text x="130" y="50" fill="#38bdf8" font-weight="bold" font-size="15" text-anchor="middle"
+                          data-es="1. ELEMENTO CONDUCTOR" data-en="1. DRIVER ELEMENT" data-fr="1. ÉLÉMENT MOTEUR">1. ELEMENT CONDUCTOR</text>
+                    <text x="130" y="72" fill="#e2e8f0" font-size="12" text-anchor="middle"
+                          data-es="(Elemento Motor / Entrada)" data-en="(Motor / Input Element)" data-fr="(Conducteur / Entrée)">(Element Motor / Entrada)</text>
+                    <text x="130" y="92" fill="#94a3b8" font-size="11" text-anchor="middle"
+                          data-es="Transforma la energía en trabajo" data-en="Transforms energy into work" data-fr="Transforme l'énergie en travail">Transforma l'energia en treball</text>
+
                     <line x1="245" y1="65" x2="305" y2="65" stroke="#38bdf8" stroke-width="3"/>
                     <polygon points="305,58 320,65 305,72" fill="#38bdf8"/>
-                    <!-- Mecanismes -->
+
                     <rect x="325" y="20" width="220" height="90" rx="12" fill="#0f2f2a" stroke="#34d399" stroke-width="2"/>
-                    <text x="435" y="50" fill="#34d399" font-weight="bold" font-size="15" text-anchor="middle">2. MECANISMES</text>
-                    <text x="435" y="72" fill="#e2e8f0" font-size="12" text-anchor="middle">(Element Conversor)</text>
-                    <text x="435" y="92" fill="#94a3b8" font-size="11" text-anchor="middle">Transmet o transforma força i moviment</text>
-                    <!-- Arrow 2 -->
+                    <text x="435" y="50" fill="#34d399" font-weight="bold" font-size="15" text-anchor="middle"
+                          data-es="2. MECANISMOS" data-en="2. MECHANISMS" data-fr="2. MÉCANISMES">2. MECANISMES</text>
+                    <text x="435" y="72" fill="#e2e8f0" font-size="12" text-anchor="middle"
+                          data-es="(Elemento Conversor)" data-en="(Converter / Transmitter)" data-fr="(Élément Convertisseur)">(Element Conversor)</text>
+                    <text x="435" y="92" fill="#94a3b8" font-size="11" text-anchor="middle"
+                          data-es="Transmite o transforma fuerza y movimiento" data-en="Transmits or transforms force & motion" data-fr="Transmet ou transforme force et mouvement">Transmet o transforma força i moviment</text>
+
                     <line x1="550" y1="65" x2="610" y2="65" stroke="#34d399" stroke-width="3"/>
                     <polygon points="610,58 625,65 610,72" fill="#34d399"/>
-                    <!-- Element Conduït -->
+
                     <rect x="630" y="20" width="200" height="90" rx="12" fill="#3b1826" stroke="#fb7185" stroke-width="2"/>
-                    <text x="730" y="50" fill="#fb7185" font-weight="bold" font-size="15" text-anchor="middle">3. ELEMENT CONDUÏT</text>
-                    <text x="730" y="72" fill="#e2e8f0" font-size="12" text-anchor="middle">(Receptor / Sortida)</text>
-                    <text x="730" y="92" fill="#94a3b8" font-size="11" text-anchor="middle">Rep la força i fa l'efecte útil</text>
+                    <text x="730" y="50" fill="#fb7185" font-weight="bold" font-size="15" text-anchor="middle"
+                          data-es="3. ELEMENTO CONDUCIDO" data-en="3. DRIVEN ELEMENT" data-fr="3. ÉLÉMENT RÉCEPTEUR">3. ELEMENT CONDUÏT</text>
+                    <text x="730" y="72" fill="#e2e8f0" font-size="12" text-anchor="middle"
+                          data-es="(Receptor / Salida)" data-en="(Receiver / Output)" data-fr="(Conduit / Sortie)">(Receptor / Sortida)</text>
+                    <text x="730" y="92" fill="#94a3b8" font-size="11" text-anchor="middle"
+                          data-es="Recibe la fuerza y realiza el trabajo útil" data-en="Receives force and performs useful work" data-fr="Reçoit la force et produit l'effet utile">Rep la força i fa l'efecte útil</text>
                 </svg>
             </div>
 
             <div class="grid-2">
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-blue">4 Moviments Bàsics</span></div>
+                    <div class="mm-branch-title">
+                        <span class="badge badge-blue"
+                              data-es="4 Movimientos Básicos"
+                              data-en="4 Basic Motions"
+                              data-fr="4 Mouvements de Base">4 Moviments Bàsics</span>
+                    </div>
                     <ul class="step-list">
-                        <li><strong>Lineal (Rectilini):</strong> Trajectòria en línia recta i sentit únic (ex: cinta transportadora, carro).</li>
-                        <li><strong>Alternatiu:</strong> Trajectòria en línia recta d'avanç i retrocés (ex: pistó d'un motor, agulla de cosir).</li>
-                        <li><strong>Rotació (Circular):</strong> Trajectòria descrivint una circumferència (ex: roda, politja, engranatge).</li>
-                        <li><strong>Oscil·lant:</strong> Trajectòria d'arc de circumferència d'avanç i retrocés (ex: pèndol d'un rellotge).</li>
+                        <li data-es="<strong>Lineal (Rectilíneo):</strong> Trayectoria en línea recta y sentido único (ej.: cinta transportadora, carro)."
+                            data-en="<strong>Linear (Rectilinear):</strong> Straight-line trajectory in a single direction (e.g., conveyor belt, cart)."
+                            data-fr="<strong>Linéaire (Rectiligne) :</strong> Trajectoire en ligne droite et sens unique (ex. : tapis roulant, chariot)."><strong>Lineal (Rectilini):</strong> Trajectòria en línia recta i sentit únic (ex: cinta transportadora, carro).</li>
+                        <li data-es="<strong>Alternativo:</strong> Trayectoria en línea recta de avance y retroceso (ej.: pistón de un motor, aguja de coser)."
+                            data-en="<strong>Reciprocating (Alternating):</strong> Back-and-forth straight-line trajectory (e.g., engine piston, sewing needle)."
+                            data-fr="<strong>Alternatif :</strong> Trajectoire rectiligne de va-et-vient (ex. : piston de moteur, aiguille à coudre)."><strong>Alternatiu:</strong> Trajectòria en línia recta d'avanç i retrocés (ex: pistó d'un motor, agulla de cosir).</li>
+                        <li data-es="<strong>Rotación (Circular):</strong> Trayectoria describiendo una circunferencia (ej.: rueda, polea, engranaje)."
+                            data-en="<strong>Rotary (Circular):</strong> Trajectory describing a circle (e.g., wheel, pulley, gear)."
+                            data-fr="<strong>Rotation (Circulaire) :</strong> Trajectoire décrivant une circonférence (ex. : roue, poulie, engrenage)."><strong>Rotació (Circular):</strong> Trajectòria descrivint una circumferència (ex: roda, politja, engranatge).</li>
+                        <li data-es="<strong>Oscilante:</strong> Trayectoria de arco de circunferencia de avance y retroceso (ej.: péndulo de un reloj)."
+                            data-en="<strong>Oscillating:</strong> Back-and-forth circular arc trajectory (e.g., clock pendulum)."
+                            data-fr="<strong>Oscillant :</strong> Trajectoire en arc de cercle de va-et-vient (ex. : pendule d'horloge)."><strong>Oscil·lant:</strong> Trajectòria d'arc de circumferència d'avanç i retrocés (ex: pèndol d'un rellotge).</li>
                     </ul>
                 </div>
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-amber">Magnituds Energètiques (S.I.)</span></div>
+                    <div class="mm-branch-title">
+                        <span class="badge badge-amber"
+                              data-es="Magnitudes Energéticas (S.I.)"
+                              data-en="Energy Quantities (S.I.)"
+                              data-fr="Grandeurs Énergétiques (S.I.)">Magnituds Energètiques (S.I.)</span>
+                    </div>
                     <ul class="step-list">
-                        <li><strong>Força / Pes (F, P):</strong> <code>P = m · g</code> &rarr; Unitat: <strong>Newton [N]</strong> (g &approx; 9,8 m/s²).</li>
-                        <li><strong>Treball i Energia (W, E):</strong> <code>W = F · d</code> &rarr; Unitat: <strong>Joule [J]</strong> (1 J = 1 N · 1 m).</li>
-                        <li><strong>Potència (P):</strong> <code>P = W / t = F · v</code> &rarr; Unitat: <strong>Watt [W]</strong> (1 W = 1 J/s).</li>
-                        <li><strong>Rendiment (&eta;):</strong> <code>&eta; (%) = (W_útil / E_consumida) · 100</code> &rarr; Sempre <strong>&eta; &lt; 100%</strong> per pèrdues (fregament/calor).</li>
+                        <li data-es="<strong>Fuerza / Peso (F, P):</strong> <code>P = m · g</code> &rarr; Unidad: <strong>Newton [N]</strong> (g &approx; 9,8 m/s²)."
+                            data-en="<strong>Force / Weight (F, P):</strong> <code>P = m · g</code> &rarr; Unit: <strong>Newton [N]</strong> (g &approx; 9.8 m/s²)."
+                            data-fr="<strong>Force / Poids (F, P) :</strong> <code>P = m · g</code> &rarr; Unité : <strong>Newton [N]</strong> (g &approx; 9,8 m/s²)."><strong>Força / Pes (F, P):</strong> <code>P = m · g</code> &rarr; Unitat: <strong>Newton [N]</strong> (g &approx; 9,8 m/s²).</li>
+                        <li data-es="<strong>Trabajo y Energía (W, E):</strong> <code>W = F · d</code> &rarr; Unidad: <strong>Julio [J]</strong> (1 J = 1 N · 1 m)."
+                            data-en="<strong>Work & Energy (W, E):</strong> <code>W = F · d</code> &rarr; Unit: <strong>Joule [J]</strong> (1 J = 1 N · 1 m)."
+                            data-fr="<strong>Travail et Énergie (W, E) :</strong> <code>W = F · d</code> &rarr; Unité : <strong>Joule [J]</strong> (1 J = 1 N · 1 m)."><strong>Treball i Energia (W, E):</strong> <code>W = F · d</code> &rarr; Unitat: <strong>Joule [J]</strong> (1 J = 1 N · 1 m).</li>
+                        <li data-es="<strong>Potencia (P):</strong> <code>P = W / t = F · v</code> &rarr; Unidad: <strong>Vatio [W]</strong> (1 W = 1 J/s)."
+                            data-en="<strong>Power (P):</strong> <code>P = W / t = F · v</code> &rarr; Unit: <strong>Watt [W]</strong> (1 W = 1 J/s)."
+                            data-fr="<strong>Puissance (P) :</strong> <code>P = W / t = F · v</code> &rarr; Unité : <strong>Watt [W]</strong> (1 W = 1 J/s)."><strong>Potència (P):</strong> <code>P = W / t = F · v</code> &rarr; Unitat: <strong>Watt [W]</strong> (1 W = 1 J/s).</li>
+                        <li data-es="<strong>Rendimiento (&eta;):</strong> <code>&eta; (%) = (W_útil / E_consumida) · 100</code> &rarr; Siempre <strong>&eta; &lt; 100%</strong> por pérdidas (rozamiento/calor)."
+                            data-en="<strong>Efficiency (&eta;):</strong> <code>&eta; (%) = (W_useful / E_consumed) · 100</code> &rarr; Always <strong>&eta; &lt; 100%</strong> due to losses (friction/heat)."
+                            data-fr="<strong>Rendement (&eta;) :</strong> <code>&eta; (%) = (W_utile / E_consommée) · 100</code> &rarr; Toujours <strong>&eta; &lt; 100%</strong> à cause des pertes (frottement/chaleur)."><strong>Rendiment (&eta;):</strong> <code>&eta; (%) = (W_útil / E_consumida) · 100</code> &rarr; Sempre <strong>&eta; &lt; 100%</strong> per pèrdues (fregament/calor).</li>
                     </ul>
                 </div>
             </div>
@@ -468,15 +266,27 @@ tr:nth-child(even) {
 
         <!-- MAPA MENTAL 2: TRANSMISSIÓ LINEAL -->
         <section class="card">
-            <h2 data-i18n="mm2_h2">2. Mapa Mental: Mecanismes de Transmissió Lineal</h2>
-            <div class="formula-box">
+            <h2 data-es="2. Mapa Mental: Mecanismos de Transmisión Lineal"
+                data-en="2. Mind Map: Linear Transmission Mechanisms"
+                data-fr="2. Carte Mentale : Mécanismes de Transmission Linéaire">2. Mapa Mental: Mecanismes de Transmissió Lineal</h2>
+            <div class="formula-box"
+                 data-es="Ley de la Palanca: F · d<sub>F</sub> = R · d<sub>R</sub> &nbsp;&nbsp;|&nbsp;&nbsp; Ventaja Mecánica: AM = R / F = d<sub>F</sub> / d<sub>R</sub>"
+                 data-en="Law of the Lever: F · d<sub>F</sub> = R · d<sub>R</sub> &nbsp;&nbsp;|&nbsp;&nbsp; Mechanical Advantage: MA = R / F = d<sub>F</sub> / d<sub>R</sub>"
+                 data-fr="Loi du Levier : F · d<sub>F</sub> = R · d<sub>R</sub> &nbsp;&nbsp;|&nbsp;&nbsp; Avantage Mécanique : AM = R / F = d<sub>F</sub> / d<sub>R</sub>">
                 Llei de la Palanca: F · d<sub>F</sub> = R · d<sub>R</sub> &nbsp;&nbsp;|&nbsp;&nbsp; Avantatge Mecànic: AM = R / F = d<sub>F</sub> / d<sub>R</sub>
             </div>
 
             <div class="grid-3">
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-blue">1r Gènere (Interfixa)</span></div>
-                    <p>El <strong>Fulcre (&Delta;)</strong> es troba entre la Potència (F) i la Resistència (R).</p>
+                    <div class="mm-branch-title">
+                        <span class="badge badge-blue"
+                              data-es="1er Género (Interfija)"
+                              data-en="1st Class Lever"
+                              data-fr="1er Genre (Inter-appui)">1r Gènere (Interfixa)</span>
+                    </div>
+                    <p data-es="El <strong>Fulcro (&Delta;)</strong> está entre la Potencia (F) y la Resistencia (R)."
+                       data-en="The <strong>Fulcrum (&Delta;)</strong> is located between the Effort (F) and the Load/Resistance (R)."
+                       data-fr="Le <strong>Point d'appui (&Delta;)</strong> se trouve entre la Force (F) et la Résistance (R).">El <strong>Fulcre (&Delta;)</strong> es troba entre la Potència (F) i la Resistència (R).</p>
                     <div class="svg-diagram">
                         <svg viewBox="0 0 240 80" width="100%" height="75">
                             <line x1="20" y1="45" x2="220" y2="45" stroke="#94a3b8" stroke-width="5"/>
@@ -489,13 +299,24 @@ tr:nth-child(even) {
                             <text x="175" y="25" fill="#34d399" font-size="12" font-weight="bold">R</text>
                         </svg>
                     </div>
-                    <p><strong>AM:</strong> Pot ser &gt; 1, = 1 o &lt; 1.</p>
-                    <p><strong>Exemples:</strong> Tisores, alicates, balança, palanca d'operari, rem.</p>
+                    <p data-es="<strong>AM:</strong> Puede ser &gt; 1, = 1 o &lt; 1."
+                       data-en="<strong>MA:</strong> Can be &gt; 1, = 1, or &lt; 1."
+                       data-fr="<strong>AM :</strong> Peut être &gt; 1, = 1 ou &lt; 1."><strong>AM:</strong> Pot ser &gt; 1, = 1 o &lt; 1.</p>
+                    <p data-es="<strong>Ejemplos:</strong> Tijeras, alicates, balanza, barra de operario, remo."
+                       data-en="<strong>Examples:</strong> Scissors, pliers, balance scale, crowbar, oar."
+                       data-fr="<strong>Exemples :</strong> Ciseaux, pinces, balance, pied-de-biche, rame."><strong>Exemples:</strong> Tisores, alicates, balança, palanca d'operari, rem.</p>
                 </div>
 
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-emerald">2n Gènere (Interresistent)</span></div>
-                    <p>La <strong>Resistència (R)</strong> es troba entre el Fulcre (&Delta;) i la Potència (F).</p>
+                    <div class="mm-branch-title">
+                        <span class="badge badge-emerald"
+                              data-es="2º Género (Interresistente)"
+                              data-en="2nd Class Lever"
+                              data-fr="2e Genre (Inter-résistant)">2n Gènere (Interresistent)</span>
+                    </div>
+                    <p data-es="La <strong>Resistencia (R)</strong> está entre el Fulcro (&Delta;) y la Potencia (F)."
+                       data-en="The <strong>Resistance (R)</strong> is located between the Fulcrum (&Delta;) and the Effort (F)."
+                       data-fr="La <strong>Résistance (R)</strong> se trouve entre le Point d'appui (&Delta;) et la Force (F).">La <strong>Resistència (R)</strong> es troba entre el Fulcre (&Delta;) i la Potència (F).</p>
                     <div class="svg-diagram">
                         <svg viewBox="0 0 240 80" width="100%" height="75">
                             <line x1="20" y1="45" x2="220" y2="45" stroke="#94a3b8" stroke-width="5"/>
@@ -508,13 +329,24 @@ tr:nth-child(even) {
                             <text x="135" y="25" fill="#34d399" font-size="12" font-weight="bold">R</text>
                         </svg>
                     </div>
-                    <p><strong>AM:</strong> Sempre <strong>AM &gt; 1</strong> (d<sub>F</sub> &gt; d<sub>R</sub>, estalvia esforç sempre).</p>
-                    <p><strong>Exemples:</strong> Carretó d'obra, trencanous, obreampolles.</p>
+                    <p data-es="<strong>AM:</strong> Siempre <strong>AM &gt; 1</strong> (d<sub>F</sub> &gt; d<sub>R</sub>, ahorra esfuerzo siempre)."
+                       data-en="<strong>MA:</strong> Always <strong>MA &gt; 1</strong> (d<sub>F</sub> &gt; d<sub>R</sub>, always multiplies force)."
+                       data-fr="<strong>AM :</strong> Toujours <strong>AM &gt; 1</strong> (d<sub>F</sub> &gt; d<sub>R</sub>, économise toujours l'effort)."><strong>AM:</strong> Sempre <strong>AM &gt; 1</strong> (d<sub>F</sub> &gt; d<sub>R</sub>, estalvia esforç sempre).</p>
+                    <p data-es="<strong>Ejemplos:</strong> Carretilla de obra, cascanueces, abrebotellas."
+                       data-en="<strong>Examples:</strong> Wheelbarrow, nutcracker, bottle opener."
+                       data-fr="<strong>Exemples :</strong> Brouette, casse-noix, décapsuleur."><strong>Exemples:</strong> Carretó d'obra, trencanous, obreampolles.</p>
                 </div>
 
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-rose">3r Gènere (Interpotent)</span></div>
-                    <p>La <strong>Potència (F)</strong> es troba entre el Fulcre (&Delta;) i la Resistència (R).</p>
+                    <div class="mm-branch-title">
+                        <span class="badge badge-rose"
+                              data-es="3er Género (Interpotente)"
+                              data-en="3rd Class Lever"
+                              data-fr="3e Genre (Inter-moteur)">3r Gènere (Interpotent)</span>
+                    </div>
+                    <p data-es="La <strong>Potencia (F)</strong> está entre el Fulcro (&Delta;) y la Resistencia (R)."
+                       data-en="The <strong>Effort (F)</strong> is located between the Fulcrum (&Delta;) and the Resistance (R)."
+                       data-fr="La <strong>Force (F)</strong> se trouve entre le Point d'appui (&Delta;) et la Résistance (R).">La <strong>Potència (F)</strong> es troba entre el Fulcre (&Delta;) i la Resistència (R).</p>
                     <div class="svg-diagram">
                         <svg viewBox="0 0 240 80" width="100%" height="75">
                             <line x1="20" y1="45" x2="220" y2="45" stroke="#94a3b8" stroke-width="5"/>
@@ -527,45 +359,51 @@ tr:nth-child(even) {
                             <text x="175" y="25" fill="#34d399" font-size="12" font-weight="bold">R</text>
                         </svg>
                     </div>
-                    <p><strong>AM:</strong> Sempre <strong>AM &lt; 1</strong> (d<sub>F</sub> &lt; d<sub>R</sub>, guanya velocitat/precisió).</p>
-                    <p><strong>Exemples:</strong> Pinces de depilar/cuina, canya de pescar, bíceps humà.</p>
+                    <p data-es="<strong>AM:</strong> Siempre <strong>AM &lt; 1</strong> (d<sub>F</sub> &lt; d<sub>R</sub>, gana velocidad/precisión)."
+                       data-en="<strong>MA:</strong> Always <strong>MA &lt; 1</strong> (d<sub>F</sub> &lt; d<sub>R</sub>, gains speed/precision)."
+                       data-fr="<strong>AM :</strong> Toujours <strong>AM &lt; 1</strong> (d<sub>F</sub> &lt; d<sub>R</sub>, gagne en vitesse/précision)."><strong>AM:</strong> Sempre <strong>AM &lt; 1</strong> (d<sub>F</sub> &lt; d<sub>R</sub>, guanya velocitat/precisió).</p>
+                    <p data-es="<strong>Ejemplos:</strong> Pinzas de depilar/cocina, caña de pescar, bíceps humano."
+                       data-en="<strong>Examples:</strong> Tweezers/kitchen tongs, fishing rod, human biceps."
+                       data-fr="<strong>Exemples :</strong> Pince à épiler/cuisine, canne à pêche, biceps humain."><strong>Exemples:</strong> Pinces de depilar/cuina, canya de pescar, bíceps humà.</p>
                 </div>
             </div>
 
-            <h3>Sistemes de Politges i Polipastos</h3>
+            <h3 data-es="Sistemas de Poleas y Polipastos"
+                data-en="Pulley & Hoist Systems"
+                data-fr="Systèmes de Poulies et Palans">Sistemes de Politges i Polipastos</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Tipus de Mecanisme</th>
-                        <th>Fórmula de la Força (F)</th>
-                        <th>Avantatge Mecànic (AM)</th>
-                        <th>Corda a estirar (L) i Velocitat</th>
+                        <th data-es="Tipo de Mecanismo" data-en="Mechanism Type" data-fr="Type de Mécanisme">Tipus de Mecanisme</th>
+                        <th data-es="Fórmula de la Fuerza (F)" data-en="Force Formula (F)" data-fr="Formule de la Force (F)">Fórmula de la Força (F)</th>
+                        <th data-es="Ventaja Mecánica (AM)" data-en="Mechanical Advantage (MA)" data-fr="Avantage Mécanique (AM)">Avantatge Mecànic (AM)</th>
+                        <th data-es="Cuerda a estirar (L) y Velocidad" data-en="Rope Pulled (L) & Speed" data-fr="Corde à tirer (L) et Vitesse">Corda a estirar (L) i Velocitat</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Politja Fixa</strong></td>
+                        <td data-es="<strong>Polea Fija</strong>" data-en="<strong>Fixed Pulley</strong>" data-fr="<strong>Poulie Fixe</strong>"><strong>Politja Fixa</strong></td>
                         <td><code>F = R</code></td>
-                        <td><code>AM = 1</code> (només canvia direcció)</td>
-                        <td><code>L = h</code> &nbsp;|&nbsp; <code>v<sub>corda</sub> = v<sub>càrrega</sub></code></td>
+                        <td data-es="<code>AM = 1</code> (solo cambia dirección)" data-en="<code>MA = 1</code> (only changes direction)" data-fr="<code>AM = 1</code> (change uniquement la direction)"><code>AM = 1</code> (només canvia direcció)</td>
+                        <td data-es="<code>L = h</code> &nbsp;|&nbsp; <code>v<sub>cuerda</sub> = v<sub>carga</sub></code>" data-en="<code>L = h</code> &nbsp;|&nbsp; <code>v<sub>rope</sub> = v<sub>load</sub></code>" data-fr="<code>L = h</code> &nbsp;|&nbsp; <code>v<sub>corde</sub> = v<sub>charge</sub></code>"><code>L = h</code> &nbsp;|&nbsp; <code>v<sub>corda</sub> = v<sub>càrrega</sub></code></td>
                     </tr>
                     <tr>
-                        <td><strong>Politja Mòbil Simple</strong></td>
+                        <td data-es="<strong>Polea Móvil Simple</strong>" data-en="<strong>Single Movable Pulley</strong>" data-fr="<strong>Poulie Mobile Simple</strong>"><strong>Politja Mòbil Simple</strong></td>
                         <td><code>F = R / 2</code></td>
-                        <td><code>AM = 2</code> (redueix la força a la meitat)</td>
-                        <td><code>L = 2 · h</code> &nbsp;|&nbsp; <code>v<sub>corda</sub> = 2 · v<sub>càrrega</sub></code></td>
+                        <td data-es="<code>AM = 2</code> (reduce la fuerza a la mitad)" data-en="<code>MA = 2</code> (halves the effort force)" data-fr="<code>AM = 2</code> (divise la force par deux)"><code>AM = 2</code> (redueix la força a la meitat)</td>
+                        <td data-es="<code>L = 2 · h</code> &nbsp;|&nbsp; <code>v<sub>cuerda</sub> = 2 · v<sub>carga</sub></code>" data-en="<code>L = 2 · h</code> &nbsp;|&nbsp; <code>v<sub>rope</sub> = 2 · v<sub>load</sub></code>" data-fr="<code>L = 2 · h</code> &nbsp;|&nbsp; <code>v<sub>corde</sub> = 2 · v<sub>charge</sub></code>"><code>L = 2 · h</code> &nbsp;|&nbsp; <code>v<sub>corda</sub> = 2 · v<sub>càrrega</sub></code></td>
                     </tr>
                     <tr>
-                        <td><strong>Polispast Factorial (Lineal)</strong><br><small>(n = nombre de politges mòbils)</small></td>
+                        <td data-es="<strong>Polipasto Factorial (Lineal)</strong><br><small>(n = número de poleas móviles)</small>" data-en="<strong>Factorial (Linear) Hoist</strong><br><small>(n = number of movable pulleys)</small>" data-fr="<strong>Palan Factoriel (Linéaire)</strong><br><small>(n = nombre de poulies mobiles)</small>"><strong>Polispast Factorial (Lineal)</strong><br><small>(n = nombre de politges mòbils)</small></td>
                         <td><code>F = R / (2 · n)</code></td>
                         <td><code>AM = 2 · n</code></td>
-                        <td><code>L = (2 · n) · h</code> &nbsp;|&nbsp; <code>v<sub>càrrega</sub> = v<sub>corda</sub> / (2n)</code></td>
+                        <td data-es="<code>L = (2 · n) · h</code> &nbsp;|&nbsp; <code>v<sub>carga</sub> = v<sub>cuerda</sub> / (2n)</code>" data-en="<code>L = (2 · n) · h</code> &nbsp;|&nbsp; <code>v<sub>load</sub> = v<sub>rope</sub> / (2n)</code>" data-fr="<code>L = (2 · n) · h</code> &nbsp;|&nbsp; <code>v<sub>charge</sub> = v<sub>corde</sub> / (2n)</code>"><code>L = (2 · n) · h</code> &nbsp;|&nbsp; <code>v<sub>càrrega</sub> = v<sub>corda</sub> / (2n)</code></td>
                     </tr>
                     <tr>
-                        <td><strong>Polispast Potencial (Exponencial)</strong><br><small>(n = nombre de politges mòbils)</small></td>
+                        <td data-es="<strong>Polipasto Potencial (Exponencial)</strong><br><small>(n = número de poleas móviles)</small>" data-en="<strong>Potential (Exponential) Hoist</strong><br><small>(n = number of movable pulleys)</small>" data-fr="<strong>Palan Potentiel (Exponentiel)</strong><br><small>(n = nombre de poulies mobiles)</small>"><strong>Polispast Potencial (Exponencial)</strong><br><small>(n = nombre de politges mòbils)</small></td>
                         <td><code>F = R / 2<sup>n</sup></code></td>
                         <td><code>AM = 2<sup>n</sup></code></td>
-                        <td><code>L = 2<sup>n</sup> · h</code> &nbsp;|&nbsp; <code>v<sub>càrrega</sub> = v<sub>corda</sub> / 2<sup>n</sup></code></td>
+                        <td data-es="<code>L = 2<sup>n</sup> · h</code> &nbsp;|&nbsp; <code>v<sub>carga</sub> = v<sub>cuerda</sub> / 2<sup>n</sup></code>" data-en="<code>L = 2<sup>n</sup> · h</code> &nbsp;|&nbsp; <code>v<sub>load</sub> = v<sub>rope</sub> / 2<sup>n</sup></code>" data-fr="<code>L = 2<sup>n</sup> · h</code> &nbsp;|&nbsp; <code>v<sub>charge</sub> = v<sub>corde</sub> / 2<sup>n</sup></code>"><code>L = 2<sup>n</sup> · h</code> &nbsp;|&nbsp; <code>v<sub>càrrega</sub> = v<sub>corda</sub> / 2<sup>n</sup></code></td>
                     </tr>
                 </tbody>
             </table>
@@ -573,123 +411,79 @@ tr:nth-child(even) {
 
         <!-- MAPA MENTAL 3: TRANSMISSIÓ CIRCULAR I CINEMÀTICA -->
         <section class="card">
-            <h2 data-i18n="mm3_h2">3. Mapa Mental: Transmissió Circular i Cinemàtica Rotacional</h2>
+            <h2 data-es="3. Mapa Mental: Transmisión Circular y Cinemática Rotacional"
+                data-en="3. Mind Map: Circular Transmission & Rotational Kinematics"
+                data-fr="3. Carte Mentale : Transmission Circulaire et Cinématique">3. Mapa Mental: Transmissió Circular i Cinemàtica Rotacional</h2>
             <div class="grid-2">
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-indigo">Politges amb Corretja i Engranatges</span></div>
-                    <div class="formula-box">
+                    <div class="mm-branch-title">
+                        <span class="badge badge-indigo"
+                              data-es="Poleas con Correa y Engranajes"
+                              data-en="Belt Pulleys & Gears"
+                              data-fr="Poulies à Courroie et Engrenages">Politges amb Corretja i Engranatges</span>
+                    </div>
+                    <div class="formula-box"
+                         data-es="Poleas: N<sub>1</sub> · D<sub>1</sub> = N<sub>2</sub> · D<sub>2</sub><br>Engranajes: N<sub>1</sub> · Z<sub>1</sub> = N<sub>2</sub> · Z<sub>2</sub><br>Relación de transmisión: i = N<sub>2</sub> / N<sub>1</sub> = D<sub>1</sub> / D<sub>2</sub> = Z<sub>1</sub> / Z<sub>2</sub>"
+                         data-en="Pulleys: N<sub>1</sub> · D<sub>1</sub> = N<sub>2</sub> · D<sub>2</sub><br>Gears: N<sub>1</sub> · Z<sub>1</sub> = N<sub>2</sub> · Z<sub>2</sub><br>Transmission ratio: i = N<sub>2</sub> / N<sub>1</sub> = D<sub>1</sub> / D<sub>2</sub> = Z<sub>1</sub> / Z<sub>2</sub>"
+                         data-fr="Poulies : N<sub>1</sub> · D<sub>1</sub> = N<sub>2</sub> · D<sub>2</sub><br>Engrenages : N<sub>1</sub> · Z<sub>1</sub> = N<sub>2</sub> · Z<sub>2</sub><br>Rapport de transmission : i = N<sub>2</sub> / N<sub>1</sub> = D<sub>1</sub> / D<sub>2</sub> = Z<sub>1</sub> / Z<sub>2</sub>">
                         Politges: N<sub>1</sub> · D<sub>1</sub> = N<sub>2</sub> · D<sub>2</sub><br>
                         Engranatges: N<sub>1</sub> · Z<sub>1</sub> = N<sub>2</sub> · Z<sub>2</sub><br>
                         Relació de transmissió: i = N<sub>2</sub> / N<sub>1</sub> = D<sub>1</sub> / D<sub>2</sub> = Z<sub>1</sub> / Z<sub>2</sub>
                     </div>
                     <ul class="step-list">
-                        <li><strong>i &lt; 1 (Sistema Reductor):</strong> D<sub>1</sub> &lt; D<sub>2</sub> (o Z<sub>1</sub> &lt; Z<sub>2</sub>). La sortida gira més lenta (N<sub>2</sub> &lt; N<sub>1</sub>) però <strong>guanya força/parell</strong>.</li>
-                        <li><strong>i &gt; 1 (Sistema Multiplicador):</strong> D<sub>1</sub> &gt; D<sub>2</sub> (o Z<sub>1</sub> &gt; Z<sub>2</sub>). La sortida gira més ràpida (N<sub>2</sub> &gt; N<sub>1</sub>) però perd força.</li>
-                        <li><strong>i = 1:</strong> D<sub>1</sub> = D<sub>2</sub> (o Z<sub>1</sub> = Z<sub>2</sub>). Es manté la mateixa velocitat de gir.</li>
+                        <li data-es="<strong>i &lt; 1 (Sistema Reductor):</strong> D<sub>1</sub> &lt; D<sub>2</sub> (o Z<sub>1</sub> &lt; Z<sub>2</sub>). La salida gira más lenta (N<sub>2</sub> &lt; N<sub>1</sub>) pero <strong>gana fuerza/par</strong>."
+                            data-en="<strong>i &lt; 1 (Speed Reducer):</strong> D<sub>1</sub> &lt; D<sub>2</sub> (or Z<sub>1</sub> &lt; Z<sub>2</sub>). Output rotates slower (N<sub>2</sub> &lt; N<sub>1</sub>) but <strong>gains torque/force</strong>."
+                            data-fr="<strong>i &lt; 1 (Système Réducteur) :</strong> D<sub>1</sub> &lt; D<sub>2</sub> (ou Z<sub>1</sub> &lt; Z<sub>2</sub>). La sortie tourne plus lentement (N<sub>2</sub> &lt; N<sub>1</sub>) mais <strong>gagne en force/couple</strong>."><strong>i &lt; 1 (Sistema Reductor):</strong> D<sub>1</sub> &lt; D<sub>2</sub> (o Z<sub>1</sub> &lt; Z<sub>2</sub>). La sortida gira més lenta (N<sub>2</sub> &lt; N<sub>1</sub>) però <strong>guanya força/parell</strong>.</li>
+                        <li data-es="<strong>i &gt; 1 (Sistema Multiplicador):</strong> D<sub>1</sub> &gt; D<sub>2</sub> (o Z<sub>1</sub> &gt; Z<sub>2</sub>). La salida gira más rápida (N<sub>2</sub> &gt; N<sub>1</sub>) pero pierde fuerza."
+                            data-en="<strong>i &gt; 1 (Speed Multiplier):</strong> D<sub>1</sub> &gt; D<sub>2</sub> (or Z<sub>1</sub> &gt; Z<sub>2</sub>). Output rotates faster (N<sub>2</sub> &gt; N<sub>1</sub>) but loses torque."
+                            data-fr="<strong>i &gt; 1 (Système Multiplicateur) :</strong> D<sub>1</sub> &gt; D<sub>2</sub> (ou Z<sub>1</sub> &gt; Z<sub>2</sub>). La sortie tourne plus vite (N<sub>2</sub> &gt; N<sub>1</sub>) mais perd en force."><strong>i &gt; 1 (Sistema Multiplicador):</strong> D<sub>1</sub> &gt; D<sub>2</sub> (o Z<sub>1</sub> &gt; Z<sub>2</sub>). La sortida gira més ràpida (N<sub>2</sub> &gt; N<sub>1</sub>) però perd força.</li>
+                        <li data-es="<strong>i = 1:</strong> D<sub>1</sub> = D<sub>2</sub> (o Z<sub>1</sub> = Z<sub>2</sub>). Se mantiene la misma velocidad de giro."
+                            data-en="<strong>i = 1:</strong> D<sub>1</sub> = D<sub>2</sub> (or Z<sub>1</sub> = Z<sub>2</sub>). Rotational speed remains unchanged."
+                            data-fr="<strong>i = 1 :</strong> D<sub>1</sub> = D<sub>2</sub> (ou Z<sub>1</sub> = Z<sub>2</sub>). La vitesse de rotation reste identique."><strong>i = 1:</strong> D<sub>1</sub> = D<sub>2</sub> (o Z<sub>1</sub> = Z<sub>2</sub>). Es manté la mateixa velocitat de gir.</li>
                     </ul>
                 </div>
 
                 <div class="mm-branch">
-                    <div class="mm-branch-title"><span class="badge badge-emerald">Velocitat de Gir (N), Angular (&omega;) i Lineal (v)</span></div>
-                    <div class="formula-box">
+                    <div class="mm-branch-title">
+                        <span class="badge badge-emerald"
+                              data-es="Velocidad de Giro (N), Angular (&omega;) y Lineal (v)"
+                              data-en="Rotational (N), Angular (&omega;) & Linear Speed (v)"
+                              data-fr="Vitesse de Rotation (N), Angulaire (&omega;) et Linéaire (v)">Velocitat de Gir (N), Angular (&omega;) i Lineal (v)</span>
+                    </div>
+                    <div class="formula-box"
+                         data-es="&omega; = (N · 2 · &pi;) / 60 &nbsp;&nbsp;[rad/s]<br>v = &omega; · r &nbsp;&nbsp;[m/s] &nbsp;(¡donde r = D / 2 en metros!)"
+                         data-en="&omega; = (N · 2 · &pi;) / 60 &nbsp;&nbsp;[rad/s]<br>v = &omega; · r &nbsp;&nbsp;[m/s] &nbsp;(where r = D / 2 in meters!)"
+                         data-fr="&omega; = (N · 2 · &pi;) / 60 &nbsp;&nbsp;[rad/s]<br>v = &omega; · r &nbsp;&nbsp;[m/s] &nbsp;(où r = D / 2 en mètres !)">
                         &omega; = (N · 2 · &pi;) / 60 &nbsp;&nbsp;[rad/s]<br>
                         v = &omega; · r &nbsp;&nbsp;[m/s] &nbsp;(on r = D / 2 en metres!)
                     </div>
                     <ul class="step-list">
-                        <li><strong>De rpm a rad/s:</strong> Multiplica per <code>2&pi;</code> i divideix entre <code>60</code>.</li>
-                        <li><strong>De rad/s a rpm:</strong> Multiplica per <code>60</code> i divideix entre <code>2&pi;</code>.</li>
-                        <li><strong>De m/s a km/h:</strong> Multiplica per <strong>3,6</strong> (i divideix entre 3,6 per passar de km/h a m/s).</li>
+                        <li data-es="<strong>De rpm a rad/s:</strong> Multiplica por <code>2&pi;</code> y divide entre <code>60</code>."
+                            data-en="<strong>From rpm to rad/s:</strong> Multiply by <code>2&pi;</code> and divide by <code>60</code>."
+                            data-fr="<strong>De tr/min (rpm) à rad/s :</strong> Multipliez par <code>2&pi;</code> et divisez par <code>60</code>."><strong>De rpm a rad/s:</strong> Multiplica per <code>2&pi;</code> i divideix entre <code>60</code>.</li>
+                        <li data-es="<strong>De rad/s a rpm:</strong> Multiplica por <code>60</code> y divide entre <code>2&pi;</code>."
+                            data-en="<strong>From rad/s to rpm:</strong> Multiply by <code>60</code> and divide by <code>2&pi;</code>."
+                            data-fr="<strong>De rad/s à tr/min (rpm) :</strong> Multipliez par <code>60</code> et divisez par <code>2&pi;</code>."><strong>De rad/s a rpm:</strong> Multiplica per <code>60</code> i divideix entre <code>2&pi;</code>.</li>
+                        <li data-es="<strong>De m/s a km/h:</strong> Multiplica por <strong>3,6</strong> (y divide entre 3,6 para pasar de km/h a m/s)."
+                            data-en="<strong>From m/s to km/h:</strong> Multiply by <strong>3.6</strong> (and divide by 3.6 to convert km/h to m/s)."
+                            data-fr="<strong>De m/s à km/h :</strong> Multipliez par <strong>3,6</strong> (et divisez par 3,6 pour passer de km/h à m/s)."><strong>De m/s a km/h:</strong> Multiplica per <strong>3,6</strong> (i divideix entre 3,6 per passar de km/h a m/s).</li>
                     </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- LES 5 TRAMPES D'EXAMEN -->
-        <section class="card">
-            <h2 data-i18n="traps_h2">⚠️ Les 5 Trampes Clàssiques d'Examen (Repàs Ràpid)</h2>
-            <div class="grid-2">
-                <div class="teacher-note">
-                    <strong>1. Massa (kg) NO és Força (N):</strong> Si l'enunciat et dóna una càrrega en quilograms (ex: 200 kg), primer has de passar-la a Newtons multiplicant per la gravetat: <code>R = m · 9,8</code>.
-                </div>
-                <div class="teacher-note">
-                    <strong>2. Diàmetre vs. Radi:</strong> En la fórmula de la velocitat lineal <code>v = &omega; · r</code>, necessites el <strong>radi en metres</strong>. Si et donen D = 70 cm, el radi és <code>r = 35 cm = 0,35 m</code>!
-                </div>
-                <div class="teacher-note">
-                    <strong>3. El braç del carretó (2n grau):</strong> El braç de potència <code>d<sub>F</sub></code> es mesura sempre <strong>des del fulcre (la roda) fins a les mans</strong>. Si et donen dos trams (0,4 m + 1,2 m), suma'ls (1,6 m)!
-                </div>
-                <div class="teacher-note">
-                    <strong>4. Factorial vs. Potencial:</strong> No confonguis el polispast factorial (<code>AM = 2·n</code>) amb el potencial o exponencial (<code>AM = 2<sup>n</sup></code>). Amb n=3 politges mòbils, el factorial divideix entre 6 i el potencial entre 8!
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        window.i18nDict = {
-            ca: {
-                nav_map: "🧠 1. Mapa Mental i Estudi",
-                nav_sol: "✅ 2. Solucionari Activitats (26)",
-                nav_exam: "📝 3. Examen i Rúbrica",
-                badge_unit: "Tecnologia 4t ESO · Unitat 1",
-                w1_title: "🧠 Mapes Mentals i Guia d'Estudi: Sistemes Mecànics",
-                w1_sub: "Esquemes visuals, classificació de mecanismes, formulari complet del Sistema Internacional i les 5 trampes clàssiques d'examen.",
-                mm1_h2: "1. Arquitectura d'una Màquina i Magnituds Físiques",
-                mm2_h2: "2. Mapa Mental: Mecanismes de Transmissió Lineal",
-                mm3_h2: "3. Mapa Mental: Transmissió Circular i Cinemàtica Rotacional",
-                traps_h2: "⚠️ Les 5 Trampes Clàssiques d'Examen (Repàs Ràpid)"
-            },
-            es: {
-                nav_map: "🧠 1. Mapa Mental y Estudio",
-                nav_sol: "✅ 2. Solucionario Actividades (26)",
-                nav_exam: "📝 3. Examen y Rúbrica",
-                badge_unit: "Tecnología 4º ESO · Unidad 1",
-                w1_title: "🧠 Mapas Mentales y Guía de Estudio: Sistemas Mecánicos",
-                w1_sub: "Esquemas visuales, clasificación de mecanismos, formulario completo del Sistema Internacional y las 5 trampas clásicas de examen.",
-                mm1_h2: "1. Arquitectura de una Máquina y Magnitudes Físicas",
-                mm2_h2: "2. Mapa Mental: Mecanismos de Transmisión Lineal",
-                mm3_h2: "3. Mapa Mental: Transmisión Circular y Cinemática Rotacional",
-                traps_h2: "⚠️ Las 5 Trampas Clásicas de Examen (Repaso Rápido)"
-            },
-            en: {
-                nav_map: "🧠 1. Mind Map & Study Guide",
-                nav_sol: "✅ 2. Activities Solutions (26)",
-                nav_exam: "📝 3. Exam & Rubric",
-                badge_unit: "Technology Grade 10 · Unit 1",
-                w1_title: "🧠 Mind Maps & Study Guide: Mechanical Systems",
-                w1_sub: "Visual diagrams, mechanism classification, complete SI formula sheet, and the 5 classic exam pitfalls.",
-                mm1_h2: "1. Machine Architecture & Physical Quantities",
-                mm2_h2: "2. Mind Map: Linear Transmission Mechanisms",
-                mm3_h2: "3. Mind Map: Circular Transmission & Rotational Kinematics",
-                traps_h2: "⚠️ The 5 Classic Exam Pitfalls (Quick Review)"
-            },
-            fr: {
-                nav_map: "🧠 1. Carte Mentale et Étude",
-                nav_sol: "✅ 2. Corrigé des Activités (26)",
-                nav_exam: "📝 3. Examen et Barème",
-                badge_unit: "Technologie 4e ESO · Unité 1",
-                w1_title: "🧠 Cartes Mentales et Guide d'Étude : Systèmes Mécaniques",
-                w1_sub: "Schémas visuels, classification des mécanismes, formulaire complet du Système International et les 5 pièges classiques d'examen.",
-                mm1_h2: "1. Architecture d'une Machine et Grandeurs Physiques",
-                mm2_h2: "2. Carte Mentale : Mécanismes de Transmission Linéaire",
-                mm3_h2: "3. Carte Mentale : Transmission Circulaire et Cinématique",
-                traps_h2: "⚠️ Les 5 Pièges Classiques d'Examen (Révision Rapide)"
-            }
-        };
-        
-function setLang(lang) {
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
-    const dict = window.i18nDict && window.i18nDict[lang];
-    if (!dict) return;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) {
-            el.innerHTML = dict[key];
+        function setLang(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            document.querySelectorAll('[data-es]').forEach(el => {
+                if (!el.dataset.ca) el.dataset.ca = el.innerHTML;
+                if (el.dataset[lang]) el.innerHTML = el.dataset[lang];
+            });
         }
-    });
-}
-
     </script>
 </body>
 </html>
